@@ -1,1 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BLACKWOOD CHARCOAL</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <section class="hero" id="top">
+    <div class="smoke"></div>
+
+    <div class="container">
+      <header class="topbar">
+        <nav class="nav">
+          <a href="#top">ABOUT</a>
+          <a href="#why">WHY BLACKWOOD</a>
+          <a href="#products">PRODUCTS</a>
+        </nav>
+
+        <div class="logo">BLACKWOOD</div>
+
+        <div class="right">
+          <button class="lang" id="langBtn">UA</button>
+          <a class="btn primary" href="https://t.me/WBMiniAppTest_bot" target="_blank" rel="noopener">BUY NOW</a>
+        </div>
+      </header>
+
+      <div class="hero-grid">
+        <div>
+          <p class="kicker">
+            BLACKWOOD<br>
+            <span class="gold">CHARCOAL</span>
+          </p>
+
+          <h1>Premium<br>Hardwood<br>Charcoal</h1>
+
+          <p class="sub">
+            Long-lasting heat, low ash, clean burn. Crafted for true fire lovers and professional grills.
+          </p>
+
+          <div class="actions">
+            <a class="btn primary" href="#products">Explore products</a>
+            <a class="btn" href="https://t.me/WBMiniAppTest_bot" target="_blank" rel="noopener">Order in Telegram</a>
+          </div>
+
+          <div class="why" id="why">
+            <p class="whyTitle">Why Blackwood</p>
+            <div class="whyIcons">
+              <div class="pill">🔥 <b>Long heat</b></div>
+              <div class="pill">☁️ <b>Low ash</b></div>
+              <div class="pill">🥩 <b>BBQ & Grill</b></div>
+              <div class="pill">🌳 <b>Hardwood</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="packsWrap">
+          <div class="embers"></div>
+          <div class="sparks" id="sparks"></div>
+
+          <!-- ОДИН PNG с 3 пачками на прозрачном фоне -->
+          <img class="packs" src="./img/packs.png" alt="BLACKWOOD CORE packs">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <section class="section" id="products">
+      <h2>BLACKWOOD CORE</h2>
+
+      <div class="note">
+        Сейчас у тебя в репо есть только <b>packs.png</b> (1 файл с 3 пачками).<br>
+        Если хочешь 3 карточки товара (3/5/8 кг) — добавь отдельные PNG без фона:
+        <code>img/core-3kg.png</code>, <code>img/core-5kg.png</code>, <code>img/core-8kg.png</code>.
+      </div>
+    </section>
+
+    <footer>© BLACKWOOD CHARCOAL · Made in Ukraine</footer>
+  </div>
+
+  <script>
+    // sparks
+    const sparks = document.getElementById('sparks');
+    function spawnSpark(){
+      const s = document.createElement('div');
+      s.className = 'spark';
+      const startX = 55 + (Math.random()*35);
+      const startY = 78 + (Math.random()*12);
+      s.style.left = startX + '%';
+      s.style.top  = startY + '%';
+      s.style.animationDuration = (2.2 + Math.random()*2.2) + 's';
+      sparks.appendChild(s);
+      setTimeout(()=>s.remove(), 5000);
+    }
+    setInterval(spawnSpark, 220);
+
+    // lang btn (визуально)
+    const langBtn = document.getElementById('langBtn');
+    let ua = false;
+    langBtn.addEventListener('click', ()=>{
+      ua = !ua;
+      langBtn.textContent = ua ? 'EN' : 'UA';
+    });
+  </script>
+</body>
+</html>
 
