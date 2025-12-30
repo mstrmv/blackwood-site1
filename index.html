@@ -12,68 +12,513 @@
 <body>
   <section class="hero" id="top">
     <div class="smoke"></div>
+    <div class="sparks" id="sparks"></div>
+    <div class="grain" aria-hidden="true"></div>
 
     <div class="container">
-      <header class="topbar">
+      <header class="topbar glass">
         <nav class="nav">
-          <a href="#top">ABOUT</a>
-          <a href="#why">WHY BLACKWOOD</a>
-          <a href="#products">PRODUCTS</a>
+          <a href="#about" data-i18n="nav_about">ABOUT</a>
+          <a href="#why" data-i18n="nav_why">WHY BLACKWOOD</a>
+          <a href="#products" data-i18n="nav_products">PRODUCTS</a>
+          <a href="#delivery" data-i18n="nav_delivery">DELIVERY</a>
         </nav>
 
         <div class="logo">BLACKWOOD</div>
 
         <div class="right">
-          <button class="lang" type="button">UA</button>
-          <button class="btn primary" type="button">BUY NOW</button>
+          <div class="langWrap" id="langWrap">
+            <button class="langBtn" data-lang="en" type="button">EN</button>
+            <button class="langBtn" data-lang="ua" type="button">UA</button>
+            <button class="langBtn" data-lang="ru" type="button">RU</button>
+          </div>
+
+          <a class="btn primary glow" href="#products" data-i18n="cta_main">BUY NOW</a>
         </div>
       </header>
 
       <div class="hero-grid">
         <div class="hero-text">
           <p class="kicker">
-            BLACKWOOD<br>
-            <span class="gold">CHARCOAL</span>
+            <span data-i18n="brand_top">BLACKWOOD</span><br>
+            <span class="gold" data-i18n="brand_sub">CHARCOAL</span>
           </p>
 
-          <h1>Premium<br>Hardwood<br>Charcoal</h1>
+          <h1 data-i18n="hero_title">Premium<br>Hardwood<br>Charcoal</h1>
 
-          <p class="sub">
+          <p class="sub" data-i18n="hero_sub">
             Long-lasting heat, low ash, clean burn. Crafted for true fire lovers and professional grills.
           </p>
 
           <div class="actions">
-            <a class="btn primary" href="#products">Explore products</a>
-            <button class="btn" type="button">Order</button>
+            <a class="btn primary glow" href="#products" data-i18n="cta_products">Explore products</a>
+            <a class="btn sheen" href="#why" data-i18n="cta_why">Why Blackwood</a>
           </div>
 
-          <div class="why" id="why">
-            <p class="whyTitle">Why Blackwood</p>
+          <div class="why glass" id="why">
+            <p class="whyTitle" data-i18n="why_title">Why Blackwood</p>
             <div class="whyIcons">
-              <div class="pill">🔥 <b>Long heat</b></div>
-              <div class="pill">☁️ <b>Low ash</b></div>
-              <div class="pill">🥩 <b>BBQ & Grill</b></div>
-              <div class="pill">🌳 <b>Hardwood</b></div>
+              <div class="pill">🔥 <b data-i18n="why_1">Long heat</b></div>
+              <div class="pill">☁️ <b data-i18n="why_2">Low ash</b></div>
+              <div class="pill">🥩 <b data-i18n="why_3">BBQ & Grill</b></div>
+              <div class="pill">🌳 <b data-i18n="why_4">Hardwood</b></div>
             </div>
+          </div>
+
+          <div class="badges">
+            <div class="badge glass" data-i18n="badge_1">Made in Ukraine</div>
+            <div class="badge glass" data-i18n="badge_2">Premium Grade</div>
+            <div class="badge glass" data-i18n="badge_3">Low Ash</div>
           </div>
         </div>
 
         <div class="hero-packs">
-          <img src="./img/packs.png" alt="BLACKWOOD CORE packs">
+          <div class="embers"></div>
+          <img class="packs" src="./img/packs.png" alt="BLACKWOOD CORE packs">
         </div>
       </div>
     </div>
   </section>
 
-  <div class="container">
-    <section class="section" id="products">
-      <h2>BLACKWOOD CORE</h2>
-      <p class="muted">Добавим карточки позже — сейчас фокус на правильном hero и фоне.</p>
+  <main class="container">
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="sectionHead">
+        <h2 data-i18n="about_title">About Blackwood</h2>
+        <p class="muted" data-i18n="about_sub">
+          Premium hardwood charcoal crafted for stable heat and a clean burn.
+        </p>
+      </div>
+
+      <div class="infoGrid">
+        <article class="infoCard glass reveal">
+          <div class="icon">🌳</div>
+          <h3 data-i18n="about_c1_t">Hardwood</h3>
+          <p data-i18n="about_c1_p">Made from selected hardwood to keep heat stable and long-lasting.</p>
+        </article>
+
+        <article class="infoCard glass reveal">
+          <div class="icon">🔥</div>
+          <h3 data-i18n="about_c2_t">Clean Burn</h3>
+          <p data-i18n="about_c2_p">Low smoke and low ash for a cleaner grill and better taste.</p>
+        </article>
+
+        <article class="infoCard glass reveal">
+          <div class="icon">🥩</div>
+          <h3 data-i18n="about_c3_t">For BBQ</h3>
+          <p data-i18n="about_c3_p">Perfect for grill, BBQ, smoker — for home and professional kitchens.</p>
+        </article>
+      </div>
     </section>
 
-    <footer>
-      © BLACKWOOD CHARCOAL · Made in Ukraine
+    <!-- PRODUCTION -->
+    <section class="section" id="production">
+      <div class="sectionHead">
+        <h2 data-i18n="prod_title">Production</h2>
+        <p class="muted" data-i18n="prod_sub">Controlled carbonization. Stable quality. Predictable results.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step glass reveal">
+          <div class="stepN">01</div>
+          <div>
+            <div class="stepT" data-i18n="prod_s1_t">Selection</div>
+            <div class="stepP" data-i18n="prod_s1_p">We choose wood for density and burn stability.</div>
+          </div>
+        </div>
+
+        <div class="step glass reveal">
+          <div class="stepN">02</div>
+          <div>
+            <div class="stepT" data-i18n="prod_s2_t">Carbonization</div>
+            <div class="stepP" data-i18n="prod_s2_p">Temperature control ensures consistent charcoal structure.</div>
+          </div>
+        </div>
+
+        <div class="step glass reveal">
+          <div class="stepN">03</div>
+          <div>
+            <div class="stepT" data-i18n="prod_s3_t">Packing</div>
+            <div class="stepP" data-i18n="prod_s3_p">Careful packing keeps pieces intact and dry.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section" id="products">
+      <div class="sectionHead">
+        <h2 data-i18n="products_title">BLACKWOOD CORE</h2>
+        <p class="muted" data-i18n="products_sub">
+          Three sizes for every grill. Clean burn, stable heat, and low ash.
+        </p>
+      </div>
+
+      <div class="products">
+        <article class="card glass reveal hoverGold" data-product="3">
+          <div class="cardTop">
+            <div class="tag" data-i18n="tag_hot">🔥 Stable heat</div>
+          </div>
+          <h3>CORE 3 KG</h3>
+          <p class="features" data-i18n="card_feat">Long heat · Low ash · For BBQ & Grill</p>
+          <div class="buyRow">
+            <button class="btn primary glow openDetails" type="button" data-i18n="details">Details</button>
+            <button class="btn sheen" type="button" data-i18n="buy">Buy</button>
+          </div>
+        </article>
+
+        <article class="card glass reveal hoverGold" data-product="5">
+          <div class="cardTop">
+            <div class="tag" data-i18n="tag_pro">⭐ Pro choice</div>
+          </div>
+          <h3>CORE 5 KG</h3>
+          <p class="features" data-i18n="card_feat">Long heat · Low ash · For BBQ & Grill</p>
+          <div class="buyRow">
+            <button class="btn primary glow openDetails" type="button" data-i18n="details">Details</button>
+            <button class="btn sheen" type="button" data-i18n="buy">Buy</button>
+          </div>
+        </article>
+
+        <article class="card glass reveal hoverGold" data-product="8">
+          <div class="cardTop">
+            <div class="tag" data-i18n="tag_value">💎 Best value</div>
+          </div>
+          <h3>CORE 8 KG</h3>
+          <p class="features" data-i18n="card_feat">Long heat · Low ash · For BBQ & Grill</p>
+          <div class="buyRow">
+            <button class="btn primary glow openDetails" type="button" data-i18n="details">Details</button>
+            <button class="btn sheen" type="button" data-i18n="buy">Buy</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- DELIVERY -->
+    <section class="section" id="delivery">
+      <div class="sectionHead">
+        <h2 data-i18n="del_title">Delivery</h2>
+        <p class="muted" data-i18n="del_sub">Fast shipping. Reliable packing. Convenient options.</p>
+      </div>
+
+      <div class="infoGrid">
+        <article class="infoCard glass reveal">
+          <div class="icon">📦</div>
+          <h3 data-i18n="del_c1_t">Shipping</h3>
+          <p data-i18n="del_c1_p">We ship across Ukraine with protective packaging.</p>
+        </article>
+        <article class="infoCard glass reveal">
+          <div class="icon">🚚</div>
+          <h3 data-i18n="del_c2_t">Fast</h3>
+          <p data-i18n="del_c2_p">Processing within 24 hours on business days.</p>
+        </article>
+        <article class="infoCard glass reveal">
+          <div class="icon">✅</div>
+          <h3 data-i18n="del_c3_t">Quality</h3>
+          <p data-i18n="del_c3_p">Dry charcoal, stable fraction, consistent results.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span data-i18n="footer">© BLACKWOOD CHARCOAL · Made in Ukraine</span>
     </footer>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modalBackdrop" data-close="1"></div>
+    <div class="modalPanel glass" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modalClose" type="button" data-close="1" aria-label="Close">✕</button>
+
+      <div class="modalTop">
+        <div class="modalBadge" id="modalBadge">CORE</div>
+        <h3 class="modalTitle" id="modalTitle">CORE</h3>
+      </div>
+
+      <p class="modalText" id="modalText"></p>
+
+      <div class="modalSpecs" id="modalSpecs"></div>
+
+      <div class="modalActions">
+        <button class="btn primary glow" type="button" data-close="1" data-i18n="close">Close</button>
+        <button class="btn sheen" type="button" data-i18n="buy">Buy</button>
+      </div>
+    </div>
   </div>
+
+  <script>
+    // ===== Smooth scroll =====
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id = a.getAttribute('href');
+        if(!id || id === '#') return;
+        const el = document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    // ===== Reveal =====
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting){
+          en.target.classList.add('show');
+          obs.unobserve(en.target);
+        }
+      });
+    }, {threshold: 0.15});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    // ===== Sparks =====
+    const sparks = document.getElementById('sparks');
+    function spawnSpark(){
+      const s = document.createElement('div');
+      s.className = 'spark';
+      const startX = 62 + (Math.random()*28);
+      const startY = 76 + (Math.random()*16);
+      s.style.left = startX + '%';
+      s.style.top  = startY + '%';
+      s.style.animationDuration = (2.1 + Math.random()*2.4) + 's';
+      s.style.animationDelay = (Math.random()*0.2) + 's';
+      sparks.appendChild(s);
+      setTimeout(()=>s.remove(), 5200);
+    }
+    setInterval(spawnSpark, 220);
+
+    // ===== Parallax (soft) =====
+    const hero = document.querySelector('.hero');
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY || 0;
+      hero.style.backgroundPosition = `center ${Math.min(0, y * -0.08)}px`;
+    }, {passive:true});
+
+    // ===== i18n =====
+    const dict = {
+      en: {
+        nav_about:"ABOUT", nav_why:"WHY BLACKWOOD", nav_products:"PRODUCTS", nav_delivery:"DELIVERY",
+        cta_main:"BUY NOW", brand_top:"BLACKWOOD", brand_sub:"CHARCOAL",
+        hero_title:"Premium<br>Hardwood<br>Charcoal",
+        hero_sub:"Long-lasting heat, low ash, clean burn. Crafted for true fire lovers and professional grills.",
+        cta_products:"Explore products", cta_why:"Why Blackwood",
+        why_title:"Why Blackwood", why_1:"Long heat", why_2:"Low ash", why_3:"BBQ & Grill", why_4:"Hardwood",
+        badge_1:"Made in Ukraine", badge_2:"Premium Grade", badge_3:"Low Ash",
+
+        about_title:"About Blackwood",
+        about_sub:"Premium hardwood charcoal crafted for stable heat and a clean burn.",
+        about_c1_t:"Hardwood", about_c1_p:"Made from selected hardwood to keep heat stable and long-lasting.",
+        about_c2_t:"Clean Burn", about_c2_p:"Low smoke and low ash for a cleaner grill and better taste.",
+        about_c3_t:"For BBQ", about_c3_p:"Perfect for grill, BBQ, smoker — for home and professional kitchens.",
+
+        prod_title:"Production",
+        prod_sub:"Controlled carbonization. Stable quality. Predictable results.",
+        prod_s1_t:"Selection", prod_s1_p:"We choose wood for density and burn stability.",
+        prod_s2_t:"Carbonization", prod_s2_p:"Temperature control ensures consistent charcoal structure.",
+        prod_s3_t:"Packing", prod_s3_p:"Careful packing keeps pieces intact and dry.",
+
+        products_title:"BLACKWOOD CORE",
+        products_sub:"Three sizes for every grill. Clean burn, stable heat, and low ash.",
+        card_feat:"Long heat · Low ash · For BBQ & Grill",
+        tag_hot:"🔥 Stable heat", tag_pro:"⭐ Pro choice", tag_value:"💎 Best value",
+
+        del_title:"Delivery",
+        del_sub:"Fast shipping. Reliable packing. Convenient options.",
+        del_c1_t:"Shipping", del_c1_p:"We ship across Ukraine with protective packaging.",
+        del_c2_t:"Fast", del_c2_p:"Processing within 24 hours on business days.",
+        del_c3_t:"Quality", del_c3_p:"Dry charcoal, stable fraction, consistent results.",
+
+        buy:"Buy", details:"Details", close:"Close",
+        footer:"© BLACKWOOD CHARCOAL · Made in Ukraine",
+
+        // modal texts
+        m3_t:"CORE 3 KG",
+        m3_p:"Compact size for quick sessions. Easy to store and perfect for home grills.",
+        m5_t:"CORE 5 KG",
+        m5_p:"Balanced option for frequent grilling. Stable heat and long burn.",
+        m8_t:"CORE 8 KG",
+        m8_p:"Best value for big cookouts. Long sessions, strong heat, low ash.",
+        spec_heat:"Heat time", spec_ash:"Ash", spec_use:"Use"
+      },
+
+      ua: {
+        nav_about:"ПРО НАС", nav_why:"ЧОМУ BLACKWOOD", nav_products:"ПРОДУКТИ", nav_delivery:"ДОСТАВКА",
+        cta_main:"КУПИТИ", brand_top:"BLACKWOOD", brand_sub:"CHARCOAL",
+        hero_title:"Преміальне<br>Деревне<br>Вугілля",
+        hero_sub:"Тривале тепло, мало попелу, чисте горіння. Для справжніх фанатів вогню та професійного грилю.",
+        cta_products:"Переглянути продукти", cta_why:"Чому Blackwood",
+        why_title:"Чому Blackwood", why_1:"Довге тепло", why_2:"Мало попелу", why_3:"BBQ & Grill", why_4:"Hardwood",
+        badge_1:"Зроблено в Україні", badge_2:"Преміум якість", badge_3:"Мало попелу",
+
+        about_title:"Про Blackwood",
+        about_sub:"Преміальне деревне вугілля зі стабільним теплом та чистим горінням.",
+        about_c1_t:"Hardwood", about_c1_p:"Відбірна деревина для стабільного та тривалого жару.",
+        about_c2_t:"Чисте горіння", about_c2_p:"Мало диму та попелу — чистіший гриль і кращий смак.",
+        about_c3_t:"Для BBQ", about_c3_p:"Підходить для грилю, BBQ, смокера — для дому та профі.",
+
+        prod_title:"Виробництво",
+        prod_sub:"Контрольована карбонізація. Стабільна якість. Передбачуваний результат.",
+        prod_s1_t:"Відбір", prod_s1_p:"Обираємо деревину за щільністю та стабільністю горіння.",
+        prod_s2_t:"Карбонізація", prod_s2_p:"Контроль температури формує правильну структуру вугілля.",
+        prod_s3_t:"Пакування", prod_s3_p:"Акуратне пакування зберігає фракцію цілою та сухою.",
+
+        products_title:"BLACKWOOD CORE",
+        products_sub:"Три розміри для будь-якого грилю. Чисте горіння, стабільне тепло та мало попелу.",
+        card_feat:"🔥 Довге тепло · ☁️ Мало попелу · Для BBQ та грилю",
+        tag_hot:"🔥 Стабільне тепло", tag_pro:"⭐ Вибір профі", tag_value:"💎 Найкраща вигода",
+
+        del_title:"Доставка",
+        del_sub:"Швидко. Надійно. Зручно.",
+        del_c1_t:"Відправка", del_c1_p:"Відправляємо по Україні з захисним пакуванням.",
+        del_c2_t:"Швидко", del_c2_p:"Обробка замовлення протягом 24 годин у робочі дні.",
+        del_c3_t:"Якість", del_c3_p:"Сухе вугілля, стабільна фракція, передбачуваний результат.",
+
+        buy:"Купити", details:"Деталі", close:"Закрити",
+        footer:"© BLACKWOOD CHARCOAL · Made in Ukraine",
+
+        m3_t:"CORE 3 KG",
+        m3_p:"Компактний розмір для швидких сесій. Зручно зберігати, ідеально для дому.",
+        m5_t:"CORE 5 KG",
+        m5_p:"Збалансований вибір для частого грилю. Стабільний жар і довге горіння.",
+        m8_t:"CORE 8 KG",
+        m8_p:"Найкраща вигода для великих BBQ. Довгі сесії, сильний жар, мало попелу.",
+        spec_heat:"Час жару", spec_ash:"Попіл", spec_use:"Застосування"
+      },
+
+      ru: {
+        nav_about:"О НАС", nav_why:"ПОЧЕМУ BLACKWOOD", nav_products:"ПРОДУКТЫ", nav_delivery:"ДОСТАВКА",
+        cta_main:"КУПИТЬ", brand_top:"BLACKWOOD", brand_sub:"CHARCOAL",
+        hero_title:"Премиальный<br>Древесный<br>Уголь",
+        hero_sub:"Долгое тепло, мало золы, чистое горение. Для настоящих фанатов огня и профессионального гриля.",
+        cta_products:"Смотреть продукты", cta_why:"Почему Blackwood",
+        why_title:"Почему Blackwood", why_1:"Долгое тепло", why_2:"Мало золы", why_3:"BBQ & Grill", why_4:"Hardwood",
+        badge_1:"Сделано в Украине", badge_2:"Премиум качество", badge_3:"Мало золы",
+
+        about_title:"О Blackwood",
+        about_sub:"Премиальный древесный уголь со стабильным жаром и чистым горением.",
+        about_c1_t:"Hardwood", about_c1_p:"Отборная древесина для стабильного и долгого жара.",
+        about_c2_t:"Чистое горение", about_c2_p:"Мало дыма и золы — чище гриль и лучше вкус.",
+        about_c3_t:"Для BBQ", about_c3_p:"Подходит для гриля, BBQ, смокера — для дома и профи.",
+
+        prod_title:"Производство",
+        prod_sub:"Контролируемая карбонизация. Стабильное качество. Предсказуемый результат.",
+        prod_s1_t:"Отбор", prod_s1_p:"Подбираем древесину по плотности и стабильности горения.",
+        prod_s2_t:"Карбонизация", prod_s2_p:"Контроль температуры даёт стабильную структуру угля.",
+        prod_s3_t:"Упаковка", prod_s3_p:"Аккуратная упаковка сохраняет фракцию целой и сухой.",
+
+        products_title:"BLACKWOOD CORE",
+        products_sub:"Три размера для любого гриля. Чистое горение, стабильный жар и мало золы.",
+        card_feat:"Долгое тепло · Мало золы · Для BBQ и гриля",
+        tag_hot:"🔥 Стабильный жар", tag_pro:"⭐ Выбор профи", tag_value:"💎 Лучшая выгода",
+
+        del_title:"Доставка",
+        del_sub:"Быстро. Надёжно. Удобно.",
+        del_c1_t:"Отправка", del_c1_p:"Отправляем по Украине с защитной упаковкой.",
+        del_c2_t:"Быстро", del_c2_p:"Обработка заказа в течение 24 часов в рабочие дни.",
+        del_c3_t:"Качество", del_c3_p:"Сухой уголь, стабильная фракция, предсказуемый результат.",
+
+        buy:"Купить", details:"Подробнее", close:"Закрыть",
+        footer:"© BLACKWOOD CHARCOAL · Made in Ukraine",
+
+        m3_t:"CORE 3 KG",
+        m3_p:"Компактный размер для быстрых сессий. Удобно хранить, идеально для дома.",
+        m5_t:"CORE 5 KG",
+        m5_p:"Сбалансированный выбор для частого гриля. Стабильный жар и долгое горение.",
+        m8_t:"CORE 8 KG",
+        m8_p:"Лучшая выгода для больших BBQ. Долгие сессии, сильный жар, мало золы.",
+        spec_heat:"Время жара", spec_ash:"Зола", spec_use:"Применение"
+      }
+    };
+
+    const saved = localStorage.getItem('bw_lang');
+    let lang = saved && dict[saved] ? saved : 'en';
+
+    function applyLang(){
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if(dict[lang] && dict[lang][key] != null){
+          el.innerHTML = dict[lang][key];
+        }
+      });
+      document.querySelectorAll('.langBtn').forEach(b=>{
+        b.classList.toggle('active', b.dataset.lang === lang);
+      });
+      localStorage.setItem('bw_lang', lang);
+      document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
+    }
+
+    document.getElementById('langWrap').addEventListener('click', (e)=>{
+      const btn = e.target.closest('.langBtn');
+      if(!btn) return;
+      lang = btn.dataset.lang;
+      applyLang();
+      // update modal if open
+      if(!document.getElementById('modal').classList.contains('open')) return;
+      const current = document.getElementById('modal').dataset.product;
+      if(current) fillModal(current);
+    });
+
+    applyLang();
+
+    // ===== MODAL DETAILS =====
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalText  = document.getElementById('modalText');
+    const modalBadge = document.getElementById('modalBadge');
+    const modalSpecs = document.getElementById('modalSpecs');
+
+    function fillModal(product){
+      const d = dict[lang];
+      const map = {
+        "3": {t:d.m3_t, p:d.m3_p, heat:"2–3h", ash:"Low", use:"BBQ / Grill"},
+        "5": {t:d.m5_t, p:d.m5_p, heat:"3–4h", ash:"Low", use:"BBQ / Grill / Smoker"},
+        "8": {t:d.m8_t, p:d.m8_p, heat:"4–6h", ash:"Low", use:"BBQ / Grill / Events"}
+      };
+      const item = map[String(product)];
+      if(!item) return;
+
+      modal.dataset.product = String(product);
+      modalBadge.textContent = "CORE " + product + "KG";
+      modalTitle.textContent = item.t;
+      modalText.textContent = item.p;
+
+      modalSpecs.innerHTML = `
+        <div class="spec"><span>${d.spec_heat}</span><b>${item.heat}</b></div>
+        <div class="spec"><span>${d.spec_ash}</span><b>${item.ash}</b></div>
+        <div class="spec"><span>${d.spec_use}</span><b>${item.use}</b></div>
+      `;
+    }
+
+    function openModal(product){
+      fillModal(product);
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('noScroll');
+    }
+
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('noScroll');
+    }
+
+    document.addEventListener('click', (e)=>{
+      const openBtn = e.target.closest('.openDetails');
+      if(openBtn){
+        const card = e.target.closest('[data-product]');
+        const p = card?.dataset.product;
+        if(p) openModal(p);
+        return;
+      }
+
+      if(e.target.closest('[data-close="1"]')){
+        closeModal();
+        return;
+      }
+    });
+
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+  </script>
 </body>
 </html>
