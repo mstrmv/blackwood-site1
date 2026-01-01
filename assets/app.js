@@ -1,394 +1,319 @@
-(() => {
+/* =========================
+   BLACKWOOD · CHARCOAL
+   app.js (FULL)
+   - i18n RU/UKR/EN
+   - Catalog: filter + sort + qty + add to cart
+   - Cart persisted in localStorage
+   - Safe init (no crashes if blocks missing)
+   ========================= */
+
+(function () {
+  "use strict";
+
+  // ---------- Helpers ----------
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  const LS_LANG = "bw_lang";
   const LS_CART = "bw_cart_v1";
-  const LS_LANG = "bw_lang_v1";
 
-  const money = (n) => `${n} грн`;
+  const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
-  const products = [
-    { id: "core-3",  name: "CORE · 3 KG",  weight: "3 kg",  price: 0,  img: "img/products/core-3kg.png",  group: "3-5" },
-    { id: "core-5",  name: "CORE · 5 KG",  weight: "5 kg",  price: 0,  img: "img/products/core-5kg.png",  group: "3-5" },
-    { id: "core-10", name: "CORE · 10 KG", weight: "10 kg", price: 0,  img: "img/products/core-10kg.png", group: "10" }
-  ];
+  function readJSON(key, fallback) {
+    try {
+      const v = localStorage.getItem(key);
+      return v ? JSON.parse(v) : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+  function writeJSON(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch {}
+  }
 
+  // ---------- i18n ----------
   const i18n = {
     ru: {
-      home: "Главная", catalog: "Каталог", shipping: "Доставка", about: "О нас", contacts: "Контакты",
+      home: "Главная",
+      catalog: "Каталог",
+      shipping: "Доставка",
+      about: "О нас",
+      contacts: "Контакты",
       cart: "Корзина",
-      hero_title: "PREMIUM\nHARDWOOD\nCHARCOAL",
-      hero_desc: "Длительное горение, минимум пепла, чистый жар.\nИдеально для BBQ и гриля.",
-      open_catalog: "Открыть каталог",
-      delivery_pay: "Доставка и оплата",
-      go_cart: "Перейти в корзину",
       products: "ТОВАРЫ",
       choose_weight: "Выберите вес и добавьте в корзину.",
-      filter: "Filter",
-      all: "All",
       sort: "Sort",
       popular: "Popular",
       price_low: "Price: Low",
       price_high: "Price: High",
-      in_cart: "В корзину",
       to_cart: "Перейти в корзину",
       checkout: "Оформить заказ",
-      empty_cart: "Корзина пуста. Перейдите в каталог и добавьте товары.",
-      total: "Итого",
-      checkout_title: "Оформление заказа",
-      name: "Имя и Фамилия",
-      phone: "Телефон",
-      city: "Город",
-      address: "Адрес (НП/улица/дом)",
-      comment: "Комментарий",
-      place_order: "Подтвердить заказ",
-      back_to_cart: "Назад в корзину",
-      success_title: "Заказ оформлен!",
-      success_desc: "Спасибо! Мы скоро свяжемся с вами для подтверждения."
+      add_to_cart: "В КОРЗИНУ",
+      weight: "Вес",
+      грн: "грн",
     },
     ukr: {
-      home: "Головна", catalog: "Каталог", shipping: "Доставка", about: "Про нас", contacts: "Контакти",
+      home: "Головна",
+      catalog: "Каталог",
+      shipping: "Доставка",
+      about: "Про нас",
+      contacts: "Контакти",
       cart: "Кошик",
-      hero_title: "PREMIUM\nHARDWOOD\nCHARCOAL",
-      hero_desc: "Довге горіння, мінімум попелу, чистий жар.\nІдеально для BBQ та гриля.",
-      open_catalog: "Відкрити каталог",
-      delivery_pay: "Доставка та оплата",
-      go_cart: "Перейти в кошик",
       products: "ТОВАРИ",
       choose_weight: "Оберіть вагу та додайте в кошик.",
-      filter: "Filter",
-      all: "All",
       sort: "Sort",
       popular: "Popular",
       price_low: "Price: Low",
       price_high: "Price: High",
-      in_cart: "У кошик",
       to_cart: "Перейти в кошик",
       checkout: "Оформити замовлення",
-      empty_cart: "Кошик порожній. Перейдіть у каталог і додайте товари.",
-      total: "Разом",
-      checkout_title: "Оформлення замовлення",
-      name: "Ім'я та Прізвище",
-      phone: "Телефон",
-      city: "Місто",
-      address: "Адреса (НП/вулиця/будинок)",
-      comment: "Коментар",
-      place_order: "Підтвердити замовлення",
-      back_to_cart: "Назад у кошик",
-      success_title: "Замовлення оформлено!",
-      success_desc: "Дякуємо! Ми скоро зв’яжемося з вами для підтвердження."
+      add_to_cart: "В КОШИК",
+      weight: "Вага",
+      грн: "грн",
     },
     en: {
-      home: "Home", catalog: "Catalog", shipping: "Shipping", about: "About", contacts: "Contacts",
+      home: "Home",
+      catalog: "Catalog",
+      shipping: "Shipping",
+      about: "About",
+      contacts: "Contacts",
       cart: "Cart",
-      hero_title: "PREMIUM\nHARDWOOD\nCHARCOAL",
-      hero_desc: "Long heat, low ash, clean burn.\nPerfect for BBQ & grill.",
-      open_catalog: "Open catalog",
-      delivery_pay: "Shipping & payment",
-      go_cart: "Go to cart",
       products: "PRODUCTS",
-      choose_weight: "Choose a weight and add to cart.",
-      filter: "Filter",
-      all: "All",
+      choose_weight: "Choose weight and add to cart.",
       sort: "Sort",
       popular: "Popular",
       price_low: "Price: Low",
       price_high: "Price: High",
-      in_cart: "Add to cart",
       to_cart: "Go to cart",
       checkout: "Checkout",
-      empty_cart: "Your cart is empty. Go to catalog and add items.",
-      total: "Total",
-      checkout_title: "Checkout",
-      name: "Full name",
-      phone: "Phone",
-      city: "City",
-      address: "Address",
-      comment: "Comment",
-      place_order: "Place order",
-      back_to_cart: "Back to cart",
-      success_title: "Order placed!",
-      success_desc: "Thank you! We’ll contact you soon to confirm."
-    }
+      add_to_cart: "ADD TO CART",
+      weight: "Weight",
+      грн: "UAH",
+    },
   };
 
-  const getLang = () => localStorage.getItem(LS_LANG) || "ru";
-  const setLang = (lang) => localStorage.setItem(LS_LANG, lang);
+  function getLang() {
+    const saved = localStorage.getItem(LS_LANG);
+    return saved && i18n[saved] ? saved : "ru";
+  }
+  function setLang(lang) {
+    if (!i18n[lang]) return;
+    localStorage.setItem(LS_LANG, lang);
 
-  const getCart = () => {
-    try { return JSON.parse(localStorage.getItem(LS_CART) || "{}"); }
-    catch { return {}; }
-  };
-  const setCart = (cart) => localStorage.setItem(LS_CART, JSON.stringify(cart));
+    $$(".langs button").forEach((b) => {
+      b.classList.toggle("active", b.dataset.lang === lang);
+    });
 
-  const cartCount = () => Object.values(getCart()).reduce((a,b)=>a+b,0);
-  const cartTotal = () => {
-    const cart = getCart();
-    let t = 0;
-    for(const [id,qty] of Object.entries(cart)){
-      const p = products.find(x=>x.id===id);
-      if(p) t += (p.price||0) * qty;
-    }
-    return t;
-  };
+    $$("[data-i18n]").forEach((el) => {
+      const key = el.dataset.i18n;
+      const val = i18n[lang][key];
+      if (typeof val === "string") el.textContent = val;
+    });
 
-  const toast = (msg) => {
-    let el = document.querySelector(".toast");
-    if(!el){
-      el = document.createElement("div");
-      el.className = "toast";
-      document.body.appendChild(el);
-    }
-    el.textContent = msg;
-    el.classList.add("show");
-    clearTimeout(el._t);
-    el._t = setTimeout(()=> el.classList.remove("show"), 1600);
-  };
+    // Also update dynamic buttons in catalog if rendered
+    if ($("#catalogGrid")) renderCatalog();
+  }
 
-  const applyI18n = () => {
+  function initLangButtons() {
     const lang = getLang();
-    const t = i18n[lang] || i18n.ru;
+    setLang(lang);
 
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
-      const key = el.getAttribute("data-i18n");
-      if(t[key] != null) el.textContent = t[key];
-    });
-
-    // multiline for hero
-    document.querySelectorAll("[data-i18n-multiline]").forEach(el=>{
-      const key = el.getAttribute("data-i18n-multiline");
-      if(t[key] != null) el.innerHTML = String(t[key]).replace(/\n/g,"<br>");
-    });
-
-    // active lang buttons
-    document.querySelectorAll("[data-lang]").forEach(btn=>{
-      btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
-    });
-  };
-
-  const wireLangButtons = () => {
-    document.querySelectorAll("[data-lang]").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        setLang(btn.getAttribute("data-lang"));
-        applyI18n();
+    $$(".langs button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setLang(btn.dataset.lang);
       });
     });
-  };
+  }
 
-  const updateHeaderCartCount = () => {
-    document.querySelectorAll("#cartCount").forEach(el => el.textContent = String(cartCount()));
-  };
+  // ---------- Cart ----------
+  function getCart() {
+    return readJSON(LS_CART, { items: {} }); // { items: {id: qty} }
+  }
+  function saveCart(cart) {
+    writeJSON(LS_CART, cart);
+    updateCartCount();
+  }
+  function cartCount(cart = getCart()) {
+    return Object.values(cart.items).reduce((a, b) => a + (Number(b) || 0), 0);
+  }
+  function updateCartCount() {
+    const el = $("#cartCount");
+    if (!el) return;
+    el.textContent = String(cartCount());
+  }
+  function addToCart(id, qty) {
+    const cart = getCart();
+    cart.items[id] = (Number(cart.items[id]) || 0) + qty;
+    if (cart.items[id] <= 0) delete cart.items[id];
+    saveCart(cart);
+  }
 
-  /* ===== Catalog render ===== */
-  const renderCatalog = () => {
-    const grid = document.querySelector("#catalogGrid");
-    if(!grid) return;
+  // ---------- Products (edit if you want prices) ----------
+  const products = [
+    {
+      id: "core-3",
+      name: "CORE • 3 KG",
+      weight: "3 kg",
+      group: "3-5",
+      price: null, // put number if you want, e.g. 199
+      img: "./img/core-3kg.jpg",
+      popular: 3,
+    },
+    {
+      id: "core-5",
+      name: "CORE • 5 KG",
+      weight: "5 kg",
+      group: "3-5",
+      price: null,
+      img: "./img/core-5kg.jpg",
+      popular: 2,
+    },
+    {
+      id: "core-10",
+      name: "CORE • 10 KG",
+      weight: "10 kg",
+      group: "10",
+      price: null,
+      img: "./img/core-10kg.jpg",
+      popular: 1,
+    },
+  ];
 
-    let filter = "all";
-    let sort = "popular";
+  // ---------- Catalog state ----------
+  let currentFilter = "all";
+  let currentSort = "popular";
+  const qtyState = {}; // per product id
 
-    const apply = () => {
-      let list = [...products];
-
-      if(filter === "3-5") list = list.filter(p=>p.group==="3-5");
-      if(filter === "10") list = list.filter(p=>p.group==="10");
-
-      if(sort === "price_low") list.sort((a,b)=>(a.price||0)-(b.price||0));
-      if(sort === "price_high") list.sort((a,b)=>(b.price||0)-(a.price||0));
-
-      grid.innerHTML = list.map(p=>`
-        <div class="card">
-          <div class="prodImg"><img src="${p.img}" alt="${p.name}"></div>
-          <h3 class="prodTitle">${p.name}</h3>
-          <div class="meta">
-            <div>${p.weight}</div>
-            <div class="price">${p.price ? money(p.price) : "-"}</div>
-          </div>
-
-          <div class="addRow">
-            <div class="qty" data-qty="${p.id}">
-              <button type="button" data-dec="${p.id}">−</button>
-              <div class="qtyVal" id="qty-${p.id}">1</div>
-              <button type="button" data-inc="${p.id}">+</button>
-            </div>
-            <button class="addBtn" type="button" data-add="${p.id}" data-i18n="in_cart">В корзину</button>
-          </div>
-        </div>
-      `).join("");
-
-      // qty state
-      const qtyState = {};
-      list.forEach(p=>qtyState[p.id]=1);
-
-      grid.querySelectorAll("[data-inc]").forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          const id = btn.getAttribute("data-inc");
-          qtyState[id] = Math.min(99,(qtyState[id]||1)+1);
-          const el = document.getElementById(`qty-${id}`);
-          if(el) el.textContent = String(qtyState[id]);
-        });
-      });
-
-      grid.querySelectorAll("[data-dec]").forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          const id = btn.getAttribute("data-dec");
-          qtyState[id] = Math.max(1,(qtyState[id]||1)-1);
-          const el = document.getElementById(`qty-${id}`);
-          if(el) el.textContent = String(qtyState[id]);
-        });
-      });
-
-      grid.querySelectorAll("[data-add]").forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          const id = btn.getAttribute("data-add");
-          const cart = getCart();
-          cart[id] = (cart[id]||0) + (qtyState[id]||1);
-          setCart(cart);
-          updateHeaderCartCount();
-          toast("✅ Добавлено в корзину");
-        });
-      });
-
-      applyI18n();
-    };
-
-    // pills
-    document.querySelectorAll("[data-filter]").forEach(b=>{
-      b.addEventListener("click", ()=>{
-        document.querySelectorAll("[data-filter]").forEach(x=>x.classList.remove("active"));
-        b.classList.add("active");
-        filter = b.getAttribute("data-filter");
-        apply();
-      });
-    });
-
-    // sort select
-    const sel = document.querySelector("#sortSelect");
-    if(sel){
-      sel.addEventListener("change", ()=>{
-        sort = sel.value;
-        apply();
-      });
+  function sortProducts(list) {
+    const arr = [...list];
+    if (currentSort === "popular") {
+      arr.sort((a, b) => (a.popular || 0) - (b.popular || 0));
+    } else if (currentSort === "price_low") {
+      arr.sort((a, b) => (a.price ?? 999999) - (b.price ?? 999999));
+    } else if (currentSort === "price_high") {
+      arr.sort((a, b) => (b.price ?? -1) - (a.price ?? -1));
     }
+    return arr;
+  }
 
-    apply();
-  };
+  function filterProducts(list) {
+    if (currentFilter === "all") return list;
+    return list.filter((p) => p.group === currentFilter);
+  }
 
-  /* ===== Cart render ===== */
-  const renderCart = () => {
-    const box = document.querySelector("#cartBox");
-    if(!box) return;
+  function formatPrice(p, lang) {
+    if (typeof p.price !== "number") return "—";
+    const currency = i18n[lang]["грн"];
+    return `${p.price} ${currency}`;
+  }
 
-    const t = i18n[getLang()] || i18n.ru;
+  function renderCatalog() {
+    const grid = $("#catalogGrid");
+    if (!grid) return;
 
-    const draw = () => {
-      const cart = getCart();
-      const items = Object.entries(cart).map(([id,qty])=>{
-        const p = products.find(x=>x.id===id);
-        if(!p) return null;
-        return {p,qty};
-      }).filter(Boolean);
+    const lang = getLang();
 
-      if(items.length===0){
-        box.innerHTML = `<p class="cartEmpty" data-i18n="empty_cart">${t.empty_cart}</p>`;
-        updateHeaderCartCount();
-        applyI18n();
-        return;
+    const list = sortProducts(filterProducts(products));
+
+    grid.innerHTML = list
+      .map((p) => {
+        const qty = clamp(qtyState[p.id] ?? 1, 1, 99);
+        const priceText = formatPrice(p, lang);
+
+        return `
+        <article class="card" data-id="${p.id}">
+          <div class="cardInner">
+            <div class="cardMedia">
+              <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.style.opacity='.15'; this.alt='Image not found';">
+            </div>
+
+            <div class="cardTitle">${p.name}</div>
+            <div class="cardMeta">${i18n[lang].weight}: ${p.weight}</div>
+
+            <div class="cardRow">
+              <div class="qty">
+                <button type="button" class="qtyMinus" aria-label="minus">−</button>
+                <span class="qtyVal">${qty}</span>
+                <button type="button" class="qtyPlus" aria-label="plus">+</button>
+              </div>
+
+              <button type="button" class="cardBtn">${i18n[lang].add_to_cart}</button>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; margin-top:10px; color:rgba(255,255,255,.65); font-weight:800">
+              <span>${priceText}</span>
+            </div>
+          </div>
+        </article>
+      `;
+      })
+      .join("");
+
+    // bind events
+    $$(".card", grid).forEach((card) => {
+      const id = card.dataset.id;
+
+      const qtyEl = $(".qtyVal", card);
+      const minus = $(".qtyMinus", card);
+      const plus = $(".qtyPlus", card);
+      const btn = $(".cardBtn", card);
+
+      function setQty(n) {
+        const v = clamp(n, 1, 99);
+        qtyState[id] = v;
+        qtyEl.textContent = String(v);
       }
 
-      box.innerHTML = `
-        <div class="cartList">
-          ${items.map(({p,qty})=>`
-            <div class="cartItem" data-item="${p.id}">
-              <div class="cartThumb"><img src="${p.img}" alt="${p.name}"></div>
+      minus.addEventListener("click", () => setQty((qtyState[id] ?? 1) - 1));
+      plus.addEventListener("click", () => setQty((qtyState[id] ?? 1) + 1));
 
-              <div>
-                <div class="cartName">${p.name}</div>
-                <div class="cartSub">${p.weight} · <span class="price">${p.price?money(p.price):"-"}</span></div>
-              </div>
-
-              <div class="cartRight">
-                <div class="cartLinePrice">${p.price?money((p.price||0)*qty):"-"}</div>
-                <div class="cartActions">
-                  <button class="iconBtn" type="button" data-dec="${p.id}">−</button>
-                  <b id="cqty-${p.id}">${qty}</b>
-                  <button class="iconBtn" type="button" data-inc="${p.id}">+</button>
-                  <button class="removeBtn" type="button" data-rm="${p.id}">Удалить</button>
-                </div>
-              </div>
-            </div>
-          `).join("")}
-        </div>
-
-        <div class="cartTotalRow">
-          <div class="total"><span data-i18n="total">${t.total}</span>: <span id="cartTotal">${money(cartTotal())}</span></div>
-          <div style="display:flex; gap:12px; flex-wrap:wrap">
-            <a class="btn dark" href="catalog.html" data-i18n="to_cart">Перейти в корзину</a>
-            <a class="btn gold" href="checkout.html" data-i18n="checkout">Оформить заказ</a>
-          </div>
-        </div>
-      `;
-
-      // buttons
-      box.querySelectorAll("[data-inc]").forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          const id = btn.getAttribute("data-inc");
-          const cart = getCart();
-          cart[id] = Math.min(99,(cart[id]||0)+1);
-          setCart(cart);
-          draw();
-        });
+      btn.addEventListener("click", () => {
+        const qty = clamp(qtyState[id] ?? 1, 1, 99);
+        addToCart(id, qty);
+        // small feedback
+        btn.textContent = "✓";
+        setTimeout(() => {
+          const lang = getLang();
+          btn.textContent = i18n[lang].add_to_cart;
+        }, 550);
       });
-
-      box.querySelectorAll("[data-dec]").forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          const id = btn.getAttribute("data-dec");
-          const cart = getCart();
-          cart[id] = Math.max(1,(cart[id]||1)-1);
-          setCart(cart);
-          draw();
-        });
-      });
-
-      box.querySelectorAll("[data-rm]").forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          const id = btn.getAttribute("data-rm");
-          const cart = getCart();
-          delete cart[id];
-          setCart(cart);
-          draw();
-        });
-      });
-
-      updateHeaderCartCount();
-      applyI18n();
-    };
-
-    draw();
-  };
-
-  /* ===== Checkout ===== */
-  const wireCheckout = () => {
-    const form = document.querySelector("#checkoutForm");
-    if(!form) return;
-
-    form.addEventListener("submit", (e)=>{
-      e.preventDefault();
-      // Тут потом подключишь реальный заказ/бота.
-      // Сейчас просто чистим корзину и кидаем на success.
-      setCart({});
-      updateHeaderCartCount();
-      window.location.href = "success.html";
     });
-  };
+  }
 
-  /* ===== Init ===== */
-  const init = () => {
-    wireLangButtons();
-    applyI18n();
-    updateHeaderCartCount();
+  function initCatalogControls() {
+    // filter pills
+    $$(".pillBtn").forEach((b) => {
+      b.addEventListener("click", () => {
+        currentFilter = b.dataset.filter || "all";
+        $$(".pillBtn").forEach((x) => x.classList.toggle("active", x === b));
+        renderCatalog();
+      });
+    });
 
-    renderCatalog();
-    renderCart();
-    wireCheckout();
-  };
+    const sortSelect = $("#sortSelect");
+    if (sortSelect) {
+      sortSelect.addEventListener("change", () => {
+        currentSort = sortSelect.value;
+        renderCatalog();
+      });
+    }
+  }
+
+  // ---------- Init ----------
+  function init() {
+    initLangButtons();
+    updateCartCount();
+
+    // Only if catalog exists
+    if ($("#catalogGrid")) {
+      initCatalogControls();
+      renderCatalog();
+    }
+
+    // If you later add cart page rendering, app.js won't crash
+  }
 
   document.addEventListener("DOMContentLoaded", init);
 })();
