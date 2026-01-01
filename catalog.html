@@ -1,84 +1,83 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Catalog · BLACKWOOD</title>
-
-  <!-- ВАЖНО: ставим ./ чтобы GitHub Pages точно нашел -->
-  <link rel="stylesheet" href="./assets/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Каталог · BLACKWOOD</title>
+  <link rel="stylesheet" href="./assets/style.css" />
 </head>
 
-<body class="page-catalog bgCatalog">
+<body class="bgCatalog">
 
-<header class="header">
-  <div class="container headerRow">
-    <a class="logo" href="./index.html">BLACKWOOD <span>·</span> <b>CHARCOAL</b></a>
+  <header class="header">
+    <div class="container headerRow">
+      <a class="logo" href="./index.html">BLACKWOOD <span>·</span> <b>CHARCOAL</b></a>
 
-    <nav class="nav">
-      <a href="./index.html" data-i18n="home">Главная</a>
-      <a href="./catalog.html" data-i18n="catalog">Каталог</a>
-      <a href="./shipping.html" data-i18n="shipping">Доставка</a>
-      <a href="./about.html" data-i18n="about">О нас</a>
-      <a href="./contacts.html" data-i18n="contacts">Контакты</a>
-    </nav>
+      <nav class="nav">
+        <a href="./index.html" data-i18n="home">Главная</a>
+        <a href="./catalog.html" data-i18n="catalog">Каталог</a>
+        <a href="./shipping.html" data-i18n="shipping">Доставка</a>
+        <a href="./about.html" data-i18n="about">О нас</a>
+        <a href="./contacts.html" data-i18n="contacts">Контакты</a>
+      </nav>
 
-    <div class="headerRight">
-      <div class="langs">
-        <button class="active" type="button" data-lang="ru">RU</button>
-        <button type="button" data-lang="ukr">UKR</button>
-        <button type="button" data-lang="en">EN</button>
-      </div>
+      <div class="headerRight">
+        <div class="langs">
+          <button type="button" data-lang="ru" class="active">RU</button>
+          <button type="button" data-lang="ukr">UKR</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
 
-      <a class="cartBtn" href="./cart.html">
-        <span data-i18n="cart">Корзина</span> · <span id="cartCount">0</span>
-      </a>
-    </div>
-  </div>
-</header>
-
-<section class="section">
-  <div class="container">
-    <div class="sectionTitle">
-      <div>
-        <h2 data-i18n="products">ТОВАРЫ</h2>
-        <p data-i18n="choose_weight">Выберите вес и добавьте в корзину.</p>
+        <a class="cartBtn" href="./cart.html">
+          <span data-i18n="cart">Корзина</span> · <span id="cartCount">0</span>
+        </a>
       </div>
     </div>
+  </header>
 
-    <!-- ТУЛБАР -->
-    <div class="toolbar">
-      <div class="pills">
-        <button class="pillBtn active" type="button" data-filter="all">All</button>
-        <button class="pillBtn" type="button" data-filter="3-5">3–5kg</button>
-        <button class="pillBtn" type="button" data-filter="10">10kg</button>
+  <section class="section">
+    <div class="container">
+
+      <div class="sectionTitle">
+        <div>
+          <h2 data-i18n="products">ТОВАРЫ</h2>
+          <p data-i18n="choose_weight">Выберите вес и добавьте в корзину.</p>
+        </div>
       </div>
 
-      <div class="selectWrap">
-        <span data-i18n="sort">Sort</span>
-        <select id="sortSelect" class="select">
-          <option value="popular" data-i18n="popular">Popular</option>
-          <option value="price_low" data-i18n="price_low">Price: Low</option>
-          <option value="price_high" data-i18n="price_high">Price: High</option>
-        </select>
+      <!-- FILTER + SORT -->
+      <div class="toolbar">
+        <div class="pills">
+          <button class="pillBtn active" type="button" data-filter="all">All</button>
+          <button class="pillBtn" type="button" data-filter="3-5">3–5kg</button>
+          <button class="pillBtn" type="button" data-filter="10">10kg</button>
+        </div>
+
+        <div class="selectWrap">
+          <span data-i18n="sort">Sort</span>
+          <select id="sortSelect" class="select">
+            <option value="popular" data-i18n="popular">Popular</option>
+            <option value="price_low" data-i18n="price_low">Price: Low</option>
+            <option value="price_high" data-i18n="price_high">Price: High</option>
+          </select>
+        </div>
       </div>
+
+      <!-- GRID -->
+      <div id="catalogGrid" class="grid"></div>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px">
+        <a class="btn dark" href="./cart.html" data-i18n="to_cart">Перейти в корзину</a>
+        <a class="btn gold" href="./checkout.html" data-i18n="checkout">Оформить заказ</a>
+      </div>
+
     </div>
+  </section>
 
-    <!-- ВАЖНО: этот блок ОБЯЗАТЕЛЕН, иначе каталог пустой -->
-    <div id="catalogGrid" class="grid"></div>
+  <footer class="footer">
+    <div class="container">BLACKWOOD · CHARCOAL © 2026</div>
+  </footer>
 
-    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px">
-      <a class="btn dark" href="./cart.html" data-i18n="to_cart">Перейти в корзину</a>
-      <a class="btn gold" href="./checkout.html" data-i18n="checkout">Оформить заказ</a>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container">BLACKWOOD · CHARCOAL © 2026</div>
-</footer>
-
-<!-- ВАЖНО: ставим ./ чтобы GitHub Pages точно нашел -->
-<script src="./assets/app.js"></script>
+  <script src="./assets/app.js"></script>
 </body>
 </html>
