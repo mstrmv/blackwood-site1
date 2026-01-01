@@ -1,9 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ОБЯЗАТЕЛЬНО для GitHub Pages -->
+  <base href="/blackwood-site1/">
+
   <title>BLACKWOOD · CHARCOAL</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="stylesheet" href="assets/style.css" />
 </head>
@@ -12,7 +16,10 @@
 
 <header class="header">
   <div class="container headerRow">
-    <div class="logo">BLACKWOOD <span>· CHARCOAL</span></div>
+
+    <div class="logo">
+      BLACKWOOD <span>· CHARCOAL</span>
+    </div>
 
     <nav class="nav">
       <a href="catalog.html">Каталог</a>
@@ -29,14 +36,21 @@
       </div>
       <a class="cartBtn" href="cart.html">Корзина · 0</a>
     </div>
+
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <div class="container heroGrid">
 
     <div class="heroText">
-      <h1>PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
+      <h1>
+        PREMIUM<br>
+        HARDWOOD<br>
+        CHARCOAL
+      </h1>
+
       <p>
         Длительное горение, минимум пепла, чистый жар.<br>
         Идеально для BBQ и гриля.
@@ -49,8 +63,8 @@
       </div>
     </div>
 
-    <!-- ❌ ВАЖНО: НИКАКИХ <img> ЗДЕСЬ НЕТ -->
-    <!-- Картинка ТОЛЬКО фоном через CSS -->
+    <!-- ❌ НИКАКИХ IMG ЗДЕСЬ НЕТ -->
+    <!-- ФОН ТОЛЬКО ЧЕРЕЗ CSS -->
 
   </div>
 </section>
@@ -61,5 +75,6 @@
   </div>
 </footer>
 
+<script src="assets/app.js"></script>
 </body>
 </html>
