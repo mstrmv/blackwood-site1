@@ -5,59 +5,55 @@
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
   // ===== Year =====
-  const y = $("#year");
-  if (y) y.textContent = String(new Date().getFullYear());
+  const year = $("#year");
+  if (year) year.textContent = String(new Date().getFullYear());
 
-  // ===== Cart (localStorage) =====
+  // ===== Cart =====
   const LS_CART = "bw_cart_v1";
 
   function readJSON(key, fallback) {
     try {
       const v = localStorage.getItem(key);
       return v ? JSON.parse(v) : fallback;
-    } catch {
-      return fallback;
-    }
+    } catch { return fallback; }
   }
   function writeJSON(key, value) {
     try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
   }
 
-  function getCart() {
-    return readJSON(LS_CART, { items: {} });
-  }
-  function saveCart(cart) {
-    writeJSON(LS_CART, cart);
-    updateCartCount();
-  }
+  function getCart() { return readJSON(LS_CART, { items: {} }); }
+  function saveCart(cart) { writeJSON(LS_CART, cart); updateCartCount(); }
+
   function cartCount() {
     const cart = getCart();
-    return Object.values(cart.items || {}).reduce((a, b) => a + (Number(b) || 0), 0);
+    return Object.values(cart.items || {}).reduce((a,b)=>a + (Number(b) || 0), 0);
   }
+
   function updateCartCount() {
     const n = String(cartCount());
-    const el1 = $("#cartCount");
-    const el2 = $("#cartCountMobile");
-    if (el1) el1.textContent = n;
-    if (el2) el2.textContent = n;
+    const a = $("#cartCount");
+    const b = $("#cartCountMobile");
+    if (a) a.textContent = n;
+    if (b) b.textContent = n;
   }
+
   function addToCart(id, qty) {
     const cart = getCart();
     cart.items[id] = (Number(cart.items[id]) || 0) + qty;
     if (cart.items[id] <= 0) delete cart.items[id];
     saveCart(cart);
   }
+
   updateCartCount();
 
   // ===== Burger =====
   const burger = $("#burger");
   const mobileNav = $("#mobileNav");
-
   const toggleMenu = (force) => {
     if (!burger || !mobileNav) return;
-    const willOpen = typeof force === "boolean" ? force : mobileNav.hidden;
-    mobileNav.hidden = !willOpen;
-    burger.setAttribute("aria-expanded", String(willOpen));
+    const open = typeof force === "boolean" ? force : mobileNav.hidden;
+    mobileNav.hidden = !open;
+    burger.setAttribute("aria-expanded", String(open));
   };
 
   if (burger && mobileNav) {
@@ -117,25 +113,20 @@
     if (!dict[lang]) return;
     localStorage.setItem(LS_LANG, lang);
 
-    // sync all lang buttons (desktop + mobile)
     $$("[data-lang]").forEach(btn => btn.classList.toggle("active", btn.dataset.lang === lang));
-
-    // translate text
     $$("[data-i18n]").forEach(el => {
       const key = el.dataset.i18n;
       const v = dict[lang][key];
       if (typeof v === "string") el.textContent = v;
     });
 
-    // re-render catalog texts/buttons
     if ($("#catalogGrid")) renderCatalog();
   }
 
   setLang(getLang());
   $$("[data-lang]").forEach(btn => btn.addEventListener("click", () => setLang(btn.dataset.lang)));
 
-  // ===== Catalog (фикс) =====
-  // ТВОИ ПУТИ ИЗ ПАПКИ img/products/*.png
+  // ===== Catalog =====
   const products = [
     { id:"core-3",  name:"CORE • 3 KG",  weight:"3 kg",  group:"3-5", price:null, img:"./img/products/core-3kg.png",  popular:3 },
     { id:"core-5",  name:"CORE • 5 KG",  weight:"5 kg",  group:"3-5", price:null, img:"./img/products/core-5kg.png",  popular:2 },
@@ -201,7 +192,6 @@
       `;
     }).join("");
 
-    // bind buttons
     $$(".card", grid).forEach(card => {
       const id = card.dataset.id;
       const qtyEl = $(".qtyVal", card);
@@ -222,9 +212,7 @@
         const qty = clamp(qtyState[id] ?? 1, 1, 99);
         addToCart(id, qty);
         btn.textContent = "✓";
-        setTimeout(() => {
-          btn.textContent = dict[getLang()].add_to_cart;
-        }, 550);
+        setTimeout(() => btn.textContent = dict[getLang()].add_to_cart, 550);
       });
     });
   }
@@ -247,7 +235,6 @@
     }
   }
 
-  // init catalog if page has it
   if ($("#catalogGrid")) {
     initCatalogControls();
     renderCatalog();
