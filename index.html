@@ -1,212 +1,69 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BLACKWOOD • CHARCOAL</title>
-
-<style>
-:root{
-  --bg:#070708;
-  --text:#fff;
-  --muted:rgba(255,255,255,.65);
-  --gold:#c8a45a;
-  --shadow:0 20px 60px rgba(0,0,0,.6);
-  --radius:20px;
-  --max:1200px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
-.container{max-width:var(--max);margin:auto;padding:0 20px}
-
-header{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter:blur(10px);
-  background:rgba(0,0,0,.55);
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-.nav{
-  display:flex; justify-content:space-between; align-items:center; gap:12px;
-  padding:14px 0;
-}
-.brand{font-weight:900; letter-spacing:.18em; white-space:nowrap}
-.brand span{color:var(--gold)}
-.lang{
-  display:flex; gap:6px; padding:6px;
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:14px;
-  background:rgba(0,0,0,.20);
-}
-.lang button{
-  cursor:pointer; border:0; padding:7px 10px; border-radius:10px;
-  background:transparent; color:var(--muted); font-weight:900; letter-spacing:.08em;
-}
-.lang button.active{
-  background:rgba(200,164,90,.18);
-  color:rgba(255,255,255,.92);
-  outline:1px solid rgba(200,164,90,.25);
-}
-
-.welcome{
-  min-height:calc(100vh - 64px);
-  position:relative;
-  display:flex;
-  align-items:center;
-}
-.welcome::before{
-  content:"";
-  position:absolute; inset:-60px 0 -90px 0;
-  background:url("./img/hero-bg.png") center/cover no-repeat;
-  z-index:-2;
-}
-.welcome::after{
-  content:"";
-  position:absolute; inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.82));
-  z-index:-1;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns: 1.1fr .9fr;
-  gap:24px;
-  align-items:center;
-  padding:42px 0;
-}
-h1{
-  margin:0 0 12px;
-  font-size:clamp(32px,4.2vw,54px);
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-p{margin:0 0 18px; color:var(--muted); max-width:56ch; line-height:1.6}
-
-.actions{display:flex; gap:12px; flex-wrap:wrap}
-.btn{
-  cursor:pointer;
-  border-radius:14px;
-  border:1px solid rgba(200,164,90,.45);
-  background:rgba(200,164,90,.12);
-  color:#fff;
-  font-weight:900;
-  letter-spacing:.06em;
-  padding:12px 16px;
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-}
-.btn:hover{background:rgba(200,164,90,.20)}
-.btn.ghost{
-  border-color:rgba(255,255,255,.16);
-  background:rgba(255,255,255,.06);
-}
-.btn.ghost:hover{background:rgba(255,255,255,.09)}
-
-.card{
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:var(--radius);
-  background:rgba(0,0,0,.22);
-  box-shadow:var(--shadow);
-  padding:16px;
-}
-.card b{letter-spacing:.12em; text-transform:uppercase}
-.card small{display:block; color:var(--muted); margin-top:6px; line-height:1.5}
-
-@media(max-width:980px){
-  .grid{grid-template-columns:1fr; text-align:center}
-  .actions{justify-content:center}
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BLACKWOOD • CHARCOAL</title>
+  <link rel="stylesheet" href="./assets/style.css" />
 </head>
-
 <body>
 
 <header>
   <div class="container nav">
-    <div class="brand">BLACKWOOD <span>• CHARCOAL</span></div>
+    <a class="brand" href="./index.html">BLACKWOOD <span>• CHARCOAL</span></a>
 
-    <div class="lang" role="group" aria-label="Language">
-      <button id="lang-ru" class="active" type="button">RU</button>
-      <button id="lang-uk" type="button">UKR</button>
-      <button id="lang-en" type="button">EN</button>
+    <nav class="navLinks">
+      <a href="./catalog.html" data-i18n="nav_catalog">Каталог</a>
+      <a href="./shipping.html" data-i18n="nav_shipping">Доставка</a>
+      <a href="./about.html" data-i18n="nav_about">О нас</a>
+      <a href="./contacts.html" data-i18n="nav_contacts">Контакты</a>
+    </nav>
+
+    <div class="rightTools">
+      <div class="lang">
+        <button id="lang-ru" class="active" type="button">RU</button>
+        <button id="lang-uk" type="button">UKR</button>
+        <button id="lang-en" type="button">EN</button>
+      </div>
+
+      <a class="pill" href="./cart.html">
+        <span data-i18n="nav_cart">Корзина</span> • <span id="cartCount">0</span>
+      </a>
     </div>
   </div>
 </header>
 
-<section class="welcome">
-  <div class="container grid">
-    <div>
-      <h1><span data-i18n="brand">BLACKWOOD</span></h1>
-      <p data-i18n="welcome_text">Добро пожаловать. Нажми кнопку ниже — откроется страница каталога.</p>
+<section class="hero">
+  <div class="container heroGrid">
+    <div class="reveal">
+      <h1 data-i18n="hero_title">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
+      <p class="lead" data-i18n="hero_sub">...</p>
 
-      <div class="actions">
-        <!-- ✅ ВОТ ОНА: ПЕРЕХОД НА ДРУГУЮ СТРАНИЦУ -->
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
         <a class="btn" href="./catalog.html" data-i18n="open_catalog">Открыть каталог</a>
-
-        <!-- можно оставить вторую кнопку -->
-        <a class="btn ghost" href="./catalog.html#top" data-i18n="go_shop">В магазин</a>
+        <a class="btn ghost" href="./cart.html" data-i18n="go_cart">Перейти в корзину</a>
+        <a class="btn ghost" href="./shipping.html" data-i18n="go_shipping">Доставка и оплата</a>
       </div>
     </div>
 
-    <div class="card">
-      <b data-i18n="hint_title">Подсказка</b>
-      <small data-i18n="hint_text">
-        Если GitHub Pages не видит страницу — проверь, что файл называется catalog.html и лежит рядом с index.html.
-      </small>
+    <div class="heroArt reveal">
+      <img src="./img/products/core-10kg.png" alt="" onerror="this.style.display='none'">
     </div>
   </div>
 </section>
 
+<footer>
+  <div class="container foot">
+    <div class="brand">BLACKWOOD <span>• CHARCOAL</span></div>
+    <div>© <span id="year"></span> • <span data-i18n="footer">Все права защищены.</span></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
 <script>
-const dict = {
-  ru:{
-    brand:"BLACKWOOD",
-    welcome_text:"Добро пожаловать. Нажми кнопку ниже — откроется страница каталога.",
-    open_catalog:"Открыть каталог",
-    go_shop:"В магазин",
-    hint_title:"Подсказка",
-    hint_text:"Если GitHub Pages не видит страницу — проверь, что файл называется catalog.html и лежит рядом с index.html."
-  },
-  uk:{
-    brand:"BLACKWOOD",
-    welcome_text:"Ласкаво просимо. Натисни кнопку нижче — відкриється сторінка каталогу.",
-    open_catalog:"Відкрити каталог",
-    go_shop:"До магазину",
-    hint_title:"Підказка",
-    hint_text:"Якщо GitHub Pages не бачить сторінку — перевір, що файл catalog.html лежить поруч з index.html."
-  },
-  en:{
-    brand:"BLACKWOOD",
-    welcome_text:"Welcome. Click the button below to open the catalog page.",
-    open_catalog:"Open catalog",
-    go_shop:"Go to shop",
-    hint_title:"Hint",
-    hint_text:"If GitHub Pages can’t find the page, make sure catalog.html is next to index.html."
-  }
-};
-
-const $ = (s)=>document.querySelector(s);
-const $$ = (s)=>Array.from(document.querySelectorAll(s));
-
-function setLang(lang){
-  document.documentElement.lang = (lang==="uk" ? "uk" : lang==="en" ? "en" : "ru");
-  $$("[data-i18n]").forEach(el=>{
-    const k = el.getAttribute("data-i18n");
-    if(dict[lang] && dict[lang][k] != null) el.textContent = dict[lang][k];
-  });
-  ["ru","uk","en"].forEach(l=>{
-    $("#lang-"+l).classList.toggle("active", l===lang);
-  });
-  localStorage.setItem("lang", lang);
-}
-
-$("#lang-ru").addEventListener("click", ()=>setLang("ru"));
-$("#lang-uk").addEventListener("click", ()=>setLang("uk"));
-$("#lang-en").addEventListener("click", ()=>setLang("en"));
-setLang(localStorage.getItem("lang") || "ru");
+  document.getElementById("year").textContent = new Date().getFullYear();
 </script>
-
+<script src="./assets/app.js"></script>
 </body>
 </html>
