@@ -4,21 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Catalog · BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css">
+
+  <!-- ВАЖНО: ставим ./ чтобы GitHub Pages точно нашел -->
+  <link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body class="page-catalog bgCatalog">
 
 <header class="header">
   <div class="container headerRow">
-    <a class="logo" href="index.html">BLACKWOOD <span>·</span> <b>CHARCOAL</b></a>
+    <a class="logo" href="./index.html">BLACKWOOD <span>·</span> <b>CHARCOAL</b></a>
 
     <nav class="nav">
-      <a href="index.html" data-i18n="home">Главная</a>
-      <a href="catalog.html" data-i18n="catalog">Каталог</a>
-      <a href="shipping.html" data-i18n="shipping">Доставка</a>
-      <a href="about.html" data-i18n="about">О нас</a>
-      <a href="contacts.html" data-i18n="contacts">Контакты</a>
+      <a href="./index.html" data-i18n="home">Главная</a>
+      <a href="./catalog.html" data-i18n="catalog">Каталог</a>
+      <a href="./shipping.html" data-i18n="shipping">Доставка</a>
+      <a href="./about.html" data-i18n="about">О нас</a>
+      <a href="./contacts.html" data-i18n="contacts">Контакты</a>
     </nav>
 
     <div class="headerRight">
@@ -27,7 +29,10 @@
         <button type="button" data-lang="ukr">UKR</button>
         <button type="button" data-lang="en">EN</button>
       </div>
-      <a class="cartBtn" href="cart.html"><span data-i18n="cart">Корзина</span> · <span id="cartCount">0</span></a>
+
+      <a class="cartBtn" href="./cart.html">
+        <span data-i18n="cart">Корзина</span> · <span id="cartCount">0</span>
+      </a>
     </div>
   </div>
 </header>
@@ -41,6 +46,7 @@
       </div>
     </div>
 
+    <!-- ТУЛБАР -->
     <div class="toolbar">
       <div class="pills">
         <button class="pillBtn active" type="button" data-filter="all">All</button>
@@ -58,11 +64,12 @@
       </div>
     </div>
 
+    <!-- ВАЖНО: этот блок ОБЯЗАТЕЛЕН, иначе каталог пустой -->
     <div id="catalogGrid" class="grid"></div>
 
     <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px">
-      <a class="btn dark" href="cart.html" data-i18n="to_cart">Перейти в корзину</a>
-      <a class="btn gold" href="checkout.html" data-i18n="checkout">Оформить заказ</a>
+      <a class="btn dark" href="./cart.html" data-i18n="to_cart">Перейти в корзину</a>
+      <a class="btn gold" href="./checkout.html" data-i18n="checkout">Оформить заказ</a>
     </div>
   </div>
 </section>
@@ -71,6 +78,7 @@
   <div class="container">BLACKWOOD · CHARCOAL © 2026</div>
 </footer>
 
-<script src="assets/app.js"></script>
+<!-- ВАЖНО: ставим ./ чтобы GitHub Pages точно нашел -->
+<script src="./assets/app.js"></script>
 </body>
 </html>
