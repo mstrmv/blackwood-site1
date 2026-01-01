@@ -1,498 +1,290 @@
-/* =========================
-   BLACKWOOD • CHARCOAL
-   Full style.css (multi-bg)
-   ========================= */
+(function () {
+  "use strict";
 
-:root{
-  --bg:#070707;
-  --card: rgba(20,20,20,.55);
-  --card2: rgba(10,10,10,.35);
-  --stroke: rgba(255,255,255,.10);
-  --stroke2: rgba(255,255,255,.06);
-  --text:#fff;
-  --muted: rgba(255,255,255,.72);
-  --gold:#c8a45a;
-  --shadow: 0 18px 60px rgba(0,0,0,.55);
-  --r: 18px;
-  --r2: 26px;
-}
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  color:var(--text);
-  background:#000;
-  overflow-x:hidden;
-}
+  const LS_LANG = "bw_lang";
+  const LS_CART = "bw_cart_v1";
 
-/* ---------- Background system ---------- */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-3;
-  background:
-    radial-gradient(1000px 600px at 20% 15%, rgba(200,164,90,.18), transparent 60%),
-    radial-gradient(900px 520px at 80% 10%, rgba(200,164,90,.10), transparent 55%),
-    radial-gradient(900px 700px at 50% 100%, rgba(0,0,0,.65), transparent 70%),
-    linear-gradient(180deg, #050505 0%, #000 100%);
-  opacity:1;
-}
+  const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
-/* texture/noise overlay */
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-2;
-  background:
-    radial-gradient(1200px 600px at 50% 110%, rgba(0,0,0,.75), transparent 65%),
-    url("../img/hero-bg.png");
-  background-size: cover;
-  background-position: center;
-  filter: contrast(1.05) saturate(0.95);
-  opacity:.28; /* by default */
-  pointer-events:none;
-}
+  function readJSON(key, fallback) {
+    try {
+      const v = localStorage.getItem(key);
+      return v ? JSON.parse(v) : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+  function writeJSON(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch {}
+  }
 
-/* ---------- Page-specific backgrounds ---------- */
-/* HOME */
-.bgHome::after{
-  background:
-    radial-gradient(1200px 600px at 50% 110%, rgba(0,0,0,.75), transparent 65%),
-    url("../img/hero-bg.png");
-  background-size: cover;
-  background-position: center;
-  opacity:.33;
-}
+  // ---------- i18n ----------
+  const i18n = {
+    ru: {
+      home: "Главная",
+      catalog: "Каталог",
+      shipping: "Доставка",
+      about: "О нас",
+      contacts: "Контакты",
+      cart: "Корзина",
+      products: "ТОВАРЫ",
+      choose_weight: "Выберите вес и добавьте в корзину.",
+      sort: "Sort",
+      popular: "Popular",
+      price_low: "Price: Low",
+      price_high: "Price: High",
+      to_cart: "Перейти в корзину",
+      checkout: "Оформить заказ",
+      add_to_cart: "В КОРЗИНУ",
+      weight: "Вес",
+      currency: "грн",
+    },
+    ukr: {
+      home: "Головна",
+      catalog: "Каталог",
+      shipping: "Доставка",
+      about: "Про нас",
+      contacts: "Контакти",
+      cart: "Кошик",
+      products: "ТОВАРИ",
+      choose_weight: "Оберіть вагу та додайте в кошик.",
+      sort: "Sort",
+      popular: "Popular",
+      price_low: "Price: Low",
+      price_high: "Price: High",
+      to_cart: "Перейти в кошик",
+      checkout: "Оформити замовлення",
+      add_to_cart: "В КОШИК",
+      weight: "Вага",
+      currency: "грн",
+    },
+    en: {
+      home: "Home",
+      catalog: "Catalog",
+      shipping: "Shipping",
+      about: "About",
+      contacts: "Contacts",
+      cart: "Cart",
+      products: "PRODUCTS",
+      choose_weight: "Choose weight and add to cart.",
+      sort: "Sort",
+      popular: "Popular",
+      price_low: "Price: Low",
+      price_high: "Price: High",
+      to_cart: "Go to cart",
+      checkout: "Checkout",
+      add_to_cart: "ADD TO CART",
+      weight: "Weight",
+      currency: "UAH",
+    },
+  };
 
-/* CATALOG (a bit clearer for products) */
-.bgCatalog::after{
-  background:
-    radial-gradient(1100px 600px at 50% 110%, rgba(0,0,0,.78), transparent 62%),
-    url("../img/hero-bg.png");
-  background-size: cover;
-  background-position: center;
-  opacity:.22;
-}
+  function getLang() {
+    const saved = localStorage.getItem(LS_LANG);
+    return saved && i18n[saved] ? saved : "ru";
+  }
+  function setLang(lang) {
+    if (!i18n[lang]) return;
+    localStorage.setItem(LS_LANG, lang);
 
-/* SHIPPING (warmer, less contrast) */
-.bgShipping::after{
-  background:
-    radial-gradient(1100px 700px at 50% 120%, rgba(0,0,0,.78), transparent 68%),
-    radial-gradient(900px 420px at 75% 15%, rgba(200,164,90,.16), transparent 60%),
-    linear-gradient(180deg, rgba(0,0,0,.85), rgba(0,0,0,.95));
-  opacity:1;
-}
-.bgShipping::before{
-  background:
-    radial-gradient(900px 520px at 22% 20%, rgba(200,164,90,.22), transparent 60%),
-    radial-gradient(900px 520px at 85% 30%, rgba(200,164,90,.10), transparent 65%),
-    linear-gradient(180deg, #070707 0%, #000 100%);
-}
+    $$(".langs button").forEach((b) => b.classList.toggle("active", b.dataset.lang === lang));
 
-/* ABOUT (smoky, centered light) */
-.bgAbout::after{
-  background:
-    radial-gradient(900px 520px at 50% 20%, rgba(255,255,255,.06), transparent 60%),
-    radial-gradient(1100px 650px at 50% 120%, rgba(0,0,0,.82), transparent 65%),
-    linear-gradient(180deg, rgba(0,0,0,.86), rgba(0,0,0,.95));
-  opacity:1;
-}
-.bgAbout::before{
-  background:
-    radial-gradient(1000px 600px at 50% 0%, rgba(200,164,90,.18), transparent 62%),
-    linear-gradient(180deg, #070707 0%, #000 100%);
-}
+    $$("[data-i18n]").forEach((el) => {
+      const key = el.dataset.i18n;
+      const val = i18n[lang][key];
+      if (typeof val === "string") el.textContent = val;
+    });
 
-/* CONTACTS (slightly more gold for CTA) */
-.bgContacts::after{
-  background:
-    radial-gradient(850px 480px at 70% 25%, rgba(200,164,90,.18), transparent 62%),
-    radial-gradient(1000px 600px at 50% 120%, rgba(0,0,0,.85), transparent 66%),
-    linear-gradient(180deg, rgba(0,0,0,.86), rgba(0,0,0,.96));
-  opacity:1;
-}
+    if ($("#catalogGrid")) renderCatalog();
+  }
 
-/* CART (neutral, focus on list) */
-.bgCart::after{
-  background:
-    radial-gradient(900px 560px at 30% 20%, rgba(255,255,255,.05), transparent 62%),
-    radial-gradient(1000px 650px at 50% 120%, rgba(0,0,0,.88), transparent 65%),
-    linear-gradient(180deg, rgba(0,0,0,.90), rgba(0,0,0,.97));
-  opacity:1;
-}
+  function initLangButtons() {
+    const lang = getLang();
+    setLang(lang);
+    $$(".langs button").forEach((btn) => btn.addEventListener("click", () => setLang(btn.dataset.lang)));
+  }
 
-/* ---------- Layout ---------- */
-.container{
-  width:min(1120px, calc(100% - 48px));
-  margin:0 auto;
-}
+  // ---------- Cart ----------
+  function getCart() {
+    return readJSON(LS_CART, { items: {} });
+  }
+  function saveCart(cart) {
+    writeJSON(LS_CART, cart);
+    updateCartCount();
+  }
+  function cartCount(cart = getCart()) {
+    return Object.values(cart.items).reduce((a, b) => a + (Number(b) || 0), 0);
+  }
+  function updateCartCount() {
+    const el = $("#cartCount");
+    if (el) el.textContent = String(cartCount());
+  }
+  function addToCart(id, qty) {
+    const cart = getCart();
+    cart.items[id] = (Number(cart.items[id]) || 0) + qty;
+    if (cart.items[id] <= 0) delete cart.items[id];
+    saveCart(cart);
+  }
 
-.header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  backdrop-filter: blur(10px);
-  background: rgba(0,0,0,.55);
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-.headerRow{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  padding:14px 0;
-}
+  // ✅ ВАЖНО: ПУТИ ТЕПЕРЬ ТВОИ (img/products/*.png)
+  const products = [
+    {
+      id: "core-3",
+      name: "CORE • 3 KG",
+      weight: "3 kg",
+      group: "3-5",
+      price: null,
+      img: "./img/products/core-3kg.png",
+      popular: 3,
+    },
+    {
+      id: "core-5",
+      name: "CORE • 5 KG",
+      weight: "5 kg",
+      group: "3-5",
+      price: null,
+      img: "./img/products/core-5kg.png",
+      popular: 2,
+    },
+    {
+      id: "core-10",
+      name: "CORE • 10 KG",
+      weight: "10 kg",
+      group: "10",
+      price: null,
+      img: "./img/products/core-10kg.png",
+      popular: 1,
+    },
+  ];
 
-.logo{
-  color:#fff;
-  text-decoration:none;
-  letter-spacing:.14em;
-  font-weight:800;
-  font-size:14px;
-  text-transform:uppercase;
-}
-.logo span{opacity:.55; padding:0 8px}
-.logo b{color:var(--gold); font-weight:800}
+  let currentFilter = "all";
+  let currentSort = "popular";
+  const qtyState = {};
 
-.nav{
-  display:flex;
-  gap:22px;
-  align-items:center;
-}
-.nav a{
-  color:rgba(255,255,255,.78);
-  text-decoration:none;
-  font-weight:600;
-  font-size:14px;
-  padding:10px 10px;
-  border-radius:999px;
-}
-.nav a:hover{
-  color:#fff;
-  background: rgba(255,255,255,.06);
-}
+  function sortProducts(list) {
+    const arr = [...list];
+    if (currentSort === "popular") {
+      arr.sort((a, b) => (a.popular || 0) - (b.popular || 0));
+    } else if (currentSort === "price_low") {
+      arr.sort((a, b) => (a.price ?? 999999) - (b.price ?? 999999));
+    } else if (currentSort === "price_high") {
+      arr.sort((a, b) => (b.price ?? -1) - (a.price ?? -1));
+    }
+    return arr;
+  }
 
-.headerRight{
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
+  function filterProducts(list) {
+    if (currentFilter === "all") return list;
+    return list.filter((p) => p.group === currentFilter);
+  }
 
-.langs{
-  display:flex;
-  gap:6px;
-  padding:6px;
-  border-radius:999px;
-  background: rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-}
-.langs button{
-  cursor:pointer;
-  border:0;
-  color:#fff;
-  font-weight:800;
-  font-size:12px;
-  padding:8px 10px;
-  border-radius:999px;
-  background: transparent;
-  opacity:.85;
-}
-.langs button:hover{opacity:1}
-.langs button.active{
-  background: linear-gradient(180deg, rgba(200,164,90,.95), rgba(200,164,90,.65));
-  color:#111;
-  opacity:1;
-}
+  function formatPrice(p, lang) {
+    if (typeof p.price !== "number") return "—";
+    return `${p.price} ${i18n[lang].currency}`;
+  }
 
-.cartBtn{
-  text-decoration:none;
-  color:#fff;
-  font-weight:800;
-  font-size:14px;
-  padding:10px 14px;
-  border-radius:999px;
-  background: rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.10);
-}
-.cartBtn:hover{
-  border-color: rgba(200,164,90,.35);
-  box-shadow: 0 10px 35px rgba(0,0,0,.4);
-}
+  function renderCatalog() {
+    const grid = $("#catalogGrid");
+    if (!grid) return;
 
-/* ---------- Hero (home) ---------- */
-.hero{
-  min-height: calc(100vh - 64px);
-  display:flex;
-  align-items:center;
-  padding: 64px 0 72px;
-}
-.heroGrid{
-  display:grid;
-  grid-template-columns: 1.1fr .9fr;
-  gap:30px;
-  align-items:center;
-}
-.heroTag{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  border-radius:999px;
-  background: rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.10);
-  color:rgba(255,255,255,.86);
-  font-weight:700;
-  width:fit-content;
-}
-.heroTag::before{
-  content:"";
-  width:8px;height:8px;border-radius:99px;
-  background: var(--gold);
-  box-shadow: 0 0 18px rgba(200,164,90,.55);
-}
-.h1{
-  margin:14px 0 10px;
-  font-size:56px;
-  line-height:1.02;
-  letter-spacing:.02em;
-  text-transform:uppercase;
-}
-.lead{
-  color: rgba(255,255,255,.78);
-  max-width: 560px;
-  font-size:16px;
-  line-height:1.6;
-}
+    const lang = getLang();
+    const list = sortProducts(filterProducts(products));
 
-.heroBtns{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:18px;
-}
+    grid.innerHTML = list
+      .map((p) => {
+        const qty = clamp(qtyState[p.id] ?? 1, 1, 99);
 
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  cursor:pointer;
-  text-decoration:none;
-  user-select:none;
-  border-radius:999px;
-  padding:12px 16px;
-  font-weight:900;
-  font-size:14px;
-  letter-spacing:.02em;
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.06);
-  color:#fff;
-}
-.btn:hover{border-color: rgba(200,164,90,.35)}
-.btn.gold{
-  background: linear-gradient(180deg, rgba(200,164,90,.95), rgba(200,164,90,.65));
-  color:#111;
-  border-color: rgba(200,164,90,.35);
-}
-.btn.dark{
-  background: rgba(255,255,255,.05);
-  color:#fff;
-}
+        return `
+          <article class="card" data-id="${p.id}">
+            <div class="cardInner">
 
-/* right image on hero */
-.heroCard{
-  border-radius: var(--r2);
-  background: rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.08);
-  overflow:hidden;
-  box-shadow: var(--shadow);
-}
-.heroCard img{
-  width:100%;
-  height:auto;
-  display:block;
-}
+              <div class="cardMedia">
+                <img src="${p.img}" alt="${p.name}" loading="lazy"
+                  onerror="this.style.opacity='.2'; this.alt='Image not found';" />
+              </div>
 
-/* ---------- Section basics ---------- */
-.section{
-  padding: 56px 0 72px;
-}
-.sectionTitle{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:18px;
-  margin-bottom: 18px;
-}
-.sectionTitle h2{
-  margin:0;
-  font-size:28px;
-  letter-spacing:.08em;
-}
-.sectionTitle p{
-  margin:6px 0 0;
-  color: rgba(255,255,255,.70);
-}
+              <div class="cardTitle">${p.name}</div>
+              <div class="cardMeta">${i18n[lang].weight}: ${p.weight}</div>
 
-/* ---------- Catalog ---------- */
-.toolbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  padding:14px;
-  border-radius: 999px;
-  background: rgba(0,0,0,.30);
-  border:1px solid rgba(255,255,255,.08);
-  backdrop-filter: blur(10px);
-}
-.pills{display:flex; gap:10px; flex-wrap:wrap}
-.pillBtn{
-  cursor:pointer;
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.06);
-  color:#fff;
-  font-weight:900;
-  padding:10px 12px;
-  border-radius:999px;
-}
-.pillBtn.active{
-  border-color: rgba(200,164,90,.35);
-  box-shadow: 0 0 0 1px rgba(200,164,90,.15) inset;
-}
+              <div class="cardRow">
+                <div class="qty">
+                  <button type="button" class="qtyMinus">−</button>
+                  <span class="qtyVal">${qty}</span>
+                  <button type="button" class="qtyPlus">+</button>
+                </div>
 
-.selectWrap{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:rgba(255,255,255,.7);
-  font-weight:700;
-}
-.select{
-  border-radius:999px;
-  padding:10px 12px;
-  color:#fff;
-  background: rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.10);
-  outline:none;
-}
+                <button type="button" class="cardBtn">${i18n[lang].add_to_cart}</button>
+              </div>
 
-.grid{
-  margin-top:18px;
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap:18px;
-}
+              <div class="cardPrice">${formatPrice(p, lang)}</div>
+            </div>
+          </article>
+        `;
+      })
+      .join("");
 
-.card{
-  border-radius: var(--r2);
-  background: rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow: var(--shadow);
-  overflow:hidden;
-  position:relative;
-}
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: radial-gradient(800px 200px at 20% 0%, rgba(200,164,90,.12), transparent 60%);
-  pointer-events:none;
-}
-.cardInner{position:relative; padding:16px}
+    $$(".card", grid).forEach((card) => {
+      const id = card.dataset.id;
 
-.cardMedia{
-  border-radius: 18px;
-  border:1px solid rgba(255,255,255,.08);
-  background: rgba(0,0,0,.35);
-  height: 240px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
-.cardMedia img{
-  width:100%;
-  height:100%;
-  object-fit: cover;   /* фото заполняет ячейку */
-  object-position: center;
-  display:block;
-}
+      const qtyEl = $(".qtyVal", card);
+      const minus = $(".qtyMinus", card);
+      const plus = $(".qtyPlus", card);
+      const btn = $(".cardBtn", card);
 
-.cardTitle{
-  margin:14px 0 4px;
-  font-weight:1000;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-}
-.cardMeta{
-  color: rgba(255,255,255,.72);
-  font-weight:700;
-  font-size:14px;
-}
+      function setQty(n) {
+        const v = clamp(n, 1, 99);
+        qtyState[id] = v;
+        qtyEl.textContent = String(v);
+      }
 
-.cardRow{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-top:12px;
-}
+      minus.addEventListener("click", () => setQty((qtyState[id] ?? 1) - 1));
+      plus.addEventListener("click", () => setQty((qtyState[id] ?? 1) + 1));
 
-.qty{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  background: rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.10);
-  padding:8px 10px;
-  border-radius:999px;
-}
-.qty button{
-  width:30px;height:30px;border-radius:999px;
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(0,0,0,.25);
-  color:#fff; font-weight:1000;
-  cursor:pointer;
-}
-.qty span{min-width:12px; text-align:center; font-weight:1000}
+      btn.addEventListener("click", () => {
+        const qty = clamp(qtyState[id] ?? 1, 1, 99);
+        addToCart(id, qty);
 
-.cardBtn{
-  flex:1;
-  border-radius: 14px;
-  padding:12px 14px;
-  font-weight:1000;
-  border:1px solid rgba(200,164,90,.35);
-  background: linear-gradient(180deg, rgba(200,164,90,.92), rgba(200,164,90,.60));
-  color:#111;
-  cursor:pointer;
-}
-.cardBtn:hover{filter:brightness(1.03)}
+        btn.textContent = "✓";
+        setTimeout(() => {
+          const lang = getLang();
+          btn.textContent = i18n[lang].add_to_cart;
+        }, 500);
+      });
+    });
+  }
 
-/* ---------- Footer ---------- */
-.footer{
-  padding: 24px 0 30px;
-  color: rgba(255,255,255,.62);
-  border-top:1px solid rgba(255,255,255,.06);
-  background: rgba(0,0,0,.35);
-  backdrop-filter: blur(10px);
-}
+  function initCatalogControls() {
+    $$(".pillBtn").forEach((b) => {
+      b.addEventListener("click", () => {
+        currentFilter = b.dataset.filter || "all";
+        $$(".pillBtn").forEach((x) => x.classList.toggle("active", x === b));
+        renderCatalog();
+      });
+    });
 
-/* ---------- Responsive ---------- */
-@media (max-width: 980px){
-  .heroGrid{grid-template-columns: 1fr; }
-  .h1{font-size:44px}
-  .grid{grid-template-columns: repeat(2, minmax(0,1fr));}
-  .nav{display:none}
-}
-@media (max-width: 560px){
-  .container{width:min(1120px, calc(100% - 28px))}
-  .h1{font-size:36px}
-  .grid{grid-template-columns: 1fr;}
-  .cardMedia{height: 220px;}
-  .toolbar{border-radius: 20px; flex-direction:column; align-items:flex-start}
-}
+    const sortSelect = $("#sortSelect");
+    if (sortSelect) {
+      sortSelect.addEventListener("change", () => {
+        currentSort = sortSelect.value;
+        renderCatalog();
+      });
+    }
+  }
+
+  function init() {
+    initLangButtons();
+    updateCartCount();
+
+    if ($("#catalogGrid")) {
+      initCatalogControls();
+      renderCatalog();
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+})();
