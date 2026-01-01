@@ -8,13 +8,12 @@
 </head>
 
 <body class="bgCatalog">
-  <canvas id="sparks"></canvas>
 
   <header class="header">
     <div class="container headerRow">
       <a class="logo" href="./index.html">BLACKWOOD <span>·</span> <b>CHARCOAL</b></a>
 
-      <nav class="nav">
+      <nav class="nav" id="navDesktop">
         <a href="./index.html" data-i18n="home">Главная</a>
         <a href="./catalog.html" class="active" data-i18n="catalog">Каталог</a>
         <a href="./shipping.html" data-i18n="shipping">Доставка</a>
@@ -32,12 +31,37 @@
         <a class="cartBtn" href="./cart.html">
           <span data-i18n="cart">Корзина</span> · <span id="cartCount">0</span>
         </a>
+
+        <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobileNav" id="mobileNav" hidden>
+      <div class="mobileNavInner">
+        <a href="./index.html" data-i18n="home">Главная</a>
+        <a href="./catalog.html" class="active" data-i18n="catalog">Каталог</a>
+        <a href="./shipping.html" data-i18n="shipping">Доставка</a>
+        <a href="./about.html" data-i18n="about">О нас</a>
+        <a href="./contacts.html" data-i18n="contacts">Контакты</a>
+
+        <a href="./cart.html" class="mobileCart">
+          <span data-i18n="to_cart">Перейти в корзину</span> · <span id="cartCountMobile">0</span>
+        </a>
+
+        <div class="mobileLangs">
+          <button type="button" data-lang="ru" class="active">RU</button>
+          <button type="button" data-lang="ukr">UKR</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
       </div>
     </div>
   </header>
 
   <main class="section">
     <div class="container">
+
       <div class="sectionTitle">
         <div>
           <h2 data-i18n="products">ТОВАРЫ</h2>
@@ -62,6 +86,7 @@
         </div>
       </div>
 
+      <!-- ВАЖНО: этот блок обязателен -->
       <div id="catalogGrid" class="grid"></div>
 
       <div class="actionsRow">
@@ -72,7 +97,10 @@
   </main>
 
   <footer class="footer">
-    <div class="container">BLACKWOOD · CHARCOAL © 2026</div>
+    <div class="container footerRow">
+      <div class="footerLogo">BLACKWOOD <span>·</span> CHARCOAL</div>
+      <div class="footerCopy">© <span id="year"></span></div>
+    </div>
   </footer>
 
   <script src="./assets/app.js"></script>
