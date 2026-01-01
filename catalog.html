@@ -8,7 +8,8 @@
 </head>
 
 <body class="page page-catalog">
-  <!-- Header -->
+  <div class="vignette"></div>
+
   <header class="topbar">
     <div class="topbar__inner container">
       <a class="brand" href="index.html">
@@ -39,7 +40,6 @@
     </div>
   </header>
 
-  <!-- Main -->
   <main class="container catalog">
     <div class="catalog__head">
       <div>
@@ -48,29 +48,23 @@
       </div>
     </div>
 
-    <!-- Controls -->
     <section class="glass controls">
-      <div class="controls__left">
-        <div class="chips">
-          <button class="chip is-active" data-filter="all" data-i18n="filter_all">All</button>
-          <button class="chip" data-filter="3-5" data-i18n="filter_3_5">3–5kg</button>
-          <button class="chip" data-filter="10" data-i18n="filter_10">10kg</button>
-        </div>
+      <div class="chips">
+        <button class="chip is-active" data-filter="all" data-i18n="filter_all">All</button>
+        <button class="chip" data-filter="3-5" data-i18n="filter_3_5">3–5kg</button>
+        <button class="chip" data-filter="10" data-i18n="filter_10">10kg</button>
       </div>
 
-      <div class="controls__right">
-        <div class="sort">
-          <span class="sort__label" data-i18n="sort">Sort</span>
-          <select id="sortSelect" class="sort__select">
-            <option value="popular" data-i18n="sort_popular">Popular</option>
-            <option value="weight_asc" data-i18n="sort_weight_asc">Weight ↑</option>
-            <option value="weight_desc" data-i18n="sort_weight_desc">Weight ↓</option>
-          </select>
-        </div>
+      <div class="sort">
+        <span class="sort__label" data-i18n="sort">Sort</span>
+        <select id="sortSelect" class="sort__select">
+          <option value="popular" data-i18n="sort_popular">Popular</option>
+          <option value="weight_asc" data-i18n="sort_weight_asc">Weight ↑</option>
+          <option value="weight_desc" data-i18n="sort_weight_desc">Weight ↓</option>
+        </select>
       </div>
     </section>
 
-    <!-- PRODUCTS GRID (ВАЖНО: этот блок нужен, сюда рисуются товары) -->
     <section class="grid" id="productsGrid"></section>
 
     <div class="catalog__actions">
