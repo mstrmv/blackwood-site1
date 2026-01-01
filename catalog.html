@@ -1,255 +1,60 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Catalog — BLACKWOOD</title>
-
-<style>
-/* (тот же стиль что у тебя был, укороченно не буду — оставляю рабочий минимум) */
-:root{
-  --bg:#070708; --card:#0f0f11; --text:#fff; --muted:rgba(255,255,255,.65);
-  --gold:#c8a45a; --shadow:0 20px 60px rgba(0,0,0,.6); --radius:20px; --max:1200px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
-header{
-  position:sticky;top:0;z-index:50;
-  backdrop-filter:blur(10px);
-  background:rgba(0,0,0,.55);
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-.nav{
-  max-width:var(--max); margin:auto; padding:14px 20px;
-  display:flex; justify-content:space-between; align-items:center; gap:12px;
-}
-.brand{font-weight:900; letter-spacing:.18em; white-space:nowrap}
-.brand span{color:var(--gold)}
-.navLinks{display:flex; gap:14px; align-items:center}
-.navLinks a{
-  color:var(--muted); text-decoration:none; font-weight:800;
-  padding:8px 10px; border-radius:12px;
-}
-.navLinks a:hover{color:#fff;background:rgba(255,255,255,.06)}
-.rightTools{display:flex;gap:10px;align-items:center;white-space:nowrap}
-
-.lang{
-  display:flex;gap:6px;padding:6px;border:1px solid rgba(255,255,255,.10);
-  border-radius:14px;background:rgba(0,0,0,.20);
-}
-.lang button{
-  cursor:pointer;border:0;padding:7px 10px;border-radius:10px;background:transparent;
-  color:var(--muted);font-weight:900;letter-spacing:.08em;
-}
-.lang button.active{
-  background:rgba(200,164,90,.18);color:rgba(255,255,255,.92);
-  outline:1px solid rgba(200,164,90,.25);
-}
-
-.cartBtn{
-  cursor:pointer;border:1px solid rgba(200,164,90,.45);background:rgba(200,164,90,.12);
-  color:#fff;padding:10px 14px;border-radius:14px;font-weight:900;letter-spacing:.06em;
-  display:inline-flex;align-items:center;gap:10px;
-}
-.cartBtn:hover{background:rgba(200,164,90,.18)}
-.badge{
-  min-width:26px;height:22px;padding:0 8px;border-radius:999px;
-  display:inline-flex;align-items:center;justify-content:center;
-  background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);
-  font-size:12px;font-weight:900;
-}
-
-.container{max-width:var(--max);margin:auto;padding:0 20px}
-section{padding:40px 0 86px}
-.section-title{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:10px 0 28px}
-.section-title h2{margin:0;letter-spacing:.16em}
-.section-title span{color:var(--muted)}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
-}
-
-.card{
-  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:var(--radius);
-  padding:18px;
-  box-shadow:var(--shadow);
-  transition:.25s;
-  position:relative;
-  overflow:hidden;
-}
-.card::before{
-  content:"";
-  position:absolute; inset:-2px;
-  background:radial-gradient(520px 220px at 20% 10%,rgba(200,164,90,.22),transparent 62%);
-  opacity:0; transition:.25s; pointer-events:none;
-}
-.card:hover{transform:translateY(-6px);border-color:rgba(200,164,90,.42)}
-.card:hover::before{opacity:1}
-
-.prodImg{
-  height:260px;display:flex;align-items:center;justify-content:center;
-  background:rgba(0,0,0,.25);border-radius:16px;margin-bottom:14px;
-  border:1px solid rgba(255,255,255,.08);
-}
-.prodImg img{
-  max-height:100%;max-width:75%;transition:.25s;
-  filter:drop-shadow(0 20px 40px rgba(0,0,0,.7));
-}
-.card:hover .prodImg img{transform:scale(1.05)}
-
-.prodTitle{font-weight:900;letter-spacing:.08em;margin-bottom:6px;text-transform:uppercase}
-.meta{display:flex;justify-content:space-between;align-items:center;color:var(--muted);gap:10px}
-.price{color:var(--gold);font-weight:900}
-
-.addRow{display:flex;gap:10px;margin-top:14px}
-.qtyPill{
-  flex:0 0 auto;
-  display:inline-flex;align-items:center;gap:10px;padding:10px 12px;
-  border-radius:14px;border:1px solid rgba(255,255,255,.12);
-  background:rgba(0,0,0,.25);
-}
-.qtyPill button{
-  cursor:pointer;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);
-  color:#fff;width:30px;height:30px;border-radius:10px;font-weight:900;
-}
-.qtyPill button:hover{background:rgba(255,255,255,.09)}
-.qtyPill span{min-width:18px;text-align:center;font-weight:900}
-
-.addBtn{
-  flex:1 1 auto;padding:12px;border-radius:14px;border:1px solid rgba(200,164,90,.45);
-  background:linear-gradient(180deg,rgba(200,164,90,.35),rgba(200,164,90,.15));
-  color:#fff;font-weight:900;letter-spacing:.06em;cursor:pointer;text-transform:uppercase;
-}
-.addBtn:hover{background:linear-gradient(180deg,rgba(200,164,90,.45),rgba(200,164,90,.20))}
-
-/* reveal */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
-.reveal.in{opacity:1;transform:translateY(0)}
-
-/* drawer */
-.backdrop{
-  position:fixed; inset:0;
-  background:rgba(0,0,0,.55);
-  backdrop-filter: blur(4px);
-  opacity:0; pointer-events:none; transition:opacity .2s ease;
-  z-index:999;
-}
-.backdrop.open{opacity:1;pointer-events:auto}
-.drawer{
-  position:fixed; top:0; right:0; height:100vh; width:min(420px,92vw);
-  background:rgba(10,10,12,.96);
-  border-left:1px solid rgba(255,255,255,.10);
-  box-shadow:-20px 0 60px rgba(0,0,0,.6);
-  transform:translateX(110%);
-  transition:transform .22s ease;
-  z-index:1000;
-  display:flex;flex-direction:column;
-}
-.drawer.open{transform:translateX(0)}
-.drawerHeader{
-  padding:16px;display:flex;align-items:center;justify-content:space-between;gap:10px;
-  border-bottom:1px solid rgba(255,255,255,.10);
-}
-.drawerHeader b{letter-spacing:.10em;text-transform:uppercase}
-.iconBtn{
-  cursor:pointer;border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.06);color:#fff;border-radius:12px;padding:8px 10px;font-weight:900;
-}
-.iconBtn:hover{background:rgba(255,255,255,.09)}
-.cartList{padding:14px 16px;overflow:auto;flex:1 1 auto}
-.cartItem{
-  display:grid;grid-template-columns:56px 1fr auto;gap:12px;
-  padding:12px;border-radius:16px;border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.03);margin-bottom:10px;
-}
-.cartItem img{width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 10px 20px rgba(0,0,0,.55))}
-.cartItem b{display:block;letter-spacing:.06em;text-transform:uppercase}
-.cartItem small{color:var(--muted)}
-.cartQty{display:flex;align-items:center;gap:8px}
-.cartQty button{
-  width:30px;height:30px;border-radius:10px;border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.06);color:#fff;cursor:pointer;font-weight:900;
-}
-.cartQty button:hover{background:rgba(255,255,255,.09)}
-.cartQty span{min-width:18px;text-align:center;font-weight:900}
-
-.drawerFooter{padding:14px 16px;border-top:1px solid rgba(255,255,255,.10);display:grid;gap:10px}
-.totalRow{display:flex;justify-content:space-between;color:var(--muted)}
-.totalRow b{color:#fff}
-.checkoutBtn{
-  width:100%;padding:12px 14px;border-radius:14px;border:1px solid rgba(200,164,90,.45);
-  background:linear-gradient(180deg,rgba(200,164,90,.38),rgba(200,164,90,.16));
-  color:#fff;font-weight:900;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
-}
-.checkoutBtn:hover{background:linear-gradient(180deg,rgba(200,164,90,.48),rgba(200,164,90,.20))}
-.clearBtn{
-  width:100%;padding:11px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.06);color:#fff;font-weight:900;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
-}
-.clearBtn:hover{background:rgba(255,255,255,.09)}
-.empty{
-  color:var(--muted);padding:16px;border:1px dashed rgba(255,255,255,.16);
-  border-radius:16px;text-align:center;
-}
-
-@media(max-width:980px){
-  .grid{grid-template-columns:1fr}
-  .navLinks{display:none}
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="/blackwood-site1/">
+  <title>Catalog • BLACKWOOD</title>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
-
 <body>
 
-<header id="top">
-  <div class="nav">
-    <div class="brand">BLACKWOOD <span>• CHARCOAL</span></div>
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">BLACKWOOD <span>• CHARCOAL</span></a>
 
     <nav class="navLinks">
-      <a href="./index.html" data-i18n="nav_home">Главная</a>
-      <a href="#catalog" data-i18n="nav_catalog">Каталог</a>
+      <a href="index.html" data-i18n="nav_home">Главная</a>
+      <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+      <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+      <a href="about.html" data-i18n="nav_about">О нас</a>
+      <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
     </nav>
 
     <div class="rightTools">
-      <div class="lang" role="group" aria-label="Language">
+      <div class="lang">
         <button id="lang-ru" class="active" type="button">RU</button>
         <button id="lang-uk" type="button">UKR</button>
         <button id="lang-en" type="button">EN</button>
       </div>
 
-      <button class="cartBtn" id="openCart" type="button">
-        <span data-i18n="cart">Корзина</span>
-        <span class="badge" id="cartCount">0</span>
-      </button>
+      <a class="pill" href="cart.html">
+        <span data-i18n="nav_cart">Корзина</span> • <span id="cartCount">0</span>
+      </a>
     </div>
   </div>
 </header>
 
-<section id="catalog">
+<section class="section">
   <div class="container">
-    <div class="section-title">
-      <h2 class="reveal" data-i18n="products">ТОВАРЫ</h2>
-      <span class="reveal" data-i18n="products_note">Выберите вес и добавьте в корзину.</span>
+    <div class="sectionTitle">
+      <h2 class="reveal" data-i18n="products">Товары</h2>
+      <p class="reveal" data-i18n="products_note">Выберите вес и добавьте в корзину.</p>
     </div>
 
     <div class="grid">
-
-      <article class="card reveal" data-id="core-3">
+      <!-- 3 KG -->
+      <article class="card reveal product-card" data-id="core-3">
         <div class="prodImg">
-          <img src="./img/products/core-3kg.png" alt="Core 3 kg" loading="lazy" onerror="this.style.display='none'">
+          <img src="img/products/core-3kg.png" alt="3kg" loading="lazy" onerror="this.style.display='none'">
         </div>
-        <div class="prodTitle" data-i18n="p1_title">CORE • 3 KG</div>
+        <div class="prodTitle">CORE • 3 KG</div>
         <div class="meta">
-          <span data-i18n="p1_weight">Вес: 3 кг</span>
+          <span>3 kg</span>
           <span class="price" data-i18n="price_stub">— грн</span>
         </div>
         <div class="addRow">
-          <div class="qtyPill">
+          <div class="qty">
             <button type="button" class="qtyMinus">−</button>
             <span class="qtyVal">1</span>
             <button type="button" class="qtyPlus">+</button>
@@ -258,17 +63,18 @@ section{padding:40px 0 86px}
         </div>
       </article>
 
-      <article class="card reveal" data-id="core-5">
+      <!-- 5 KG -->
+      <article class="card reveal product-card" data-id="core-5">
         <div class="prodImg">
-          <img src="./img/products/core-5kg.png" alt="Core 5 kg" loading="lazy" onerror="this.style.display='none'">
+          <img src="img/products/core-5kg.png" alt="5kg" loading="lazy" onerror="this.style.display='none'">
         </div>
-        <div class="prodTitle" data-i18n="p2_title">CORE • 5 KG</div>
+        <div class="prodTitle">CORE • 5 KG</div>
         <div class="meta">
-          <span data-i18n="p2_weight">Вес: 5 кг</span>
+          <span>5 kg</span>
           <span class="price" data-i18n="price_stub">— грн</span>
         </div>
         <div class="addRow">
-          <div class="qtyPill">
+          <div class="qty">
             <button type="button" class="qtyMinus">−</button>
             <span class="qtyVal">1</span>
             <button type="button" class="qtyPlus">+</button>
@@ -277,17 +83,18 @@ section{padding:40px 0 86px}
         </div>
       </article>
 
-      <article class="card reveal" data-id="core-10">
+      <!-- 10 KG -->
+      <article class="card reveal product-card" data-id="core-10">
         <div class="prodImg">
-          <img src="./img/products/core-10kg.png" alt="Core 10 kg" loading="lazy" onerror="this.style.display='none'">
+          <img src="img/products/core-10kg.png" alt="10kg" loading="lazy" onerror="this.style.display='none'">
         </div>
-        <div class="prodTitle" data-i18n="p3_title">CORE • 10 KG</div>
+        <div class="prodTitle">CORE • 10 KG</div>
         <div class="meta">
-          <span data-i18n="p3_weight">Вес: 10 кг</span>
+          <span>10 kg</span>
           <span class="price" data-i18n="price_stub">— грн</span>
         </div>
         <div class="addRow">
-          <div class="qtyPill">
+          <div class="qty">
             <button type="button" class="qtyMinus">−</button>
             <span class="qtyVal">1</span>
             <button type="button" class="qtyPlus">+</button>
@@ -295,212 +102,23 @@ section{padding:40px 0 86px}
           <button class="addBtn" type="button" data-i18n="add_to_cart">В корзину</button>
         </div>
       </article>
+    </div>
 
+    <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
+      <a class="btn ghost" href="cart.html" data-i18n="go_cart">Перейти в корзину</a>
+      <a class="btn" href="checkout.html" data-i18n="cart_checkout">Оформить заказ</a>
     </div>
   </div>
 </section>
 
-<div class="backdrop" id="backdrop"></div>
-
-<aside class="drawer" id="drawer">
-  <div class="drawerHeader">
-    <b data-i18n="cart_title">Корзина</b>
-    <button class="iconBtn" id="closeCart" type="button">✕</button>
+<footer>
+  <div class="container foot">
+    <div class="brand">BLACKWOOD <span>• CHARCOAL</span></div>
+    <div>© <span data-i18n="footer">Все права защищены.</span></div>
   </div>
+</footer>
 
-  <div class="cartList" id="cartList"></div>
-
-  <div class="drawerFooter">
-    <div class="totalRow">
-      <span data-i18n="total_items">Товаров</span>
-      <b id="totalItems">0</b>
-    </div>
-    <button class="checkoutBtn" type="button" id="checkoutBtn" data-i18n="checkout">Оформить</button>
-    <button class="clearBtn" type="button" id="clearBtn" data-i18n="clear_cart">Очистить</button>
-  </div>
-</aside>
-
-<script>
-/* i18n */
-const dict = {
-  ru:{
-    nav_home:"Главная", nav_catalog:"Каталог", cart:"Корзина", cart_title:"Корзина",
-    products:"ТОВАРЫ", products_note:"Выберите вес и добавьте в корзину.",
-    p1_title:"CORE • 3 KG", p2_title:"CORE • 5 KG", p3_title:"CORE • 10 KG",
-    p1_weight:"Вес: 3 кг", p2_weight:"Вес: 5 кг", p3_weight:"Вес: 10 кг",
-    price_stub:"— грн", add_to_cart:"В корзину",
-    total_items:"Товаров", checkout:"Оформить", clear_cart:"Очистить", empty_cart:"Корзина пуста"
-  },
-  uk:{
-    nav_home:"Головна", nav_catalog:"Каталог", cart:"Кошик", cart_title:"Кошик",
-    products:"ТОВАРИ", products_note:"Оберіть вагу та додайте до кошика.",
-    p1_title:"CORE • 3 KG", p2_title:"CORE • 5 KG", p3_title:"CORE • 10 KG",
-    p1_weight:"Вага: 3 кг", p2_weight:"Вага: 5 кг", p3_weight:"Вага: 10 кг",
-    price_stub:"— грн", add_to_cart:"У кошик",
-    total_items:"Товарів", checkout:"Оформити", clear_cart:"Очистити", empty_cart:"Кошик порожній"
-  },
-  en:{
-    nav_home:"Home", nav_catalog:"Catalog", cart:"Cart", cart_title:"Cart",
-    products:"PRODUCTS", products_note:"Choose weight and add to cart.",
-    p1_title:"CORE • 3 KG", p2_title:"CORE • 5 KG", p3_title:"CORE • 10 KG",
-    p1_weight:"Weight: 3 kg", p2_weight:"Weight: 5 kg", p3_weight:"Weight: 10 kg",
-    price_stub:"— UAH", add_to_cart:"Add to cart",
-    total_items:"Items", checkout:"Checkout", clear_cart:"Clear", empty_cart:"Cart is empty"
-  }
-};
-
-const $ = (s)=>document.querySelector(s);
-const $$ = (s)=>Array.from(document.querySelectorAll(s));
-
-function setLang(lang){
-  document.documentElement.lang = (lang==="uk"?"uk":lang==="en"?"en":"ru");
-  $$("[data-i18n]").forEach(el=>{
-    const k = el.getAttribute("data-i18n");
-    if(dict[lang] && dict[lang][k]!=null) el.textContent = dict[lang][k];
-  });
-  ["ru","uk","en"].forEach(l=>$("#lang-"+l).classList.toggle("active", l===lang));
-  localStorage.setItem("lang", lang);
-  renderCart();
-}
-
-$("#lang-ru").addEventListener("click", ()=>setLang("ru"));
-$("#lang-uk").addEventListener("click", ()=>setLang("uk"));
-$("#lang-en").addEventListener("click", ()=>setLang("en"));
-setLang(localStorage.getItem("lang") || "ru");
-
-/* reveal */
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add("in");
-      io.unobserve(e.target);
-    }
-  });
-},{threshold:0.14});
-$$(".reveal").forEach(el=>io.observe(el));
-
-/* cart */
-const CART_KEY="bw_cart_v1";
-function loadCart(){ try{return JSON.parse(localStorage.getItem(CART_KEY)||"{}");}catch{return {}} }
-function saveCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)); }
-function cartCount(c){ return Object.values(c).reduce((a,b)=>a+(b.qty||0),0); }
-
-function getProductMeta(id){
-  return {
-    "core-3":  {img:"./img/products/core-3kg.png", titleKey:"p1_title", weightKey:"p1_weight"},
-    "core-5":  {img:"./img/products/core-5kg.png", titleKey:"p2_title", weightKey:"p2_weight"},
-    "core-10": {img:"./img/products/core-10kg.png", titleKey:"p3_title", weightKey:"p3_weight"},
-  }[id];
-}
-
-function openCart(){ $("#backdrop").classList.add("open"); $("#drawer").classList.add("open"); }
-function closeCart(){ $("#backdrop").classList.remove("open"); $("#drawer").classList.remove("open"); }
-$("#openCart").addEventListener("click", openCart);
-$("#closeCart").addEventListener("click", closeCart);
-$("#backdrop").addEventListener("click", closeCart);
-
-function renderCart(){
-  const lang = localStorage.getItem("lang") || "ru";
-  const cart = loadCart();
-  const list = $("#cartList");
-  list.innerHTML = "";
-  const count = cartCount(cart);
-  $("#cartCount").textContent = count;
-  $("#totalItems").textContent = count;
-
-  if(count===0){
-    const empty=document.createElement("div");
-    empty.className="empty";
-    empty.textContent=dict[lang].empty_cart;
-    list.appendChild(empty);
-    return;
-  }
-
-  Object.entries(cart).forEach(([id,item])=>{
-    const meta=getProductMeta(id);
-    if(!meta) return;
-
-    const row=document.createElement("div");
-    row.className="cartItem";
-
-    const img=document.createElement("img");
-    img.src=meta.img;
-    img.alt="";
-    img.onerror=()=>img.style.display="none";
-
-    const info=document.createElement("div");
-    const title=document.createElement("b");
-    title.textContent=dict[lang][meta.titleKey] || id;
-    const sub=document.createElement("small");
-    sub.textContent=dict[lang][meta.weightKey] || "";
-    info.appendChild(title);
-    info.appendChild(sub);
-
-    const qty=document.createElement("div");
-    qty.className="cartQty";
-    const minus=document.createElement("button");
-    minus.textContent="−";
-    const qv=document.createElement("span");
-    qv.textContent=item.qty;
-    const plus=document.createElement("button");
-    plus.textContent="+";
-
-    minus.onclick=()=>{
-      const c=loadCart();
-      if(!c[id]) return;
-      c[id].qty=Math.max(0,(c[id].qty||0)-1);
-      if(c[id].qty===0) delete c[id];
-      saveCart(c); renderCart();
-    };
-    plus.onclick=()=>{
-      const c=loadCart();
-      if(!c[id]) c[id]={qty:0};
-      c[id].qty=(c[id].qty||0)+1;
-      saveCart(c); renderCart();
-    };
-
-    qty.appendChild(minus);
-    qty.appendChild(qv);
-    qty.appendChild(plus);
-
-    row.appendChild(img);
-    row.appendChild(info);
-    row.appendChild(qty);
-
-    list.appendChild(row);
-  });
-}
-
-renderCart();
-
-/* add to cart from cards */
-$$(".card[data-id]").forEach(card=>{
-  const id = card.dataset.id;
-  const minus = card.querySelector(".qtyMinus");
-  const plus = card.querySelector(".qtyPlus");
-  const val = card.querySelector(".qtyVal");
-  const addBtn = card.querySelector(".addBtn");
-  let qty=1;
-
-  minus.addEventListener("click", ()=>{ qty=Math.max(1, qty-1); val.textContent=qty; });
-  plus.addEventListener("click", ()=>{ qty=Math.min(99, qty+1); val.textContent=qty; });
-
-  addBtn.addEventListener("click", ()=>{
-    const cart=loadCart();
-    if(!cart[id]) cart[id]={qty:0};
-    cart[id].qty+=qty;
-    saveCart(cart);
-    renderCart();
-    openCart();
-  });
-});
-
-$("#clearBtn").addEventListener("click", ()=>{ saveCart({}); renderCart(); });
-$("#checkoutBtn").addEventListener("click", ()=>{
-  alert((dict[localStorage.getItem("lang")||"ru"].checkout) + " (скоро)");
-});
-</script>
-
+<div class="toast" id="toast"></div>
+<script src="assets/app.js"></script>
 </body>
 </html>
-
