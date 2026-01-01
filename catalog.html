@@ -15,7 +15,7 @@
 
       <nav class="nav">
         <a href="./index.html" data-i18n="home">Главная</a>
-        <a href="./catalog.html" data-i18n="catalog">Каталог</a>
+        <a href="./catalog.html" class="active" data-i18n="catalog">Каталог</a>
         <a href="./shipping.html" data-i18n="shipping">Доставка</a>
         <a href="./about.html" data-i18n="about">О нас</a>
         <a href="./contacts.html" data-i18n="contacts">Контакты</a>
@@ -35,7 +35,7 @@
     </div>
   </header>
 
-  <section class="section">
+  <main class="section">
     <div class="container">
 
       <div class="sectionTitle">
@@ -45,7 +45,6 @@
         </div>
       </div>
 
-      <!-- FILTER + SORT -->
       <div class="toolbar">
         <div class="pills">
           <button class="pillBtn active" type="button" data-filter="all">All</button>
@@ -63,16 +62,15 @@
         </div>
       </div>
 
-      <!-- GRID -->
       <div id="catalogGrid" class="grid"></div>
 
-      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px">
+      <div class="actionsRow">
         <a class="btn dark" href="./cart.html" data-i18n="to_cart">Перейти в корзину</a>
         <a class="btn gold" href="./checkout.html" data-i18n="checkout">Оформить заказ</a>
       </div>
 
     </div>
-  </section>
+  </main>
 
   <footer class="footer">
     <div class="container">BLACKWOOD · CHARCOAL © 2026</div>
