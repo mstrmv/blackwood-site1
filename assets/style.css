@@ -8,6 +8,7 @@
 
   --container: 1180px;
   --headerH: 78px;
+  --r:18px;
 }
 
 *{box-sizing:border-box}
@@ -24,7 +25,7 @@ a{color:inherit; text-decoration:none}
 button,select{font:inherit}
 img{max-width:100%; display:block}
 
-/* ---------- Background (Hero) ---------- */
+/* Backgrounds */
 .bgHero{
   background:
     radial-gradient(900px 420px at 18% 6%, rgba(200,164,90,.14), transparent 62%),
@@ -33,7 +34,6 @@ img{max-width:100%; display:block}
     var(--bg);
 }
 @media (max-width: 900px){
-  /* fixed на мобилке часто лагает — убираем */
   .bgHero{
     background:
       radial-gradient(700px 380px at 20% 8%, rgba(200,164,90,.13), transparent 62%),
@@ -43,22 +43,27 @@ img{max-width:100%; display:block}
   }
 }
 
+.bgCatalog{
+  background:
+    radial-gradient(900px 420px at 50% 6%, rgba(200,164,90,.10), transparent 62%),
+    url("../img/catalog-bg.png") center top / cover no-repeat fixed,
+    var(--bg);
+}
+@media (max-width: 900px){
+  .bgCatalog{
+    background:
+      radial-gradient(700px 380px at 50% 8%, rgba(200,164,90,.10), transparent 62%),
+      url("../img/catalog-bg.png") center top / cover no-repeat,
+      var(--bg);
+  }
+}
+
 .container{
   width: min(var(--container), calc(100% - 32px));
   margin: 0 auto;
 }
 
-/* sparks canvas */
-#sparks{
-  position: fixed;
-  inset: 0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  z-index: 1;
-}
-
-/* ---------- Header ---------- */
+/* Header */
 .header{
   position: sticky;
   top:0;
@@ -221,7 +226,7 @@ img{max-width:100%; display:block}
   color:#111;
 }
 
-/* ---------- Hero ---------- */
+/* Hero */
 .hero{
   position: relative;
   z-index: 2;
@@ -230,15 +235,8 @@ img{max-width:100%; display:block}
   align-items:center;
   padding: 42px 0 54px;
 }
-
-/* сдвиг текста чуть левее, чтобы было больше упаковок */
-.heroShiftLeft{
-  margin-left: clamp(0px, 2vw, 28px);
-}
-
-.heroText{
-  max-width: 640px;
-}
+.heroShiftLeft{ margin-left: clamp(0px, 2vw, 28px); }
+.heroText{ max-width: 640px; }
 
 .kicker{
   display:inline-flex;
@@ -267,7 +265,6 @@ img{max-width:100%; display:block}
   font-weight: 950;
   text-shadow: 0 18px 40px rgba(0,0,0,.55);
 }
-
 .heroDesc{
   margin: 0 0 22px 0;
   color: rgba(255,255,255,.82);
@@ -275,7 +272,6 @@ img{max-width:100%; display:block}
   line-height: 1.55;
   max-width: 520px;
 }
-
 .heroActions{
   display:flex;
   flex-wrap:wrap;
@@ -302,10 +298,142 @@ img{max-width:100%; display:block}
   border-color: rgba(200,164,90,.35);
   color:#1a1307;
 }
-.btn.gold:hover{ filter: brightness(1.03); }
 .btn.dark{ background: rgba(255,255,255,.06); }
 
-/* ---------- Footer ---------- */
+/* Catalog section */
+.section{
+  position: relative;
+  z-index: 2;
+  padding: 46px 0 70px;
+}
+.sectionTitle h2{
+  margin:0;
+  font-size: 34px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.sectionTitle p{ margin:6px 0 0; color: var(--muted); }
+
+.toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 14px;
+  margin: 16px 0 22px;
+  padding: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(200,164,90,.20);
+  background: rgba(0,0,0,.30);
+  backdrop-filter: blur(10px);
+}
+.pills{display:flex; gap:8px; flex-wrap:wrap}
+.pillBtn{
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.06);
+  color:#fff;
+  border-radius:999px;
+  padding:8px 12px;
+  cursor:pointer;
+  font-weight:800;
+  font-size:13px;
+}
+.pillBtn.active{
+  border-color: rgba(200,164,90,.40);
+  background: rgba(200,164,90,.18);
+}
+.selectWrap{display:flex; align-items:center; gap:8px; color:rgba(255,255,255,.85); font-weight:800}
+.select{
+  border-radius:999px;
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.35);
+  color:#fff;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.card{
+  border-radius: var(--r);
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.33);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+.cardInner{padding:14px}
+.cardMedia{
+  height: 220px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.cardMedia img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  object-position: center;
+}
+.cardTitle{
+  margin: 12px 0 2px;
+  font-weight: 950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.cardMeta{ color: var(--muted); font-size:14px; }
+.cardRow{
+  margin-top:12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.qty{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.28);
+}
+.qty button{
+  width:30px; height:30px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  color:#fff;
+  cursor:pointer;
+  font-weight: 950;
+}
+.qtyVal{min-width:18px; text-align:center; font-weight:950}
+.cardBtn{
+  border-radius:999px;
+  padding:10px 14px;
+  border:1px solid rgba(200,164,90,.35);
+  background: rgba(200,164,90,.14);
+  color:#fff;
+  font-weight:950;
+  letter-spacing:.06em;
+  cursor:pointer;
+}
+.cardPrice{
+  margin-top:10px;
+  display:flex;
+  justify-content:flex-end;
+  color: rgba(200,164,90,.95);
+  font-weight:950;
+}
+
+.actionsRow{ margin-top:22px; display:flex; gap:10px; flex-wrap:wrap; }
+
+/* Footer */
 .footer{
   position: relative;
   z-index: 2;
@@ -321,56 +449,35 @@ img{max-width:100%; display:block}
   gap: 12px;
   flex-wrap:wrap;
 }
-.footerLogo{
-  letter-spacing:.12em;
-  font-weight: 900;
-  font-size: 12px;
-  color: rgba(255,255,255,.85);
-}
+.footerLogo{letter-spacing:.12em; font-weight: 950; font-size: 12px; color: rgba(255,255,255,.85);}
 .footerLogo span{opacity:.35; padding:0 6px}
 .footerCopy{color: rgba(255,255,255,.55); font-size: 12px}
 
-/* ---------- Responsive ---------- */
+/* Responsive */
+@media (max-width: 1050px){
+  .grid{grid-template-columns: repeat(2, 1fr)}
+}
 @media (max-width: 980px){
   .nav{display:none}
   .burger{display:inline-flex; align-items:center; justify-content:center}
 }
-
 @media (max-width: 720px){
   :root{ --headerH: 70px; }
   .container{ width: calc(100% - 24px); }
-
-  /* языки переносим в бургер, чтобы не было каши */
   .langs{display:none}
   .cartBtn{ padding: 10px 12px; font-size: 12px; }
-
-  .hero{
-    padding: 34px 0 46px;
-    align-items:flex-start;
-  }
+  .hero{ padding: 34px 0 46px; align-items:flex-start; }
   .heroShiftLeft{ margin-left: 0; }
   .heroText{ max-width: 100%; padding-top: 14px; }
-
-  .heroTitle{
-    font-size: 42px;
-    line-height: .98;
-  }
+  .heroTitle{ font-size: 42px; line-height: .98; }
   .heroDesc{ font-size: 14px; }
-
-  .heroActions{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    max-width: 420px;
-  }
-  .btn{
-    width:100%;
-    padding: 13px 16px;
-  }
+  .heroActions{ display:grid; grid-template-columns: 1fr; gap:10px; max-width: 420px; }
+  .btn{ width:100%; padding: 13px 16px; }
+  .toolbar{ border-radius: 18px; flex-direction:column; align-items:flex-start; }
+  .grid{ grid-template-columns: 1fr; }
 }
-
 @media (max-width: 420px){
   .logo{font-size: 12px;}
-  .cartBtn{display:none;} /* корзина есть в меню */
+  .cartBtn{display:none;}
   .heroTitle{font-size: 38px;}
 }
