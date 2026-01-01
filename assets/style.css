@@ -185,3 +185,54 @@ footer{
   justify-content:space-between;
   align-items:center;
 }
+/* ================== HOME HERO BACKGROUND ================== */
+body.page-home .hero{
+  min-height: calc(100vh - 72px);
+  position: relative;
+  overflow: hidden;
+
+  background-image:
+    radial-gradient(1200px 500px at 25% -50px, rgba(200,164,90,.14), transparent 60%),
+    radial-gradient(900px 380px at 65% 90%, rgba(255,160,80,.10), transparent 65%),
+    linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.88)),
+    url("../img/hero-bg.png");
+
+  background-size: auto, auto, auto, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* сетка hero */
+.heroGrid{
+  display:grid;
+  grid-template-columns: 1fr;
+  align-items:center;
+  min-height: calc(100vh - 72px);
+}
+
+/* текст */
+.heroText h1{
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+
+.heroText p{
+  color: rgba(255,255,255,.8);
+  margin-bottom: 28px;
+  max-width: 520px;
+}
+
+/* кнопки */
+.heroActions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+/* ================== УБИРАЕМ ЛЮБЫЕ КАРТИНКИ В HERO ================== */
+body.page-home .heroArt,
+body.page-home .heroArt img,
+body.page-home .hero img{
+  display:none !important;
+}
