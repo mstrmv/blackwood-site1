@@ -17,6 +17,7 @@
       --shadow: 0 18px 50px rgba(0,0,0,.55);
       --r:18px;
       --max:1180px;
+      --headerH:64px;
     }
 
     *{box-sizing:border-box}
@@ -34,18 +35,21 @@
     /* Header */
     header{
       position:sticky; top:0; z-index:50;
+      height: var(--headerH);
+      display:flex; align-items:center;
       backdrop-filter: blur(10px);
       background: rgba(7,7,8,.55);
       border-bottom: 1px solid rgba(255,255,255,.07);
     }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
-      gap:14px; padding:14px 0;
+      gap:14px; width:100%;
     }
     .brand{
       display:flex; align-items:baseline; gap:10px;
       letter-spacing:.16em; text-transform:uppercase;
       font-weight:800;
+      white-space:nowrap;
     }
     .brand .accent{color:var(--gold)}
     .links{
@@ -92,24 +96,124 @@
       font-weight:800;
       letter-spacing:.06em;
       box-shadow: 0 10px 28px rgba(0,0,0,.35);
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
     }
     .btn:hover{background: rgba(200,164,90,.16)}
     .btn.primary{
       background: linear-gradient(180deg, rgba(200,164,90,.32), rgba(200,164,90,.12));
       border-color: rgba(200,164,90,.45);
     }
+    .btn.ghost{
+      border-color: rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
+    .btn.ghost:hover{background: rgba(255,255,255,.09)}
 
-    /* HERO */
+    /* WELCOME (первый экран, до hero) */
+    .welcome{
+      position:relative;
+      min-height: calc(100vh - var(--headerH));
+      display:flex;
+      align-items:center;
+      isolation:isolate;
+    }
+    .welcome::before{
+      content:"";
+      position:absolute; inset:-40px 0 -60px 0; /* запас фона */
+      background:
+        radial-gradient(1100px 520px at 20% 10%, rgba(200,164,90,.14), transparent 65%),
+        radial-gradient(900px 450px at 80% 20%, rgba(255,140,0,.10), transparent 60%),
+        url("img/hero-bg.png");
+      background-size: cover;
+      background-position: center;
+      filter: contrast(1.02) saturate(1.05);
+      z-index:-2;
+    }
+    .welcome::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(7,7,8,.55), rgba(7,7,8,.78));
+      z-index:-1;
+    }
+    .welcomeInner{
+      padding: 46px 0 44px;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:26px;
+      align-items:center;
+    }
+    .logoBig{
+      font-weight:900;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size: clamp(30px, 3.8vw, 54px);
+      line-height:1.02;
+      margin: 0 0 10px;
+    }
+    .logoBig .gold{color:var(--gold2)}
+    .welcomeText{
+      color:var(--muted);
+      font-size: clamp(14px, 1.3vw, 18px);
+      line-height:1.6;
+      max-width: 52ch;
+      margin: 0 0 18px;
+    }
+    .menuGrid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:12px;
+      margin-top: 14px;
+    }
+    .menuCard{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--r);
+      background: rgba(0,0,0,.22);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .menuCard b{
+      letter-spacing:.10em;
+      text-transform:uppercase;
+    }
+    .menuCard p{
+      margin:0;
+      color:var(--muted);
+      font-size: 13px;
+      line-height:1.45;
+    }
+
+    .heroPreview{
+      display:flex;
+      justify-content:center;
+      align-items:flex-end;
+      min-height: 420px;
+    }
+    .packs{
+      width:min(520px, 100%);
+      max-height: 520px;
+      object-fit: contain;
+      filter: drop-shadow(0 24px 55px rgba(0,0,0,.55));
+      transform: translateY(14px);
+    }
+
+    /* HERO (второй экран) */
     .hero{
       position:relative;
-      min-height: calc(100vh - 64px);
+      min-height: 100vh; /* ВАЖНО: не вычитаем header */
       display:flex;
       align-items:stretch;
       isolation:isolate;
     }
     .hero::before{
       content:"";
-      position:absolute; inset:0;
+      position:absolute;
+      inset:-60px 0 -90px 0; /* ВАЖНО: запас чтобы нигде не обрывалось */
       background:
         radial-gradient(1000px 500px at 20% 10%, rgba(200,164,90,.14), transparent 65%),
         radial-gradient(900px 450px at 80% 20%, rgba(255,140,0,.10), transparent 60%),
@@ -122,7 +226,7 @@
     .hero::after{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(90deg, rgba(7,7,8,.78) 0%, rgba(7,7,8,.40) 55%, rgba(7,7,8,.55) 100%);
+      background: linear-gradient(90deg, rgba(7,7,8,.80) 0%, rgba(7,7,8,.40) 55%, rgba(7,7,8,.60) 100%);
       z-index:-1;
     }
     .heroGrid{
@@ -163,23 +267,8 @@
     }
     .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
 
-    .heroArt{
-      position:relative;
-      display:flex;
-      justify-content:center;
-      align-items:flex-end;
-      min-height: 420px;
-    }
-    .packs{
-      width:min(520px, 100%);
-      max-height: 520px;
-      object-fit: contain;
-      filter: drop-shadow(0 24px 55px rgba(0,0,0,.55));
-      transform: translateY(14px);
-    }
-
-    /* Section base */
-    section{
+    /* Sections */
+    section.content{
       padding: 70px 0;
       background: radial-gradient(900px 420px at 50% -20%, rgba(200,164,90,.10), transparent 60%);
     }
@@ -196,7 +285,6 @@
     }
     .sectionTitle p{margin:0; color:var(--muted)}
 
-    /* Products (mock) */
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -219,6 +307,7 @@
       pointer-events:none;
     }
     .cardInner{position:relative}
+
     .prodImg{
       width:100%;
       height: 220px;
@@ -247,7 +336,6 @@
       letter-spacing:.04em;
     }
 
-    /* Why */
     .why{
       background:
         radial-gradient(800px 380px at 50% -20%, rgba(255,140,0,.08), transparent 60%);
@@ -281,7 +369,6 @@
     .whyItem b{display:block; letter-spacing:.06em; text-transform:uppercase}
     .whyItem span{color:var(--muted); font-size:13px}
 
-    /* Footer */
     footer{
       padding: 26px 0;
       border-top:1px solid rgba(255,255,255,.08);
@@ -293,17 +380,24 @@
       flex-wrap:wrap;
     }
 
+    /* Anchor offset for sticky header */
+    .anchor{
+      scroll-margin-top: calc(var(--headerH) + 14px);
+    }
+
     /* Responsive */
     @media (max-width: 980px){
       .links{display:none}
+      .welcomeInner{grid-template-columns: 1fr; padding: 34px 0}
       .heroGrid{grid-template-columns: 1fr; padding: 36px 0}
-      .heroArt{min-height: 320px}
+      .heroPreview{min-height: 300px}
       .grid{grid-template-columns: repeat(2, 1fr)}
       .whyGrid{grid-template-columns: repeat(2, 1fr)}
     }
     @media (max-width: 520px){
       .grid{grid-template-columns: 1fr}
       .prodImg{height: 240px}
+      .menuGrid{grid-template-columns: 1fr}
     }
   </style>
 </head>
@@ -317,6 +411,7 @@
       </a>
 
       <nav class="links">
+        <a href="#welcome" data-i18n="nav_home">Главная</a>
         <a href="#catalog" data-i18n="nav_catalog">Каталог</a>
         <a href="#why" data-i18n="nav_why">Почему мы</a>
         <a href="#shipping" data-i18n="nav_ship">Доставка</a>
@@ -335,340 +430,37 @@
   </header>
 
   <main id="top">
-    <!-- HERO -->
-    <section class="hero" aria-label="Hero">
-      <div class="container heroGrid">
+    <!-- WELCOME / MENU (первый экран, hero не видно) -->
+    <section id="welcome" class="welcome anchor" aria-label="Welcome">
+      <div class="container welcomeInner">
         <div>
-          <div class="kicker"><span class="dot"></span><span data-i18n="kicker">Премиум уголь для гриля</span></div>
-          <h1 data-i18n="hero_title">PREMIUM HARDWOOD CHARCOAL</h1>
-          <p class="sub" data-i18n="hero_sub">
-            Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.
+          <div class="logoBig">
+            <span data-i18n="brand">BLACKWOOD</span>
+            <span class="gold" data-i18n="brand2">CHARCOAL</span>
+          </div>
+
+          <p class="welcomeText" data-i18n="welcome_text">
+            Добро пожаловать. Здесь будет премиум-магазин угля в стиле Blackwood: темный charcoal, золото, жар и чистый минимализм.
           </p>
+
           <div class="ctaRow">
-            <a class="btn primary" href="#catalog" data-i18n="hero_cta1">Смотреть товары</a>
-            <a class="btn" href="#why" data-i18n="hero_cta2">Почему мы</a>
+            <a class="btn primary" href="#hero" data-i18n="go_hero">Перейти к витрине</a>
+            <a class="btn ghost" href="#catalog" data-i18n="go_catalog">Открыть каталог</a>
+            <a class="btn ghost" href="#why" data-i18n="go_why">Почему мы</a>
           </div>
-        </div>
 
-        <div class="heroArt">
-          <!-- Вставь свой PNG с упаковками -->
-          <img class="packs" src="img/packs.png" alt="Packs" />
-        </div>
-      </div>
-    </section>
-
-    <!-- CATALOG (mock) -->
-    <section id="catalog">
-      <div class="container">
-        <div class="sectionTitle">
-          <h2 data-i18n="cat_title">Товары</h2>
-          <p data-i18n="cat_sub">Пока макет — цены и кнопки потом подключим.</p>
-        </div>
-
-        <div class="grid">
-          <article class="card">
-            <div class="cardInner">
-              <div class="prodImg">
-                <img src="img/packs.png" alt="Product mock" />
-              </div>
-              <div style="font-weight:900; letter-spacing:.06em; text-transform:uppercase;" data-i18n="p1_name">CORE • 3 KG</div>
-              <div class="meta">
-                <span data-i18n="p_weight">Вес: 3 кг</span>
-                <span class="price" data-i18n="p_price">— грн</span>
-              </div>
+          <div class="menuGrid" style="margin-top:18px;">
+            <div class="menuCard">
+              <b data-i18n="m1_t">Витрина</b>
+              <p data-i18n="m1_s">Красивый hero-экран как на твоем примере.</p>
+              <a class="btn ghost" href="#hero" style="width:fit-content" data-i18n="open">Открыть</a>
             </div>
-          </article>
-
-          <article class="card">
-            <div class="cardInner">
-              <div class="prodImg">
-                <img src="img/packs.png" alt="Product mock" />
-              </div>
-              <div style="font-weight:900; letter-spacing:.06em; text-transform:uppercase;" data-i18n="p2_name">CORE • 5 KG</div>
-              <div class="meta">
-                <span data-i18n="p_weight2">Вес: 5 кг</span>
-                <span class="price" data-i18n="p_price">— грн</span>
-              </div>
+            <div class="menuCard">
+              <b data-i18n="m2_t">Каталог</b>
+              <p data-i18n="m2_s">Карточки товаров (пока макет, без логики).</p>
+              <a class="btn ghost" href="#catalog" style="width:fit-content" data-i18n="open">Открыть</a>
             </div>
-          </article>
-
-          <article class="card">
-            <div class="cardInner">
-              <div class="prodImg">
-                <img src="img/packs.png" alt="Product mock" />
-              </div>
-              <div style="font-weight:900; letter-spacing:.06em; text-transform:uppercase;" data-i18n="p3_name">CORE • 10 KG</div>
-              <div class="meta">
-                <span data-i18n="p_weight3">Вес: 10 кг</span>
-                <span class="price" data-i18n="p_price">— грн</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY -->
-    <section id="why" class="why">
-      <div class="container">
-        <div class="sectionTitle">
-          <h2 data-i18n="why_title">WHY</h2>
-          <p data-i18n="why_sub">Коротко и понятно — за что любят наш уголь.</p>
-        </div>
-
-        <div class="whyGrid">
-          <div class="whyItem">
-            <div class="whyIcon">🔥</div>
-            <b data-i18n="why_1_t">Долгое горение</b>
-            <span data-i18n="why_1_s">Стабильный жар</span>
-          </div>
-          <div class="whyItem">
-            <div class="whyIcon">⬛</div>
-            <b data-i18n="why_2_t">Мало пепла</b>
-            <span data-i18n="why_2_s">Чистый гриль</span>
-          </div>
-          <div class="whyItem">
-            <div class="whyIcon">🍖</div>
-            <b data-i18n="why_3_t">BBQ & Grill</b>
-            <span data-i18n="why_3_s">Для мяса и овощей</span>
-          </div>
-          <div class="whyItem">
-            <div class="whyIcon">🌳</div>
-            <b data-i18n="why_4_t">100% Hardwood</b>
-            <span data-i18n="why_4_s">Качество сырья</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SHIPPING -->
-    <section id="shipping">
-      <div class="container">
-        <div class="sectionTitle">
-          <h2 data-i18n="ship_title">Доставка и оплата</h2>
-          <p data-i18n="ship_sub">Пока текст-заглушка — позже сделаем красиво.</p>
-        </div>
-
-        <div class="grid">
-          <div class="card"><div class="cardInner"><b data-i18n="ship_1_t">Нова Пошта</b><p style="color:var(--muted)" data-i18n="ship_1_s">Отправка по Украине 1–2 дня.</p></div></div>
-          <div class="card"><div class="cardInner"><b data-i18n="ship_2_t">Курьер</b><p style="color:var(--muted)" data-i18n="ship_2_s">Доставка по городу (если есть).</p></div></div>
-          <div class="card"><div class="cardInner"><b data-i18n="ship_3_t">Оплата</b><p style="color:var(--muted)" data-i18n="ship_3_s">Карта / наложка / наличные.</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACTS -->
-    <section id="contacts">
-      <div class="container">
-        <div class="sectionTitle">
-          <h2 data-i18n="c_title">Контакты</h2>
-          <p data-i18n="c_sub">Поставь свои реальные ссылки и телефоны.</p>
-        </div>
-
-        <div class="grid">
-          <div class="card"><div class="cardInner"><b data-i18n="c_1_t">Телефон</b><p style="color:var(--muted)">+38 (0__) ___ __ __</p></div></div>
-          <div class="card"><div class="cardInner"><b data-i18n="c_2_t">Telegram</b><p style="color:var(--muted)">@yourname</p></div></div>
-          <div class="card"><div class="cardInner"><b data-i18n="c_3_t">Instagram</b><p style="color:var(--muted)">@yourbrand</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="container foot">
-        <div style="font-weight:900; letter-spacing:.14em; text-transform:uppercase;">
-          <span data-i18n="brand">BLACKWOOD</span> <span style="color:var(--gold)" data-i18n="brand2">CHARCOAL</span>
-        </div>
-        <div>© <span id="year"></span> <span data-i18n="foot">Все права защищены.</span></div>
-      </div>
-    </footer>
-  </main>
-
-  <script>
-    const dict = {
-      ru: {
-        brand: "BLACKWOOD",
-        brand2: "CHARCOAL",
-        nav_catalog: "Каталог",
-        nav_why: "Почему мы",
-        nav_ship: "Доставка",
-        nav_contacts: "Контакты",
-        buy_now: "Купить",
-        kicker: "Премиум уголь для гриля",
-        hero_title: "PREMIUM HARDWOOD CHARCOAL",
-        hero_sub: "Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.",
-        hero_cta1: "Смотреть товары",
-        hero_cta2: "Почему мы",
-
-        cat_title: "Товары",
-        cat_sub: "Пока макет — цены и кнопки потом подключим.",
-        p1_name: "CORE • 3 KG",
-        p2_name: "CORE • 5 KG",
-        p3_name: "CORE • 10 KG",
-        p_weight: "Вес: 3 кг",
-        p_weight2: "Вес: 5 кг",
-        p_weight3: "Вес: 10 кг",
-        p_price: "— грн",
-
-        why_title: "WHY BLACKWOOD",
-        why_sub: "Коротко и понятно — за что любят наш уголь.",
-        why_1_t: "Долгое горение",
-        why_1_s: "Стабильный жар",
-        why_2_t: "Мало пепла",
-        why_2_s: "Чистый гриль",
-        why_3_t: "BBQ & Grill",
-        why_3_s: "Для мяса и овощей",
-        why_4_t: "100% Hardwood",
-        why_4_s: "Качество сырья",
-
-        ship_title: "Доставка и оплата",
-        ship_sub: "Пока текст-заглушка — позже сделаем красиво.",
-        ship_1_t: "Нова Пошта",
-        ship_1_s: "Отправка по Украине 1–2 дня.",
-        ship_2_t: "Курьер",
-        ship_2_s: "Доставка по городу (если есть).",
-        ship_3_t: "Оплата",
-        ship_3_s: "Карта / наложка / наличные.",
-
-        c_title: "Контакты",
-        c_sub: "Поставь свои реальные ссылки и телефоны.",
-        c_1_t: "Телефон",
-        c_2_t: "Telegram",
-        c_3_t: "Instagram",
-
-        foot: "Все права защищены."
-      },
-
-      uk: {
-        brand: "BLACKWOOD",
-        brand2: "CHARCOAL",
-        nav_catalog: "Каталог",
-        nav_why: "Чому ми",
-        nav_ship: "Доставка",
-        nav_contacts: "Контакти",
-        buy_now: "Купити",
-        kicker: "Преміум вугілля для гриля",
-        hero_title: "PREMIUM HARDWOOD CHARCOAL",
-        hero_sub: "Тривале горіння, мінімум попелу, чистий жар. Ідеально для BBQ та гриля.",
-        hero_cta1: "Дивитися товари",
-        hero_cta2: "Чому ми",
-
-        cat_title: "Товари",
-        cat_sub: "Поки макет — ціни та кнопки підключимо пізніше.",
-        p1_name: "CORE • 3 KG",
-        p2_name: "CORE • 5 KG",
-        p3_name: "CORE • 10 KG",
-        p_weight: "Вага: 3 кг",
-        p_weight2: "Вага: 5 кг",
-        p_weight3: "Вага: 10 кг",
-        p_price: "— грн",
-
-        why_title: "WHY BLACKWOOD",
-        why_sub: "Коротко й зрозуміло — за що люблять наше вугілля.",
-        why_1_t: "Довге горіння",
-        why_1_s: "Стабільний жар",
-        why_2_t: "Мало попелу",
-        why_2_s: "Чистий гриль",
-        why_3_t: "BBQ & Grill",
-        why_3_s: "Для м’яса та овочів",
-        why_4_t: "100% Hardwood",
-        why_4_s: "Якість сировини",
-
-        ship_title: "Доставка та оплата",
-        ship_sub: "Поки текст-заглушка — потім зробимо красиво.",
-        ship_1_t: "Нова Пошта",
-        ship_1_s: "Відправка по Україні 1–2 дні.",
-        ship_2_t: "Кур’єр",
-        ship_2_s: "Доставка по місту (за наявності).",
-        ship_3_t: "Оплата",
-        ship_3_s: "Картка / накладений / готівка.",
-
-        c_title: "Контакти",
-        c_sub: "Постав свої реальні посилання та телефони.",
-        c_1_t: "Телефон",
-        c_2_t: "Telegram",
-        c_3_t: "Instagram",
-
-        foot: "Усі права захищено."
-      },
-
-      en: {
-        brand: "BLACKWOOD",
-        brand2: "CHARCOAL",
-        nav_catalog: "Catalog",
-        nav_why: "Why us",
-        nav_ship: "Shipping",
-        nav_contacts: "Contacts",
-        buy_now: "Buy now",
-        kicker: "Premium charcoal for grilling",
-        hero_title: "PREMIUM HARDWOOD CHARCOAL",
-        hero_sub: "Long-lasting heat, low ash, clean burn. Perfect for BBQ & grill.",
-        hero_cta1: "View products",
-        hero_cta2: "Why us",
-
-        cat_title: "Products",
-        cat_sub: "Mockup only — we’ll connect prices and actions later.",
-        p1_name: "CORE • 3 KG",
-        p2_name: "CORE • 5 KG",
-        p3_name: "CORE • 10 KG",
-        p_weight: "Weight: 3 kg",
-        p_weight2: "Weight: 5 kg",
-        p_weight3: "Weight: 10 kg",
-        p_price: "— UAH",
-
-        why_title: "WHY BLACKWOOD",
-        why_sub: "Simple reasons people choose our charcoal.",
-        why_1_t: "Long heat",
-        why_1_s: "Stable temperature",
-        why_2_t: "Low ash",
-        why_2_s: "Cleaner grill",
-        why_3_t: "BBQ & Grill",
-        why_3_s: "Meat & veggies",
-        why_4_t: "100% Hardwood",
-        why_4_s: "Quality raw material",
-
-        ship_title: "Shipping & Payment",
-        ship_sub: "Placeholder text — we’ll refine it later.",
-        ship_1_t: "Nova Poshta",
-        ship_1_s: "Delivery across Ukraine in 1–2 days.",
-        ship_2_t: "Courier",
-        ship_2_s: "City delivery (if available).",
-        ship_3_t: "Payment",
-        ship_3_s: "Card / COD / cash.",
-
-        c_title: "Contacts",
-        c_sub: "Replace with your real links and phone.",
-        c_1_t: "Phone",
-        c_2_t: "Telegram",
-        c_3_t: "Instagram",
-
-        foot: "All rights reserved."
-      }
-    };
-
-    const $ = (s)=>document.querySelector(s);
-    const setLang = (lang) => {
-      document.documentElement.lang = lang === "uk" ? "uk" : (lang === "en" ? "en" : "ru");
-
-      document.querySelectorAll("[data-i18n]").forEach(el=>{
-        const key = el.getAttribute("data-i18n");
-        if(dict[lang] && dict[lang][key] != null) el.textContent = dict[lang][key];
-      });
-
-      ["ru","uk","en"].forEach(l=>{
-        $("#lang-"+l).classList.toggle("active", l===lang);
-      });
-
-      localStorage.setItem("lang", lang);
-    };
-
-    $("#lang-ru").addEventListener("click", ()=>setLang("ru"));
-    $("#lang-uk").addEventListener("click", ()=>setLang("uk"));
-    $("#lang-en").addEventListener("click", ()=>setLang("en"));
-
-    $("#year").textContent = new Date().getFullYear();
-
-    // init
-    setLang(localStorage.getItem("lang") || "ru");
-  </script>
-</body>
-</html>
+            <div class="menuCard">
+              <b data-i18n="m3_t">Преимущества</b>
+              <p data-i18n="m3_s">Иконки: long heat, low ash и т.д.</p>
+              <a class="btn ghost" href
