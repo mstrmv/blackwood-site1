@@ -12,60 +12,27 @@
 <header>
   <div class="container nav">
     <a class="brand" href="index.html">BLACKWOOD <span>• CHARCOAL</span></a>
-
     <nav class="navLinks">
-      <a href="index.html" data-i18n="nav_home">Главная</a>
-      <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-      <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-      <a href="about.html" data-i18n="nav_about">О нас</a>
-      <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="shipping.html">Доставка</a>
+      <a href="contacts.html">Контакты</a>
     </nav>
-
-    <div class="rightTools">
-      <div class="lang">
-        <button id="lang-ru" class="active" type="button">RU</button>
-        <button id="lang-uk" type="button">UKR</button>
-        <button id="lang-en" type="button">EN</button>
-      </div>
-
-      <a class="pill" href="cart.html">
-        <span data-i18n="nav_cart">Корзина</span> • <span id="cartCount">0</span>
-      </a>
-    </div>
+    <a class="pill" href="cart.html">Корзина • <span id="cartCount">0</span></a>
   </div>
 </header>
 
 <section class="section">
   <div class="container">
     <div class="sectionTitle">
-      <h2 class="reveal" data-i18n="products">Товары</h2>
-      <p class="reveal" data-i18n="products_note">Выберите вес и добавьте в корзину.</p>
-    </div>
-
-    <!-- FILTER / SORT BAR -->
-    <div class="card reveal" style="margin-bottom:16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
-      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-        <span class="pill">Filter</span>
-        <button class="btn ghost" type="button" data-filter="all">All</button>
-        <button class="btn ghost" type="button" data-filter="light">3–5kg</button>
-        <button class="btn ghost" type="button" data-filter="heavy">10kg</button>
-      </div>
-
-      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-        <span class="pill">Sort</span>
-        <select id="sortSel" class="select" style="width:190px;">
-          <option value="popular">Popular</option>
-          <option value="priceAsc">Price ↑</option>
-          <option value="priceDesc">Price ↓</option>
-        </select>
-      </div>
+      <h2>ТОВАРЫ</h2>
+      <p>Выберите вес и добавьте в корзину.</p>
     </div>
 
     <div class="grid">
-      <!-- 3 KG -->
-      <article class="card reveal product-card" data-id="core-3">
+      <div class="card product-card" data-id="core-3">
         <div class="prodImg">
-          <img src="img/products/core-3kg.png" alt="3kg" loading="lazy" onerror="this.style.display='none'">
+          <img src="img/products/core-3kg.png">
         </div>
         <div class="prodTitle">CORE • 3 KG</div>
         <div class="meta">
@@ -74,18 +41,15 @@
         </div>
         <div class="addRow">
           <div class="qty">
-            <button type="button" class="qtyMinus">−</button>
-            <span class="qtyVal">1</span>
-            <button type="button" class="qtyPlus">+</button>
+            <button>-</button><span>1</span><button>+</button>
           </div>
-          <button class="addBtn" type="button" data-i18n="add_to_cart">В корзину</button>
+          <button class="addBtn">В корзину</button>
         </div>
-      </article>
+      </div>
 
-      <!-- 5 KG -->
-      <article class="card reveal product-card" data-id="core-5">
+      <div class="card product-card" data-id="core-5">
         <div class="prodImg">
-          <img src="img/products/core-5kg.png" alt="5kg" loading="lazy" onerror="this.style.display='none'">
+          <img src="img/products/core-5kg.png">
         </div>
         <div class="prodTitle">CORE • 5 KG</div>
         <div class="meta">
@@ -94,18 +58,15 @@
         </div>
         <div class="addRow">
           <div class="qty">
-            <button type="button" class="qtyMinus">−</button>
-            <span class="qtyVal">1</span>
-            <button type="button" class="qtyPlus">+</button>
+            <button>-</button><span>1</span><button>+</button>
           </div>
-          <button class="addBtn" type="button" data-i18n="add_to_cart">В корзину</button>
+          <button class="addBtn">В корзину</button>
         </div>
-      </article>
+      </div>
 
-      <!-- 10 KG -->
-      <article class="card reveal product-card" data-id="core-10">
+      <div class="card product-card" data-id="core-10">
         <div class="prodImg">
-          <img src="img/products/core-10kg.png" alt="10kg" loading="lazy" onerror="this.style.display='none'">
+          <img src="img/products/core-10kg.png">
         </div>
         <div class="prodTitle">CORE • 10 KG</div>
         <div class="meta">
@@ -114,30 +75,22 @@
         </div>
         <div class="addRow">
           <div class="qty">
-            <button type="button" class="qtyMinus">−</button>
-            <span class="qtyVal">1</span>
-            <button type="button" class="qtyPlus">+</button>
+            <button>-</button><span>1</span><button>+</button>
           </div>
-          <button class="addBtn" type="button" data-i18n="add_to_cart">В корзину</button>
+          <button class="addBtn">В корзину</button>
         </div>
-      </article>
-    </div>
-
-    <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
-      <a class="btn ghost" href="cart.html" data-i18n="go_cart">Перейти в корзину</a>
-      <a class="btn" href="checkout.html" data-i18n="cart_checkout">Оформить заказ</a>
+      </div>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="container foot">
-    <div class="brand">BLACKWOOD <span>• CHARCOAL</span></div>
-    <div>© <span data-i18n="footer">Все права защищены.</span></div>
+    <div>BLACKWOOD • CHARCOAL</div>
+    <div>© Все права защищены</div>
   </div>
 </footer>
 
-<div class="toast" id="toast"></div>
 <script src="assets/app.js"></script>
 </body>
 </html>
