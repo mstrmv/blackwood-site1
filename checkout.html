@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout • BLACKWOOD</title>
+  <link rel="stylesheet" href="./assets/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="./index.html">BLACKWOOD <span>• CHARCOAL</span></a>
+
+    <nav class="navLinks">
+      <a href="./catalog.html" data-i18n="nav_catalog">Каталог</a>
+      <a href="./cart.html" data-i18n="nav_cart">Корзина</a>
+      <a href="./shipping.html" data-i18n="nav_shipping">Доставка</a>
+    </nav>
+
+    <div class="rightTools">
+      <div class="lang">
+        <button id="lang-ru" class="active" type="button">RU</button>
+        <button id="lang-uk" type="button">UKR</button>
+        <button id="lang-en" type="button">EN</button>
+      </div>
+
+      <a class="pill" href="./cart.html">
+        <span data-i18n="nav_cart">Корзина</span> • <span id="cartCount">0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="sectionTitle">
+      <h2 class="reveal" data-i18n="checkout_title">Оформление</h2>
+      <p class="reveal" data-i18n="checkout_sub">...</p>
+    </div>
+
+    <form id="checkoutForm" class="form card reveal">
+      <div class="field">
+        <label for="name" data-i18n="f_name">Имя</label>
+        <input id="name" class="input" required>
+      </div>
+
+      <div class="field">
+        <label for="phone" data-i18n="f_phone">Телефон</label>
+        <input id="phone" class="input" required>
+      </div>
+
+      <div class="field">
+        <label for="city" data-i18n="f_city">Город</label>
+        <input id="city" class="input" required>
+      </div>
+
+      <div class="field">
+        <label for="delivery" data-i18n="f_delivery">Доставка</label>
+        <select id="delivery" class="select">
+          <option value="np" data-i18n="delivery_np">Нова Пошта</option>
+          <option value="courier" data-i18n="delivery_courier">Курьер</option>
+          <option value="pickup" data-i18n="delivery_pickup">Самовывоз</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="payment" data-i18n="f_payment">Оплата</label>
+        <select id="payment" class="select">
+          <option value="card" data-i18n="pay_card">Карта</option>
+          <option value="cod" data-i18n="pay_cod">Наложенный платеж</option>
+          <option value="cash" data-i18n="pay_cash">Наличные</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="comment" data-i18n="f_comment">Комментарий</label>
+        <textarea id="comment" class="textarea"></textarea>
+      </div>
+
+      <button class="btn" type="submit" data-i18n="place_order">Оформить</button>
+      <a class="btn ghost" href="./cart.html" data-i18n="nav_cart">Корзина</a>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot">
+    <div class="brand">BLACKWOOD <span>• CHARCOAL</span></div>
+    <div>© <span data-i18n="footer">Все права защищены.</span></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+<script src="./assets/app.js"></script>
+</body>
+</html>
