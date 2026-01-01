@@ -1,4 +1,16 @@
-/* ====== i18n ====== */
+/* =========================================================
+   BLACKWOOD • app.js (full)
+   - i18n RU/UKR/EN
+   - cart (localStorage)
+   - catalog add-to-cart
+   - cart page render
+   - checkout demo -> success
+   - reveal (stagger)
+   - header scroll effect + parallax (desktop only)
+   - live embers particles (canvas) (desktop only)
+   ========================================================= */
+
+/* ===== i18n ===== */
 const I18N = {
   ru:{
     nav_home:"Главная",
@@ -188,10 +200,25 @@ const ORDER_KEY = "bw_last_order_v1";
 const $  = (s)=>document.querySelector(s);
 const $$ = (s)=>Array.from(document.querySelectorAll(s));
 
+/* ===== Motion / performance guards (mobile + reduced motion) ===== */
+function prefersReducedMotion(){
+  return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+function isMobileLike(){
+  // simple heuristics: small screen or coarse pointer
+  const coarse = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+  return coarse || Math.min(window.innerWidth, window.innerHeight) < 820;
+}
+function allowHeavyFX(){
+  if (prefersReducedMotion()) return false;
+  if (isMobileLike()) return false; // auto disable on mobile
+  return true;
+}
+
+/* ===== Language ===== */
 function getLang(){
   return localStorage.getItem(LANG_KEY) || "ru";
 }
-
 function setLang(lang){
   localStorage.setItem(LANG_KEY, lang);
   document.documentElement.lang = (lang==="uk"?"uk":lang==="en"?"en":"ru");
@@ -206,10 +233,8 @@ function setLang(lang){
     if(b) b.classList.toggle("active", l===lang);
   });
 
-  // update cart badge
   updateCartBadge();
 }
-
 function initLangButtons(){
   ["ru","uk","en"].forEach(l=>{
     const b = $("#lang-"+l);
@@ -218,7 +243,7 @@ function initLangButtons(){
   setLang(getLang());
 }
 
-/* ====== Cart ====== */
+/* ===== Cart ===== */
 function loadCart(){
   try{ return JSON.parse(localStorage.getItem(CART_KEY) || "{}"); } catch { return {}; }
 }
@@ -234,15 +259,13 @@ function updateCartBadge(){
   const badge = $("#cartCount");
   if(badge) badge.textContent = count;
 }
-
 function productsDB(){
   return {
-    "core-3":  { img:"./img/products/core-3kg.png", title:"CORE • 3 KG", weight:3 },
-    "core-5":  { img:"./img/products/core-5kg.png", title:"CORE • 5 KG", weight:5 },
-    "core-10": { img:"./img/products/core-10kg.png", title:"CORE • 10 KG", weight:10 },
+    "core-3":  { img:"./img/products/core-3kg.png", title:"CORE • 3 KG"  },
+    "core-5":  { img:"./img/products/core-5kg.png", title:"CORE • 5 KG"  },
+    "core-10": { img:"./img/products/core-10kg.png", title:"CORE • 10 KG" },
   };
 }
-
 function addToCart(id, qty){
   const cart = loadCart();
   if(!cart[id]) cart[id] = { qty:0 };
@@ -251,7 +274,6 @@ function addToCart(id, qty){
   updateCartBadge();
   toast(I18N[getLang()].added);
 }
-
 function setQtyInCart(id, qty){
   const cart = loadCart();
   if(qty <= 0){
@@ -264,7 +286,7 @@ function setQtyInCart(id, qty){
   updateCartBadge();
 }
 
-/* ====== Toast ====== */
+/* ===== Toast ===== */
 let toastTimer = null;
 function toast(text){
   const el = $("#toast");
@@ -275,20 +297,30 @@ function toast(text){
   toastTimer = setTimeout(()=> el.classList.remove("show"), 1200);
 }
 
-/* ====== Reveal animation ====== */
-function initReveal(){
+/* ===== Reveal (stagger) ===== */
+function initRevealStagger(){
+  const els = $$(".reveal");
+  if(!els.length) return;
+
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add("in");
-        io.unobserve(e.target);
-      }
+      if(!e.isIntersecting) return;
+      const el = e.target;
+      const delay = Number(el.getAttribute("data-stagger") || "0");
+      setTimeout(()=> el.classList.add("in"), delay);
+      io.unobserve(el);
     });
-  },{threshold:0.14});
-  $$(".reveal").forEach(el=>io.observe(el));
+  },{threshold:0.15});
+
+  els.forEach((el, idx)=>{
+    if(!el.hasAttribute("data-stagger")){
+      el.setAttribute("data-stagger", String(Math.min(idx * 70, 420)));
+    }
+    io.observe(el);
+  });
 }
 
-/* ====== Catalog page wiring ====== */
+/* ===== Catalog cards wiring ===== */
 function initCatalogCards(){
   $$(".product-card[data-id]").forEach(card=>{
     const id = card.dataset.id;
@@ -301,24 +333,25 @@ function initCatalogCards(){
 
     minus?.addEventListener("click", ()=>{
       qty = Math.max(1, qty-1);
-      val.textContent = qty;
+      if(val) val.textContent = qty;
     });
+
     plus?.addEventListener("click", ()=>{
       qty = Math.min(99, qty+1);
-      val.textContent = qty;
+      if(val) val.textContent = qty;
     });
+
     addBtn?.addEventListener("click", ()=>{
       addToCart(id, qty);
       addBtn.style.transform = "scale(.98)";
       setTimeout(()=> addBtn.style.transform = "", 120);
-      updateCartBadge();
     });
   });
 
   updateCartBadge();
 }
 
-/* ====== Cart page rendering ====== */
+/* ===== Cart page render ===== */
 function renderCartPage(){
   const wrap = $("#cartList");
   if(!wrap) return;
@@ -328,13 +361,16 @@ function renderCartPage(){
   const db = productsDB();
   const count = cartCount(cart);
 
-  $("#cartCount") && ($("#cartCount").textContent = count);
-  $("#itemsTotal") && ($("#itemsTotal").textContent = count);
+  const badge = $("#cartCount");
+  if(badge) badge.textContent = count;
+
+  const totalEl = $("#itemsTotal");
+  if(totalEl) totalEl.textContent = count;
 
   wrap.innerHTML = "";
 
   if(count === 0){
-    wrap.innerHTML = `<div class="card"><div class="reveal in" style="color:var(--muted)">${I18N[lang].cart_empty}</div></div>`;
+    wrap.innerHTML = `<div class="card reveal in" style="color:var(--muted)">${I18N[lang].cart_empty}</div>`;
     return;
   }
 
@@ -370,6 +406,7 @@ function renderCartPage(){
       setQtyInCart(id, q);
       renderCartPage();
     });
+
     row.querySelector(".cPlus").addEventListener("click", ()=>{
       const cur = loadCart();
       const q = (cur[id]?.qty || 0) + 1;
@@ -381,7 +418,7 @@ function renderCartPage(){
   });
 }
 
-/* ====== Checkout ====== */
+/* ===== Checkout ===== */
 function initCheckout(){
   const form = $("#checkoutForm");
   if(!form) return;
@@ -398,27 +435,27 @@ function initCheckout(){
     }
 
     const data = {
-      name: $("#name").value.trim(),
-      phone: $("#phone").value.trim(),
-      city: $("#city").value.trim(),
-      delivery: $("#delivery").value,
-      payment: $("#payment").value,
-      comment: $("#comment").value.trim(),
+      name: $("#name")?.value?.trim() || "",
+      phone: $("#phone")?.value?.trim() || "",
+      city: $("#city")?.value?.trim() || "",
+      delivery: $("#delivery")?.value || "",
+      payment: $("#payment")?.value || "",
+      comment: $("#comment")?.value?.trim() || "",
       cart,
       created_at: new Date().toISOString()
     };
 
     localStorage.setItem(ORDER_KEY, JSON.stringify(data));
-    // очищать корзину можно сразу, а можно после success — я очищаю сразу
-    saveCart({});
+    saveCart({}); // чистим корзину
     window.location.href = "./success.html";
   });
 }
 
-/* ====== Success page ====== */
+/* ===== Success ===== */
 function renderSuccess(){
   const pre = $("#orderDump");
   if(!pre) return;
+
   try{
     const data = JSON.parse(localStorage.getItem(ORDER_KEY) || "{}");
     pre.textContent = JSON.stringify(data, null, 2);
@@ -427,14 +464,199 @@ function renderSuccess(){
   }
 }
 
-/* ====== Boot ====== */
+/* =========================================================
+   (OPT) Header scroll effect + Parallax (desktop only)
+   ========================================================= */
+function initHeaderAndParallax(){
+  // always keep header nice; parallax only if allowed
+  const heavy = allowHeavyFX();
+
+  let ticking = false;
+  const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+
+    requestAnimationFrame(()=>{
+      const y = window.scrollY || 0;
+
+      // Header dynamic opacity (works even on mobile)
+      const t = clamp(y / 240, 0, 1);
+      const navA = 0.30 + t * 0.55;   // 0.30 -> 0.85
+      const border = 0.04 + t * 0.10; // 0.04 -> 0.14
+      const blur = 10 + t * 8;        // 10px -> 18px
+
+      document.documentElement.style.setProperty("--navA", navA.toFixed(2));
+      document.documentElement.style.setProperty("--navBorder", border.toFixed(2));
+      document.documentElement.style.setProperty("--navBlur", blur.toFixed(1) + "px");
+
+      // Parallax background (desktop only)
+      if(heavy){
+        const bgY = Math.round(-y * 0.18);
+        document.documentElement.style.setProperty("--bgY", bgY + "px");
+      }else{
+        document.documentElement.style.setProperty("--bgY", "0px");
+      }
+
+      ticking = false;
+    });
+  }
+
+  window.addEventListener("scroll", onScroll, {passive:true});
+  window.addEventListener("resize", onScroll, {passive:true});
+  onScroll();
+}
+
+/* =========================================================
+   (2) Live embers particles (canvas) - hero only
+   - auto disabled on mobile/reduced motion
+   ========================================================= */
+function initEmbersCanvas(){
+  const heavy = allowHeavyFX();
+  const hero = document.querySelector(".hero");
+  const canvas = document.getElementById("embersCanvas");
+
+  if(!hero || !canvas) return;
+
+  // Disable on mobile / reduced motion
+  if(!heavy){
+    canvas.style.display = "none";
+    return;
+  }
+
+  const ctx = canvas.getContext("2d", {alpha:true});
+  let w = 0, h = 0, raf = 0;
+  let particles = [];
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+  function resize(){
+    const rect = hero.getBoundingClientRect();
+    // canvas size based on hero width and a fixed height zone near bottom
+    w = Math.floor(rect.width);
+    h = Math.floor(Math.max(220, Math.min(320, rect.height * 0.32)));
+
+    canvas.width  = Math.floor(w * DPR);
+    canvas.height = Math.floor(h * DPR);
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+    // position canvas at bottom of hero
+    canvas.style.position = "absolute";
+    canvas.style.left = "0";
+    canvas.style.right = "0";
+    canvas.style.bottom = "-20px";
+    canvas.style.height = h + "px";
+    canvas.style.zIndex = "0";
+    canvas.style.pointerEvents = "none";
+
+    // refresh particles a bit
+    particles = particles.slice(0, Math.floor(w / 10));
+  }
+
+  function rand(a,b){ return a + Math.random()*(b-a); }
+
+  function spawn(){
+    // spawn near bottom with slight x randomness
+    const x = rand(0, w);
+    const y = rand(h * 0.70, h);
+    const size = rand(0.8, 2.2);
+    const speedY = rand(0.25, 1.0);
+    const driftX = rand(-0.25, 0.25);
+
+    return {
+      x, y,
+      vx: driftX,
+      vy: -speedY,
+      r: size,
+      life: rand(80, 170),
+      a: rand(0.35, 0.95),
+      tw: rand(0.6, 1.6), // twinkle
+      hue: rand(28, 46)   // warm ember range
+    };
+  }
+
+  function step(){
+    raf = requestAnimationFrame(step);
+
+    ctx.clearRect(0,0,w,h);
+
+    // soft glow at bottom
+    const grad = ctx.createRadialGradient(w*0.5, h*1.05, 10, w*0.5, h*1.05, w*0.65);
+    grad.addColorStop(0, "rgba(255,140,0,0.16)");
+    grad.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,w,h);
+
+    // keep enough particles
+    const target = Math.min(160, Math.max(70, Math.floor(w / 6)));
+    while(particles.length < target) particles.push(spawn());
+
+    // draw
+    for(let i=particles.length-1;i>=0;i--){
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life -= 1;
+
+      // slight wind based on time
+      p.vx += Math.sin((Date.now()/1000) + p.tw) * 0.002;
+
+      // fade as it goes up
+      const t = Math.max(0, Math.min(1, p.life / 170));
+      const alpha = p.a * t;
+
+      // remove
+      if(p.life <= 0 || p.y < -20 || p.x < -50 || p.x > w + 50){
+        particles.splice(i,1);
+        continue;
+      }
+
+      // draw ember
+      ctx.beginPath();
+      ctx.fillStyle = `hsla(${p.hue}, 95%, 62%, ${alpha})`;
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fill();
+
+      // little sparkle
+      if(Math.random() < 0.025){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,220,160,${alpha*0.7})`;
+        ctx.arc(p.x + rand(-2,2), p.y + rand(-2,2), p.r*0.6, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+  }
+
+  resize();
+  window.addEventListener("resize", resize, {passive:true});
+  step();
+
+  // stop on page hide
+  document.addEventListener("visibilitychange", ()=>{
+    if(document.hidden){
+      if(raf) cancelAnimationFrame(raf);
+      raf = 0;
+    }else if(!raf){
+      step();
+    }
+  });
+}
+
+/* =========================================================
+   Boot
+   ========================================================= */
 document.addEventListener("DOMContentLoaded", ()=>{
   initLangButtons();
-  initReveal();
+  initRevealStagger();
+  initHeaderAndParallax();
+
   initCatalogCards();
   renderCartPage();
   initCheckout();
   renderSuccess();
   updateCartBadge();
-});
 
+  initEmbersCanvas();
+});
