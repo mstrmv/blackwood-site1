@@ -1,59 +1,74 @@
 <!doctype html>
-<html lang="ru">
+<html lang="uk">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BLACKWOOD · CHARCOAL</title>
-  <link rel="stylesheet" href="assets/style.css">
+
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 
-<body class="page-home bgHero">
+<body class="bgHome">
 
-<header class="header">
-  <div class="container headerRow">
-    <a class="logo" href="index.html">BLACKWOOD <span>·</span> <b>CHARCOAL</b></a>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container headerRow">
+      <a href="index.html" class="logo">BLACKWOOD <span>·</span> <b>CHARCOAL</b></a>
 
-    <nav class="nav">
-      <a href="index.html" data-i18n="home">Главная</a>
-      <a href="catalog.html" data-i18n="catalog">Каталог</a>
-      <a href="shipping.html" data-i18n="shipping">Доставка</a>
-      <a href="about.html" data-i18n="about">О нас</a>
-      <a href="contacts.html" data-i18n="contacts">Контакты</a>
-    </nav>
+      <nav class="nav">
+        <a href="index.html">Головна</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="shipping.html">Доставка</a>
+        <a href="about.html">Про нас</a>
+        <a href="contacts.html">Контакти</a>
+      </nav>
 
-    <div class="headerRight">
-      <div class="langs">
-        <button class="active" type="button" data-lang="ru">RU</button>
-        <button type="button" data-lang="ukr">UKR</button>
-        <button type="button" data-lang="en">EN</button>
-      </div>
-      <a class="cartBtn" href="cart.html"><span data-i18n="cart">Корзина</span> · <span id="cartCount">0</span></a>
-    </div>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="container heroGrid">
-    <div class="heroText">
-      <h1 data-i18n-multiline="hero_title">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
-      <p data-i18n-multiline="hero_desc">
-        Длительное горение, минимум пепла, чистый жар.<br>
-        Идеально для BBQ и гриля.
-      </p>
-
-      <div class="heroActions">
-        <a href="catalog.html" class="btn gold" data-i18n="open_catalog">Открыть каталог</a>
-        <a href="shipping.html" class="btn dark" data-i18n="delivery_pay">Доставка и оплата</a>
-        <a href="cart.html" class="btn dark" data-i18n="go_cart">Перейти в корзину</a>
+      <div class="headerRight">
+        <div class="langs">
+          <button>RU</button>
+          <button class="active">UKR</button>
+          <button>EN</button>
+        </div>
+        <a href="cart.html" class="cartBtn">Кошик · 3</a>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<footer class="footer">
-  <div class="container">BLACKWOOD · CHARCOAL © 2026</div>
-</footer>
+  <!-- HERO -->
+  <main class="hero heroLeft">
+    <div class="container heroGrid">
 
-<script src="assets/app.js"></script>
+      <!-- TEXT -->
+      <div class="heroText">
+        <h1 class="h1">
+          PREMIUM<br>
+          HARDWOOD<br>
+          CHARCOAL
+        </h1>
+
+        <p class="lead">
+          Довге горіння, мінімум попелу, чистий жар.<br>
+          Ідеально для BBQ та гриля.
+        </p>
+
+        <div class="heroBtns">
+          <a href="catalog.html" class="btn gold">Відкрити каталог</a>
+          <a href="shipping.html" class="btn dark">Доставка та оплата</a>
+          <a href="cart.html" class="btn dark">Перейти в кошик</a>
+        </div>
+      </div>
+
+      <!-- EMPTY RIGHT COLUMN (for image visibility) -->
+      <div></div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      BLACKWOOD · CHARCOAL © 2026
+    </div>
+  </footer>
+
 </body>
 </html>
