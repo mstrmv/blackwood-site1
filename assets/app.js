@@ -660,3 +660,27 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   initEmbersCanvas();
 });
+// ===== Enter screen logic (hide/show hero) =====
+(function initEnterScreen(){
+  const welcome = document.getElementById("welcome");
+  const hero = document.getElementById("hero");
+  const btn = document.getElementById("enterBtn");
+  if(!welcome || !hero || !btn) return;
+
+  const KEY = "bw_entered_v1";
+  const entered = localStorage.getItem(KEY) === "1";
+
+  function enter(){
+    localStorage.setItem(KEY, "1");
+    welcome.style.display = "none";
+    hero.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  if(entered){
+    welcome.style.display = "none";
+    return;
+  }
+
+  // hero можно оставить ниже, но welcome будет первым экраном
+  btn.addEventListener("click", enter);
+})();
