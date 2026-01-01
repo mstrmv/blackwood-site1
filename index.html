@@ -1,94 +1,65 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/blackwood-site1/">
-  <title>BLACKWOOD • CHARCOAL</title>
+  <meta charset="UTF-8" />
+  <title>BLACKWOOD · CHARCOAL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 
-<body>
+<body class="page-home">
 
-<header>
-  <div class="container nav">
-    <a class="brand" href="index.html">BLACKWOOD <span>• CHARCOAL</span></a>
+<header class="header">
+  <div class="container headerRow">
+    <div class="logo">BLACKWOOD <span>· CHARCOAL</span></div>
 
-    <nav class="navLinks">
-      <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-      <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-      <a href="about.html" data-i18n="nav_about">О нас</a>
-      <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
+    <nav class="nav">
+      <a href="catalog.html">Каталог</a>
+      <a href="shipping.html">Доставка</a>
+      <a href="about.html">О нас</a>
+      <a href="contacts.html">Контакты</a>
     </nav>
 
-    <div class="rightTools">
-      <div class="lang">
-        <button id="lang-ru" class="active" type="button">RU</button>
-        <button id="lang-uk" type="button">UKR</button>
-        <button id="lang-en" type="button">EN</button>
+    <div class="headerRight">
+      <div class="langs">
+        <button class="active">RU</button>
+        <button>UKR</button>
+        <button>EN</button>
       </div>
-
-      <a class="pill" href="cart.html">
-        <span data-i18n="nav_cart">Корзина</span> • <span id="cartCount">0</span>
-      </a>
+      <a class="cartBtn" href="cart.html">Корзина · 0</a>
     </div>
   </div>
 </header>
 
-<!-- ===== ENTER SCREEN (первый экран, без hero) ===== -->
-<section class="welcome" id="welcome">
-  <div class="container welcomeInner reveal in">
-    <div class="brand" style="font-size:14px;">BLACKWOOD <span>• CHARCOAL</span></div>
-    <h1 style="margin-top:12px;" data-i18n="hero_title">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
-    <p class="lead" data-i18n="hero_sub">...</p>
-
-    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
-      <button class="btn" id="enterBtn" type="button">ENTER</button>
-      <a class="btn ghost" href="catalog.html" data-i18n="open_catalog">Открыть каталог</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== HERO (скрыт пока не нажмешь ENTER) ===== -->
-<section class="hero" id="hero">
-  <!-- (3) Видео фон: добавь файл img/bg.mp4 (не обяз.) -->
-  <video class="bgVideo" autoplay muted loop playsinline>
-    <source src="img/bg.mp4" type="video/mp4">
-  </video>
-
-  <!-- 🔥 живые искры -->
-  <canvas id="embersCanvas" aria-hidden="true"></canvas>
-
+<section class="hero">
   <div class="container heroGrid">
-    <div class="reveal">
-      <h1 data-i18n="hero_title">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
-      <p class="lead" data-i18n="hero_sub">...</p>
 
-      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
-        <a class="btn" href="catalog.html" data-i18n="open_catalog">Открыть каталог</a>
-        <a class="btn ghost" href="shipping.html" data-i18n="go_shipping">Доставка и оплата</a>
-        <a class="btn ghost" href="cart.html" data-i18n="go_cart">Перейти в корзину</a>
+    <div class="heroText">
+      <h1>PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
+      <p>
+        Длительное горение, минимум пепла, чистый жар.<br>
+        Идеально для BBQ и гриля.
+      </p>
+
+      <div class="heroActions">
+        <a href="catalog.html" class="btn gold">Открыть каталог</a>
+        <a href="shipping.html" class="btn dark">Доставка и оплата</a>
+        <a href="cart.html" class="btn dark">Перейти в корзину</a>
       </div>
     </div>
 
-<div class="heroArt" aria-hidden="true"></div>
-      <img src="img/products/core-10kg.png" alt="BLACKWOOD Charcoal" onerror="this.style.display='none'">
-    </div>
+    <!-- ❌ ВАЖНО: НИКАКИХ <img> ЗДЕСЬ НЕТ -->
+    <!-- Картинка ТОЛЬКО фоном через CSS -->
+
   </div>
 </section>
 
-<footer>
-  <div class="container foot">
-    <div class="brand">BLACKWOOD <span>• CHARCOAL</span></div>
-    <div>© <span id="year"></span> • <span data-i18n="footer">Все права защищены.</span></div>
+<footer class="footer">
+  <div class="container">
+    BLACKWOOD · CHARCOAL © 2026
   </div>
 </footer>
 
-<div class="toast" id="toast"></div>
-
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-<script src="assets/app.js"></script>
 </body>
 </html>
