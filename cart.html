@@ -1,35 +1,33 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/blackwood-site1/">
-  <title>Cart • BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cart · BLACKWOOD</title>
+  <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
 
-<header>
-  <div class="container nav">
-    <a class="brand" href="index.html">BLACKWOOD <span>• CHARCOAL</span></a>
+<body class="page-cart bgCatalog">
 
-    <nav class="navLinks">
-      <a href="index.html" data-i18n="nav_home">Главная</a>
-      <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-      <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-      <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
+<header class="header">
+  <div class="container headerRow">
+    <a class="logo" href="index.html">BLACKWOOD <span>·</span> <b>CHARCOAL</b></a>
+
+    <nav class="nav">
+      <a href="index.html" data-i18n="home">Главная</a>
+      <a href="catalog.html" data-i18n="catalog">Каталог</a>
+      <a href="shipping.html" data-i18n="shipping">Доставка</a>
+      <a href="about.html" data-i18n="about">О нас</a>
+      <a href="contacts.html" data-i18n="contacts">Контакты</a>
     </nav>
 
-    <div class="rightTools">
-      <div class="lang">
-        <button id="lang-ru" class="active" type="button">RU</button>
-        <button id="lang-uk" type="button">UKR</button>
-        <button id="lang-en" type="button">EN</button>
+    <div class="headerRight">
+      <div class="langs">
+        <button class="active" type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="ukr">UKR</button>
+        <button type="button" data-lang="en">EN</button>
       </div>
-
-      <span class="pill">
-        <span data-i18n="nav_cart">Корзина</span> • <span id="cartCount">0</span>
-      </span>
+      <a class="cartBtn" href="cart.html"><span data-i18n="cart">Корзина</span> · <span id="cartCount">0</span></a>
     </div>
   </div>
 </header>
@@ -37,44 +35,20 @@
 <section class="section">
   <div class="container">
     <div class="sectionTitle">
-      <h2 class="reveal" data-i18n="cart_title">Корзина</h2>
-      <p class="reveal"><span data-i18n="cart_items">Товаров</span>: <b id="itemsTotal">0</b></p>
+      <div>
+        <h2 data-i18n="cart">Корзина</h2>
+        <p data-i18n="choose_weight">Выберите вес и добавьте в корзину.</p>
+      </div>
     </div>
 
-    <!-- LIST -->
-    <div id="cartList" style="display:grid; gap:12px;"></div>
-
-    <!-- TOTAL -->
-    <div class="card reveal" style="margin-top:14px; display:flex; justify-content:space-between; align-items:center; gap:12px;">
-      <div style="color:var(--muted); font-weight:900; letter-spacing:.08em; text-transform:uppercase;">Total</div>
-      <div style="font-size:22px; font-weight:900; color:var(--gold2);" id="sumTotal">—</div>
-    </div>
-
-    <!-- ACTIONS -->
-    <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
-      <a class="btn ghost" href="catalog.html" data-i18n="cart_back">Назад в каталог</a>
-      <a class="btn" href="checkout.html" data-i18n="cart_checkout">Оформить заказ</a>
-      <button class="btn ghost" type="button" id="clearCartBtn" data-i18n="cart_clear">Очистить</button>
-    </div>
+    <div id="cartBox" class="cartBox"></div>
   </div>
 </section>
 
-<footer>
-  <div class="container foot">
-    <div class="brand">BLACKWOOD <span>• CHARCOAL</span></div>
-    <div>© <span data-i18n="footer">Все права защищены.</span></div>
-  </div>
+<footer class="footer">
+  <div class="container">BLACKWOOD · CHARCOAL © 2026</div>
 </footer>
 
-<div class="toast" id="toast"></div>
-
 <script src="assets/app.js"></script>
-<script>
-  // Очистка корзины
-  document.getElementById("clearCartBtn").addEventListener("click", ()=>{
-    localStorage.setItem("bw_cart_v1", "{}");
-    location.reload();
-  });
-</script>
 </body>
 </html>
