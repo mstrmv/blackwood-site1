@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Если у тебя GitHub Pages project: /blackwood-site1/ -->
+  <!-- GitHub Pages project -->
   <base href="/blackwood-site1/">
 
   <title>BLACKWOOD • CHARCOAL</title>
@@ -38,88 +38,51 @@
   </div>
 </header>
 
+<!-- ================= HERO ================= -->
 <section class="hero">
-  <!-- ✅ ЖИВЫЕ ИСКРЫ (Canvas) -->
+  <!-- 🔥 ЖИВЫЕ ИСКРЫ -->
   <canvas id="embersCanvas" aria-hidden="true"></canvas>
 
   <div class="container heroGrid">
     <div class="reveal">
-      <h1 data-i18n="hero_title">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
+      <h1 data-i18n="hero_title">
+        PREMIUM<br>HARDWOOD<br>CHARCOAL
+      </h1>
+
       <p class="lead" data-i18n="hero_sub">
         Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.
       </p>
 
-      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
-        <a class="btn" href="catalog.html" data-i18n="open_catalog">Открыть каталог</a>
-        <a class="btn ghost" href="cart.html" data-i18n="go_cart">Перейти в корзину</a>
-        <a class="btn ghost" href="shipping.html" data-i18n="go_shipping">Доставка и оплата</a>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <a class="btn" href="catalog.html" data-i18n="open_catalog">
+          Открыть каталог
+        </a>
+        <a class="btn ghost" href="shipping.html" data-i18n="go_shipping">
+          Доставка и оплата
+        </a>
+        <a class="btn ghost" href="cart.html" data-i18n="go_cart">
+          Перейти в корзину
+        </a>
       </div>
     </div>
 
     <div class="heroArt reveal">
-      <!-- Можно поменять на любую пачку -->
-      <img src="img/products/core-10kg.png" alt="BLACKWOOD Pack" onerror="this.style.display='none'">
+      <!-- декоративная пачка -->
+      <img src="img/products/core-10kg.png"
+           alt="BLACKWOOD Charcoal"
+           onerror="this.style.display='none'">
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="sectionTitle">
-      <h2 class="reveal" data-i18n="products">Товары</h2>
-      <p class="reveal" data-i18n="products_note">Выберите вес и добавьте в корзину.</p>
-    </div>
-
-    <div class="grid">
-      <div class="card reveal">
-        <div class="prodImg">
-          <img src="img/products/core-3kg.png" alt="3kg" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="prodTitle">CORE • 3 KG</div>
-        <div class="meta">
-          <span>3 kg</span>
-          <span class="price" data-i18n="price_stub">— грн</span>
-        </div>
-        <div style="margin-top:12px;">
-          <a class="btn ghost" href="catalog.html" style="width:100%;" data-i18n="open_catalog">Открыть каталог</a>
-        </div>
-      </div>
-
-      <div class="card reveal">
-        <div class="prodImg">
-          <img src="img/products/core-5kg.png" alt="5kg" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="prodTitle">CORE • 5 KG</div>
-        <div class="meta">
-          <span>5 kg</span>
-          <span class="price" data-i18n="price_stub">— грн</span>
-        </div>
-        <div style="margin-top:12px;">
-          <a class="btn ghost" href="catalog.html" style="width:100%;" data-i18n="open_catalog">Открыть каталог</a>
-        </div>
-      </div>
-
-      <div class="card reveal">
-        <div class="prodImg">
-          <img src="img/products/core-10kg.png" alt="10kg" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="prodTitle">CORE • 10 KG</div>
-        <div class="meta">
-          <span>10 kg</span>
-          <span class="price" data-i18n="price_stub">— грн</span>
-        </div>
-        <div style="margin-top:12px;">
-          <a class="btn ghost" href="catalog.html" style="width:100%;" data-i18n="open_catalog">Открыть каталог</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- ================= FOOTER ================= -->
 <footer>
   <div class="container foot">
     <div class="brand">BLACKWOOD <span>• CHARCOAL</span></div>
-    <div>© <span id="year"></span> • <span data-i18n="footer">Все права защищены.</span></div>
+    <div>
+      © <span id="year"></span> •
+      <span data-i18n="footer">Все права защищены.</span>
+    </div>
   </div>
 </footer>
 
