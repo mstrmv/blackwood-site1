@@ -42,6 +42,25 @@
       <p class="reveal" data-i18n="products_note">Выберите вес и добавьте в корзину.</p>
     </div>
 
+    <!-- FILTER / SORT BAR -->
+    <div class="card reveal" style="margin-bottom:16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+        <span class="pill">Filter</span>
+        <button class="btn ghost" type="button" data-filter="all">All</button>
+        <button class="btn ghost" type="button" data-filter="light">3–5kg</button>
+        <button class="btn ghost" type="button" data-filter="heavy">10kg</button>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+        <span class="pill">Sort</span>
+        <select id="sortSel" class="select" style="width:190px;">
+          <option value="popular">Popular</option>
+          <option value="priceAsc">Price ↑</option>
+          <option value="priceDesc">Price ↓</option>
+        </select>
+      </div>
+    </div>
+
     <div class="grid">
       <!-- 3 KG -->
       <article class="card reveal product-card" data-id="core-3">
@@ -51,7 +70,7 @@
         <div class="prodTitle">CORE • 3 KG</div>
         <div class="meta">
           <span>3 kg</span>
-          <span class="price" data-i18n="price_stub">— грн</span>
+          <span class="price" data-price="core-3">—</span>
         </div>
         <div class="addRow">
           <div class="qty">
@@ -71,7 +90,7 @@
         <div class="prodTitle">CORE • 5 KG</div>
         <div class="meta">
           <span>5 kg</span>
-          <span class="price" data-i18n="price_stub">— грн</span>
+          <span class="price" data-price="core-5">—</span>
         </div>
         <div class="addRow">
           <div class="qty">
@@ -91,7 +110,7 @@
         <div class="prodTitle">CORE • 10 KG</div>
         <div class="meta">
           <span>10 kg</span>
-          <span class="price" data-i18n="price_stub">— грн</span>
+          <span class="price" data-price="core-10">—</span>
         </div>
         <div class="addRow">
           <div class="qty">
