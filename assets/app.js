@@ -1,242 +1,283 @@
+/* BLACKWOOD • CHARCOAL
+   One JS for all pages.
+   Cart in localStorage: "bw_cart"
+*/
+
 (() => {
-  "use strict";
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const CART_KEY = "bw_cart";
+  const LANG_KEY = "bw_lang";
 
-  // ===== Year =====
-  const year = $("#year");
-  if (year) year.textContent = String(new Date().getFullYear());
+  const products = [
+    {
+      id: "core-3kg",
+      weight: 3,
+      popular: 3,
+      img: "img/products/core-3kg.png",
+      title: { ru: "CORE • 3 KG", uk: "CORE • 3 KG", en: "CORE • 3 KG" },
+      sub:   { ru: "Вес: 3 кг",   uk: "Вага: 3 кг",  en: "Weight: 3 kg" }
+    },
+    {
+      id: "core-5kg",
+      weight: 5,
+      popular: 2,
+      img: "img/products/core-5kg.png",
+      title: { ru: "CORE • 5 KG", uk: "CORE • 5 KG", en: "CORE • 5 KG" },
+      sub:   { ru: "Вес: 5 кг",   uk: "Вага: 5 кг",  en: "Weight: 5 kg" }
+    },
+    {
+      id: "core-10kg",
+      weight: 10,
+      popular: 1,
+      img: "img/products/core-10kg.png",
+      title: { ru: "CORE • 10 KG", uk: "CORE • 10 KG", en: "CORE • 10 KG" },
+      sub:   { ru: "Вес: 10 кг",   uk: "Вага: 10 кг",  en: "Weight: 10 kg" }
+    }
+  ];
 
-  // ===== Cart =====
-  const LS_CART = "bw_cart_v1";
-
-  function readJSON(key, fallback) {
-    try {
-      const v = localStorage.getItem(key);
-      return v ? JSON.parse(v) : fallback;
-    } catch { return fallback; }
-  }
-  function writeJSON(key, value) {
-    try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
-  }
-
-  function getCart() { return readJSON(LS_CART, { items: {} }); }
-  function saveCart(cart) { writeJSON(LS_CART, cart); updateCartCount(); }
-
-  function cartCount() {
-    const cart = getCart();
-    return Object.values(cart.items || {}).reduce((a,b)=>a + (Number(b) || 0), 0);
-  }
-
-  function updateCartCount() {
-    const n = String(cartCount());
-    const a = $("#cartCount");
-    const b = $("#cartCountMobile");
-    if (a) a.textContent = n;
-    if (b) b.textContent = n;
-  }
-
-  function addToCart(id, qty) {
-    const cart = getCart();
-    cart.items[id] = (Number(cart.items[id]) || 0) + qty;
-    if (cart.items[id] <= 0) delete cart.items[id];
-    saveCart(cart);
-  }
-
-  updateCartCount();
-
-  // ===== Burger =====
-  const burger = $("#burger");
-  const mobileNav = $("#mobileNav");
-  const toggleMenu = (force) => {
-    if (!burger || !mobileNav) return;
-    const open = typeof force === "boolean" ? force : mobileNav.hidden;
-    mobileNav.hidden = !open;
-    burger.setAttribute("aria-expanded", String(open));
-  };
-
-  if (burger && mobileNav) {
-    burger.addEventListener("click", () => toggleMenu());
-    mobileNav.addEventListener("click", (e) => {
-      if (e.target && e.target.tagName === "A") toggleMenu(false);
-    });
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 980) toggleMenu(false);
-    });
-  }
-
-  // ===== i18n =====
-  const LS_LANG = "bw_lang";
   const dict = {
     ru: {
-      home:"Главная", catalog:"Каталог", shipping:"Доставка", about:"О нас", contacts:"Контакты",
-      cart:"Корзина", to_cart:"Перейти в корзину",
-      products:"ТОВАРЫ", choose_weight:"Выберите вес и добавьте в корзину.",
-      sort:"Sort", popular:"Popular", price_low:"Price: Low", price_high:"Price: High",
-      checkout:"Оформить заказ", add_to_cart:"В КОРЗИНУ", weight:"Вес", currency:"грн",
-      kicker:"Премиум уголь для гриля",
-      hero_desc:"Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.",
-      open_catalog:"Открыть каталог",
-      shipping_pay:"Доставка и оплата",
+      nav_home: "Главная",
+      nav_catalog: "Каталог",
+      nav_shipping: "Доставка",
+      nav_about: "О нас",
+      nav_contacts: "Контакты",
+      cart: "Корзина",
+
+      catalog_title: "Товары",
+      catalog_sub: "Выберите вес и добавьте в корзину.",
+      filter_all: "All",
+      filter_3_5: "3–5kg",
+      filter_10: "10kg",
+      sort: "Sort",
+      sort_popular: "Popular",
+      sort_weight_asc: "Weight ↑",
+      sort_weight_desc: "Weight ↓",
+
+      to_cart: "В корзину",
+      go_cart: "Перейти в корзину",
+      checkout: "Оформить заказ"
     },
-    ukr: {
-      home:"Головна", catalog:"Каталог", shipping:"Доставка", about:"Про нас", contacts:"Контакти",
-      cart:"Кошик", to_cart:"Перейти в кошик",
-      products:"ТОВАРИ", choose_weight:"Оберіть вагу та додайте в кошик.",
-      sort:"Sort", popular:"Popular", price_low:"Price: Low", price_high:"Price: High",
-      checkout:"Оформити замовлення", add_to_cart:"В КОШИК", weight:"Вага", currency:"грн",
-      kicker:"Преміум вугілля для гриля",
-      hero_desc:"Довге горіння, мінімум попелу, чистий жар. Ідеально для BBQ та гриля.",
-      open_catalog:"Відкрити каталог",
-      shipping_pay:"Доставка та оплата",
+    uk: {
+      nav_home: "Головна",
+      nav_catalog: note("Каталог","Каталог"),
+      nav_shipping: "Доставка",
+      nav_about: "Про нас",
+      nav_contacts: "Контакти",
+      cart: "Кошик",
+
+      catalog_title: "Товари",
+      catalog_sub: "Оберіть вагу та додайте в кошик.",
+      filter_all: "All",
+      filter_3_5: "3–5kg",
+      filter_10: "10kg",
+      sort: "Sort",
+      sort_popular: "Popular",
+      sort_weight_asc: "Weight ↑",
+      sort_weight_desc: "Weight ↓",
+
+      to_cart: "В кошик",
+      go_cart: "Перейти в кошик",
+      checkout: "Оформити замовлення"
     },
     en: {
-      home:"Home", catalog:"Catalog", shipping:"Shipping", about:"About", contacts:"Contacts",
-      cart:"Cart", to_cart:"Go to cart",
-      products:"PRODUCTS", choose_weight:"Choose weight and add to cart.",
-      sort:"Sort", popular:"Popular", price_low:"Price: Low", price_high:"Price: High",
-      checkout:"Checkout", add_to_cart:"ADD TO CART", weight:"Weight", currency:"UAH",
-      kicker:"Premium charcoal for grill",
-      hero_desc:"Long burn, low ash, clean heat. Perfect for BBQ & grill.",
-      open_catalog:"Open catalog",
-      shipping_pay:"Shipping & payment",
+      nav_home: "Home",
+      nav_catalog: "Catalog",
+      nav_shipping: "Shipping",
+      nav_about: "About",
+      nav_contacts: "Contacts",
+      cart: "Cart",
+
+      catalog_title: "Products",
+      catalog_sub: "Choose weight and add to cart.",
+      filter_all: "All",
+      filter_3_5: "3–5kg",
+      filter_10: "10kg",
+      sort: "Sort",
+      sort_popular: "Popular",
+      sort_weight_asc: "Weight ↑",
+      sort_weight_desc: "Weight ↓",
+
+      to_cart: "Add to cart",
+      go_cart: "Go to cart",
+      checkout: "Checkout"
     }
   };
 
-  function getLang() {
-    const saved = localStorage.getItem(LS_LANG);
-    return saved && dict[saved] ? saved : "ru";
+  function note(a, b){ return a || b; }
+
+  function loadCart() {
+    try { return JSON.parse(localStorage.getItem(CART_KEY)) || {}; }
+    catch { return {}; }
+  }
+  function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }
+  function cartCount(cart) {
+    return Object.values(cart).reduce((s, n) => s + Number(n || 0), 0);
+  }
+  function updateCartBadge() {
+    const cart = loadCart();
+    const el = $("#cartCount");
+    if (el) el.textContent = String(cartCount(cart));
   }
 
+  function getLang() {
+    const saved = localStorage.getItem(LANG_KEY);
+    return saved || "ru";
+  }
   function setLang(lang) {
-    if (!dict[lang]) return;
-    localStorage.setItem(LS_LANG, lang);
-
-    $$("[data-lang]").forEach(btn => btn.classList.toggle("active", btn.dataset.lang === lang));
+    localStorage.setItem(LANG_KEY, lang);
+    applyI18n(lang);
+    renderCatalog(); // чтобы тексты карточек обновились
+  }
+  function applyI18n(lang) {
+    const d = dict[lang] || dict.ru;
     $$("[data-i18n]").forEach(el => {
-      const key = el.dataset.i18n;
-      const v = dict[lang][key];
-      if (typeof v === "string") el.textContent = v;
+      const key = el.getAttribute("data-i18n");
+      if (d[key]) el.textContent = d[key];
     });
 
-    if ($("#catalogGrid")) renderCatalog();
+    // Active lang button
+    $$(".lang__btn").forEach(b => {
+      b.classList.toggle("is-active", b.dataset.lang === lang);
+    });
   }
 
-  setLang(getLang());
-  $$("[data-lang]").forEach(btn => btn.addEventListener("click", () => setLang(btn.dataset.lang)));
+  // ===== Catalog render =====
+  function getFilter() {
+    const active = $(".chip.is-active");
+    return active ? active.dataset.filter : "all";
+  }
+  function getSort() {
+    const sel = $("#sortSelect");
+    return sel ? sel.value : "popular";
+  }
 
-  // ===== Catalog =====
-  const products = [
-    { id:"core-3",  name:"CORE • 3 KG",  weight:"3 kg",  group:"3-5", price:null, img:"./img/products/core-3kg.png",  popular:3 },
-    { id:"core-5",  name:"CORE • 5 KG",  weight:"5 kg",  group:"3-5", price:null, img:"./img/products/core-5kg.png",  popular:2 },
-    { id:"core-10", name:"CORE • 10 KG", weight:"10 kg", group:"10",  price:null, img:"./img/products/core-10kg.png", popular:1 },
-  ];
+  function filteredProducts(list) {
+    const f = getFilter();
+    if (f === "all") return list.slice();
+    if (f === "10") return list.filter(p => p.weight === 10);
+    // 3-5
+    return list.filter(p => p.weight === 3 || p.weight === 5);
+  }
 
-  let currentFilter = "all";
-  let currentSort = "popular";
-  const qtyState = {};
-
-  const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
-
-  function sortProducts(list) {
-    const arr = [...list];
-    if (currentSort === "popular") arr.sort((a,b)=>(a.popular||0)-(b.popular||0));
-    if (currentSort === "price_low") arr.sort((a,b)=>(a.price??999999)-(b.price??999999));
-    if (currentSort === "price_high") arr.sort((a,b)=>(b.price??-1)-(a.price??-1));
+  function sortedProducts(list) {
+    const s = getSort();
+    const arr = list.slice();
+    if (s === "weight_asc") arr.sort((a, b) => a.weight - b.weight);
+    else if (s === "weight_desc") arr.sort((a, b) => b.weight - a.weight);
+    else arr.sort((a, b) => a.popular - b.popular); // popular
     return arr;
   }
 
-  function filterProducts(list) {
-    if (currentFilter === "all") return list;
-    return list.filter(p => p.group === currentFilter);
-  }
-
-  function formatPrice(p, lang) {
-    if (typeof p.price !== "number") return "—";
-    return `${p.price} ${dict[lang].currency}`;
-  }
-
   function renderCatalog() {
-    const grid = $("#catalogGrid");
+    const grid = $("#productsGrid");
     if (!grid) return;
 
     const lang = getLang();
-    const list = sortProducts(filterProducts(products));
+    const d = dict[lang] || dict.ru;
 
-    grid.innerHTML = list.map(p => {
-      const qty = clamp(qtyState[p.id] ?? 1, 1, 99);
-      return `
-        <article class="card" data-id="${p.id}">
-          <div class="cardInner">
-            <div class="cardMedia">
-              <img src="${p.img}" alt="${p.name}" loading="lazy">
-            </div>
+    const list = sortedProducts(filteredProducts(products));
+    grid.innerHTML = list.map(p => cardHTML(p, lang, d)).join("");
 
-            <div class="cardTitle">${p.name}</div>
-            <div class="cardMeta">${dict[lang].weight}: ${p.weight}</div>
-
-            <div class="cardRow">
-              <div class="qty">
-                <button type="button" class="qtyMinus">−</button>
-                <span class="qtyVal">${qty}</span>
-                <button type="button" class="qtyPlus">+</button>
-              </div>
-
-              <button type="button" class="cardBtn">${dict[lang].add_to_cart}</button>
-            </div>
-
-            <div class="cardPrice">${formatPrice(p, lang)}</div>
-          </div>
-        </article>
-      `;
-    }).join("");
-
-    $$(".card", grid).forEach(card => {
+    // bind card events
+    $$(".card").forEach(card => {
       const id = card.dataset.id;
-      const qtyEl = $(".qtyVal", card);
-      const minus = $(".qtyMinus", card);
-      const plus  = $(".qtyPlus", card);
-      const btn   = $(".cardBtn", card);
+      const minus = $(".qty__btn--minus", card);
+      const plus = $(".qty__btn--plus", card);
+      const num = $(".qty__num", card);
+      const add = $(".card__buy", card);
 
-      const setQty = (n) => {
-        const v = clamp(n, 1, 99);
-        qtyState[id] = v;
-        qtyEl.textContent = String(v);
+      let q = 1;
+
+      const setQ = (v) => {
+        q = Math.max(1, Math.min(99, v));
+        num.textContent = String(q);
       };
 
-      minus.addEventListener("click", () => setQty((qtyState[id] ?? 1) - 1));
-      plus.addEventListener("click",  () => setQty((qtyState[id] ?? 1) + 1));
+      minus?.addEventListener("click", () => setQ(q - 1));
+      plus?.addEventListener("click", () => setQ(q + 1));
 
+      add?.addEventListener("click", () => {
+        const cart = loadCart();
+        cart[id] = (cart[id] || 0) + q;
+        saveCart(cart);
+        updateCartBadge();
+
+        // маленький "пульс" на кнопке
+        add.classList.add("is-done");
+        setTimeout(() => add.classList.remove("is-done"), 250);
+      });
+    });
+  }
+
+  function cardHTML(p, lang, d) {
+    const title = p.title[lang] || p.title.ru;
+    const sub = p.sub[lang] || p.sub.ru;
+
+    return `
+      <article class="card" data-id="${p.id}">
+        <div class="card__media">
+          <img class="card__img" src="${p.img}" alt="${title}" loading="lazy" />
+        </div>
+
+        <div class="card__body">
+          <div class="card__title">${title}</div>
+          <div class="card__sub">${sub}</div>
+
+          <div class="card__row">
+            <div class="qty">
+              <button class="qty__btn qty__btn--minus" type="button">−</button>
+              <div class="qty__num">1</div>
+              <button class="qty__btn qty__btn--plus" type="button">+</button>
+            </div>
+
+            <button class="btn btn--gold card__buy" type="button">${d.to_cart}</button>
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  function bindCatalogControls() {
+    // Filters
+    $$(".chip").forEach(btn => {
       btn.addEventListener("click", () => {
-        const qty = clamp(qtyState[id] ?? 1, 1, 99);
-        addToCart(id, qty);
-        btn.textContent = "✓";
-        setTimeout(() => btn.textContent = dict[getLang()].add_to_cart, 550);
-      });
-    });
-  }
-
-  function initCatalogControls() {
-    $$(".pillBtn").forEach(b => {
-      b.addEventListener("click", () => {
-        currentFilter = b.dataset.filter || "all";
-        $$(".pillBtn").forEach(x => x.classList.toggle("active", x === b));
+        $$(".chip").forEach(b => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
         renderCatalog();
       });
     });
 
-    const sortSelect = $("#sortSelect");
-    if (sortSelect) {
-      sortSelect.addEventListener("change", () => {
-        currentSort = sortSelect.value;
-        renderCatalog();
-      });
-    }
+    // Sort
+    const sel = $("#sortSelect");
+    sel?.addEventListener("change", renderCatalog);
   }
 
-  if ($("#catalogGrid")) {
-    initCatalogControls();
+  function bindLangButtons() {
+    $$(".lang__btn").forEach(btn => {
+      btn.addEventListener("click", () => setLang(btn.dataset.lang));
+    });
+  }
+
+  function init() {
+    // year
+    const y = $("#year");
+    if (y) y.textContent = String(new Date().getFullYear());
+
+    bindLangButtons();
+    applyI18n(getLang());
+
+    updateCartBadge();
+
+    // catalog specific
+    bindCatalogControls();
     renderCatalog();
   }
+
+  document.addEventListener("DOMContentLoaded", init);
 })();
+
