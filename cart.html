@@ -3,20 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="/blackwood-site1/">
   <title>Cart • BLACKWOOD</title>
-  <link rel="stylesheet" href="./assets/style.css" />
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
 
 <header>
   <div class="container nav">
-    <a class="brand" href="./index.html">BLACKWOOD <span>• CHARCOAL</span></a>
+    <a class="brand" href="index.html">BLACKWOOD <span>• CHARCOAL</span></a>
 
     <nav class="navLinks">
-      <a href="./index.html" data-i18n="nav_home">Главная</a>
-      <a href="./catalog.html" data-i18n="nav_catalog">Каталог</a>
-      <a href="./shipping.html" data-i18n="nav_shipping">Доставка</a>
-      <a href="./contacts.html" data-i18n="nav_contacts">Контакты</a>
+      <a href="index.html" data-i18n="nav_home">Главная</a>
+      <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+      <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+      <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
     </nav>
 
     <div class="rightTools">
@@ -25,7 +26,10 @@
         <button id="lang-uk" type="button">UKR</button>
         <button id="lang-en" type="button">EN</button>
       </div>
-      <span class="pill"><span data-i18n="nav_cart">Корзина</span> • <span id="cartCount">0</span></span>
+
+      <span class="pill">
+        <span data-i18n="nav_cart">Корзина</span> • <span id="cartCount">0</span>
+      </span>
     </div>
   </div>
 </header>
@@ -37,11 +41,19 @@
       <p class="reveal"><span data-i18n="cart_items">Товаров</span>: <b id="itemsTotal">0</b></p>
     </div>
 
+    <!-- LIST -->
     <div id="cartList" style="display:grid; gap:12px;"></div>
 
+    <!-- TOTAL -->
+    <div class="card reveal" style="margin-top:14px; display:flex; justify-content:space-between; align-items:center; gap:12px;">
+      <div style="color:var(--muted); font-weight:900; letter-spacing:.08em; text-transform:uppercase;">Total</div>
+      <div style="font-size:22px; font-weight:900; color:var(--gold2);" id="sumTotal">—</div>
+    </div>
+
+    <!-- ACTIONS -->
     <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
-      <a class="btn ghost" href="./catalog.html" data-i18n="cart_back">Назад в каталог</a>
-      <a class="btn" href="./checkout.html" data-i18n="cart_checkout">Оформить заказ</a>
+      <a class="btn ghost" href="catalog.html" data-i18n="cart_back">Назад в каталог</a>
+      <a class="btn" href="checkout.html" data-i18n="cart_checkout">Оформить заказ</a>
       <button class="btn ghost" type="button" id="clearCartBtn" data-i18n="cart_clear">Очистить</button>
     </div>
   </div>
@@ -56,12 +68,11 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="./assets/app.js"></script>
+<script src="assets/app.js"></script>
 <script>
-  // очистка корзины на странице корзины
+  // Очистка корзины
   document.getElementById("clearCartBtn").addEventListener("click", ()=>{
     localStorage.setItem("bw_cart_v1", "{}");
-    document.dispatchEvent(new Event("DOMContentLoaded")); // простой перерендер
     location.reload();
   });
 </script>
