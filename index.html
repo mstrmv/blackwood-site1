@@ -3,10 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- GitHub Pages project -->
   <base href="/blackwood-site1/">
-
   <title>BLACKWOOD • CHARCOAL</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
@@ -25,7 +22,7 @@
     </nav>
 
     <div class="rightTools">
-      <div class="lang" role="group" aria-label="Language">
+      <div class="lang">
         <button id="lang-ru" class="active" type="button">RU</button>
         <button id="lang-uk" type="button">UKR</button>
         <button id="lang-en" type="button">EN</button>
@@ -38,51 +35,52 @@
   </div>
 </header>
 
-<!-- ================= HERO ================= -->
-<section class="hero">
-  <!-- 🔥 ЖИВЫЕ ИСКРЫ -->
-  <canvas id="embersCanvas" aria-hidden="true"></canvas>
+<!-- ===== ENTER SCREEN (первый экран, без hero) ===== -->
+<section class="welcome" id="welcome">
+  <div class="container welcomeInner reveal in">
+    <div class="brand" style="font-size:14px;">BLACKWOOD <span>• CHARCOAL</span></div>
+    <h1 style="margin-top:12px;" data-i18n="hero_title">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
+    <p class="lead" data-i18n="hero_sub">...</p>
 
-  <div class="container heroGrid">
-    <div class="reveal">
-      <h1 data-i18n="hero_title">
-        PREMIUM<br>HARDWOOD<br>CHARCOAL
-      </h1>
-
-      <p class="lead" data-i18n="hero_sub">
-        Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.
-      </p>
-
-      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
-        <a class="btn" href="catalog.html" data-i18n="open_catalog">
-          Открыть каталог
-        </a>
-        <a class="btn ghost" href="shipping.html" data-i18n="go_shipping">
-          Доставка и оплата
-        </a>
-        <a class="btn ghost" href="cart.html" data-i18n="go_cart">
-          Перейти в корзину
-        </a>
-      </div>
-    </div>
-
-    <div class="heroArt reveal">
-      <!-- декоративная пачка -->
-      <img src="img/products/core-10kg.png"
-           alt="BLACKWOOD Charcoal"
-           onerror="this.style.display='none'">
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+      <button class="btn" id="enterBtn" type="button">ENTER</button>
+      <a class="btn ghost" href="catalog.html" data-i18n="open_catalog">Открыть каталог</a>
     </div>
   </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
+<!-- ===== HERO (скрыт пока не нажмешь ENTER) ===== -->
+<section class="hero" id="hero">
+  <!-- (3) Видео фон: добавь файл img/bg.mp4 (не обяз.) -->
+  <video class="bgVideo" autoplay muted loop playsinline>
+    <source src="img/bg.mp4" type="video/mp4">
+  </video>
+
+  <!-- 🔥 живые искры -->
+  <canvas id="embersCanvas" aria-hidden="true"></canvas>
+
+  <div class="container heroGrid">
+    <div class="reveal">
+      <h1 data-i18n="hero_title">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
+      <p class="lead" data-i18n="hero_sub">...</p>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <a class="btn" href="catalog.html" data-i18n="open_catalog">Открыть каталог</a>
+        <a class="btn ghost" href="shipping.html" data-i18n="go_shipping">Доставка и оплата</a>
+        <a class="btn ghost" href="cart.html" data-i18n="go_cart">Перейти в корзину</a>
+      </div>
+    </div>
+
+    <div class="heroArt reveal">
+      <img src="img/products/core-10kg.png" alt="BLACKWOOD Charcoal" onerror="this.style.display='none'">
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="container foot">
     <div class="brand">BLACKWOOD <span>• CHARCOAL</span></div>
-    <div>
-      © <span id="year"></span> •
-      <span data-i18n="footer">Все права защищены.</span>
-    </div>
+    <div>© <span id="year"></span> • <span data-i18n="footer">Все права защищены.</span></div>
   </div>
 </footer>
 
