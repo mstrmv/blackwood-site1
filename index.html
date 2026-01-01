@@ -1,19 +1,20 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ОБЯЗАТЕЛЬНО для GitHub Pages -->
+  <!-- GitHub Pages -->
   <base href="/blackwood-site1/">
 
   <title>BLACKWOOD · CHARCOAL</title>
 
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body class="page-home">
 
+<!-- ================= HEADER ================= -->
 <header class="header">
   <div class="container headerRow">
 
@@ -30,17 +31,20 @@
 
     <div class="headerRight">
       <div class="langs">
-        <button class="active">RU</button>
-        <button>UKR</button>
-        <button>EN</button>
+        <button class="active" type="button">RU</button>
+        <button type="button">UKR</button>
+        <button type="button">EN</button>
       </div>
-      <a class="cartBtn" href="cart.html">Корзина · 0</a>
+
+      <a href="cart.html" class="cartBtn">
+        Корзина · <span id="cartCount">0</span>
+      </a>
     </div>
 
   </div>
 </header>
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 <section class="hero">
   <div class="container heroGrid">
 
@@ -63,12 +67,13 @@
       </div>
     </div>
 
-    <!-- ❌ НИКАКИХ IMG ЗДЕСЬ НЕТ -->
+    <!-- ❌ НЕТ НИКАКИХ IMG -->
     <!-- ФОН ТОЛЬКО ЧЕРЕЗ CSS -->
 
   </div>
 </section>
 
+<!-- ================= FOOTER ================= -->
 <footer class="footer">
   <div class="container">
     BLACKWOOD · CHARCOAL © 2026
