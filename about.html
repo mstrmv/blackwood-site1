@@ -4,59 +4,101 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>О нас — BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="./assets/style.css" />
 </head>
-<body class="page-alt">
-  <header class="topbar">
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="index.html">BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span></a>
-        <nav class="navlinks">
-          <a href="index.html" data-i18n="nav_home">Главная</a>
-          <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-          <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-          <a href="about.html" data-i18n="nav_about">О нас</a>
-          <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
-        </nav>
-        <div class="navright">
-          <div class="lang">
-            <button type="button" data-lang="ru">RU</button>
-            <button type="button" data-lang="ukr">UKR</button>
-            <button type="button" data-lang="en">EN</button>
+<body>
+  <div class="page" data-bg="plain">
+    <header class="topbar">
+      <div class="container">
+        <div class="topbar__inner">
+          <div class="brand">
+            <span>BLACKWOOD</span><span class="dot">•</span><span>CHARCOAL</span>
           </div>
-          <a class="badge" href="cart.html"><span data-i18n="cart">Корзина</span> • <span data-cart-count>0</span></a>
+
+          <nav class="nav">
+            <a href="./index.html">Главная</a>
+            <a href="./catalog.html">Каталог</a>
+            <a href="./shipping.html">Доставка</a>
+            <a href="./about.html" class="active">О нас</a>
+            <a href="./contacts.html">Контакты</a>
+          </nav>
+
+          <div class="actions">
+            <button class="burger" data-burger>Меню</button>
+
+            <div class="lang">
+              <button type="button" data-lang="RU">RU</button>
+              <button type="button" data-lang="UKR">UKR</button>
+              <button type="button" data-lang="EN">EN</button>
+            </div>
+
+            <a class="cart-pill" href="./cart.html">
+              <span data-i18n-cart>Корзина</span> • <span class="badge" data-cart-count>0</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="mobile-menu" data-mobile-menu>
+          <a href="./index.html">Главная</a>
+          <a href="./catalog.html">Каталог</a>
+          <a href="./shipping.html">Доставка</a>
+          <a href="./about.html">О нас</a>
+          <a href="./contacts.html">Контакты</a>
+          <a href="./cart.html"><span data-i18n-cart>Корзина</span> (<span data-cart-count>0</span>)</a>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main class="section">
-    <div class="container">
-      <div class="sectionTitle">
-        <div>
-          <h2 data-i18n="nav_about">О нас</h2>
-          <p>Премиальный уголь для гриля и BBQ.</p>
+    <main class="section">
+      <div class="container">
+        <div class="title-row">
+          <div>
+            <h2>О НАС</h2>
+            <div class="subtitle">BLACKWOOD • CHARCOAL — премиальный уголь для BBQ и гриля.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="formWrap">
-        <div style="color:rgba(255,255,255,.75);font-weight:650;line-height:1.6">
-          BLACKWOOD • CHARCOAL — фокус на чистом жаре, минимуме пепла и стабильном горении.<br>
-          Выбирай вес, добавляй в корзину, оформляй доставку Новой Почтой.
+        <div class="form" style="margin-top:16px;">
+          <div style="display:grid; gap:14px; color:rgba(255,255,255,.82); font-weight:650; line-height:1.65;">
+            <p style="margin:0;">
+              BLACKWOOD начался с простой ситуации: мы собрались на гриль с друзьями и поняли,
+              что половина “обычного” угля — это пепел, запах и нестабильный жар.
+              Один раз жарит, второй раз тухнет, третий — искрит и портит мясо.
+              Тогда мы решили сделать уголь, который ведёт себя предсказуемо: долго держит тепло,
+              почти не пылит и даёт чистый жар без лишних сюрпризов.
+            </p>
+
+            <p style="margin:0;">
+              Мы выбрали подход к качеству “как для себя”: отбираем сырьё, следим за обжигом,
+              тестируем на реальных мангалах и грилях — от домашних до профессиональных.
+              В итоге получился продукт, который удобно контролировать: разжёг — и работаешь,
+              не подсыпая каждые 10 минут.
+            </p>
+
+            <p style="margin:0;">
+              Наша цель простая: чтобы каждый заказ превращался в вкусный вечер, а не в борьбу с углём.
+              Поэтому мы сделали понятные веса (3 / 5 / 10 кг), честные цены и доставку Новой Почтой по Украине.
+            </p>
+
+            <div style="display:grid; gap:8px; margin-top:4px;">
+              <div>• Длительное горение и стабильный жар</div>
+              <div>• Минимум пепла и чистое горение</div>
+              <div>• Удобная упаковка и быстрая доставка</div>
+            </div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+              <a class="btn primary" href="./catalog.html">Перейти в каталог</a>
+              <a class="btn" href="./shipping.html">Доставка</a>
+              <a class="btn ghost" href="./contacts.html">Контакты</a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footerRow">
-        <div class="mini"><b>BLACKWOOD</b><i></i>CHARCOAL</div>
-        <div>© 2026</div>
+        <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
       </div>
-    </div>
-  </footer>
+    </main>
+  </div>
 
-  <script src="assets/app.js"></script>
+  <script src="./assets/app.js"></script>
 </body>
 </html>
