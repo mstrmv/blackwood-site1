@@ -1,283 +1,196 @@
-/* BLACKWOOD • CHARCOAL
-   One JS for all pages.
-   Cart in localStorage: "bw_cart"
-*/
+// file: /assets/app.js
 
 (() => {
-  const $ = (sel, root = document) => root.querySelector(sel);
-  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  const $ = (s, el=document) => el.querySelector(s);
+  const $$ = (s, el=document) => Array.from(el.querySelectorAll(s));
 
-  const CART_KEY = "bw_cart";
-  const LANG_KEY = "bw_lang";
+  const CART_KEY = "bw_cart_v1";
 
   const products = [
     {
-      id: "core-3kg",
+      id: "core-3",
+      title: "CORE • 3 KG",
       weight: 3,
-      popular: 3,
-      img: "img/products/core-3kg.png",
-      title: { ru: "CORE • 3 KG", uk: "CORE • 3 KG", en: "CORE • 3 KG" },
-      sub:   { ru: "Вес: 3 кг",   uk: "Вага: 3 кг",  en: "Weight: 3 kg" }
+      group: "3-5",
+      img: "img/products/core-3kg.png"
     },
     {
-      id: "core-5kg",
+      id: "core-5",
+      title: "CORE • 5 KG",
       weight: 5,
-      popular: 2,
-      img: "img/products/core-5kg.png",
-      title: { ru: "CORE • 5 KG", uk: "CORE • 5 KG", en: "CORE • 5 KG" },
-      sub:   { ru: "Вес: 5 кг",   uk: "Вага: 5 кг",  en: "Weight: 5 kg" }
+      group: "3-5",
+      img: "img/products/core-5kg.png"
     },
     {
-      id: "core-10kg",
+      id: "core-10",
+      title: "CORE • 10 KG",
       weight: 10,
-      popular: 1,
-      img: "img/products/core-10kg.png",
-      title: { ru: "CORE • 10 KG", uk: "CORE • 10 KG", en: "CORE • 10 KG" },
-      sub:   { ru: "Вес: 10 кг",   uk: "Вага: 10 кг",  en: "Weight: 10 kg" }
+      group: "10",
+      img: "img/products/core-10kg.png"
     }
   ];
 
-  const dict = {
-    ru: {
-      nav_home: "Главная",
-      nav_catalog: "Каталог",
-      nav_shipping: "Доставка",
-      nav_about: "О нас",
-      nav_contacts: "Контакты",
-      cart: "Корзина",
-
-      catalog_title: "Товары",
-      catalog_sub: "Выберите вес и добавьте в корзину.",
-      filter_all: "All",
-      filter_3_5: "3–5kg",
-      filter_10: "10kg",
-      sort: "Sort",
-      sort_popular: "Popular",
-      sort_weight_asc: "Weight ↑",
-      sort_weight_desc: "Weight ↓",
-
-      to_cart: "В корзину",
-      go_cart: "Перейти в корзину",
-      checkout: "Оформить заказ"
-    },
-    uk: {
-      nav_home: "Головна",
-      nav_catalog: note("Каталог","Каталог"),
-      nav_shipping: "Доставка",
-      nav_about: "Про нас",
-      nav_contacts: "Контакти",
-      cart: "Кошик",
-
-      catalog_title: "Товари",
-      catalog_sub: "Оберіть вагу та додайте в кошик.",
-      filter_all: "All",
-      filter_3_5: "3–5kg",
-      filter_10: "10kg",
-      sort: "Sort",
-      sort_popular: "Popular",
-      sort_weight_asc: "Weight ↑",
-      sort_weight_desc: "Weight ↓",
-
-      to_cart: "В кошик",
-      go_cart: "Перейти в кошик",
-      checkout: "Оформити замовлення"
-    },
-    en: {
-      nav_home: "Home",
-      nav_catalog: "Catalog",
-      nav_shipping: "Shipping",
-      nav_about: "About",
-      nav_contacts: "Contacts",
-      cart: "Cart",
-
-      catalog_title: "Products",
-      catalog_sub: "Choose weight and add to cart.",
-      filter_all: "All",
-      filter_3_5: "3–5kg",
-      filter_10: "10kg",
-      sort: "Sort",
-      sort_popular: "Popular",
-      sort_weight_asc: "Weight ↑",
-      sort_weight_desc: "Weight ↓",
-
-      to_cart: "Add to cart",
-      go_cart: "Go to cart",
-      checkout: "Checkout"
+  function readCart(){
+    try{
+      const raw = localStorage.getItem(CART_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch(e){
+      return {};
     }
-  };
-
-  function note(a, b){ return a || b; }
-
-  function loadCart() {
-    try { return JSON.parse(localStorage.getItem(CART_KEY)) || {}; }
-    catch { return {}; }
   }
-  function saveCart(cart) {
+  function saveCart(cart){
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
   }
-  function cartCount(cart) {
-    return Object.values(cart).reduce((s, n) => s + Number(n || 0), 0);
+  function cartCount(cart){
+    return Object.values(cart).reduce((a,n)=>a+(Number(n)||0),0);
   }
-  function updateCartBadge() {
-    const cart = loadCart();
+  function setCartCountUI(){
     const el = $("#cartCount");
-    if (el) el.textContent = String(cartCount(cart));
+    if(!el) return;
+    el.textContent = String(cartCount(readCart()));
   }
 
-  function getLang() {
-    const saved = localStorage.getItem(LANG_KEY);
-    return saved || "ru";
-  }
-  function setLang(lang) {
-    localStorage.setItem(LANG_KEY, lang);
-    applyI18n(lang);
-    renderCatalog(); // чтобы тексты карточек обновились
-  }
-  function applyI18n(lang) {
-    const d = dict[lang] || dict.ru;
-    $$("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      if (d[key]) el.textContent = d[key];
-    });
-
-    // Active lang button
-    $$(".lang__btn").forEach(b => {
-      b.classList.toggle("is-active", b.dataset.lang === lang);
-    });
-  }
-
-  // ===== Catalog render =====
-  function getFilter() {
-    const active = $(".chip.is-active");
-    return active ? active.dataset.filter : "all";
-  }
-  function getSort() {
-    const sel = $("#sortSelect");
-    return sel ? sel.value : "popular";
-  }
-
-  function filteredProducts(list) {
-    const f = getFilter();
-    if (f === "all") return list.slice();
-    if (f === "10") return list.filter(p => p.weight === 10);
-    // 3-5
-    return list.filter(p => p.weight === 3 || p.weight === 5);
-  }
-
-  function sortedProducts(list) {
-    const s = getSort();
-    const arr = list.slice();
-    if (s === "weight_asc") arr.sort((a, b) => a.weight - b.weight);
-    else if (s === "weight_desc") arr.sort((a, b) => b.weight - a.weight);
-    else arr.sort((a, b) => a.popular - b.popular); // popular
-    return arr;
-  }
-
-  function renderCatalog() {
-    const grid = $("#productsGrid");
-    if (!grid) return;
-
-    const lang = getLang();
-    const d = dict[lang] || dict.ru;
-
-    const list = sortedProducts(filteredProducts(products));
-    grid.innerHTML = list.map(p => cardHTML(p, lang, d)).join("");
-
-    // bind card events
-    $$(".card").forEach(card => {
-      const id = card.dataset.id;
-      const minus = $(".qty__btn--minus", card);
-      const plus = $(".qty__btn--plus", card);
-      const num = $(".qty__num", card);
-      const add = $(".card__buy", card);
-
-      let q = 1;
-
-      const setQ = (v) => {
-        q = Math.max(1, Math.min(99, v));
-        num.textContent = String(q);
-      };
-
-      minus?.addEventListener("click", () => setQ(q - 1));
-      plus?.addEventListener("click", () => setQ(q + 1));
-
-      add?.addEventListener("click", () => {
-        const cart = loadCart();
-        cart[id] = (cart[id] || 0) + q;
-        saveCart(cart);
-        updateCartBadge();
-
-        // маленький "пульс" на кнопке
-        add.classList.add("is-done");
-        setTimeout(() => add.classList.remove("is-done"), 250);
-      });
-    });
-  }
-
-  function cardHTML(p, lang, d) {
-    const title = p.title[lang] || p.title.ru;
-    const sub = p.sub[lang] || p.sub.ru;
-
+  function cardTemplate(p){
     return `
-      <article class="card" data-id="${p.id}">
+      <article class="card" data-id="${p.id}" data-group="${p.group}" data-weight="${p.weight}">
         <div class="card__media">
-          <img class="card__img" src="${p.img}" alt="${title}" loading="lazy" />
+          <div class="card__frame">
+            <img class="card__img" src="${p.img}" alt="${p.title}" loading="lazy">
+          </div>
         </div>
 
         <div class="card__body">
-          <div class="card__title">${title}</div>
-          <div class="card__sub">${sub}</div>
+          <div class="card__title">${p.title}</div>
+          <div class="card__sub">${p.weight} kg</div>
 
           <div class="card__row">
-            <div class="qty">
-              <button class="qty__btn qty__btn--minus" type="button">−</button>
-              <div class="qty__num">1</div>
-              <button class="qty__btn qty__btn--plus" type="button">+</button>
+            <div class="qty" role="group" aria-label="quantity">
+              <button class="qty__btn" data-act="minus" type="button">−</button>
+              <div class="qty__num" data-qty>1</div>
+              <button class="qty__btn" data-act="plus" type="button">+</button>
             </div>
 
-            <button class="btn btn--gold card__buy" type="button">${d.to_cart}</button>
+            <button class="btn btn--gold card__buy" data-act="add" type="button">В КОРЗИНУ</button>
           </div>
         </div>
       </article>
     `;
   }
 
-  function bindCatalogControls() {
-    // Filters
-    $$(".chip").forEach(btn => {
-      btn.addEventListener("click", () => {
-        $$(".chip").forEach(b => b.classList.remove("is-active"));
-        btn.classList.add("is-active");
-        renderCatalog();
+  function renderProducts(list){
+    const grid = $("#productsGrid");
+    if(!grid) return;
+    grid.innerHTML = list.map(cardTemplate).join("");
+  }
+
+  function applyFilterAndSort(){
+    const grid = $("#productsGrid");
+    if(!grid) return;
+
+    const activeChip = $(".chip.is-active");
+    const filter = activeChip ? activeChip.dataset.filter : "all";
+    const sort = $("#sortSelect") ? $("#sortSelect").value : "popular";
+
+    let list = [...products];
+
+    if(filter !== "all"){
+      list = list.filter(p => p.group === filter);
+    }
+
+    if(sort === "weight_asc"){
+      list.sort((a,b)=>a.weight-b.weight);
+    } else if(sort === "weight_desc"){
+      list.sort((a,b)=>b.weight-a.weight);
+    } // popular = default order
+
+    renderProducts(list);
+  }
+
+  function bindCatalogEvents(){
+    const grid = $("#productsGrid");
+    if(!grid) return;
+
+    // chips
+    $$(".chip").forEach(ch => {
+      ch.addEventListener("click", () => {
+        $$(".chip").forEach(x => x.classList.remove("is-active"));
+        ch.classList.add("is-active");
+        applyFilterAndSort();
       });
     });
 
-    // Sort
-    const sel = $("#sortSelect");
-    sel?.addEventListener("change", renderCatalog);
-  }
+    // sort
+    const sort = $("#sortSelect");
+    if(sort){
+      sort.addEventListener("change", applyFilterAndSort);
+    }
 
-  function bindLangButtons() {
-    $$(".lang__btn").forEach(btn => {
-      btn.addEventListener("click", () => setLang(btn.dataset.lang));
+    // delegation for qty/add
+    grid.addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if(!btn) return;
+
+      const card = e.target.closest(".card");
+      if(!card) return;
+
+      const act = btn.dataset.act;
+      const qtyEl = card.querySelector("[data-qty]");
+      let qty = Number(qtyEl?.textContent || 1);
+
+      if(act === "minus"){
+        qty = Math.max(1, qty - 1);
+        qtyEl.textContent = String(qty);
+        return;
+      }
+      if(act === "plus"){
+        qty = Math.min(99, qty + 1);
+        qtyEl.textContent = String(qty);
+        return;
+      }
+      if(act === "add"){
+        const id = card.dataset.id;
+        const cart = readCart();
+        cart[id] = (Number(cart[id]) || 0) + qty;
+        saveCart(cart);
+        setCartCountUI();
+
+        // small feedback
+        btn.classList.add("is-done");
+        btn.textContent = "ДОБАВЛЕНО";
+        setTimeout(() => {
+          btn.classList.remove("is-done");
+          btn.textContent = "В КОРЗИНУ";
+        }, 900);
+      }
     });
   }
 
-  function init() {
-    // year
+  function initYear(){
     const y = $("#year");
-    if (y) y.textContent = String(new Date().getFullYear());
-
-    bindLangButtons();
-    applyI18n(getLang());
-
-    updateCartBadge();
-
-    // catalog specific
-    bindCatalogControls();
-    renderCatalog();
+    if(y) y.textContent = String(new Date().getFullYear());
   }
 
-  document.addEventListener("DOMContentLoaded", init);
-})();
+  function initLangButtons(){
+    // только подсветка, чтобы не ломать твой сайт
+    const btns = $$(".lang__btn");
+    btns.forEach(b => {
+      b.addEventListener("click", () => {
+        btns.forEach(x => x.classList.remove("is-active"));
+        b.classList.add("is-active");
+      });
+    });
+  }
 
+  // init
+  document.addEventListener("DOMContentLoaded", () => {
+    initYear();
+    initLangButtons();
+    setCartCountUI();
+
+    // if catalog page
+    if($("#productsGrid")){
+      applyFilterAndSort();
+      bindCatalogEvents();
+    }
+  });
+})();
