@@ -3,56 +3,45 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BLACKWOOD • CHARCOAL — Контакты</title>
+  <title>Контакты • BLACKWOOD</title>
   <link rel="stylesheet" href="assets/style.css" />
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="index.html">
-          BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
-        </a>
-
-        <nav class="navlinks">
+  <div class="page has-catalog-bg">
+    <header class="header">
+      <div class="container headerInner">
+        <a class="brand" href="index.html"><span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span></a>
+        <nav class="nav">
           <a href="index.html">Главная</a>
           <a href="catalog.html">Каталог</a>
           <a href="shipping.html">Доставка</a>
           <a href="about.html">О нас</a>
           <a href="contacts.html">Контакты</a>
-          <a href="cart.html">Корзина <span data-cart-count></span></a>
         </nav>
+        <div class="rightBar">
+          <a class="cartPill" href="cart.html">Корзина <span class="count" data-cart-count>0</span></a>
+          <button class="burger" type="button" data-burger>Меню</button>
+        </div>
       </div>
-    </div>
-  </header>
+      <div class="container mobileMenu" data-mobilemenu>
+        <a href="index.html">Главная</a><a href="catalog.html">Каталог</a><a href="shipping.html">Доставка</a>
+        <a href="about.html">О нас</a><a href="contacts.html">Контакты</a><a href="cart.html">Корзина</a>
+      </div>
+    </header>
 
-  <main class="container">
-    <div class="card pad">
-      <h1 class="h1" style="margin-bottom:6px;">Контакты</h1>
-      <p class="p">Сюда вставь свои реальные контакты.</p>
+    <main class="container section">
+      <h1 class="h1">Контакты</h1>
+      <p class="p">Напишите нам — ответим быстро.</p>
 
-      <div class="hr"></div>
-      <p class="small">
-        <b>Telegram:</b> @your_username<br>
-        <b>Телефон:</b> +380...<br>
-        <b>Instagram:</b> @your_instagram
-      </p>
+      <div style="padding:16px; margin-top:16px; border:1px solid rgba(255,255,255,.10); border-radius:18px; background:rgba(0,0,0,.28); color:rgba(255,255,255,.82); line-height:1.7">
+        <p style="margin-top:0"><b>Email:</b> your@email.com</p>
+        <p><b>Телефон:</b> +380 XX XXX XX XX</p>
+        <p style="margin-bottom:0"><b>Telegram:</b> @your_username</p>
+      </div>
 
-      <div class="hr"></div>
-      <p class="small">
-        Для заказа: открой <a href="catalog.html" style="text-decoration:underline;">каталог</a> → добавь товары → оформи.
-      </p>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      © <span id="y"></span> BLACKWOOD • CHARCOAL
-    </div>
-  </footer>
-
+      <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
+    </main>
+  </div>
   <script src="assets/app.js"></script>
-  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 </html>
