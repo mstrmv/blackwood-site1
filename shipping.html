@@ -3,70 +3,56 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Доставка • BLACKWOOD</title>
+  <title>BLACKWOOD • CHARCOAL — Доставка</title>
   <link rel="stylesheet" href="assets/style.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <div class="page has-catalog-bg">
-    <header class="header">
-      <div class="container headerInner">
+  <header class="topbar">
+    <div class="container">
+      <div class="nav">
         <a class="brand" href="index.html">
-          <span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span>
+          BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
         </a>
 
-        <nav class="nav">
+        <nav class="navlinks">
           <a href="index.html">Главная</a>
           <a href="catalog.html">Каталог</a>
           <a href="shipping.html">Доставка</a>
           <a href="about.html">О нас</a>
           <a href="contacts.html">Контакты</a>
+          <a href="cart.html">Корзина <span data-cart-count></span></a>
         </nav>
-
-        <div class="rightBar">
-          <div class="lang">
-            <button type="button" data-lang="RU">RU</button>
-            <button type="button" data-lang="UKR">UKR</button>
-            <button type="button" data-lang="EN">EN</button>
-          </div>
-
-          <a class="cartPill" href="cart.html">
-            Корзина <span class="count" data-cart-count>0</span>
-          </a>
-
-          <button class="burger" type="button" data-burger>Меню</button>
-        </div>
       </div>
+    </div>
+  </header>
 
-      <div class="container mobileMenu" data-mobilemenu>
-        <a href="index.html">Главная</a>
-        <a href="catalog.html">Каталог</a>
-        <a href="shipping.html">Доставка</a>
-        <a href="about.html">О нас</a>
-        <a href="contacts.html">Контакты</a>
-        <a href="cart.html">Корзина</a>
-      </div>
-    </header>
+  <main class="container">
+    <div class="card pad">
+      <h1 class="h1" style="margin-bottom:6px;">Доставка</h1>
+      <p class="p">Коротко и понятно — без лишнего текста.</p>
 
-    <main class="container section">
-      <h1 class="h1">Доставка</h1>
-      <p class="p">Новая Почта по Украине. Сроки и стоимость — по тарифам НП.</p>
+      <div class="hr"></div>
+      <p class="p"><b>По Украине</b></p>
+      <p class="small">
+        • Отправка Новой Почтой (отделение/почтомат).<br>
+        • Сроки зависят от города.<br>
+        • Уточнения — в комментарии при оформлении.
+      </p>
 
-      <div class="glass" style="padding:16px; margin-top:16px">
-        <ul style="margin:0; padding-left:18px; color:rgba(255,255,255,.82); line-height:1.6">
-          <li>Отправка: Новая Почта (отделение / поштомат / курьер).</li>
-          <li>Оплата: наложенный платеж или оплата на карту.</li>
-          <li>Если нужно — добавьте комментарий при оформлении заказа.</li>
-        </ul>
-        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
-          <a class="btn primary" href="catalog.html">Открыть каталог</a>
-          <a class="btn secondary" href="checkout.html">Оформить заказ</a>
-        </div>
-      </div>
+      <div class="hr"></div>
+      <p class="p"><b>Самовывоз</b></p>
+      <p class="small">Если есть — укажем в контактах или сообщим отдельно.</p>
+    </div>
+  </main>
 
-      <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
-    </main>
-  </div>
+  <footer class="site-footer">
+    <div class="container">
+      © <span id="y"></span> BLACKWOOD • CHARCOAL
+    </div>
+  </footer>
 
   <script src="assets/app.js"></script>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 </html>
