@@ -2,82 +2,66 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>BLACKWOOD • CHARCOAL</title>
+
+  <!-- Telegram Mini App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
   <link rel="stylesheet" href="./assets/style.css" />
 </head>
-<body>
-  <div class="page" data-bg="hero">
-    <header class="topbar">
-      <div class="container">
-        <div class="topbar__inner">
-          <div class="brand">
-            <span>BLACKWOOD</span><span class="dot">•</span><span>CHARCOAL</span>
-          </div>
+<body class="page page-hero">
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="./index.html">BLACKWOOD <span>•</span> CHARCOAL</a>
 
-          <nav class="nav">
-            <a href="./index.html" class="active">Главная</a>
-            <a href="./catalog.html">Каталог</a>
-            <a href="./shipping.html">Доставка</a>
-            <a href="./about.html">О нас</a>
-            <a href="./contacts.html">Контакты</a>
-          </nav>
+      <nav class="nav">
+        <a href="./index.html" class="nav__link is-active">Главная</a>
+        <a href="./catalog.html" class="nav__link">Каталог</a>
+        <a href="./shipping.html" class="nav__link">Доставка</a>
+        <a href="./about.html" class="nav__link">О нас</a>
+        <a href="./contacts.html" class="nav__link">Контакты</a>
+      </nav>
 
-          <div class="actions">
-            <button class="burger" data-burger>Меню</button>
-
-            <div class="lang">
-              <button type="button" data-lang="RU">RU</button>
-              <button type="button" data-lang="UKR">UKR</button>
-              <button type="button" data-lang="EN">EN</button>
-            </div>
-
-            <a class="cart-pill" href="./cart.html">
-              <span data-i18n-cart>Корзина</span> • <span class="badge" data-cart-count>0</span>
-            </a>
-          </div>
+      <div class="right">
+        <div class="lang">
+          <button class="pill is-active" data-lang="ru">RU</button>
+          <button class="pill" data-lang="uk">UKR</button>
+          <button class="pill" data-lang="en">EN</button>
         </div>
-
-        <div class="mobile-menu" data-mobile-menu>
-          <a href="./index.html">Главная</a>
-          <a href="./catalog.html">Каталог</a>
-          <a href="./shipping.html">Доставка</a>
-          <a href="./about.html">О нас</a>
-          <a href="./contacts.html">Контакты</a>
-          <a href="./cart.html"><span data-i18n-cart>Корзина</span> (<span data-cart-count>0</span>)</a>
-        </div>
+        <a class="cart-pill" href="./cart.html">Корзина • <span id="cartCount">0</span></a>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main class="hero">
-      <div class="container">
-        <div class="hero__grid">
-          <div class="hero__card">
-            <div class="kicker"><span class="dot"></span> Премиум уголь для гриля</div>
-            <h1>PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
-            <p>Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.</p>
+  <main class="hero">
+    <div class="hero__content">
+      <div class="badge">Премиум уголь для гриля</div>
 
-            <div class="hero__buttons">
-              <button class="btn primary" data-go-catalog>Открыть каталог</button>
-              <a class="btn ghost" href="./shipping.html">Доставка и оплата</a>
-              <a class="btn" href="./cart.html">Перейти в корзину</a>
-            </div>
-          </div>
+      <h1 class="hero__title">
+        PREMIUM<br/>
+        HARDWOOD<br/>
+        CHARCOAL
+      </h1>
 
-          <!-- right placeholder hidden by CSS (keeps layout for future) -->
-          <div class="hero__right">
-            <div class="ghost-img"></div>
-          </div>
-        </div>
+      <p class="hero__text">
+        Длительное горение, минимум пепла, чистый жар.<br/>
+        Идеально для BBQ и гриля.
+      </p>
 
-        <div class="footer">
-          <div class="container" style="width:100%;margin:0;">
-            BLACKWOOD • CHARCOAL © 2026
-          </div>
-        </div>
+      <div class="hero__actions">
+        <a class="btn btn--gold" href="./catalog.html">Открыть каталог</a>
+        <a class="btn" href="./shipping.html">Доставка и оплата</a>
+        <a class="btn" href="./cart.html">Перейти в корзину</a>
       </div>
-    </main>
-  </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>BLACKWOOD • CHARCOAL © 2026</div>
+    </div>
+  </footer>
 
   <script src="./assets/app.js"></script>
 </body>
