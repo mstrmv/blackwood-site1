@@ -4,60 +4,79 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Доставка — BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="./assets/style.css" />
 </head>
-<body class="page-alt">
-  <header class="topbar">
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="index.html">BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span></a>
-        <nav class="navlinks">
-          <a href="index.html" data-i18n="nav_home">Главная</a>
-          <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-          <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-          <a href="about.html" data-i18n="nav_about">О нас</a>
-          <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
-        </nav>
-        <div class="navright">
-          <div class="lang">
-            <button type="button" data-lang="ru">RU</button>
-            <button type="button" data-lang="ukr">UKR</button>
-            <button type="button" data-lang="en">EN</button>
+<body>
+  <div class="page" data-bg="plain">
+    <header class="topbar">
+      <div class="container">
+        <div class="topbar__inner">
+          <div class="brand">
+            <span>BLACKWOOD</span><span class="dot">•</span><span>CHARCOAL</span>
           </div>
-          <a class="badge" href="cart.html"><span data-i18n="cart">Корзина</span> • <span data-cart-count>0</span></a>
+
+          <nav class="nav">
+            <a href="./index.html">Главная</a>
+            <a href="./catalog.html">Каталог</a>
+            <a href="./shipping.html" class="active">Доставка</a>
+            <a href="./about.html">О нас</a>
+            <a href="./contacts.html">Контакты</a>
+          </nav>
+
+          <div class="actions">
+            <button class="burger" data-burger>Меню</button>
+
+            <div class="lang">
+              <button type="button" data-lang="RU">RU</button>
+              <button type="button" data-lang="UKR">UKR</button>
+              <button type="button" data-lang="EN">EN</button>
+            </div>
+
+            <a class="cart-pill" href="./cart.html">
+              <span data-i18n-cart>Корзина</span> • <span class="badge" data-cart-count>0</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="mobile-menu" data-mobile-menu>
+          <a href="./index.html">Главная</a>
+          <a href="./catalog.html">Каталог</a>
+          <a href="./shipping.html">Доставка</a>
+          <a href="./about.html">О нас</a>
+          <a href="./contacts.html">Контакты</a>
+          <a href="./cart.html"><span data-i18n-cart>Корзина</span> (<span data-cart-count>0</span>)</a>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main class="section">
-    <div class="container">
-      <div class="sectionTitle">
-        <div>
-          <h2 data-i18n="nav_shipping">Доставка</h2>
-          <p>Новая Почта по Украине. Сроки и стоимость — по тарифам НП.</p>
+    <main class="section">
+      <div class="container">
+        <div class="title-row">
+          <div>
+            <h2>ДОСТАВКА</h2>
+            <div class="subtitle">Новая Почта по Украине. Сроки и стоимость — по тарифам НП.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="formWrap">
-        <div style="color:rgba(255,255,255,.75);font-weight:650;line-height:1.6">
-          • Отправка: Новая Почта (отделение/поштомат).<br>
-          • Оплата: при получении / уточнение менеджером.<br>
-          • Если нужно — добавь комментарий при оформлении заказа.
+        <div class="form" style="margin-top:16px;">
+          <div style="display:grid; gap:10px; color:rgba(255,255,255,.82); font-weight:650; line-height:1.55;">
+            <div>• Отправка: Новая Почта (Отделение / Поштомат / Курьер).</div>
+            <div>• Оплата: при получении или по договорённости.</div>
+            <div>• Если нужно — добавьте комментарий при оформлении заказа.</div>
+            <div>• Упаковка: прочная заводская упаковка, чтобы уголь приехал целым.</div>
+          </div>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="./catalog.html">Открыть каталог</a>
+            <a class="btn" href="./checkout.html">Оформить заказ</a>
+          </div>
         </div>
-      </div>
-    </div>
-  </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footerRow">
-        <div class="mini"><b>BLACKWOOD</b><i></i>CHARCOAL</div>
-        <div>© 2026</div>
+        <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
       </div>
-    </div>
-  </footer>
+    </main>
+  </div>
 
-  <script src="assets/app.js"></script>
+  <script src="./assets/app.js"></script>
 </body>
 </html>
