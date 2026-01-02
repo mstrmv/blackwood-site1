@@ -4,81 +4,58 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Контакты — BLACKWOOD</title>
-  <link rel="stylesheet" href="./assets/style.css" />
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/app.js" defer></script>
 </head>
-<body>
-  <div class="page" data-bg="plain">
-    <header class="topbar">
-      <div class="container">
-        <div class="topbar__inner">
-          <div class="brand">
-            <span>BLACKWOOD</span><span class="dot">•</span><span>CHARCOAL</span>
-          </div>
 
-          <nav class="nav">
-            <a href="./index.html">Главная</a>
-            <a href="./catalog.html">Каталог</a>
-            <a href="./shipping.html">Доставка</a>
-            <a href="./about.html">О нас</a>
-            <a href="./contacts.html" class="active">Контакты</a>
-          </nav>
+<body class="page-alt" data-page="contacts">
+  <header class="header">
+    <div class="container header__row">
+      <a class="brand" href="index.html">BLACKWOOD <span class="dot">•</span> CHARCOAL</a>
 
-          <div class="actions">
-            <button class="burger" data-burger>Меню</button>
+      <nav class="nav">
+        <a data-nav="home" href="index.html">Главная</a>
+        <a data-nav="catalog" href="catalog.html">Каталог</a>
+        <a data-nav="shipping" href="shipping.html">Доставка</a>
+        <a data-nav="about" href="about.html">О нас</a>
+        <a data-nav="contacts" href="contacts.html">Контакты</a>
+      </nav>
 
-            <div class="lang">
-              <button type="button" data-lang="RU">RU</button>
-              <button type="button" data-lang="UKR">UKR</button>
-              <button type="button" data-lang="EN">EN</button>
-            </div>
-
-            <a class="cart-pill" href="./cart.html">
-              <span data-i18n-cart>Корзина</span> • <span class="badge" data-cart-count>0</span>
-            </a>
-          </div>
+      <div class="right">
+        <button class="burger" data-burger>☰</button>
+        <div class="lang">
+          <button data-lang="RU" class="active">RU</button>
+          <button data-lang="UKR">UKR</button>
+          <button data-lang="EN">EN</button>
         </div>
-
-        <div class="mobile-menu" data-mobile-menu>
-          <a href="./index.html">Главная</a>
-          <a href="./catalog.html">Каталог</a>
-          <a href="./shipping.html">Доставка</a>
-          <a href="./about.html">О нас</a>
-          <a href="./contacts.html">Контакты</a>
-          <a href="./cart.html"><span data-i18n-cart>Корзина</span> (<span data-cart-count>0</span>)</a>
-        </div>
+        <a class="cartpill" href="cart.html">Корзина • <b data-cart-count>0</b></a>
       </div>
-    </header>
+    </div>
 
-    <main class="section">
-      <div class="container">
-        <div class="title-row">
-          <div>
-            <h2>КОНТАКТЫ</h2>
-            <div class="subtitle">Свяжитесь с нами — отвечаем быстро.</div>
-          </div>
-        </div>
+    <div class="container mobile-nav" data-mobile-nav>
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="shipping.html">Доставка</a>
+      <a href="about.html">О нас</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="cart.html">Корзина</a>
+    </div>
+  </header>
 
-        <div class="form" style="margin-top:16px;">
-          <div style="display:grid; gap:10px; color:rgba(255,255,255,.82); font-weight:650; line-height:1.55;">
-            <div><strong style="color:#fff;">Email:</strong> your@email.com</div>
-            <div><strong style="color:#fff;">Телефон:</strong> +380 XX XXX XX XX</div>
-            <div><strong style="color:#fff;">Telegram:</strong> @your_telegram</div>
-            <div style="color:rgba(255,255,255,.60); font-size:12px;">
-              (Поменяй контакты на свои — прямо в этом файле.)
-            </div>
-          </div>
+  <main class="container section">
+    <h1 class="page-title">Контакты</h1>
+    <div class="panel" style="padding:16px;">
+      <p>Для вопросов по заказу и доставке пишите:</p>
+      <p><b>Email:</b> YOUR_EMAIL_HERE@example.com</p>
+      <p><b>Telegram:</b> @your_username</p>
+      <p style="margin-top:10px;color:rgba(255,255,255,.62);font-size:12px;">
+        (Поменяй контакты на свои)
+      </p>
+    </div>
+  </main>
 
-          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn primary" href="./catalog.html">Каталог</a>
-            <a class="btn" href="./checkout.html">Оформить заказ</a>
-          </div>
-        </div>
-
-        <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
-      </div>
-    </main>
-  </div>
-
-  <script src="./assets/app.js"></script>
+  <footer class="footer">
+    <div class="container">BLACKWOOD • CHARCOAL © 2026</div>
+  </footer>
 </body>
 </html>
