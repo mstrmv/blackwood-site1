@@ -1,62 +1,83 @@
+<!-- index.html -->
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BLACKWOOD • CHARCOAL</title>
-  <link rel="stylesheet" href="assets/style.css"/>
-  <script defer src="assets/app.js"></script>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
-<body class="home">
+<body class="page page-hero">
+
+  <!-- HEADER -->
   <header class="header">
-    <div class="container">
-      <div class="row">
-        <a class="logo" href="index.html">
-          <span>BLACKWOOD</span><span class="dot"></span><span>CHARCOAL</span>
-        </a>
+    <div class="wrap header__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__name">BLACKWOOD</span>
+        <span class="brand__dot">•</span>
+        <span class="brand__sub">CHARCOAL</span>
+      </a>
 
-        <nav class="nav">
-          <a href="index.html" data-i18n="nav_home">Главная</a>
-          <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-          <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-          <a href="about.html" data-i18n="nav_about">О нас</a>
-          <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
-        </nav>
+      <nav class="nav">
+        <a class="nav__link is-active" href="index.html">Главная</a>
+        <a class="nav__link" href="catalog.html">Каталог</a>
+        <a class="nav__link" href="shipping.html">Доставка</a>
+        <a class="nav__link" href="about.html">О нас</a>
+        <a class="nav__link" href="contacts.html">Контакты</a>
+      </nav>
 
-        <div class="right">
-          <div class="lang">
-            <button type="button" data-lang="RU">RU</button>
-            <button type="button" data-lang="UKR">UKR</button>
-            <button type="button" data-lang="EN">EN</button>
-          </div>
-          <a class="cartBadge" href="cart.html" data-cart-badge>Корзина • 0</a>
+      <div class="header__right">
+        <div class="lang">
+          <button class="pill is-active" type="button">RU</button>
+          <button class="pill" type="button">UKR</button>
+          <button class="pill" type="button">EN</button>
         </div>
+
+        <a class="cartPill" href="cart.html">Корзина • <span id="cartCount">0</span></a>
       </div>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
+  <!-- HERO -->
+  <main class="hero">
+    <div class="wrap">
       <div class="heroGrid">
-        <div class="heroCard">
-          <div class="kicker"><span class="kdot"></span><span data-i18n="hero_kicker">Премиум уголь для гриля</span></div>
-          <div class="h1" data-i18n="hero_title">PREMIUM<br/>HARDWOOD<br/>CHARCOAL</div>
-          <p class="lead" data-i18n="hero_desc">
-            Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.
-          </p>
-          <div class="heroActions">
-            <a class="btn primary" href="catalog.html" data-i18n="btn_open_catalog">Открыть каталог</a>
-            <a class="btn ghost" href="shipping.html" data-i18n="btn_shipping_pay">Доставка и оплата</a>
-            <a class="btn" href="cart.html" data-i18n="btn_go_cart">Перейти в корзину</a>
+        <!-- LEFT -->
+        <section class="heroCard">
+          <div class="badge">
+            <span class="dot"></span>
+            Премиум уголь для гриля
           </div>
-        </div>
+
+          <h1 class="heroTitle">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
+
+          <p class="heroText">
+            Длительное горение, минимум пепла, чистый жар.<br>
+            Идеально для BBQ и гриля.
+          </p>
+
+          <div class="heroActions">
+            <a class="btn btnGold" href="catalog.html">Открыть каталог</a>
+            <a class="btn btnGhost" href="shipping.html">Доставка и оплата</a>
+            <a class="btn btnDark" href="cart.html">Перейти в корзину</a>
+          </div>
+
+          <div class="footerLine">BLACKWOOD • CHARCOAL © 2026</div>
+        </section>
+
+        <!-- RIGHT (пусто, чтобы пачки/фон было видно) -->
         <div></div>
       </div>
-
-      <div class="footer">
-        BLACKWOOD • CHARCOAL © 2026
-      </div>
     </div>
-  </section>
+  </main>
+
+  <script>
+    // счетчик корзины (если у тебя уже есть app.js — можешь удалить этот кусок)
+    try {
+      const cart = JSON.parse(localStorage.getItem('bw_cart') || '[]');
+      const count = cart.reduce((s, it) => s + (it.qty || 0), 0);
+      document.getElementById('cartCount').textContent = String(count);
+    } catch(e){}
+  </script>
 </body>
 </html>
