@@ -1,1 +1,94 @@
+/* ============================
+   PATCH — безопасные правки
+   (не ломает старые стили)
+   ============================ */
+
+/* 1) УБРАТЬ "прозрачные квадраты"/сетку/оверлеи, если они есть */
+.grid-overlay,
+.bg-grid,
+.pattern,
+.squares,
+.overlay-grid,
+.grid-pattern {
+  background-image: none !important;
+  display: none !important;
+}
+
+/* если квадраты рисуются псевдоэлементами */
+body::before, body::after,
+.hero::before, .hero::after,
+.section::before, .section::after {
+  background-image: none !important;
+  opacity: 0 !important;
+}
+
+/* 2) HERO: текст левее */
+.hero .wrap,
+.hero .container,
+.hero .inner {
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+.hero .hero-card,
+.hero .content,
+.hero .hero-content {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+/* 3) Починить шапку/меню/кнопки языков (если слетели в дефолт) */
+header, .header, .topbar, .nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+header a, .header a, .topbar a, .nav-bar a {
+  color: rgba(255,255,255,.85) !important;
+  text-decoration: none !important;
+  font-weight: 600;
+}
+
+header a:hover, .header a:hover, .topbar a:hover, .nav-bar a:hover {
+  color: #fff !important;
+}
+
+/* навигация в одну строку */
+.nav, nav, .menu, .nav-links {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.lang, .lang-switch, .langs, .langBtns {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.lang button, .lang-switch button, .langs button, .langBtns button,
+.lang a, .lang-switch a, .langs a, .langBtns a {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.85) !important;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.lang button.active, .lang-switch button.active, .langs button.active, .langBtns button.active,
+.lang a.active, .lang-switch a.active, .langs a.active, .langBtns a.active {
+  background: rgba(200,164,90,.92);
+  border-color: rgba(200,164,90,.85);
+  color: #16130c !important;
+}
+
+/* 4) На всякий случай: убрать “синие” дефолтные ссылки где-то вверху */
+a { -webkit-tap-highlight-color: transparent; }
 
