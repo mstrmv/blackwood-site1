@@ -1,65 +1,61 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>О нас — BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <script src="assets/app.js" defer></script>
+  <link rel="stylesheet" href="assets/style.css"/>
+  <script defer src="assets/app.js"></script>
 </head>
-
-<body class="page-alt" data-page="about">
-  <header class="header">
-    <div class="container header__row">
-      <a class="brand" href="index.html">BLACKWOOD <span class="dot">•</span> CHARCOAL</a>
+<body class="page">
+<header class="header">
+  <div class="container">
+    <div class="row">
+      <a class="logo" href="index.html">
+        <span>BLACKWOOD</span><span class="dot"></span><span>CHARCOAL</span>
+      </a>
 
       <nav class="nav">
-        <a data-nav="home" href="index.html">Главная</a>
-        <a data-nav="catalog" href="catalog.html">Каталог</a>
-        <a data-nav="shipping" href="shipping.html">Доставка</a>
-        <a data-nav="about" href="about.html">О нас</a>
-        <a data-nav="contacts" href="contacts.html">Контакты</a>
+        <a href="index.html" data-i18n="nav_home">Главная</a>
+        <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+        <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+        <a href="about.html" data-i18n="nav_about">О нас</a>
+        <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
       </nav>
 
       <div class="right">
-        <button class="burger" data-burger>☰</button>
         <div class="lang">
-          <button data-lang="RU" class="active">RU</button>
-          <button data-lang="UKR">UKR</button>
-          <button data-lang="EN">EN</button>
+          <button type="button" data-lang="RU">RU</button>
+          <button type="button" data-lang="UKR">UKR</button>
+          <button type="button" data-lang="EN">EN</button>
         </div>
-        <a class="cartpill" href="cart.html">Корзина • <b data-cart-count>0</b></a>
+        <a class="cartBadge" href="cart.html" data-cart-badge>Корзина • 0</a>
       </div>
     </div>
+  </div>
+</header>
 
-    <div class="container mobile-nav" data-mobile-nav>
-      <a href="index.html">Главная</a>
-      <a href="catalog.html">Каталог</a>
-      <a href="shipping.html">Доставка</a>
-      <a href="about.html">О нас</a>
-      <a href="contacts.html">Контакты</a>
-      <a href="cart.html">Корзина</a>
+<main class="main">
+  <div class="container">
+    <h1 class="pageTitle">О нас</h1>
+    <p class="pageSub">BLACKWOOD • CHARCOAL — про чистый жар, вкус и стабильность.</p>
+
+    <div class="card" style="padding:16px; color:rgba(255,255,255,.82); line-height:1.65; font-weight:650;">
+      <p style="margin-top:0;">
+        Мы начинали как небольшая команда, которая просто хотела идеальный уголь для BBQ — без лишнего дыма, с ровной температурой и минимумом пепла.
+        Перепробовали десятки вариантов, пока не нашли формулу: правильная древесина, правильный обжиг и строгий контроль партии.
+      </p>
+      <p>
+        BLACKWOOD CORE — это уголь, который “держит жар” и дает предсказуемый результат: от домашних грилей до профессиональных кухонь.
+        Мы делаем ставку на качество, честные характеристики и удобную доставку по Украине.
+      </p>
+      <p style="margin-bottom:0;">
+        Спасибо, что выбираете нас. Если нужен совет по выбору веса или хранению — напишите, мы подскажем.
+      </p>
     </div>
-  </header>
 
-  <main class="container section">
-    <h1 class="page-title">О нас</h1>
-
-    <div class="panel" style="padding:16px;">
-      <p><b>BLACKWOOD • CHARCOAL</b> — это идея, которая родилась из простого желания: чтобы уголь для гриля горел ровно, давал сильный жар и не оставлял горы пепла.</p>
-      <p>Мы тестировали разные партии, сравнивали плотность, время горения и стабильность температуры — и собрали линейку <b>CORE</b>, которая подходит и для домашнего BBQ, и для выездных пикников.</p>
-      <p>Наша цель — чтобы вы получали предсказуемый результат: быстро разжёг, держит жар, вкус мяса чистый, без лишнего дыма.</p>
-
-      <div style="margin-top:12px;color:rgba(255,255,255,.72);">
-        • Долго горит<br>
-        • Чистый жар<br>
-        • Минимум пепла
-      </div>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container">BLACKWOOD • CHARCOAL © 2026</div>
-  </footer>
+    <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
+  </div>
+</main>
 </body>
 </html>
