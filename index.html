@@ -1,62 +1,82 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BLACKWOOD • CHARCOAL</title>
-  <link rel="stylesheet" href="assets/style.css"/>
-  <script defer src="assets/app.js"></script>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
-<body class="home">
-  <header class="header">
-    <div class="container">
-      <div class="row">
-        <a class="logo" href="index.html">
-          <span>BLACKWOOD</span><span class="dot"></span><span>CHARCOAL</span>
+<body>
+  <div class="page has-hero-bg">
+    <header class="header">
+      <div class="container headerInner">
+        <a class="brand" href="index.html">
+          <span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span>
         </a>
 
         <nav class="nav">
-          <a href="index.html" data-i18n="nav_home">Главная</a>
-          <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-          <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-          <a href="about.html" data-i18n="nav_about">О нас</a>
-          <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
+          <a href="index.html">Главная</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="shipping.html">Доставка</a>
+          <a href="about.html">О нас</a>
+          <a href="contacts.html">Контакты</a>
         </nav>
 
-        <div class="right">
+        <div class="rightBar">
           <div class="lang">
             <button type="button" data-lang="RU">RU</button>
             <button type="button" data-lang="UKR">UKR</button>
             <button type="button" data-lang="EN">EN</button>
           </div>
-          <a class="cartBadge" href="cart.html" data-cart-badge>Корзина • 0</a>
+
+          <a class="cartPill" href="cart.html">
+            Корзина <span class="count" data-cart-count>0</span>
+          </a>
+
+          <button class="burger" type="button" data-burger>Меню</button>
         </div>
       </div>
-    </div>
-  </header>
 
-  <section class="hero">
-    <div class="container">
+      <div class="container mobileMenu" data-mobilemenu>
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="shipping.html">Доставка</a>
+        <a href="about.html">О нас</a>
+        <a href="contacts.html">Контакты</a>
+        <a href="cart.html">Корзина</a>
+      </div>
+    </header>
+
+    <main class="container heroWrap">
       <div class="heroGrid">
         <div class="heroCard">
-          <div class="kicker"><span class="kdot"></span><span data-i18n="hero_kicker">Премиум уголь для гриля</span></div>
-          <div class="h1" data-i18n="hero_title">PREMIUM<br/>HARDWOOD<br/>CHARCOAL</div>
-          <p class="lead" data-i18n="hero_desc">
-            Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.
+          <div class="badge"><span class="bDot"></span> Премиум уголь для гриля</div>
+
+          <h1 class="heroTitle">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
+
+          <p class="heroSub">
+            Длительное горение, минимум пепла, чистый жар.
+            Идеально для BBQ и гриля.
           </p>
+
           <div class="heroActions">
-            <a class="btn primary" href="catalog.html" data-i18n="btn_open_catalog">Открыть каталог</a>
-            <a class="btn ghost" href="shipping.html" data-i18n="btn_shipping_pay">Доставка и оплата</a>
-            <a class="btn" href="cart.html" data-i18n="btn_go_cart">Перейти в корзину</a>
+            <a class="btn primary" href="catalog.html">Открыть каталог</a>
+            <a class="btn secondary" href="shipping.html">Доставка и оплата</a>
+            <a class="btn secondary" href="cart.html">Перейти в корзину</a>
+          </div>
+
+          <div class="footer" style="padding:18px 0 0;">
+            BLACKWOOD • CHARCOAL © 2026
           </div>
         </div>
+
+        <!-- правая колонка специально пустая (пачки в фоне) -->
         <div></div>
       </div>
+    </main>
+  </div>
 
-      <div class="footer">
-        BLACKWOOD • CHARCOAL © 2026
-      </div>
-    </div>
-  </section>
+  <script src="assets/app.js"></script>
 </body>
 </html>
