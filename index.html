@@ -2,94 +2,69 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BLACKWOOD · CHARCOAL</title>
-  <link rel="stylesheet" href="./assets/style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BLACKWOOD • CHARCOAL</title>
+
+  <!-- ?v=5 чтобы сбросить кеш GitHub Pages -->
+  <link rel="stylesheet" href="assets/style.css?v=5" />
 </head>
 
-<body class="bgHero">
+<body class="page page-home">
+  <div class="vignette"></div>
 
-  <header class="header">
-    <div class="container headerRow">
-      <a class="logo" href="./index.html">BLACKWOOD <span>·</span> <b>CHARCOAL</b></a>
+  <header class="topbar">
+    <div class="topbar__inner container">
+      <a class="brand" href="index.html">
+        <span>BLACKWOOD</span><span class="brand__dot">•</span><span>CHARCOAL</span>
+      </a>
 
-      <nav class="nav" id="navDesktop">
-        <a href="./index.html" class="active" data-i18n="home">Главная</a>
-        <a href="./catalog.html" data-i18n="catalog">Каталог</a>
-        <a href="./shipping.html" data-i18n="shipping">Доставка</a>
-        <a href="./about.html" data-i18n="about">О нас</a>
-        <a href="./contacts.html" data-i18n="contacts">Контакты</a>
+      <nav class="nav">
+        <a class="nav__link" href="index.html">Главная</a>
+        <a class="nav__link" href="catalog.html">Каталог</a>
+        <a class="nav__link" href="shipping.html">Доставка</a>
+        <a class="nav__link" href="about.html">О нас</a>
+        <a class="nav__link" href="contacts.html">Контакты</a>
       </nav>
 
-      <div class="headerRight">
-        <div class="langs">
-          <button type="button" data-lang="ru" class="active">RU</button>
-          <button type="button" data-lang="ukr">UKR</button>
-          <button type="button" data-lang="en">EN</button>
+      <div class="topbar__right">
+        <div class="lang">
+          <button class="lang__btn is-active" data-lang="ru">RU</button>
+          <button class="lang__btn" data-lang="uk">UKR</button>
+          <button class="lang__btn" data-lang="en">EN</button>
         </div>
-
-        <a class="cartBtn" href="./cart.html">
-          <span data-i18n="cart">Корзина</span> · <span id="cartCount">0</span>
-        </a>
-
-        <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-
-    <div class="mobileNav" id="mobileNav" hidden>
-      <div class="mobileNavInner">
-        <a href="./index.html" class="active" data-i18n="home">Главная</a>
-        <a href="./catalog.html" data-i18n="catalog">Каталог</a>
-        <a href="./shipping.html" data-i18n="shipping">Доставка</a>
-        <a href="./about.html" data-i18n="about">О нас</a>
-        <a href="./contacts.html" data-i18n="contacts">Контакты</a>
-
-        <a href="./cart.html" class="mobileCart">
-          <span data-i18n="to_cart">Перейти в корзину</span> · <span id="cartCountMobile">0</span>
-        </a>
-
-        <div class="mobileLangs">
-          <button type="button" data-lang="ru" class="active">RU</button>
-          <button type="button" data-lang="ukr">UKR</button>
-          <button type="button" data-lang="en">EN</button>
-        </div>
+        <a class="pill" href="cart.html">Корзина • <span id="cartCount">0</span></a>
       </div>
     </div>
   </header>
 
-  <main class="hero">
-    <div class="container">
-      <div class="heroText heroShiftLeft">
-        <div class="kicker"><i></i><span data-i18n="kicker">Премиум уголь для гриля</span></div>
-
-        <h1 class="heroTitle">
-          PREMIUM<br>
-          HARDWOOD<br>
-          CHARCOAL
-        </h1>
-
-        <p class="heroDesc" data-i18n="hero_desc">
-          Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.
+  <main class="container hero">
+    <div class="hero__wrap">
+      <div class="hero__pad">
+        <h1 class="hero__title">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
+        <p class="hero__desc">
+          Длительное горение, минимум пепла, чистый жар.<br>
+          Идеально для BBQ и гриля.
         </p>
 
-        <div class="heroActions">
-          <a class="btn gold" href="./catalog.html" data-i18n="open_catalog">Открыть каталог</a>
-          <a class="btn dark" href="./shipping.html" data-i18n="shipping_pay">Доставка и оплата</a>
-          <a class="btn" href="./cart.html" data-i18n="to_cart">Перейти в корзину</a>
+        <div class="hero__actions">
+          <a class="btn btn--gold" href="catalog.html">Открыть каталог</a>
+          <a class="btn btn--ghost" href="shipping.html">Доставка и оплата</a>
+          <a class="btn btn--ghost" href="cart.html">Перейти в корзину</a>
         </div>
       </div>
+
+      <!-- справа пусто, чтобы “видно больше упаковки” -->
+      <div></div>
     </div>
   </main>
 
   <footer class="footer">
-    <div class="container footerRow">
-      <div class="footerLogo">BLACKWOOD <span>·</span> CHARCOAL</div>
-      <div class="footerCopy">© <span id="year"></span></div>
+    <div class="container footer__inner">
+      <div class="footer__brand">BLACKWOOD • CHARCOAL</div>
+      <div>© <span id="year"></span></div>
     </div>
   </footer>
 
-  <script src="./assets/app.js"></script>
+  <script src="assets/app.js?v=5"></script>
 </body>
 </html>
