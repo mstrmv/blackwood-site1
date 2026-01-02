@@ -1,341 +1,213 @@
-/* ===========================
-   BLACKWOOD • CHARCOAL — STYLE
-   =========================== */
-
 :root{
-  --bg:#070708;
-  --panel: rgba(18,18,20,.58);
-  --panel2: rgba(18,18,20,.35);
-  --stroke: rgba(255,255,255,.10);
-  --stroke2: rgba(255,255,255,.14);
-  --text:#fff;
-  --muted: rgba(255,255,255,.72);
-  --muted2: rgba(255,255,255,.55);
+  --bg:#0b0b0c;
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.75);
+  --stroke:rgba(255,255,255,.10);
+  --card:rgba(15,15,16,.55);
+  --shadow: 0 10px 30px rgba(0,0,0,.45);
   --gold:#c8a45a;
-  --gold2:#b89245;
-  --shadow: 0 18px 50px rgba(0,0,0,.55);
+  --gold2:#8f6a2c;
   --r:18px;
-  --r2:22px;
 
-  --container: 1180px;
+  /* safe-area */
+  --safeTop: env(safe-area-inset-top, 0px);
+  --safeBottom: env(safe-area-inset-bottom, 0px);
 }
 
-*{ box-sizing:border-box; }
-html,body{ height:100%; }
+*{box-sizing:border-box}
+html,body{height:100%}
 body{
   margin:0;
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   color:var(--text);
   background: var(--bg);
 }
 
-/* ===== Background system ===== */
-.page{
-  min-height:100vh;
-  position:relative;
-  overflow-x:hidden;
-}
-
-.page:not([data-bg="plain"])::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-3;
+/* backgrounds per page */
+.page-hero{
   background:
-    radial-gradient(1200px 600px at 50% -180px, rgba(200,164,90,.18), transparent 60%),
-    linear-gradient(180deg, rgba(0,0,0,.88), rgba(0,0,0,.74) 45%, rgba(0,0,0,.90));
+    radial-gradient(1200px 500px at 50% -120px, rgba(200,164,90,.16), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.65)),
+    url("../img/hero-bg.png") center/cover no-repeat fixed;
+}
+@media (max-width: 900px){
+  .page-hero{ background-attachment: scroll; } /* без лагов на мобиле */
 }
 
-.page[data-bg="hero"]::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-4;
-  background: url("../img/hero-bg.png") center/cover no-repeat;
-  filter: saturate(1.02) contrast(1.02);
-}
-
-.page[data-bg="catalog"]::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-4;
-  background: url("../img/catalog-bg.png") center/cover no-repeat;
-  filter: saturate(1.02) contrast(1.02);
-}
-
-.page[data-bg="plain"]{
+/* Для остальных страниц сделаем другой фон */
+.page-inner{
   background:
-    radial-gradient(900px 500px at 25% 0%, rgba(200,164,90,.10), transparent 55%),
-    linear-gradient(180deg, rgba(0,0,0,.92), rgba(0,0,0,.86));
+    radial-gradient(1000px 420px at 50% -120px, rgba(200,164,90,.12), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.75), rgba(0,0,0,.85)),
+    url("../img/catalog-bg.png") center/cover no-repeat fixed;
+}
+@media (max-width: 900px){
+  .page-inner{ background-attachment: scroll; }
 }
 
-/* light vignette */
-.page::marker{ content:""; }
-
-.container{
-  width: min(var(--container), calc(100% - 40px));
-  margin: 0 auto;
-}
-
-/* ===== Topbar ===== */
+/* Topbar */
 .topbar{
-  position: sticky;
+  position:sticky;
   top:0;
-  z-index: 50;
+  z-index:50;
+  padding-top: var(--safeTop);
+  background: rgba(0,0,0,.55);
   backdrop-filter: blur(10px);
-  background: linear-gradient(180deg, rgba(0,0,0,.72), rgba(0,0,0,.40));
   border-bottom: 1px solid rgba(255,255,255,.06);
 }
-
 .topbar__inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 18px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  padding: 14px 0;
-  min-height: 62px;
+  gap:18px;
 }
-
-/* Brand */
 .brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:800;
-  letter-spacing:.18em;
-  text-transform:uppercase;
+  text-decoration:none;
+  color:#fff;
+  font-weight:700;
+  letter-spacing:.12em;
   font-size:14px;
-  white-space:nowrap;
 }
-.brand .dot{ color: var(--gold); }
+.brand span{ color: var(--gold); }
 
-/* Nav */
 .nav{
   display:flex;
-  align-items:center;
   gap:16px;
-  flex: 1;
+  margin-left: 18px;
+  flex:1;
   justify-content:center;
-  min-width: 0;
 }
-.nav a{
+.nav__link{
   color: rgba(255,255,255,.78);
   text-decoration:none;
-  font-weight:650;
   font-size:13px;
   padding:8px 10px;
-  border-radius: 999px;
-  border:1px solid transparent;
-  transition: .2s ease;
-  white-space:nowrap;
+  border-radius:999px;
 }
-.nav a:hover{
-  color:#fff;
-  border-color: rgba(255,255,255,.10);
-  background: rgba(255,255,255,.04);
-}
-.nav a.active{
-  color:#fff;
-  border-color: rgba(200,164,90,.28);
-  background: rgba(200,164,90,.10);
-}
+.nav__link:hover{ color:#fff; background: rgba(255,255,255,.06); }
+.nav__link.is-active{ color:#fff; background: rgba(200,164,90,.14); border:1px solid rgba(200,164,90,.22); }
 
-/* Actions — IMPORTANT FIX */
-.actions{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:flex-end !important;
+.right{
+  display:flex;
+  align-items:center;
   gap:10px;
-  flex-wrap:nowrap !important;
-  white-space:nowrap;
 }
 
-/* Burger */
-.burger{
-  display:none;
-  border:1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.06);
-  color:#fff;
-  border-radius: 12px;
-  padding:10px 12px;
-  font-weight:800;
-}
-
-/* Language pills */
-.lang{
-  display:inline-flex !important;
-  align-items:center;
-  gap:6px;
-  padding:6px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.05);
+.lang{ display:flex; gap:6px; }
+.pill{
   border:1px solid rgba(255,255,255,.10);
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-}
-.lang button{
-  border:0;
-  cursor:pointer;
+  background: rgba(0,0,0,.35);
+  color:#fff;
   padding:7px 10px;
-  border-radius: 999px;
-  color: rgba(255,255,255,.80);
-  font-weight:900;
+  border-radius:999px;
   font-size:12px;
-  background: transparent;
+  cursor:pointer;
 }
-.lang button.active{
-  color:#111;
-  background: linear-gradient(180deg, var(--gold), var(--gold2));
+.pill.is-active{
+  border-color: rgba(200,164,90,.35);
+  background: rgba(200,164,90,.18);
 }
 
-/* Cart pill */
 .cart-pill{
-  display:inline-flex !important;
-  align-items:center;
-  gap:8px;
-  padding:10px 12px;
-  border-radius: 999px;
   text-decoration:none;
   color:#fff;
-  font-weight:900;
-  font-size:13px;
-  background: rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-  width:auto !important;
-  min-width: 0;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.35);
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:12px;
 }
-.cart-pill:hover{ background: rgba(255,255,255,.08); }
+
+/* Hero */
+.hero{
+  min-height: calc(100vh - 70px);
+  display:flex;
+  align-items:center;
+}
+.hero__content{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 18px calc(40px + var(--safeBottom));
+}
 .badge{
   display:inline-flex;
   align-items:center;
-  justify-content:center;
-  min-width:22px;
-  height:22px;
-  padding:0 7px;
+  gap:8px;
+  padding: 8px 12px;
   border-radius:999px;
-  background: rgba(200,164,90,.18);
-  border:1px solid rgba(200,164,90,.35);
-  color:#fff;
-  font-weight:900;
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.10);
+  color: rgba(255,255,255,.85);
   font-size:12px;
 }
 
-/* Mobile menu */
-.mobile-menu{
-  display:none;
-  padding: 10px 0 16px;
-  border-top: 1px solid rgba(255,255,255,.06);
+/* Текст ЛЕВЕЕ (как ты просил) + чтобы видно больше упаковки */
+.hero__title{
+  margin: 18px 0 10px;
+  font-size: 64px;
+  line-height: .92;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  max-width: 560px;
 }
-.mobile-menu a{
-  display:block;
-  padding:12px 0;
-  color: rgba(255,255,255,.86);
-  text-decoration:none;
-  font-weight:750;
-}
-
-/* ===== Sections / Cards ===== */
-.section{
-  padding: 48px 0 70px;
-}
-
-.title-row{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:16px;
-}
-h1,h2{
-  margin:0;
-  letter-spacing:.02em;
-}
-h2{
-  font-size: 34px;
-  font-weight: 950;
-}
-.subtitle{
-  margin-top:8px;
+.hero__text{
+  margin: 0 0 18px;
   color: var(--muted);
-  font-weight:650;
+  max-width: 560px;
+  font-size: 14px;
+}
+.hero__actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-/* Buttons */
 .btn{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:10px;
-  padding: 12px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
+  height:42px;
+  padding: 0 16px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.35);
   color:#fff;
   text-decoration:none;
-  font-weight:900;
+  font-weight:600;
   font-size:13px;
-  cursor:pointer;
-  transition:.2s ease;
 }
-.btn:hover{ background: rgba(255,255,255,.08); }
-.btn.primary{
-  color:#111;
-  border-color: rgba(200,164,90,.45);
-  background: linear-gradient(180deg, var(--gold), var(--gold2));
+.btn:hover{ background: rgba(255,255,255,.06); }
+.btn--gold{
+  background: linear-gradient(180deg, rgba(200,164,90,.95), rgba(143,106,44,.95));
+  color:#1b1408;
+  border: 0;
 }
-.btn.ghost{
-  background: transparent;
-}
-
-/* Form panel */
-.form{
-  border-radius: var(--r2);
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(10,10,11,.52);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow);
-  padding: 18px;
+.btn--gold:hover{
+  filter: brightness(1.05);
 }
 
 /* Footer */
 .footer{
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,.08);
-  color: rgba(255,255,255,.60);
-  font-weight:700;
-  letter-spacing:.10em;
-  text-transform:uppercase;
+  border-top: 1px solid rgba(255,255,255,.06);
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+}
+.footer__inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding: 14px 18px calc(14px + var(--safeBottom));
+  color: rgba(255,255,255,.70);
   font-size:12px;
 }
 
-/* ====== Catalog grid helpers (если используешь) ====== */
-.grid{
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 18px;
-}
-
-/* ===== Fix: убрать “прозрачные квадраты” (если где-то были рамки) ===== */
-.hero-card, .glass, .outline, .frame, .ghost-frame{
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* ===== Responsive ===== */
+/* Responsive */
 @media (max-width: 980px){
-  .nav{ display:none; }
-  .burger{ display:inline-flex; }
-  .mobile-menu.show{ display:block; }
-  .topbar__inner{ gap:10px; }
+  .nav{ display:none; } /* чтобы верх не ломался */
+  .hero__title{ font-size: 46px; }
 }
-
-@media (max-width: 560px){
-  .container{ width: calc(100% - 26px); }
-  h2{ font-size: 28px; }
-  .lang{ padding:5px; }
-  .lang button{ padding:7px 9px; }
-  .cart-pill{ padding:9px 11px; }
+@media (max-width: 520px){
+  .hero__title{ font-size: 38px; }
+  .topbar__inner{ padding: 12px 12px; }
 }
