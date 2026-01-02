@@ -3,81 +3,54 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>О нас • BLACKWOOD</title>
+  <title>BLACKWOOD • CHARCOAL — О нас</title>
   <link rel="stylesheet" href="assets/style.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <div class="page has-catalog-bg">
-    <header class="header">
-      <div class="container headerInner">
+  <header class="topbar">
+    <div class="container">
+      <div class="nav">
         <a class="brand" href="index.html">
-          <span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span>
+          BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
         </a>
 
-        <nav class="nav">
+        <nav class="navlinks">
           <a href="index.html">Главная</a>
           <a href="catalog.html">Каталог</a>
           <a href="shipping.html">Доставка</a>
           <a href="about.html">О нас</a>
           <a href="contacts.html">Контакты</a>
+          <a href="cart.html">Корзина <span data-cart-count></span></a>
         </nav>
-
-        <div class="rightBar">
-          <div class="lang">
-            <button type="button" data-lang="RU">RU</button>
-            <button type="button" data-lang="UKR">UKR</button>
-            <button type="button" data-lang="EN">EN</button>
-          </div>
-
-          <a class="cartPill" href="cart.html">
-            Корзина <span class="count" data-cart-count>0</span>
-          </a>
-
-          <button class="burger" type="button" data-burger>Меню</button>
-        </div>
       </div>
+    </div>
+  </header>
 
-      <div class="container mobileMenu" data-mobilemenu>
-        <a href="index.html">Главная</a>
-        <a href="catalog.html">Каталог</a>
-        <a href="shipping.html">Доставка</a>
-        <a href="about.html">О нас</a>
-        <a href="contacts.html">Контакты</a>
-        <a href="cart.html">Корзина</a>
-      </div>
-    </header>
+  <main class="container">
+    <div class="card pad">
+      <h1 class="h1" style="margin-bottom:6px;">О нас</h1>
+      <p class="p">
+        BLACKWOOD • CHARCOAL — уголь для тех, кто любит стабильный жар и чистое горение.
+      </p>
 
-    <main class="container section">
-      <h1 class="h1">О нас</h1>
-      <p class="p">BLACKWOOD — это про вкус, жар и стабильный результат на каждом гриле.</p>
+      <div class="hr"></div>
+      <p class="p"><b>Почему мы</b></p>
+      <p class="small">
+        • Честная фасовка 3 / 5 / 10 кг<br>
+        • Удобный заказ через сайт (и скоро через Telegram Mini App)<br>
+        • Аккуратный дизайн без лагов 🙂
+      </p>
+    </div>
+  </main>
 
-      <div class="glass" style="padding:16px; margin-top:16px; line-height:1.65; color:rgba(255,255,255,.82)">
-        <p style="margin-top:0">
-          Мы начали с простой идеи: сделать уголь, который не подводит.
-          Без резкого дыма, без лишнего пепла, без “скачков” температуры — чтобы мясо, рыба и овощи
-          получались одинаково круто и у новичка, и у профи.
-        </p>
-
-        <p>
-          Мы тестировали фракции, прожиг, упаковку и логистику — чтобы уголь приходил сухим и целым,
-          а жар держался долго. BLACKWOOD CORE — это уверенность: один и тот же результат на BBQ,
-          гриле и в печи.
-        </p>
-
-        <p style="margin-bottom:0">
-          Наша цель простая: чтобы вы думали про вкус — а не про уголь.
-        </p>
-
-        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
-          <a class="btn primary" href="catalog.html">Открыть каталог</a>
-          <a class="btn secondary" href="contacts.html">Контакты</a>
-        </div>
-      </div>
-
-      <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
-    </main>
-  </div>
+  <footer class="site-footer">
+    <div class="container">
+      © <span id="y"></span> BLACKWOOD • CHARCOAL
+    </div>
+  </footer>
 
   <script src="assets/app.js"></script>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 </html>
