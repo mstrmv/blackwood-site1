@@ -4,79 +4,92 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BLACKWOOD • CHARCOAL</title>
+  <meta name="description" content="BLACKWOOD • CHARCOAL — преміальний деревний вуголь для гриля та мангалу. Каталог: 3кг, 5кг, 10кг." />
   <link rel="stylesheet" href="assets/style.css" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <div class="page has-hero-bg">
-    <header class="header">
-      <div class="container headerInner">
+  <header class="topbar">
+    <div class="container">
+      <div class="nav">
         <a class="brand" href="index.html">
-          <span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span>
+          BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
         </a>
 
-        <nav class="nav">
+        <nav class="navlinks">
           <a href="index.html">Главная</a>
           <a href="catalog.html">Каталог</a>
           <a href="shipping.html">Доставка</a>
           <a href="about.html">О нас</a>
           <a href="contacts.html">Контакты</a>
+          <a href="cart.html">Корзина <span data-cart-count></span></a>
         </nav>
-
-        <div class="rightBar">
-          <div class="lang">
-            <button type="button" data-lang="RU">RU</button>
-            <button type="button" data-lang="UKR">UKR</button>
-            <button type="button" data-lang="EN">EN</button>
-          </div>
-
-          <a class="cartPill" href="cart.html">
-            Корзина <span class="count" data-cart-count>0</span>
-          </a>
-
-          <button class="burger" type="button" data-burger>Меню</button>
-        </div>
       </div>
+    </div>
+  </header>
 
-      <div class="container mobileMenu" data-mobilemenu>
-        <a href="index.html">Главная</a>
-        <a href="catalog.html">Каталог</a>
-        <a href="shipping.html">Доставка</a>
-        <a href="about.html">О нас</a>
-        <a href="contacts.html">Контакты</a>
-        <a href="cart.html">Корзина</a>
-      </div>
-    </header>
-
-    <main class="container heroWrap">
-      <div class="heroGrid">
-        <div class="heroCard">
-          <div class="badge"><span class="bDot"></span> Премиум уголь для гриля</div>
-
-          <h1 class="heroTitle">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
-
-          <p class="heroSub">
-            Длительное горение, минимум пепла, чистый жар.
-            Идеально для BBQ и гриля.
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="card pad">
+          <h1 class="h1">Премиальный уголь для гриля и мангала</h1>
+          <p class="p">
+            BLACKWOOD • CHARCOAL — стабильный жар, чистое горение и удобная фасовка.
+            Заказывай быстро через сайт или позже подключим Telegram Mini App.
           </p>
 
-          <div class="heroActions">
-            <a class="btn primary" href="catalog.html">Открыть каталог</a>
-            <a class="btn secondary" href="shipping.html">Доставка и оплата</a>
-            <a class="btn secondary" href="cart.html">Перейти в корзину</a>
+          <div class="badges">
+            <span class="badge">Сухой и чистый</span>
+            <span class="badge">Стабильный жар</span>
+            <span class="badge">Фасовка 3 / 5 / 10 кг</span>
           </div>
 
-          <div class="footer" style="padding:18px 0 0;">
-            BLACKWOOD • CHARCOAL © 2026
+          <div class="actions">
+            <a class="btn primary" href="catalog.html">Открыть каталог</a>
+            <a class="btn" href="cart.html">Перейти в корзину</a>
           </div>
         </div>
 
-        <!-- правая колонка специально пустая (пачки в фоне) -->
-        <div></div>
+        <div class="card pad">
+          <p class="p" style="margin-bottom:10px;"><b>Быстрый заказ</b></p>
+          <p class="small">
+            1) Открой <b>Каталог</b><br>
+            2) Добавь товары в <b>Корзину</b><br>
+            3) Перейди в <b>Оформление</b>
+          </p>
+          <div class="hr"></div>
+          <p class="small">
+            В будущем можно подключить оплату/форму заказа через Telegram и авто-уведомления.
+          </p>
+        </div>
       </div>
-    </main>
-  </div>
+    </section>
+
+    <section style="margin-top:16px;">
+      <div class="grid-3">
+        <div class="card pad">
+          <p class="p"><b>Для мяса</b></p>
+          <p class="small">Ровный жар и вкусная корочка.</p>
+        </div>
+        <div class="card pad">
+          <p class="p"><b>Для овощей</b></p>
+          <p class="small">Без лишнего дыма, контролируемая температура.</p>
+        </div>
+        <div class="card pad">
+          <p class="p"><b>Для заведений</b></p>
+          <p class="small">Удобные фасовки и быстрые поставки.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      © <span id="y"></span> BLACKWOOD • CHARCOAL
+    </div>
+  </footer>
 
   <script src="assets/app.js"></script>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 </html>
