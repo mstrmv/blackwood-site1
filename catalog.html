@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Каталог — BLACKWOOD • CHARCOAL</title>
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/style.css?v=5" />
 </head>
 
 <body class="page page-catalog">
@@ -18,7 +18,7 @@
 
       <nav class="nav">
         <a class="nav__link" href="index.html">Главная</a>
-        <a class="nav__link is-active" href="catalog.html">Каталог</a>
+        <a class="nav__link" href="catalog.html">Каталог</a>
         <a class="nav__link" href="shipping.html">Доставка</a>
         <a class="nav__link" href="about.html">О нас</a>
         <a class="nav__link" href="contacts.html">Контакты</a>
@@ -30,20 +30,15 @@
           <button class="lang__btn" data-lang="uk">UKR</button>
           <button class="lang__btn" data-lang="en">EN</button>
         </div>
-
-        <a class="pill" href="cart.html">
-          Корзина • <span id="cartCount">0</span>
-        </a>
+        <a class="pill" href="cart.html">Корзина • <span id="cartCount">0</span></a>
       </div>
     </div>
   </header>
 
   <main class="container catalog">
-    <div class="catalog__head">
-      <div>
-        <h1 class="h1">Товары</h1>
-        <p class="muted">Выберите вес и добавьте в корзину.</p>
-      </div>
+    <div>
+      <h1 class="h1">Товары</h1>
+      <p class="muted">Выберите вес и добавьте в корзину.</p>
     </div>
 
     <section class="glass controls">
@@ -74,10 +69,10 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">BLACKWOOD • CHARCOAL</div>
-      <div class="footer__copy">© <span id="year"></span></div>
+      <div>© <span id="year"></span></div>
     </div>
   </footer>
 
-  <script src="assets/app.js"></script>
+  <script src="assets/app.js?v=5"></script>
 </body>
 </html>
