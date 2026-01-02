@@ -1,4 +1,4 @@
-/* BLACKWOOD • CHARCOAL — clean stable CSS */
+/* BLACKWOOD • CHARCOAL — clean stable CSS + i18n + auth + new hero style */
 
 :root{
   --bg: #070708;
@@ -27,6 +27,9 @@ body{
 }
 
 img{ max-width:100%; height:auto; display:block; }
+
+/* Prevent purple visited links */
+a:visited{ color: inherit; }
 
 .container{
   width:min(var(--container), 92vw);
@@ -67,12 +70,12 @@ img{ max-width:100%; height:auto; display:block; }
   background: var(--gold);
   box-shadow: 0 0 18px rgba(200,164,90,.55);
 }
-
 .brand .gold{ color: var(--gold); }
 
 .navlinks{
   display:flex;
-  gap: 14px;
+  align-items:center;
+  gap: 10px;
   flex-wrap: wrap;
   justify-content:flex-end;
 }
@@ -100,34 +103,33 @@ img{ max-width:100%; height:auto; display:block; }
   background: rgba(200,164,90,.10);
 }
 
-/* Make sure visited links don't go purple */
-a:visited{ color: inherit; }
+/* Lang switch */
+.lang{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding-left: 6px;
+}
+.lang select{
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.25);
+  color: var(--text);
+  font-weight: 750;
+  cursor:pointer;
+}
 
 /* Layout */
 main{ padding: 26px 0 42px; }
 
-.hero{
-  padding: 26px 0 10px;
-}
-
-.hero-grid{
-  display:grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 18px;
-  align-items: stretch;
-}
-
-@media (max-width: 880px){
-  .hero-grid{ grid-template-columns: 1fr; }
-}
-
+/* Cards + text */
 .card{
   background: rgba(255,255,255,.05);
   border: 1px solid rgba(255,255,255,.10);
   border-radius: var(--r);
   box-shadow: var(--shadow);
 }
-
 .card.pad{ padding: 18px; }
 
 .h1{
@@ -181,6 +183,7 @@ main{ padding: 26px 0 42px; }
   justify-content:center;
   gap:10px;
   transition: .15s ease;
+  white-space: nowrap;
 }
 
 .btn:hover{
@@ -202,32 +205,208 @@ main{ padding: 26px 0 42px; }
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
 }
-
 @media (max-width: 880px){
   .grid-3{ grid-template-columns: 1fr; }
 }
 
-/* Product cards */
+.hr{
+  height:1px;
+  background: rgba(255,255,255,.10);
+  margin: 12px 0;
+}
+
+.small{
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.split{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 720px){
+  .split{ grid-template-columns: 1fr; }
+}
+
+/* =========================
+   NEW: HERO like 2nd photo
+========================= */
+.hero-premium{
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: var(--shadow);
+  background:
+    radial-gradient(900px 420px at 18% 10%, rgba(200,164,90,.20), transparent 55%),
+    linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.70));
+}
+
+.hero-premium::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image: url("../img/hero/hero-bg.png");
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.05) contrast(1.05);
+  transform: scale(1.02);
+  opacity: .62;
+}
+
+.hero-premium::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(700px 320px at 22% 35%, rgba(0,0,0,.30), transparent 60%),
+    linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 40%, rgba(0,0,0,.25) 70%, rgba(0,0,0,.65) 100%);
+}
+
+.hero-premium-inner{
+  position: relative;
+  z-index: 1;
+  padding: 26px;
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 18px;
+  align-items: center;
+}
+
+@media (max-width: 920px){
+  .hero-premium-inner{ grid-template-columns: 1fr; }
+}
+
+.kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom: 10px;
+  color: rgba(255,255,255,.86);
+  font-weight: 850;
+  letter-spacing:.5px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.kicker .line{
+  width: 28px;
+  height: 2px;
+  background: rgba(200,164,90,.70);
+  border-radius: 999px;
+}
+
+.hero-title{
+  font-size: clamp(30px, 4.6vw, 52px);
+  line-height: 1.02;
+  margin: 0 0 10px;
+  letter-spacing: .2px;
+  text-shadow: 0 12px 30px rgba(0,0,0,.55);
+}
+.hero-sub{
+  margin:0 0 14px;
+  color: rgba(255,255,255,.78);
+  line-height: 1.55;
+  font-size: 15px;
+  max-width: 58ch;
+}
+
+.hero-media{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+}
+
+.packstack{
+  width: 100%;
+  max-width: 460px;
+  position: relative;
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.28);
+  backdrop-filter: blur(8px);
+}
+
+.packstack .packs{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap: 10px;
+}
+
+.packstack img{
+  width: 33%;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 32px rgba(0,0,0,.65));
+  transform: translateY(2px);
+}
+
+.packstack img:nth-child(2){ transform: translateY(-6px); }
+.packstack img:nth-child(3){ transform: translateY(6px); }
+
+.hero-cta{
+  display:flex;
+  gap:10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+/* =========================
+   NEW: Why Blackwood row
+========================= */
+.why{
+  margin-top: 14px;
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (max-width: 920px){
+  .why{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px){
+  .why{ grid-template-columns: 1fr; }
+}
+
+.why-item{
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+}
+.why-item b{
+  display:block;
+  margin-bottom: 6px;
+  letter-spacing: .2px;
+}
+.why-item span{
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* =========================
+   Product cards
+========================= */
 .product{
   overflow:hidden;
   display:flex;
   flex-direction:column;
   min-height: 100%;
 }
-
 .product-media{
   padding: 16px;
   border-bottom: 1px solid rgba(255,255,255,.08);
   background: radial-gradient(700px 280px at 50% 0%, rgba(200,164,90,.16), transparent 55%);
 }
-
 .product-media img{
   width:100%;
   max-height: 260px;
   object-fit: contain;
   filter: drop-shadow(0 18px 32px rgba(0,0,0,.55));
 }
-
 .product-body{
   padding: 16px;
   display:flex;
@@ -235,14 +414,12 @@ main{ padding: 26px 0 42px; }
   gap: 10px;
   flex: 1;
 }
-
 .product-title{
   display:flex;
   align-items:baseline;
   justify-content:space-between;
   gap: 10px;
 }
-
 .product-title h3{
   margin:0;
   font-size: 16px;
@@ -253,23 +430,18 @@ main{ padding: 26px 0 42px; }
   font-weight: 850;
   white-space: nowrap;
 }
-
 .product-meta{
   margin:0;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.45;
 }
-
 .product-footer{
   margin-top: auto;
   display:flex;
   gap: 10px;
 }
-
-.product-footer .btn{
-  width: 100%;
-}
+.product-footer .btn{ width: 100%; }
 
 /* Tables (cart) */
 .table{
@@ -328,17 +500,8 @@ main{ padding: 26px 0 42px; }
 }
 .total b{ color: var(--gold); }
 
-.hr{
-  height:1px;
-  background: rgba(255,255,255,.10);
-  margin: 12px 0;
-}
-
 /* Forms */
-.form{
-  display:grid;
-  gap: 12px;
-}
+.form{ display:grid; gap: 12px; }
 .field label{
   display:block;
   font-size: 13px;
@@ -346,7 +509,7 @@ main{ padding: 26px 0 42px; }
   margin-bottom: 6px;
   font-weight: 750;
 }
-.field input, .field textarea, .field select{
+.field input, .field textarea{
   width:100%;
   padding: 12px 12px;
   border-radius: 14px;
@@ -357,13 +520,42 @@ main{ padding: 26px 0 42px; }
 }
 .field textarea{ min-height: 110px; resize: vertical; }
 
-.small{
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
+/* Auth tabs */
+.tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.tab{
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+  font-weight: 850;
+  cursor:pointer;
+}
+.tab.active{
+  border-color: rgba(200,164,90,.40);
+  background: rgba(200,164,90,.12);
 }
 
-/* Bottom */
+/* About banner */
+.about-banner{
+  overflow:hidden;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: var(--shadow);
+  background: rgba(0,0,0,.35);
+}
+.about-banner img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* Footer */
 .site-footer{
   padding: 18px 0 26px;
   color: rgba(255,255,255,.55);
