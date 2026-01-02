@@ -1,95 +1,115 @@
-<!doctype html><html lang="ru"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Оформление — BLACKWOOD</title>
-<link rel="stylesheet" href="assets/style.css?v=8">
-</head><body class="page page-alt"><div class="vignette"></div>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Оформление — BLACKWOOD</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body class="page-alt">
+  <header class="topbar">
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="index.html">
+          BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
+        </a>
 
-<header class="topbar"><div class="topbar__inner container">
-<a class="brand" href="index.html"><span>BLACKWOOD</span><span class="brand__dot">•</span><span>CHARCOAL</span></a>
-<nav class="nav">
-<a class="nav__link" href="index.html">Главная</a>
-<a class="nav__link" href="catalog.html">Каталог</a>
-<a class="nav__link" href="shipping.html">Доставка</a>
-<a class="nav__link" href="about.html">О нас</a>
-<a class="nav__link" href="contacts.html">Контакты</a>
-</nav>
-<div class="topbar__right">
-<div class="lang">
-<button class="lang__btn is-active" data-lang="ru">RU</button>
-<button class="lang__btn" data-lang="uk">UKR</button>
-<button class="lang__btn" data-lang="en">EN</button>
-</div>
-<a class="pill" href="cart.html">Корзина • <span id="cartCount">0</span></a>
-</div>
-</div></header>
+        <nav class="navlinks">
+          <a href="index.html" data-i18n="nav_home">Главная</a>
+          <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+          <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+          <a href="about.html" data-i18n="nav_about">О нас</a>
+          <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
+        </nav>
 
-<main class="container checkout">
-  <section class="glass form">
-    <h1 class="h1" style="font-size:30px;">Оформление</h1>
-    <p class="muted">Заполните данные для отправки Новой Почтой.</p>
+        <div class="navright">
+          <div class="lang">
+            <button type="button" data-lang="ru">RU</button>
+            <button type="button" data-lang="ukr">UKR</button>
+            <button type="button" data-lang="en">EN</button>
+          </div>
+          <a class="badge" href="cart.html">
+            <span data-i18n="cart">Корзина</span> • <span data-cart-count>0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <form id="checkoutForm" novalidate>
-      <div class="field" data-field="fullName">
-        <div class="label">ФИО получателя</div>
-        <input class="input" name="fullName" placeholder="Иванов Иван Иванович" autocomplete="name">
-        <div class="err" data-err="fullName"></div>
+  <main class="section">
+    <div class="container">
+      <div class="sectionTitle">
+        <div>
+          <h2 data-i18n="checkout_title">Оформление заказа</h2>
+          <p style="color:rgba(255,255,255,.62);font-weight:650">
+            <span data-i18n="total">Итого</span>: <b style="color:var(--gold)" data-total>0 грн</b>
+          </p>
+        </div>
       </div>
 
-      <div class="field" data-field="phone">
-        <div class="label">Телефон</div>
-        <input class="input" name="phone" placeholder="+380 XX XXX XX XX" autocomplete="tel">
-        <div class="err" data-err="phone"></div>
+      <form class="formWrap" data-checkout-form>
+        <div class="formGrid">
+          <div class="field">
+            <label for="full_name" data-i18n="name">ФИО</label>
+            <input id="full_name" placeholder="Иван Иванов" required />
+          </div>
+
+          <div class="field">
+            <label for="phone" data-i18n="phone">Телефон</label>
+            <input id="phone" placeholder="+380..." required />
+          </div>
+
+          <div class="field">
+            <label for="np_city" data-i18n="city">Город</label>
+            <input id="np_city" list="np_city_list" placeholder="Киев / Львов..." required />
+            <datalist id="np_city_list"></datalist>
+            <div class="help">Подсказки подтягиваются с Новой Почты.</div>
+          </div>
+
+          <div class="field">
+            <label for="np_wh" data-i18n="warehouse">Отделение / Поштомат</label>
+            <select id="np_wh" required>
+              <option value="">Отделение / Поштомат</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="pay" data-i18n="pay">Оплата</label>
+            <select id="pay">
+              <option value="Cash on delivery" data-i18n="pay_cash">Наличными при получении</option>
+              <option value="Card later" data-i18n="pay_card">Картой (уточним после заказа)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="comment" data-i18n="comment">Комментарий</label>
+            <input id="comment" placeholder="Например: позвонить перед отправкой" />
+          </div>
+        </div>
+
+        <hr class="hr"/>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+          <a class="btn ghost" href="cart.html" data-i18n="cart">Корзина</a>
+          <button class="btn primary" type="submit" data-i18n="send_order">Отправить заказ</button>
+        </div>
+
+        <div class="help" style="margin-top:10px;">
+          ⚠️ GitHub Pages — статический сайт. Реальная отправка на email без сервера невозможна, поэтому сейчас используется <b>mailto</b> (откроет вашу почту с готовым письмом).
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footerRow">
+        <div class="mini"><b>BLACKWOOD</b><i></i>CHARCOAL</div>
+        <div>© 2026</div>
       </div>
+    </div>
+  </footer>
 
-      <div class="field" data-field="city">
-        <div class="label">Город</div>
-        <input class="input" name="city" placeholder="Киев / Львов / Одесса" autocomplete="address-level2">
-        <div class="err" data-err="city"></div>
-      </div>
-
-      <div class="field" data-field="npWarehouse">
-        <div class="label">Нова Пошта: отделение / почтомат</div>
-        <input class="input" name="npWarehouse" placeholder="Напр.: Отделение №12 или Почтомат №3456">
-        <div class="err" data-err="npWarehouse"></div>
-      </div>
-
-      <div class="field" data-field="payment">
-        <div class="label">Оплата</div>
-        <select class="select" name="payment">
-          <option value="">Выберите…</option>
-          <option value="Оплата при получении">Оплата при получении</option>
-          <option value="Предоплата (перевод)">Предоплата (перевод)</option>
-        </select>
-        <div class="err" data-err="payment"></div>
-      </div>
-
-      <div class="field" data-field="comment">
-        <div class="label">Комментарий (не обязательно)</div>
-        <textarea class="textarea" name="comment" placeholder="Например: звонить перед отправкой"></textarea>
-        <div class="err" data-err="comment"></div>
-      </div>
-
-      <div class="rowbtns" style="margin-top:14px;">
-        <a class="btn btn--ghost" href="cart.html">Назад в корзину</a>
-        <button class="btn btn--gold" type="submit">Подтвердить заказ</button>
-      </div>
-
-      <p class="muted" style="margin-top:12px; font-size:12px;">
-        * Сейчас сайт без сервера, поэтому заказ сохраняется и показывается на странице “Успех”.
-        Следующий шаг — отправлять заказ в Telegram-бот или на email.
-      </p>
-    </form>
-  </section>
-
-  <aside class="glass summary">
-    <div class="label" style="margin-bottom:10px;">Состав заказа</div>
-    <div id="checkoutSummary"></div>
-  </aside>
-</main>
-
-<footer class="footer"><div class="container footer__inner">
-<div class="footer__brand">BLACKWOOD • CHARCOAL</div><div>© <span id="year"></span></div>
-</div></footer>
-
-<script src="assets/app.js?v=8"></script>
-</body></html>
+  <script src="assets/app.js"></script>
+</body>
+</html>
