@@ -13,28 +13,26 @@
   <header class="topbar">
     <div class="topbar__inner container">
       <a class="brand" href="index.html">
-        <span class="brand__name">BLACKWOOD</span>
-        <span class="brand__dot">•</span>
-        <span class="brand__sub">CHARCOAL</span>
+        <span>BLACKWOOD</span><span class="brand__dot">•</span><span>CHARCOAL</span>
       </a>
 
       <nav class="nav">
-        <a class="nav__link" href="index.html" data-i18n="nav_home">Главная</a>
-        <a class="nav__link is-active" href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-        <a class="nav__link" href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-        <a class="nav__link" href="about.html" data-i18n="nav_about">О нас</a>
-        <a class="nav__link" href="contacts.html" data-i18n="nav_contacts">Контакты</a>
+        <a class="nav__link" href="index.html">Главная</a>
+        <a class="nav__link is-active" href="catalog.html">Каталог</a>
+        <a class="nav__link" href="shipping.html">Доставка</a>
+        <a class="nav__link" href="about.html">О нас</a>
+        <a class="nav__link" href="contacts.html">Контакты</a>
       </nav>
 
       <div class="topbar__right">
         <div class="lang">
-          <button class="lang__btn" data-lang="ru">RU</button>
+          <button class="lang__btn is-active" data-lang="ru">RU</button>
           <button class="lang__btn" data-lang="uk">UKR</button>
           <button class="lang__btn" data-lang="en">EN</button>
         </div>
 
         <a class="pill" href="cart.html">
-          <span data-i18n="cart">Корзина</span> • <span id="cartCount">0</span>
+          Корзина • <span id="cartCount">0</span>
         </a>
       </div>
     </div>
@@ -43,24 +41,24 @@
   <main class="container catalog">
     <div class="catalog__head">
       <div>
-        <h1 class="h1" data-i18n="catalog_title">Товары</h1>
-        <p class="muted" data-i18n="catalog_sub">Выберите вес и добавьте в корзину.</p>
+        <h1 class="h1">Товары</h1>
+        <p class="muted">Выберите вес и добавьте в корзину.</p>
       </div>
     </div>
 
     <section class="glass controls">
       <div class="chips">
-        <button class="chip is-active" data-filter="all" data-i18n="filter_all">All</button>
-        <button class="chip" data-filter="3-5" data-i18n="filter_3_5">3–5kg</button>
-        <button class="chip" data-filter="10" data-i18n="filter_10">10kg</button>
+        <button class="chip is-active" data-filter="all">All</button>
+        <button class="chip" data-filter="3-5">3–5kg</button>
+        <button class="chip" data-filter="10">10kg</button>
       </div>
 
       <div class="sort">
-        <span class="sort__label" data-i18n="sort">Sort</span>
+        <span class="sort__label">Sort</span>
         <select id="sortSelect" class="sort__select">
-          <option value="popular" data-i18n="sort_popular">Popular</option>
-          <option value="weight_asc" data-i18n="sort_weight_asc">Weight ↑</option>
-          <option value="weight_desc" data-i18n="sort_weight_desc">Weight ↓</option>
+          <option value="popular">Popular</option>
+          <option value="weight_asc">Weight ↑</option>
+          <option value="weight_desc">Weight ↓</option>
         </select>
       </div>
     </section>
@@ -68,8 +66,8 @@
     <section class="grid" id="productsGrid"></section>
 
     <div class="catalog__actions">
-      <a class="btn btn--ghost" href="cart.html" data-i18n="go_cart">Перейти в корзину</a>
-      <a class="btn btn--gold" href="checkout.html" data-i18n="checkout">Оформить заказ</a>
+      <a class="btn btn--ghost" href="cart.html">Перейти в корзину</a>
+      <a class="btn btn--gold" href="checkout.html">Оформить заказ</a>
     </div>
   </main>
 
