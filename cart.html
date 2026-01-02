@@ -1,58 +1,77 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Корзина — BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css"/>
-  <script defer src="assets/app.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Корзина • BLACKWOOD</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
-<body class="page">
-<header class="header">
-  <div class="container">
-    <div class="row">
-      <a class="logo" href="index.html">
-        <span>BLACKWOOD</span><span class="dot"></span><span>CHARCOAL</span>
-      </a>
+<body>
+  <div class="page has-catalog-bg">
+    <header class="header">
+      <div class="container headerInner">
+        <a class="brand" href="index.html">
+          <span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span>
+        </a>
 
-      <nav class="nav">
-        <a href="index.html" data-i18n="nav_home">Главная</a>
-        <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-        <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-        <a href="about.html" data-i18n="nav_about">О нас</a>
-        <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
-      </nav>
+        <nav class="nav">
+          <a href="index.html">Главная</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="shipping.html">Доставка</a>
+          <a href="about.html">О нас</a>
+          <a href="contacts.html">Контакты</a>
+        </nav>
 
-      <div class="right">
-        <div class="lang">
-          <button type="button" data-lang="RU">RU</button>
-          <button type="button" data-lang="UKR">UKR</button>
-          <button type="button" data-lang="EN">EN</button>
+        <div class="rightBar">
+          <div class="lang">
+            <button type="button" data-lang="RU">RU</button>
+            <button type="button" data-lang="UKR">UKR</button>
+            <button type="button" data-lang="EN">EN</button>
+          </div>
+
+          <a class="cartPill" href="cart.html">
+            Корзина <span class="count" data-cart-count>0</span>
+          </a>
+
+          <button class="burger" type="button" data-burger>Меню</button>
         </div>
-        <a class="cartBadge" href="cart.html" data-cart-badge>Корзина • 0</a>
       </div>
-    </div>
+
+      <div class="container mobileMenu" data-mobilemenu>
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="shipping.html">Доставка</a>
+        <a href="about.html">О нас</a>
+        <a href="contacts.html">Контакты</a>
+        <a href="cart.html">Корзина</a>
+      </div>
+    </header>
+
+    <main class="container section">
+      <h1 class="h1">Корзина</h1>
+      <p class="p">Проверьте количество и переходите к оформлению.</p>
+
+      <div data-cart-empty class="glass" style="padding:16px; margin-top:16px; display:none">
+        Корзина пуста. <a class="btn primary" href="catalog.html" style="margin-top:10px">Открыть каталог</a>
+      </div>
+
+      <div class="cartList" data-cart-list></div>
+
+      <div class="summaryRow">
+        <div style="color:rgba(255,255,255,.78); font-weight:800">Итого:</div>
+        <div class="total" data-cart-total>0 грн</div>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px">
+        <a class="btn secondary" href="catalog.html">Назад в каталог</a>
+        <a class="btn primary" href="checkout.html">Оформить заказ</a>
+      </div>
+
+      <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
+    </main>
   </div>
-</header>
 
-<main class="main">
-  <div class="container">
-    <h1 class="pageTitle" data-i18n="cart_title">Корзина</h1>
-
-    <div class="cartList" data-cart-list></div>
-
-    <div class="totalBox">
-      <div><span data-i18n="total">Итого</span>:</div>
-      <div class="sum" data-cart-total>0 грн</div>
-    </div>
-
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
-      <a class="btn" href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-      <a class="btn primary" href="checkout.html" data-i18n="btn_checkout">Оформить заказ</a>
-    </div>
-
-    <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
-  </div>
-</main>
+  <script src="assets/app.js"></script>
 </body>
 </html>
