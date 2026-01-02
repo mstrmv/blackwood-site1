@@ -2,77 +2,84 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Каталог — BLACKWOOD • CHARCOAL</title>
-  <link rel="stylesheet" href="assets/style.css?v=5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Каталог — BLACKWOOD</title>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
-
-<body class="page page-catalog">
-  <div class="vignette"></div>
-
+<body class="page-alt">
   <header class="topbar">
-    <div class="topbar__inner container">
-      <a class="brand" href="index.html">
-        <span>BLACKWOOD</span><span class="brand__dot">•</span><span>CHARCOAL</span>
-      </a>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="index.html">
+          BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
+        </a>
 
-      <nav class="nav">
-        <a class="nav__link" href="index.html">Главная</a>
-        <a class="nav__link" href="catalog.html">Каталог</a>
-        <a class="nav__link" href="shipping.html">Доставка</a>
-        <a class="nav__link" href="about.html">О нас</a>
-        <a class="nav__link" href="contacts.html">Контакты</a>
-      </nav>
+        <nav class="navlinks">
+          <a href="index.html" data-i18n="nav_home">Главная</a>
+          <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+          <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+          <a href="about.html" data-i18n="nav_about">О нас</a>
+          <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
+        </nav>
 
-      <div class="topbar__right">
-        <div class="lang">
-          <button class="lang__btn is-active" data-lang="ru">RU</button>
-          <button class="lang__btn" data-lang="uk">UKR</button>
-          <button class="lang__btn" data-lang="en">EN</button>
+        <div class="navright">
+          <div class="lang">
+            <button type="button" data-lang="ru">RU</button>
+            <button type="button" data-lang="ukr">UKR</button>
+            <button type="button" data-lang="en">EN</button>
+          </div>
+          <a class="badge" href="cart.html">
+            <span data-i18n="cart">Корзина</span> • <span data-cart-count>0</span>
+          </a>
         </div>
-        <a class="pill" href="cart.html">Корзина • <span id="cartCount">0</span></a>
       </div>
     </div>
   </header>
 
-  <main class="container catalog">
-    <div>
-      <h1 class="h1">Товары</h1>
-      <p class="muted">Выберите вес и добавьте в корзину.</p>
-    </div>
-
-    <section class="glass controls">
-      <div class="chips">
-        <button class="chip is-active" data-filter="all">All</button>
-        <button class="chip" data-filter="3-5">3–5kg</button>
-        <button class="chip" data-filter="10">10kg</button>
+  <main class="section">
+    <div class="container">
+      <div class="sectionTitle">
+        <div>
+          <h2 data-i18n="goods_title">Товары</h2>
+          <p data-i18n="goods_sub">Выберите вес и добавьте в корзину.</p>
+        </div>
       </div>
 
-      <div class="sort">
-        <span class="sort__label">Sort</span>
-        <select id="sortSelect" class="sort__select">
-          <option value="popular">Popular</option>
-          <option value="weight_asc">Weight ↑</option>
-          <option value="weight_desc">Weight ↓</option>
-        </select>
+      <div class="toolbar">
+        <div class="pills">
+          <button class="pill active" type="button" data-filter="all" data-i18n="filter_all">All</button>
+          <button class="pill" type="button" data-filter="3-5kg" data-i18n="filter_35">3–5kg</button>
+          <button class="pill" type="button" data-filter="10kg" data-i18n="filter_10">10kg</button>
+        </div>
+
+        <div class="sort">
+          <span data-i18n="sort">Sort</span>
+          <select class="select" data-sort>
+            <option value="popular" data-i18n="sort_pop">Popular</option>
+            <option value="price-asc">Price ↑</option>
+            <option value="price-desc">Price ↓</option>
+          </select>
+        </div>
       </div>
-    </section>
 
-    <section class="grid" id="productsGrid"></section>
+      <div class="grid" data-catalog-grid></div>
 
-    <div class="catalog__actions">
-      <a class="btn btn--ghost" href="cart.html">Перейти в корзину</a>
-      <a class="btn btn--gold" href="checkout.html">Оформить заказ</a>
+      <div class="catalogBottom">
+        <a class="btn ghost" href="cart.html" data-i18n="go_cart">Перейти в корзину</a>
+        <a class="btn primary" href="checkout.html" data-i18n="checkout">Оформить заказ</a>
+      </div>
     </div>
   </main>
 
   <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__brand">BLACKWOOD • CHARCOAL</div>
-      <div>© <span id="year"></span></div>
+    <div class="container">
+      <div class="footerRow">
+        <div class="mini"><b>BLACKWOOD</b><i></i>CHARCOAL</div>
+        <div>© 2026</div>
+      </div>
     </div>
   </footer>
 
-  <script src="assets/app.js?v=5"></script>
+  <script src="assets/app.js"></script>
 </body>
 </html>
