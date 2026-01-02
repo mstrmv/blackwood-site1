@@ -1,21 +1,28 @@
 /* BLACKWOOD • CHARCOAL — unified styles (PC + Mobile)
-   Put file here: /assets/style.css
+   file: /assets/style.css
 */
 
 :root{
   --bg:#070708;
-  --card:rgba(20,20,22,.62);
-  --glass:rgba(18,18,20,.55);
-  --stroke:rgba(255,255,255,.10);
-  --stroke2:rgba(255,255,255,.07);
+
+  --glass: rgba(18,18,20,.52);
+  --glass2: rgba(16,16,18,.42);
+
+  --stroke: rgba(255,255,255,.10);
+  --stroke2: rgba(255,255,255,.07);
+
   --text:#fff;
-  --muted:rgba(255,255,255,.74);
-  --muted2:rgba(255,255,255,.55);
+  --muted: rgba(255,255,255,.74);
+  --muted2: rgba(255,255,255,.56);
+
   --gold:#c8a45a;
   --gold2:#a8843f;
-  --shadow:0 18px 50px rgba(0,0,0,.55);
+
+  --shadow: 0 18px 55px rgba(0,0,0,.55);
+
   --r:18px;
   --r2:24px;
+
   --container:1180px;
 }
 
@@ -24,15 +31,15 @@ html,body{height:100%}
 body{
   margin:0;
   color:var(--text);
-  background: var(--bg);
+  background:var(--bg);
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
   line-height:1.25;
 }
 
-a{color:inherit; text-decoration:none}
-img{max-width:100%; display:block}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
 button,select{font:inherit}
-::selection{background:rgba(200,164,90,.25)}
+::selection{background:rgba(200,164,90,.22)}
 
 .container{
   width:min(var(--container), calc(100% - 48px));
@@ -49,48 +56,44 @@ button,select{font:inherit}
   content:"";
   position:fixed;
   inset:0;
-  z-index:-2;
+  z-index:-3;
   background:
-    radial-gradient(1100px 520px at 50% -120px, rgba(200,164,90,.18), transparent 58%),
-    radial-gradient(900px 420px at 10% 20%, rgba(200,164,90,.09), transparent 60%),
-    radial-gradient(900px 420px at 90% 20%, rgba(200,164,90,.06), transparent 60%),
-    linear-gradient(180deg, #050506 0%, #070708 40%, #060607 100%);
+    radial-gradient(1100px 520px at 50% -120px, rgba(200,164,90,.16), transparent 58%),
+    radial-gradient(900px 420px at 10% 20%, rgba(200,164,90,.08), transparent 60%),
+    radial-gradient(900px 420px at 90% 20%, rgba(200,164,90,.05), transparent 60%),
+    linear-gradient(180deg, #050506 0%, #070708 45%, #060607 100%);
 }
 
 .page::after{
   content:"";
   position:fixed;
   inset:0;
-  z-index:-1;
-  opacity:.88;
+  z-index:-2;
+  opacity:.90;
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
   filter:saturate(.95) contrast(1.02);
 }
 
-/* HERO bg on main */
 .page-home::after{ background-image:url("../img/hero-bg.png"); }
-
-/* CATALOG bg */
 .page-catalog::after{ background-image:url("../img/catalog-bg.png"); }
 
-/* other pages (you can change later) */
 .page-alt::after{
-  background-image:
-    radial-gradient(1200px 520px at 50% 10%, rgba(200,164,90,.10), transparent 60%),
-    linear-gradient(180deg, #070708 0%, #070708 100%);
   opacity:1;
+  background-image:
+    radial-gradient(1200px 520px at 50% 10%, rgba(200,164,90,.08), transparent 60%),
+    linear-gradient(180deg, #070708 0%, #070708 100%);
 }
 
-/* subtle vignette */
+/* vignette */
 .vignette{
   position:fixed;
   inset:0;
   z-index:-1;
   pointer-events:none;
   background:
-    radial-gradient(60% 70% at 50% 40%, rgba(0,0,0,.0), rgba(0,0,0,.55) 70%, rgba(0,0,0,.75) 100%);
+    radial-gradient(60% 70% at 50% 40%, rgba(0,0,0,.00), rgba(0,0,0,.52) 70%, rgba(0,0,0,.74) 100%);
 }
 
 /* ---- Topbar ---- */
@@ -99,7 +102,7 @@ button,select{font:inherit}
   top:0;
   z-index:50;
   backdrop-filter: blur(12px);
-  background: linear-gradient(180deg, rgba(0,0,0,.62), rgba(0,0,0,.28));
+  background: linear-gradient(180deg, rgba(0,0,0,.62), rgba(0,0,0,.24));
   border-bottom:1px solid rgba(255,255,255,.06);
 }
 
@@ -116,14 +119,13 @@ button,select{font:inherit}
   align-items:center;
   gap:10px;
   letter-spacing:.22em;
-  font-weight:700;
+  font-weight:800;
   text-transform:uppercase;
   font-size:13px;
   opacity:.98;
   white-space:nowrap;
 }
-.brand__dot{ color:var(--gold); opacity:1 }
-.brand__sub{ opacity:.85 }
+.brand__dot{ color:var(--gold) }
 
 .nav{
   display:flex;
@@ -136,13 +138,13 @@ button,select{font:inherit}
 .nav__link{
   font-size:13px;
   color:rgba(255,255,255,.82);
-  padding:10px 10px;
+  padding:10px 12px;
   border-radius:999px;
   transition:.2s ease;
 }
 .nav__link:hover{ background:rgba(255,255,255,.06) }
 .nav__link.is-active{
-  background:rgba(200,164,90,.12);
+  background:rgba(200,164,90,.14);
   border:1px solid rgba(200,164,90,.22);
   color:#fff;
 }
@@ -153,7 +155,6 @@ button,select{font:inherit}
   gap:10px;
 }
 
-/* ---- Lang switch ---- */
 .lang{
   display:flex;
   gap:6px;
@@ -169,7 +170,7 @@ button,select{font:inherit}
   padding:8px 10px;
   border-radius:999px;
   background:transparent;
-  font-weight:650;
+  font-weight:750;
   font-size:12px;
   letter-spacing:.06em;
 }
@@ -180,7 +181,6 @@ button,select{font:inherit}
   border:1px solid rgba(200,164,90,.24);
 }
 
-/* ---- Pills & Buttons ---- */
 .pill{
   display:inline-flex;
   align-items:center;
@@ -206,16 +206,16 @@ button,select{font:inherit}
   color:#fff;
   cursor:pointer;
   transition: transform .08s ease, background .2s ease, border-color .2s ease;
-  font-weight:650;
+  font-weight:800;
 }
 .btn:active{ transform:translateY(1px) }
 .btn:hover{ background:rgba(255,255,255,.08) }
 
 .btn--gold{
-  background: linear-gradient(180deg, rgba(200,164,90,.95), rgba(168,132,63,.95));
+  background: linear-gradient(180deg, rgba(200,164,90,.96), rgba(168,132,63,.96));
   color:#0b0b0c;
-  border-color: rgba(200,164,90,.45);
-  box-shadow: 0 10px 26px rgba(200,164,90,.18);
+  border-color: rgba(200,164,90,.42);
+  box-shadow: 0 10px 26px rgba(200,164,90,.16);
 }
 .btn--gold:hover{
   background: linear-gradient(180deg, rgba(214,180,103,.98), rgba(176,140,70,.98));
@@ -224,11 +224,12 @@ button,select{font:inherit}
   background:rgba(255,255,255,.04);
 }
 
+/* ---- Headings ---- */
 .h1{
   margin:0;
-  font-size:44px;
-  letter-spacing:.02em;
-  text-transform:none;
+  font-size:36px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
 }
 .muted{ color:var(--muted) }
 
@@ -241,14 +242,17 @@ button,select{font:inherit}
   backdrop-filter: blur(14px);
 }
 
-/* ---- Catalog ---- */
-.catalog{ padding: 34px 0 36px; }
+/* ---- Catalog layout ---- */
+.catalog{
+  padding: 34px 0 36px;
+}
+
 .catalog__head{
   display:flex;
   align-items:flex-end;
   justify-content:space-between;
   gap:16px;
-  margin-bottom:16px;
+  margin-bottom:12px;
 }
 
 .controls{
@@ -260,33 +264,36 @@ button,select{font:inherit}
   margin: 10px 0 18px;
 }
 
+/* left chips like your screenshot */
 .chips{ display:flex; gap:8px; flex-wrap:wrap; }
 .chip{
   border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.05);
-  color:rgba(255,255,255,.88);
+  background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.90);
   padding:10px 14px;
   border-radius:999px;
   cursor:pointer;
-  font-weight:650;
+  font-weight:800;
   font-size:13px;
+  letter-spacing:.02em;
 }
-.chip:hover{ background:rgba(255,255,255,.08) }
+.chip:hover{ background:rgba(255,255,255,.10) }
 .chip.is-active{
   background:rgba(200,164,90,.16);
-  border-color:rgba(200,164,90,.25);
+  border-color:rgba(200,164,90,.26);
   color:#fff;
 }
 
+/* sort on right */
 .sort{
   display:flex;
   align-items:center;
   gap:10px;
 }
 .sort__label{
-  color:rgba(255,255,255,.72);
+  color:rgba(255,255,255,.82);
   font-size:13px;
-  font-weight:650;
+  font-weight:800;
 }
 .sort__select{
   border-radius:999px;
@@ -295,54 +302,71 @@ button,select{font:inherit}
   background:rgba(0,0,0,.35);
   color:#fff;
   outline:none;
+  min-width:150px;
 }
 .sort__select:focus{
-  border-color:rgba(200,164,90,.30);
+  border-color:rgba(200,164,90,.34);
 }
 
-/* PRODUCTS GRID */
+/* Products grid */
 .grid{
   display:grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap:18px;
 }
 
-/* CARD */
+/* ---- Product Card (match your screenshot) ---- */
 .card{
   border-radius: var(--r2);
-  background: rgba(12,12,14,.55);
+  background: rgba(12,12,14,.52);
   border:1px solid rgba(255,255,255,.10);
   box-shadow: 0 18px 45px rgba(0,0,0,.50);
   overflow:hidden;
   position:relative;
 }
+
 .card::before{
   content:"";
   position:absolute;
   inset:-2px;
-  background: radial-gradient(600px 260px at 20% 0%, rgba(200,164,90,.14), transparent 55%);
+  background: radial-gradient(640px 260px at 20% 0%, rgba(200,164,90,.12), transparent 56%);
   pointer-events:none;
   opacity:.9;
 }
 
-/* media: fixed proportion so all cards equal height */
+/* top media “window” + inner frame */
 .card__media{
   position:relative;
-  aspect-ratio: 16 / 10;
-  background:
-    radial-gradient(120% 120% at 50% 30%, rgba(255,255,255,.06), transparent 60%),
-    linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.18));
+  padding:16px;
   border-bottom:1px solid rgba(255,255,255,.08);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.16));
 }
+
+.card__frame{
+  border-radius: 18px;
+  border:1px solid rgba(255,255,255,.10);
+  background:
+    radial-gradient(120% 120% at 50% 28%, rgba(255,255,255,.06), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.24));
+  overflow:hidden;
+  aspect-ratio: 16 / 11; /* как “окно” на твоём скрине */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* IMPORTANT: contain -> упаковка целиком, без кропа */
 .card__img{
   width:100%;
   height:100%;
-  object-fit: cover; /* if you want full cell: cover */
+  object-fit: contain;
   object-position:center;
   transform: scale(1.02);
-  filter: contrast(1.04) saturate(.98);
+  filter: contrast(1.03) saturate(.98);
 }
 
+/* body */
 .card__body{
   padding:14px 14px 16px;
   position:relative;
@@ -350,7 +374,7 @@ button,select{font:inherit}
 }
 
 .card__title{
-  font-weight:800;
+  font-weight:900;
   letter-spacing:.10em;
   text-transform:uppercase;
   font-size:14px;
@@ -361,6 +385,7 @@ button,select{font:inherit}
   font-size:13px;
 }
 
+/* qty + buy row */
 .card__row{
   margin-top:14px;
   display:flex;
@@ -383,20 +408,21 @@ button,select{font:inherit}
   height:34px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,.10);
-  background:rgba(0,0,0,.30);
+  background:rgba(0,0,0,.34);
   color:#fff;
   cursor:pointer;
+  font-weight:900;
 }
-.qty__btn:hover{ background:rgba(255,255,255,.06) }
+.qty__btn:hover{ background:rgba(255,255,255,.08) }
 .qty__num{
   min-width:18px;
   text-align:center;
-  font-weight:800;
+  font-weight:900;
 }
 
 .card__buy{
   padding:12px 16px;
-  min-width:140px;
+  min-width:150px;
 }
 
 .card__buy.is-done{
@@ -434,10 +460,10 @@ button,select{font:inherit}
 }
 .footer__copy{ opacity:.8 }
 
-/* ---- Responsive (mobile) ---- */
+/* ---- Responsive ---- */
 @media (max-width: 980px){
   .nav{ display:none; }
-  .h1{ font-size:36px; }
+  .h1{ font-size:30px; }
   .grid{ grid-template-columns: 1fr 1fr; }
 }
 
@@ -445,12 +471,11 @@ button,select{font:inherit}
   .container{ width: calc(100% - 26px); }
   .topbar__inner{ padding:12px 0; }
   .brand{ font-size:12px; }
-  .lang{ padding:5px; }
-  .lang__btn{ padding:7px 9px; }
-  .pill{ padding:9px 12px; font-size:12.5px; }
 
-  .h1{ font-size:30px; }
   .controls{ flex-direction:column; align-items:flex-start; }
+  .sort{ width:100%; justify-content:space-between; }
+  .sort__select{ width:100%; }
+
   .grid{ grid-template-columns: 1fr; }
   .card__row{ flex-direction:column; align-items:stretch; }
   .card__buy{ width:100%; }
