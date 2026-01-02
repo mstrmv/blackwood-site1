@@ -3,91 +3,58 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BLACKWOOD • CHARCOAL — About</title>
+  <title>О нас • BLACKWOOD</title>
   <link rel="stylesheet" href="assets/style.css" />
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="index.html">
-          BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
-        </a>
-
-        <nav class="navlinks">
-          <a href="index.html" data-i18n="nav_home">Главная</a>
-          <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-          <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-          <a href="about.html" data-i18n="nav_about">О нас</a>
-          <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
-          <a href="cart.html"><span data-i18n="nav_cart">Корзина</span> <span data-cart-count></span></a>
-          <span data-auth-slot></span>
-
-          <span class="lang">
-            <select data-lang-select aria-label="language">
-              <option value="ru">RU</option>
-              <option value="uk">UA</option>
-              <option value="en">EN</option>
-            </select>
-          </span>
+  <div class="page has-catalog-bg">
+    <header class="header">
+      <div class="container headerInner">
+        <a class="brand" href="index.html"><span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span></a>
+        <nav class="nav">
+          <a href="index.html">Главная</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="shipping.html">Доставка</a>
+          <a href="about.html">О нас</a>
+          <a href="contacts.html">Контакты</a>
         </nav>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <div class="card pad">
-      <h1 class="h1" style="margin-bottom:6px;" data-i18n="about_title">О нас</h1>
-      <p class="p" data-i18n="about_text">BLACKWOOD • CHARCOAL — уголь для тех, кто любит стабильный жар и чистое горение.</p>
-    </div>
-
-    <section class="about-banner" style="margin-top:14px;">
-      <img src="img/brand/about-banner.png" alt="BLACKWOOD banner" loading="lazy">
-    </section>
-
-    <section style="margin-top:14px;">
-      <div class="split">
-        <div class="card pad">
-          <p class="p"><b data-i18n="about_why">Почему мы</b></p>
-          <p class="small" style="white-space:pre-line;" data-i18n="about_why_t"></p>
-        </div>
-
-        <div class="card pad">
-          <p class="p"><b data-i18n="about_quality_t">Качество</b></p>
-          <p class="small" style="white-space:pre-line;" data-i18n="about_quality_s">
-            Чистое горение и стабильная температура — то, что важно для BBQ.
-          </p>
-          <div class="hr"></div>
-          <p class="p"><b data-i18n="about_pack_t">Фасовка</b></p>
-          <p class="small" data-i18n="about_pack_s">3 / 5 / 10 кг — удобно для дома и для заведений.</p>
+        <div class="rightBar">
+          <a class="cartPill" href="cart.html">Корзина <span class="count" data-cart-count>0</span></a>
+          <button class="burger" type="button" data-burger>Меню</button>
         </div>
       </div>
-    </section>
+      <div class="container mobileMenu" data-mobilemenu>
+        <a href="index.html">Главная</a><a href="catalog.html">Каталог</a><a href="shipping.html">Доставка</a>
+        <a href="about.html">О нас</a><a href="contacts.html">Контакты</a><a href="cart.html">Корзина</a>
+      </div>
+    </header>
 
-    <section style="margin-top:14px;">
-      <div class="grid-3">
-        <div class="card pad">
-          <p class="p"><b data-i18n="about_feat1_t">Долго держит жар</b></p>
-          <p class="small" data-i18n="about_feat1_s">Оптимально для долгих сессий на гриле.</p>
-        </div>
-        <div class="card pad">
-          <p class="p"><b data-i18n="about_feat2_t">Мало пепла</b></p>
-          <p class="small" data-i18n="about_feat2_s">Чисто, аккуратно, проще убирать.</p>
-        </div>
-        <div class="card pad">
-          <p class="p"><b data-i18n="about_feat3_t">Для BBQ & Grill</b></p>
-          <p class="small" data-i18n="about_feat3_s">Стабильный жар = стабильный результат.</p>
+    <main class="container section">
+      <h1 class="h1">О нас</h1>
+      <p class="p">BLACKWOOD — это про вкус, жар и стабильный результат на каждом гриле.</p>
+
+      <div style="padding:16px; margin-top:16px; border:1px solid rgba(255,255,255,.10); border-radius:18px; background:rgba(0,0,0,.28); color:rgba(255,255,255,.82); line-height:1.65">
+        <p style="margin-top:0">
+          Мы начали с простой идеи: сделать уголь, который не подводит — без резкого дыма, без лишнего пепла,
+          с ровным жаром. Чтобы результат был одинаково крутым и у новичка, и у профи.
+        </p>
+        <p>
+          Мы тестировали фракции, прожиг, упаковку и логистику — чтобы уголь приходил сухим и целым,
+          а температура держалась долго. BLACKWOOD CORE — это уверенность на BBQ и гриле.
+        </p>
+        <p style="margin-bottom:0">
+          Наша цель простая: чтобы вы думали про вкус — а не про уголь.
+        </p>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn primary" href="catalog.html">Открыть каталог</a>
+          <a class="btn secondary" href="contacts.html">Контакты</a>
         </div>
       </div>
-    </section>
-  </main>
 
-  <footer class="site-footer">
-    <div class="container">© <span id="y"></span> BLACKWOOD • CHARCOAL</div>
-  </footer>
-
+      <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
+    </main>
+  </div>
   <script src="assets/app.js"></script>
-  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 </html>
