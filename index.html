@@ -38,16 +38,23 @@
   </header>
 
   <main class="container">
-    <!-- HERO like 2nd photo -->
-    <section class="hero-premium">
+    <section
+      class="hero-premium"
+      style="
+        background-image:
+          linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 40%, rgba(0,0,0,.25) 70%, rgba(0,0,0,.70) 100%),
+          radial-gradient(900px 420px at 18% 10%, rgba(200,164,90,.20), transparent 55%),
+          url('img/hero/hero-bg.png');
+        background-size: cover;
+        background-position: center;
+      "
+    >
       <div class="hero-premium-inner">
         <div>
-          <div class="kicker"><span class="line"></span> <span data-i18n="home_kicker">Premium Hardwood Charcoal</span></div>
+          <div class="kicker"><span class="line"></span> <span data-i18n="home_kicker">PREMIUM HARDWOOD CHARCOAL</span></div>
 
           <h1 class="hero-title" data-i18n="hero_title">Премиальный уголь для гриля и мангала</h1>
-          <p class="hero-sub" data-i18n="hero_text">
-            BLACKWOOD • CHARCOAL — стабильный жар, чистое горение и удобная фасовка.
-          </p>
+          <p class="hero-sub" data-i18n="hero_text">BLACKWOOD • CHARCOAL — стабильный жар, чистое горение и удобная фасовка.</p>
 
           <div class="badges">
             <span class="badge" data-i18n="badge_1">Сухой и чистый</span>
@@ -80,8 +87,7 @@
           </div>
         </div>
 
-        <!-- Right: packs -->
-        <div class="hero-media">
+        <div>
           <div class="packstack">
             <div class="packs">
               <img src="img/products/core-3kg.png" alt="CORE 3kg" loading="lazy">
@@ -95,7 +101,6 @@
       </div>
     </section>
 
-    <!-- Keep bottom cards (optional) -->
     <section style="margin-top:16px;">
       <div class="grid-3">
         <div class="card pad">
