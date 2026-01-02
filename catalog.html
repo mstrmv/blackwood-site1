@@ -3,83 +3,46 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Каталог • BLACKWOOD</title>
+  <title>BLACKWOOD • CHARCOAL — Каталог</title>
   <link rel="stylesheet" href="assets/style.css" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <div class="page has-catalog-bg">
-    <header class="header">
-      <div class="container headerInner">
+  <header class="topbar">
+    <div class="container">
+      <div class="nav">
         <a class="brand" href="index.html">
-          <span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span>
+          BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
         </a>
 
-        <nav class="nav">
+        <nav class="navlinks">
           <a href="index.html">Главная</a>
           <a href="catalog.html">Каталог</a>
           <a href="shipping.html">Доставка</a>
           <a href="about.html">О нас</a>
           <a href="contacts.html">Контакты</a>
+          <a href="cart.html">Корзина <span data-cart-count></span></a>
         </nav>
-
-        <div class="rightBar">
-          <div class="lang">
-            <button type="button" data-lang="RU">RU</button>
-            <button type="button" data-lang="UKR">UKR</button>
-            <button type="button" data-lang="EN">EN</button>
-          </div>
-
-          <a class="cartPill" href="cart.html">
-            Корзина <span class="count" data-cart-count>0</span>
-          </a>
-
-          <button class="burger" type="button" data-burger>Меню</button>
-        </div>
       </div>
+    </div>
+  </header>
 
-      <div class="container mobileMenu" data-mobilemenu>
-        <a href="index.html">Главная</a>
-        <a href="catalog.html">Каталог</a>
-        <a href="shipping.html">Доставка</a>
-        <a href="about.html">О нас</a>
-        <a href="contacts.html">Контакты</a>
-        <a href="cart.html">Корзина</a>
-      </div>
-    </header>
+  <main class="container">
+    <div class="card pad" style="margin-bottom:14px;">
+      <h1 class="h1" style="margin-bottom:6px;">Каталог</h1>
+      <p class="p">Выберите фасовку и добавьте в корзину.</p>
+    </div>
 
-    <main class="container section">
-      <h1 class="h1">Товары</h1>
-      <p class="p">Выберите вес и добавьте в корзину.</p>
+    <section class="grid-3" data-catalog></section>
+  </main>
 
-      <div class="toolbar">
-        <div class="filters">
-          <button class="pill" type="button" data-filter="all">All</button>
-          <button class="pill" type="button" data-filter="3-5kg">3–5kg</button>
-          <button class="pill" type="button" data-filter="10kg">10kg</button>
-        </div>
-
-        <div class="sort">
-          <label for="sort">Sort</label>
-          <select id="sort" data-sort>
-            <option value="popular">Popular</option>
-            <option value="price_asc">Price ↑</option>
-            <option value="price_desc">Price ↓</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="grid" data-products></div>
-
-      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
-        <button class="btn secondary" type="button" data-go-cart>Перейти в корзину</button>
-        <button class="btn primary" type="button" data-go-checkout>Оформить заказ</button>
-      </div>
-
-      <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
-    </main>
-  </div>
+  <footer class="site-footer">
+    <div class="container">
+      © <span id="y"></span> BLACKWOOD • CHARCOAL
+    </div>
+  </footer>
 
   <script src="assets/app.js"></script>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 </html>
