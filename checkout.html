@@ -1,7 +1,7 @@
 <!doctype html><html lang="ru"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Оформление — BLACKWOOD</title>
-<link rel="stylesheet" href="assets/style.css?v=5">
+<link rel="stylesheet" href="assets/style.css?v=8">
 </head><body class="page page-alt"><div class="vignette"></div>
 
 <header class="topbar"><div class="topbar__inner container">
@@ -23,17 +23,73 @@
 </div>
 </div></header>
 
-<main class="container section">
-  <h1 class="h1">Оформление</h1>
-  <div class="glass panel">
-    <p class="muted">Форма оформления будет здесь. Пока сделаем кнопку “Успех”.</p>
-    <a class="btn btn--gold" href="success.html" style="margin-top:12px;">Подтвердить</a>
-  </div>
+<main class="container checkout">
+  <section class="glass form">
+    <h1 class="h1" style="font-size:30px;">Оформление</h1>
+    <p class="muted">Заполните данные для отправки Новой Почтой.</p>
+
+    <form id="checkoutForm" novalidate>
+      <div class="field" data-field="fullName">
+        <div class="label">ФИО получателя</div>
+        <input class="input" name="fullName" placeholder="Иванов Иван Иванович" autocomplete="name">
+        <div class="err" data-err="fullName"></div>
+      </div>
+
+      <div class="field" data-field="phone">
+        <div class="label">Телефон</div>
+        <input class="input" name="phone" placeholder="+380 XX XXX XX XX" autocomplete="tel">
+        <div class="err" data-err="phone"></div>
+      </div>
+
+      <div class="field" data-field="city">
+        <div class="label">Город</div>
+        <input class="input" name="city" placeholder="Киев / Львов / Одесса" autocomplete="address-level2">
+        <div class="err" data-err="city"></div>
+      </div>
+
+      <div class="field" data-field="npWarehouse">
+        <div class="label">Нова Пошта: отделение / почтомат</div>
+        <input class="input" name="npWarehouse" placeholder="Напр.: Отделение №12 или Почтомат №3456">
+        <div class="err" data-err="npWarehouse"></div>
+      </div>
+
+      <div class="field" data-field="payment">
+        <div class="label">Оплата</div>
+        <select class="select" name="payment">
+          <option value="">Выберите…</option>
+          <option value="Оплата при получении">Оплата при получении</option>
+          <option value="Предоплата (перевод)">Предоплата (перевод)</option>
+        </select>
+        <div class="err" data-err="payment"></div>
+      </div>
+
+      <div class="field" data-field="comment">
+        <div class="label">Комментарий (не обязательно)</div>
+        <textarea class="textarea" name="comment" placeholder="Например: звонить перед отправкой"></textarea>
+        <div class="err" data-err="comment"></div>
+      </div>
+
+      <div class="rowbtns" style="margin-top:14px;">
+        <a class="btn btn--ghost" href="cart.html">Назад в корзину</a>
+        <button class="btn btn--gold" type="submit">Подтвердить заказ</button>
+      </div>
+
+      <p class="muted" style="margin-top:12px; font-size:12px;">
+        * Сейчас сайт без сервера, поэтому заказ сохраняется и показывается на странице “Успех”.
+        Следующий шаг — отправлять заказ в Telegram-бот или на email.
+      </p>
+    </form>
+  </section>
+
+  <aside class="glass summary">
+    <div class="label" style="margin-bottom:10px;">Состав заказа</div>
+    <div id="checkoutSummary"></div>
+  </aside>
 </main>
 
 <footer class="footer"><div class="container footer__inner">
 <div class="footer__brand">BLACKWOOD • CHARCOAL</div><div>© <span id="year"></span></div>
 </div></footer>
 
-<script src="assets/app.js?v=5"></script>
+<script src="assets/app.js?v=8"></script>
 </body></html>
