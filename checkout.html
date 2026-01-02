@@ -1,500 +1,138 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Оформление — BLACKWOOD</title>
-  <link rel="stylesheet" href="./style.css"/>
-
-  <style>
-    /* локальные стили именно для этой страницы */
-    .page{
-      min-height:100vh;
-      padding: 24px 16px 60px;
-      background:
-        radial-gradient(1100px 520px at 50% -120px, rgba(200,164,90,.14), transparent 60%),
-        radial-gradient(700px 380px at 20% 12%, rgba(255,255,255,.06), transparent 55%),
-        #0b0b0c;
-    }
-    .topbar{
-      width:min(1180px, 100%);
-      margin: 0 auto 18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding: 10px 14px;
-    }
-    .brand{font-weight:800; letter-spacing:.08em; font-size:13px; opacity:.9}
-    .brand span{color: var(--gold)}
-    .card{
-      width:min(980px, 100%);
-      margin: 0 auto;
-      padding: 18px;
-    }
-    .title{margin: 6px 0 4px; font-size: 30px; letter-spacing:.02em}
-    .total{margin:0 0 14px; color: rgba(255,255,255,.78)}
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    @media (max-width: 860px){
-      .grid{grid-template-columns:1fr}
-    }
-    .row{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      justify-content:flex-end;
-      margin-top: 14px;
-      flex-wrap:wrap;
-    }
-    .hint{
-      margin-top:8px;
-      color: rgba(255,255,255,.62);
-      font-size: 12px;
-      line-height:1.35;
-    }
-    .divider{
-      height:1px;
-      background: rgba(255,255,255,.08);
-      margin: 14px 0;
-    }
-    .mini{
-      font-size:12px;
-      color: rgba(255,255,255,.58);
-    }
-  </style>
+  <link rel="stylesheet" href="./assets/style.css" />
 </head>
-
 <body>
-  <div class="page">
-    <div class="topbar glass">
-      <div class="brand">BLACKWOOD <span>•</span> CHARCOAL</div>
-      <a class="btn" href="./catalog.html">Каталог</a>
-    </div>
-
-    <div class="card glass">
-      <h1 class="title">ОФОРМЛЕНИЕ ЗАКАЗА</h1>
-      <p class="total">Итого: <b id="total">0 грн</b></p>
-
-      <div class="grid">
-        <div class="field">
-          <div class="label">ФИО</div>
-          <input class="input" id="fio" placeholder="Иван Иванов"/>
-        </div>
-
-        <div class="field">
-          <div class="label">Телефон</div>
-          <input class="input" id="phone" placeholder="+380..." inputmode="tel"/>
-        </div>
-
-        <!-- ГОРОД (подсказки НП) -->
-        <div class="field suggest">
-          <div class="label">Город</div>
-          <input class="input" id="city" placeholder="Киев / Львов..." autocomplete="off"/>
-          <div class="suggest-list" id="cityList"></div>
-          <div class="hint">Подсказки подтягиваются с Новой Почты.</div>
-        </div>
-
-        <div class="field">
-          <div class="label">Оплата</div>
-          <select class="input" id="pay">
-            <option value="cod">Наличными при получении</option>
-            <option value="card">Картой (уточнить менеджером)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <!-- СПОСОБ ДОСТАВКИ КНОПКАМИ -->
-      <div class="field">
-        <div class="label">Доставка</div>
-        <div class="pills" id="deliveryPills">
-          <button type="button" class="pill active" data-mode="branch">Отделение</button>
-          <button type="button" class="pill" data-mode="postomat">Поштомат</button>
-          <button type="button" class="pill" data-mode="courier">Курьер</button>
-        </div>
-        <div class="hint">Выберите тип доставки — дальше поля подстроятся автоматически.</div>
-      </div>
-
-      <div class="grid" style="margin-top:12px">
-        <!-- ОТДЕЛЕНИЯ/ПОШТОМАТЫ -->
-        <div class="field suggest" id="npBlock">
-          <div class="label" id="npLabel">Отделение (НП)</div>
-          <input class="input" id="npPlace" placeholder="Начните вводить номер или адрес..." autocomplete="off"/>
-          <div class="suggest-list" id="npList"></div>
-          <div class="hint" id="npHint">Сначала выберите город — затем появятся подсказки отделений.</div>
-        </div>
-
-        <!-- КУРЬЕР -->
-        <div class="field" id="addrBlock" style="display:none">
-          <div class="label">Адрес (курьер)</div>
-          <input class="input" id="addrStreet" placeholder="Улица, дом"/>
-          <div style="display:flex; gap:10px; margin-top:10px">
-            <input class="input" id="addrFlat" placeholder="Кв/офис (необязательно)"/>
+  <div class="page" data-bg="plain">
+    <header class="topbar">
+      <div class="container">
+        <div class="topbar__inner">
+          <div class="brand">
+            <span>BLACKWOOD</span><span class="dot">•</span><span>CHARCOAL</span>
           </div>
-          <div class="hint">Курьерская доставка: укажите улицу и дом (кв/офис — по желанию).</div>
+
+          <nav class="nav">
+            <a href="./index.html">Главная</a>
+            <a href="./catalog.html">Каталог</a>
+            <a href="./shipping.html">Доставка</a>
+            <a href="./about.html">О нас</a>
+            <a href="./contacts.html">Контакты</a>
+          </nav>
+
+          <div class="actions">
+            <button class="burger" data-burger>Меню</button>
+
+            <div class="lang">
+              <button type="button" data-lang="RU">RU</button>
+              <button type="button" data-lang="UKR">UKR</button>
+              <button type="button" data-lang="EN">EN</button>
+            </div>
+
+            <a class="cart-pill" href="./cart.html">
+              <span data-i18n-cart>Корзина</span> • <span class="badge" data-cart-count>0</span>
+            </a>
+          </div>
         </div>
 
-        <div class="field">
-          <div class="label">Комментарий</div>
-          <textarea class="input" id="comment" placeholder="Например: позвонить перед отправкой"></textarea>
+        <div class="mobile-menu" data-mobile-menu>
+          <a href="./index.html">Главная</a>
+          <a href="./catalog.html">Каталог</a>
+          <a href="./shipping.html">Доставка</a>
+          <a href="./about.html">О нас</a>
+          <a href="./contacts.html">Контакты</a>
+          <a href="./cart.html"><span data-i18n-cart>Корзина</span> (<span data-cart-count>0</span>)</a>
         </div>
       </div>
+    </header>
 
-      <div class="row">
-        <a class="btn" href="./cart.html">Корзина</a>
-        <button class="btn primary" id="submit">Отправить заказ</button>
+    <main class="section">
+      <div class="container">
+        <div class="title-row">
+          <div>
+            <h2>ОФОРМЛЕНИЕ ЗАКАЗА</h2>
+            <div class="subtitle">
+              Товаров: <strong data-checkout-count>0</strong> • Итого: <strong data-checkout-total>0 грн</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- SET YOUR EMAIL HERE -->
+        <div data-order-email="YOUR_EMAIL_HERE@example.com"></div>
+
+        <form class="form" data-checkout-form>
+          <div class="form-grid">
+            <div class="field">
+              <label>ФИО</label>
+              <input class="input" name="fio" placeholder="Иван Иванов" required />
+            </div>
+
+            <div class="field">
+              <label>Телефон</label>
+              <input class="input" name="phone" placeholder="+380..." required />
+              <div class="hint">Формат: +380XXXXXXXXX</div>
+            </div>
+
+            <div class="field">
+              <label>Город</label>
+              <input class="input" name="city" placeholder="Киев / Львов..." list="cityList" required />
+              <datalist id="cityList"></datalist>
+              <div class="hint">Подсказки появятся, если подключён прокси `/api/np`. Иначе можно вводить вручную.</div>
+            </div>
+
+            <div class="field">
+              <label>Оплата</label>
+              <select class="input" name="pay">
+                <option value="Наличными при получении">Наличными при получении</option>
+                <option value="Оплата на карту">Оплата на карту</option>
+              </select>
+            </div>
+
+            <div class="field" style="grid-column: 1 / -1;">
+              <label>Доставка</label>
+              <div class="delivery-toggle">
+                <button type="button" class="pill active" data-delivery="warehouse">Отделение</button>
+                <button type="button" class="pill" data-delivery="postomat">Поштомат</button>
+                <button type="button" class="pill" data-delivery="courier">Курьер</button>
+              </div>
+              <div class="hint">Для “Курьер” поле отделения скрывается.</div>
+            </div>
+
+            <div class="field" data-branch-wrap>
+              <label>Отделение / Поштомат</label>
+              <input class="input" name="branch" placeholder="Например: Отделение №12, ул..." list="branchList" />
+              <datalist id="branchList"></datalist>
+              <div class="hint">Подсказки по отделениям/поштоматам будут работать через `/api/np`.</div>
+            </div>
+
+            <div class="field" style="grid-column: 1 / -1;">
+              <label>Комментарий</label>
+              <textarea class="textarea" name="comment" placeholder="Например: позвонить перед отправкой"></textarea>
+            </div>
+          </div>
+
+          <div class="actions-row">
+            <div class="total-big">Итого: <span data-checkout-total>0 грн</span></div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn ghost" href="./cart.html">Корзина</a>
+              <button class="btn primary" type="submit">Отправить заказ</button>
+            </div>
+          </div>
+
+          <div class="note">
+            GitHub Pages — статический сайт. Реальная отправка заказа на email без сервера невозможна — сейчас используется <strong>mailto</strong> (откроет вашу почту с готовым письмом).
+            Если хочешь “в 1 клик” без mailto — нужно добавить сервер/worker.
+          </div>
+        </form>
+
+        <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
       </div>
-
-      <p class="mini" style="margin-top:10px">
-        ⚠️ GitHub Pages — статический сайт. Реальная отправка заказа без сервера невозможна,
-        поэтому сейчас используется <b>mailto:</b> (откроет вашу почту с готовым письмом).
-      </p>
-    </div>
+    </main>
   </div>
 
-<script>
-/** ==========================
- * НАСТРОЙКИ
- * ========================== */
-const NP_API_KEY = "e2d2f807d2464e81aae678bb51c9c569"; // твой ключ НП
-const ORDER_EMAIL = "YOUR_EMAIL_HERE@gmail.com";       // <-- поставь свой email
-
-/** ==========================
- * КОРЗИНА / СУММА
- * ========================== */
-function readCart(){
-  // ожидаем массив: [{id,name,price,qty}]
-  try{
-    const raw = localStorage.getItem("bw_cart");
-    if(!raw) return [];
-    const arr = JSON.parse(raw);
-    if(!Array.isArray(arr)) return [];
-    return arr.map(x => ({
-      id: String(x.id ?? ""),
-      name: String(x.name ?? "Товар"),
-      price: Number(x.price ?? 0),
-      qty: Number(x.qty ?? 1)
-    })).filter(x => x.price > 0 && x.qty > 0);
-  }catch(e){
-    return [];
-  }
-}
-
-function calcTotal(cart){
-  let sum = 0;
-  for(const it of cart){
-    sum += (it.price * it.qty);
-  }
-  return Math.round(sum);
-}
-
-function renderTotal(){
-  const cart = readCart();
-
-  // если вдруг корзина пустая — можно показать демо-цены (не обязательно)
-  const total = calcTotal(cart);
-  document.getElementById("total").textContent = `${total} грн`;
-  return {cart, total};
-}
-
-/** ==========================
- * НОВА ПОЧТА API
- * ========================== */
-async function npRequest(modelName, calledMethod, methodProperties){
-  const res = await fetch("https://api.novaposhta.ua/v2.0/json/", {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({
-      apiKey: NP_API_KEY,
-      modelName,
-      calledMethod,
-      methodProperties
-    })
-  });
-  const data = await res.json();
-  if(!data || data.success !== true) return { ok:false, data };
-  return { ok:true, data };
-}
-
-function debounce(fn, ms=350){
-  let t;
-  return (...args)=>{
-    clearTimeout(t);
-    t = setTimeout(()=>fn(...args), ms);
-  };
-}
-
-/** ==========================
- * AUTOCOMPLETE UI
- * ========================== */
-function showList(listEl, items, onPick){
-  listEl.innerHTML = "";
-  if(!items.length){
-    listEl.classList.remove("show");
-    return;
-  }
-  for(const it of items){
-    const div = document.createElement("div");
-    div.className = "suggest-item";
-    div.textContent = it.label;
-    div.addEventListener("click", ()=>onPick(it));
-    listEl.appendChild(div);
-  }
-  listEl.classList.add("show");
-}
-
-function hideList(listEl){
-  listEl.classList.remove("show");
-}
-
-/** ==========================
- * СТЕЙТ ДОСТАВКИ
- * ========================== */
-let selectedCity = null; // {Ref, Description}
-let selectedPlace = null; // отделение/поштомат (string)
-let deliveryMode = "branch"; // branch | postomat | courier
-
-function setDeliveryMode(mode){
-  deliveryMode = mode;
-  selectedPlace = null;
-  document.getElementById("npPlace").value = "";
-  hideList(document.getElementById("npList"));
-
-  // pills active
-  document.querySelectorAll("#deliveryPills .pill").forEach(b=>{
-    b.classList.toggle("active", b.dataset.mode === mode);
-  });
-
-  const npBlock = document.getElementById("npBlock");
-  const addrBlock = document.getElementById("addrBlock");
-  const npLabel = document.getElementById("npLabel");
-  const npHint = document.getElementById("npHint");
-
-  if(mode === "courier"){
-    npBlock.style.display = "none";
-    addrBlock.style.display = "block";
-  }else{
-    npBlock.style.display = "block";
-    addrBlock.style.display = "none";
-    npLabel.textContent = (mode === "postomat") ? "Поштомат (НП)" : "Отделение (НП)";
-    npHint.textContent = selectedCity
-      ? "Начните вводить номер/адрес — покажем варианты."
-      : "Сначала выберите город — затем появятся подсказки.";
-  }
-}
-
-/** ==========================
- * ГОРОД: подсказки
- * ========================== */
-const cityInput = document.getElementById("city");
-const cityList  = document.getElementById("cityList");
-
-const searchCity = debounce(async ()=>{
-  const q = cityInput.value.trim();
-  selectedCity = null;
-  selectedPlace = null;
-  document.getElementById("npPlace").value = "";
-  hideList(document.getElementById("npList"));
-  document.getElementById("npHint").textContent = "Сначала выберите город — затем появятся подсказки.";
-
-  if(q.length < 2){
-    hideList(cityList);
-    return;
-  }
-
-  const r = await npRequest("Address", "searchSettlements", {
-    CityName: q,
-    Limit: 10
-  });
-
-  if(!r.ok){
-    hideList(cityList);
-    return;
-  }
-
-  const arr = (r.data.data && r.data.data[0] && r.data.data[0].Addresses) ? r.data.data[0].Addresses : [];
-  const items = arr.map(x => ({
-    label: x.Present,
-    ref: x.DeliveryCity,
-    desc: x.Present
-  }));
-
-  showList(cityList, items, (it)=>{
-    cityInput.value = it.desc;
-    selectedCity = { Ref: it.ref, Description: it.desc };
-    hideList(cityList);
-    document.getElementById("npHint").textContent = "Начните вводить номер/адрес — покажем варианты.";
-  });
-}, 350);
-
-cityInput.addEventListener("input", searchCity);
-cityInput.addEventListener("focus", ()=>{ if(cityList.childElementCount) cityList.classList.add("show"); });
-document.addEventListener("click", (e)=>{
-  if(!e.target.closest(".suggest")) {
-    hideList(cityList);
-    hideList(document.getElementById("npList"));
-  }
-});
-
-/** ==========================
- * ОТДЕЛЕНИЯ / ПОШТОМАТЫ: подсказки
- * ========================== */
-const npInput = document.getElementById("npPlace");
-const npList  = document.getElementById("npList");
-
-const searchPlaces = debounce(async ()=>{
-  const q = npInput.value.trim();
-  selectedPlace = null;
-
-  if(deliveryMode === "courier"){
-    hideList(npList);
-    return;
-  }
-  if(!selectedCity || !selectedCity.Ref){
-    hideList(npList);
-    return;
-  }
-  if(q.length < 1){
-    hideList(npList);
-    return;
-  }
-
-  // Новый API метод getWarehouses, можно фильтровать по TypeOfWarehouseRef (поштомат) и FindByString
-  const props = {
-    CityRef: selectedCity.Ref,
-    FindByString: q,
-    Limit: 15
-  };
-
-  // для поштоматов часто используют TypeOfWarehouseRef = "f9316480-5f2d-425d-bc2c-ac7cd29decf0"
-  // но чтобы не зависеть от рефа (иногда меняют), просто фильтруем по названию/типу.
-  const r = await npRequest("AddressGeneral", "getWarehouses", props);
-  if(!r.ok){
-    hideList(npList);
-    return;
-  }
-
-  const data = Array.isArray(r.data.data) ? r.data.data : [];
-  let filtered = data;
-
-  if(deliveryMode === "postomat"){
-    filtered = data.filter(w => String(w.TypeOfWarehouse || "").toLowerCase().includes("поштомат"));
-  }else{
-    filtered = data.filter(w => !String(w.TypeOfWarehouse || "").toLowerCase().includes("поштомат"));
-  }
-
-  const items = filtered.slice(0, 12).map(w => ({
-    label: w.Description,
-    value: w.Description
-  }));
-
-  showList(npList, items, (it)=>{
-    npInput.value = it.value;
-    selectedPlace = it.value;
-    hideList(npList);
-  });
-
-}, 350);
-
-npInput.addEventListener("input", searchPlaces);
-
-/** ==========================
- * КНОПКИ ДОСТАВКИ
- * ========================== */
-document.getElementById("deliveryPills").addEventListener("click", (e)=>{
-  const btn = e.target.closest(".pill");
-  if(!btn) return;
-  setDeliveryMode(btn.dataset.mode);
-});
-
-/** ==========================
- * ОТПРАВКА ЗАКАЗА (mailto)
- * ========================== */
-function buildOrderText({cart, total}){
-  const fio = document.getElementById("fio").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const city = document.getElementById("city").value.trim();
-  const pay = document.getElementById("pay").value;
-  const comment = document.getElementById("comment").value.trim();
-
-  let delivery = "";
-  if(deliveryMode === "courier"){
-    const st = document.getElementById("addrStreet").value.trim();
-    const fl = document.getElementById("addrFlat").value.trim();
-    delivery = `Курьер: ${st}${fl ? (", " + fl) : ""}`;
-  }else{
-    delivery = (deliveryMode === "postomat" ? "Поштомат" : "Отделение") + `: ${npInput.value.trim()}`;
-  }
-
-  const payText = (pay === "cod") ? "Наличными при получении" : "Картой (уточнить менеджером)";
-
-  const lines = [];
-  lines.push("BLACKWOOD — Новый заказ");
-  lines.push("");
-  lines.push(`ФИО: ${fio}`);
-  lines.push(`Телефон: ${phone}`);
-  lines.push(`Город: ${city}`);
-  lines.push(`Доставка: ${delivery}`);
-  lines.push(`Оплата: ${payText}`);
-  if(comment) lines.push(`Комментарий: ${comment}`);
-  lines.push("");
-  lines.push("Состав заказа:");
-  if(cart.length){
-    cart.forEach((it, idx)=>{
-      lines.push(`${idx+1}) ${it.name} — ${it.qty} шт × ${it.price} грн = ${it.qty*it.price} грн`);
-    });
-  }else{
-    lines.push("(Корзина пустая — проверьте cart.html / localStorage bw_cart)");
-  }
-  lines.push("");
-  lines.push(`ИТОГО: ${total} грн`);
-  return lines.join("\n");
-}
-
-function validate(){
-  const fio = document.getElementById("fio").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const city = document.getElementById("city").value.trim();
-
-  if(!fio || fio.length < 3) return "Введите ФИО.";
-  if(!phone || phone.replace(/\D/g,"").length < 10) return "Введите корректный телефон.";
-  if(!city || city.length < 2) return "Выберите город (лучше из подсказки).";
-
-  if(deliveryMode === "courier"){
-    const st = document.getElementById("addrStreet").value.trim();
-    if(!st || st.length < 3) return "Для курьера укажите улицу и дом.";
-  }else{
-    const place = npInput.value.trim();
-    if(!place || place.length < 3) return "Выберите отделение/поштомат (начните вводить и выберите из подсказки).";
-  }
-  return null;
-}
-
-document.getElementById("submit").addEventListener("click", ()=>{
-  const err = validate();
-  if(err){
-    alert(err);
-    return;
-  }
-
-  const {cart, total} = renderTotal();
-  const body = buildOrderText({cart, total});
-
-  const subject = encodeURIComponent("BLACKWOOD — Заказ");
-  const mailBody = encodeURIComponent(body);
-
-  // Открываем почтовый клиент
-  window.location.href = `mailto:${ORDER_EMAIL}?subject=${subject}&body=${mailBody}`;
-});
-
-/** init */
-renderTotal();
-setDeliveryMode("branch");
-</script>
+  <script src="./assets/app.js"></script>
 </body>
 </html>
