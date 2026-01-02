@@ -1,61 +1,55 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Контакты — BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <script src="assets/app.js" defer></script>
+  <link rel="stylesheet" href="assets/style.css"/>
+  <script defer src="assets/app.js"></script>
 </head>
-
-<body class="page-alt" data-page="contacts">
-  <header class="header">
-    <div class="container header__row">
-      <a class="brand" href="index.html">BLACKWOOD <span class="dot">•</span> CHARCOAL</a>
+<body class="page">
+<header class="header">
+  <div class="container">
+    <div class="row">
+      <a class="logo" href="index.html">
+        <span>BLACKWOOD</span><span class="dot"></span><span>CHARCOAL</span>
+      </a>
 
       <nav class="nav">
-        <a data-nav="home" href="index.html">Главная</a>
-        <a data-nav="catalog" href="catalog.html">Каталог</a>
-        <a data-nav="shipping" href="shipping.html">Доставка</a>
-        <a data-nav="about" href="about.html">О нас</a>
-        <a data-nav="contacts" href="contacts.html">Контакты</a>
+        <a href="index.html" data-i18n="nav_home">Главная</a>
+        <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+        <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+        <a href="about.html" data-i18n="nav_about">О нас</a>
+        <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
       </nav>
 
       <div class="right">
-        <button class="burger" data-burger>☰</button>
         <div class="lang">
-          <button data-lang="RU" class="active">RU</button>
-          <button data-lang="UKR">UKR</button>
-          <button data-lang="EN">EN</button>
+          <button type="button" data-lang="RU">RU</button>
+          <button type="button" data-lang="UKR">UKR</button>
+          <button type="button" data-lang="EN">EN</button>
         </div>
-        <a class="cartpill" href="cart.html">Корзина • <b data-cart-count>0</b></a>
+        <a class="cartBadge" href="cart.html" data-cart-badge>Корзина • 0</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container">
+    <h1 class="pageTitle">Контакты</h1>
+    <p class="pageSub">Связь по вопросам заказа и сотрудничества.</p>
+
+    <div class="card" style="padding:16px">
+      <div style="color:rgba(255,255,255,.82);font-weight:700;line-height:1.8">
+        <div>📩 Email: <b>your@email.com</b></div>
+        <div>📞 Телефон: <b>+380 XX XXX XX XX</b></div>
+        <div>🕘 Время: <b>10:00 – 20:00</b></div>
       </div>
     </div>
 
-    <div class="container mobile-nav" data-mobile-nav>
-      <a href="index.html">Главная</a>
-      <a href="catalog.html">Каталог</a>
-      <a href="shipping.html">Доставка</a>
-      <a href="about.html">О нас</a>
-      <a href="contacts.html">Контакты</a>
-      <a href="cart.html">Корзина</a>
-    </div>
-  </header>
-
-  <main class="container section">
-    <h1 class="page-title">Контакты</h1>
-    <div class="panel" style="padding:16px;">
-      <p>Для вопросов по заказу и доставке пишите:</p>
-      <p><b>Email:</b> YOUR_EMAIL_HERE@example.com</p>
-      <p><b>Telegram:</b> @your_username</p>
-      <p style="margin-top:10px;color:rgba(255,255,255,.62);font-size:12px;">
-        (Поменяй контакты на свои)
-      </p>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container">BLACKWOOD • CHARCOAL © 2026</div>
-  </footer>
+    <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
+  </div>
+</main>
 </body>
 </html>
