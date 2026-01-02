@@ -1,56 +1,30 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Success · BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css">
-</head>
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Готово — BLACKWOOD</title>
+<link rel="stylesheet" href="assets/style.css?v=5">
+</head><body class="page page-alt"><div class="vignette"></div>
 
-<body class="page-success bgHero">
+<header class="topbar"><div class="topbar__inner container">
+<a class="brand" href="index.html"><span>BLACKWOOD</span><span class="brand__dot">•</span><span>CHARCOAL</span></a>
+<div class="topbar__right">
+<a class="pill" href="cart.html">Корзина • <span id="cartCount">0</span></a>
+</div>
+</div></header>
 
-<header class="header">
-  <div class="container headerRow">
-    <a class="logo" href="index.html">BLACKWOOD <span>·</span> <b>CHARCOAL</b></a>
-
-    <nav class="nav">
-      <a href="index.html" data-i18n="home">Главная</a>
-      <a href="catalog.html" data-i18n="catalog">Каталог</a>
-      <a href="shipping.html" data-i18n="shipping">Доставка</a>
-      <a href="about.html" data-i18n="about">О нас</a>
-      <a href="contacts.html" data-i18n="contacts">Контакты</a>
-    </nav>
-
-    <div class="headerRight">
-      <div class="langs">
-        <button class="active" type="button" data-lang="ru">RU</button>
-        <button type="button" data-lang="ukr">UKR</button>
-        <button type="button" data-lang="en">EN</button>
-      </div>
-      <a class="cartBtn" href="cart.html"><span data-i18n="cart">Корзина</span> · <span id="cartCount">0</span></a>
+<main class="container section">
+  <h1 class="h1">Заказ принят</h1>
+  <div class="glass panel">
+    <p class="muted">Спасибо! Мы свяжемся с вами для подтверждения.</p>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;">
+      <a class="btn btn--ghost" href="index.html">На главную</a>
+      <a class="btn btn--gold" href="catalog.html">В каталог</a>
     </div>
   </div>
-</header>
+</main>
 
-<section class="section">
-  <div class="container">
-    <div class="card">
-      <h2 style="margin:0 0 10px 0" data-i18n="success_title">Заказ оформлен!</h2>
-      <p style="margin:0 0 18px 0; color:rgba(255,255,255,.78)" data-i18n="success_desc">
-        Спасибо! Мы скоро свяжемся с вами для подтверждения.
-      </p>
-      <div style="display:flex; gap:12px; flex-wrap:wrap">
-        <a class="btn gold" href="catalog.html" data-i18n="open_catalog">Открыть каталог</a>
-        <a class="btn dark" href="index.html" data-i18n="home">Главная</a>
-      </div>
-    </div>
-  </div>
-</section>
+<footer class="footer"><div class="container footer__inner">
+<div class="footer__brand">BLACKWOOD • CHARCOAL</div><div>© <span id="year"></span></div>
+</div></footer>
 
-<footer class="footer">
-  <div class="container">BLACKWOOD · CHARCOAL © 2026</div>
-</footer>
-
-<script src="assets/app.js"></script>
-</body>
-</html>
+<script src="assets/app.js?v=5"></script>
+</body></html>
