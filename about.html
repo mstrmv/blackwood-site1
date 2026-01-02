@@ -1,61 +1,83 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>О нас — BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css"/>
-  <script defer src="assets/app.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>О нас • BLACKWOOD</title>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
-<body class="page">
-<header class="header">
-  <div class="container">
-    <div class="row">
-      <a class="logo" href="index.html">
-        <span>BLACKWOOD</span><span class="dot"></span><span>CHARCOAL</span>
-      </a>
+<body>
+  <div class="page has-catalog-bg">
+    <header class="header">
+      <div class="container headerInner">
+        <a class="brand" href="index.html">
+          <span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span>
+        </a>
 
-      <nav class="nav">
-        <a href="index.html" data-i18n="nav_home">Главная</a>
-        <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-        <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-        <a href="about.html" data-i18n="nav_about">О нас</a>
-        <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
-      </nav>
+        <nav class="nav">
+          <a href="index.html">Главная</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="shipping.html">Доставка</a>
+          <a href="about.html">О нас</a>
+          <a href="contacts.html">Контакты</a>
+        </nav>
 
-      <div class="right">
-        <div class="lang">
-          <button type="button" data-lang="RU">RU</button>
-          <button type="button" data-lang="UKR">UKR</button>
-          <button type="button" data-lang="EN">EN</button>
+        <div class="rightBar">
+          <div class="lang">
+            <button type="button" data-lang="RU">RU</button>
+            <button type="button" data-lang="UKR">UKR</button>
+            <button type="button" data-lang="EN">EN</button>
+          </div>
+
+          <a class="cartPill" href="cart.html">
+            Корзина <span class="count" data-cart-count>0</span>
+          </a>
+
+          <button class="burger" type="button" data-burger>Меню</button>
         </div>
-        <a class="cartBadge" href="cart.html" data-cart-badge>Корзина • 0</a>
       </div>
-    </div>
+
+      <div class="container mobileMenu" data-mobilemenu>
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="shipping.html">Доставка</a>
+        <a href="about.html">О нас</a>
+        <a href="contacts.html">Контакты</a>
+        <a href="cart.html">Корзина</a>
+      </div>
+    </header>
+
+    <main class="container section">
+      <h1 class="h1">О нас</h1>
+      <p class="p">BLACKWOOD — это про вкус, жар и стабильный результат на каждом гриле.</p>
+
+      <div class="glass" style="padding:16px; margin-top:16px; line-height:1.65; color:rgba(255,255,255,.82)">
+        <p style="margin-top:0">
+          Мы начали с простой идеи: сделать уголь, который не подводит.
+          Без резкого дыма, без лишнего пепла, без “скачков” температуры — чтобы мясо, рыба и овощи
+          получались одинаково круто и у новичка, и у профи.
+        </p>
+
+        <p>
+          Мы тестировали фракции, прожиг, упаковку и логистику — чтобы уголь приходил сухим и целым,
+          а жар держался долго. BLACKWOOD CORE — это уверенность: один и тот же результат на BBQ,
+          гриле и в печи.
+        </p>
+
+        <p style="margin-bottom:0">
+          Наша цель простая: чтобы вы думали про вкус — а не про уголь.
+        </p>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn primary" href="catalog.html">Открыть каталог</a>
+          <a class="btn secondary" href="contacts.html">Контакты</a>
+        </div>
+      </div>
+
+      <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
+    </main>
   </div>
-</header>
 
-<main class="main">
-  <div class="container">
-    <h1 class="pageTitle">О нас</h1>
-    <p class="pageSub">BLACKWOOD • CHARCOAL — про чистый жар, вкус и стабильность.</p>
-
-    <div class="card" style="padding:16px; color:rgba(255,255,255,.82); line-height:1.65; font-weight:650;">
-      <p style="margin-top:0;">
-        Мы начинали как небольшая команда, которая просто хотела идеальный уголь для BBQ — без лишнего дыма, с ровной температурой и минимумом пепла.
-        Перепробовали десятки вариантов, пока не нашли формулу: правильная древесина, правильный обжиг и строгий контроль партии.
-      </p>
-      <p>
-        BLACKWOOD CORE — это уголь, который “держит жар” и дает предсказуемый результат: от домашних грилей до профессиональных кухонь.
-        Мы делаем ставку на качество, честные характеристики и удобную доставку по Украине.
-      </p>
-      <p style="margin-bottom:0;">
-        Спасибо, что выбираете нас. Если нужен совет по выбору веса или хранению — напишите, мы подскажем.
-      </p>
-    </div>
-
-    <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
-  </div>
-</main>
+  <script src="assets/app.js"></script>
 </body>
 </html>
