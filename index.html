@@ -4,126 +4,78 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BLACKWOOD • CHARCOAL</title>
-  <meta name="description" content="BLACKWOOD • CHARCOAL — premium charcoal. Catalog: 3kg, 5kg, 10kg." />
   <link rel="stylesheet" href="assets/style.css" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container">
-      <div class="nav">
+  <div class="page has-hero-bg">
+    <header class="header">
+      <div class="container headerInner">
         <a class="brand" href="index.html">
-          BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
+          <span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span>
         </a>
 
-        <nav class="navlinks">
-          <a href="index.html" data-i18n="nav_home">Главная</a>
-          <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-          <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-          <a href="about.html" data-i18n="nav_about">О нас</a>
-          <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
-          <a href="cart.html"><span data-i18n="nav_cart">Корзина</span> <span data-cart-count></span></a>
-          <span data-auth-slot></span>
-
-          <span class="lang">
-            <select data-lang-select aria-label="language">
-              <option value="ru">RU</option>
-              <option value="uk">UA</option>
-              <option value="en">EN</option>
-            </select>
-          </span>
+        <nav class="nav">
+          <a href="index.html">Главная</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="shipping.html">Доставка</a>
+          <a href="about.html">О нас</a>
+          <a href="contacts.html">Контакты</a>
         </nav>
-      </div>
-    </div>
-  </header>
 
-  <main class="container">
-    <section
-      class="hero-premium"
-      style="
-        background-image:
-          linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 40%, rgba(0,0,0,.25) 70%, rgba(0,0,0,.70) 100%),
-          radial-gradient(900px 420px at 18% 10%, rgba(200,164,90,.20), transparent 55%),
-          url('img/hero/hero-bg.png');
-        background-size: cover;
-        background-position: center;
-      "
-    >
-      <div class="hero-premium-inner">
-        <div>
-          <div class="kicker"><span class="line"></span> <span data-i18n="home_kicker">PREMIUM HARDWOOD CHARCOAL</span></div>
-
-          <h1 class="hero-title" data-i18n="hero_title">Премиальный уголь для гриля и мангала</h1>
-          <p class="hero-sub" data-i18n="hero_text">BLACKWOOD • CHARCOAL — стабильный жар, чистое горение и удобная фасовка.</p>
-
-          <div class="badges">
-            <span class="badge" data-i18n="badge_1">Сухой и чистый</span>
-            <span class="badge" data-i18n="badge_2">Стабильный жар</span>
-            <span class="badge" data-i18n="badge_3">Фасовка 3 / 5 / 10 кг</span>
+        <div class="rightBar">
+          <div class="lang">
+            <button type="button" data-lang="RU">RU</button>
+            <button type="button" data-lang="UKR">UKR</button>
+            <button type="button" data-lang="EN">EN</button>
           </div>
 
-          <div class="hero-cta">
-            <a class="btn primary" href="catalog.html" data-i18n="btn_open_catalog">Открыть каталог</a>
-            <a class="btn" href="cart.html" data-i18n="btn_go_cart">Перейти в корзину</a>
-          </div>
+          <a class="cartPill" href="cart.html">
+            Корзина <span class="count" data-cart-count>0</span>
+          </a>
 
-          <div class="why">
-            <div class="why-item">
-              <b data-i18n="why_1_t">Long heat</b>
-              <span data-i18n="why_1_s">Держит жар дольше, удобен для гриля и мангала.</span>
-            </div>
-            <div class="why-item">
-              <b data-i18n="why_2_t">Low ash</b>
-              <span data-i18n="why_2_s">Меньше пепла — чище готовка и проще уборка.</span>
-            </div>
-            <div class="why-item">
-              <b data-i18n="why_3_t">For BBQ & Grill</b>
-              <span data-i18n="why_3_s">Стабильная температура, предсказуемый результат.</span>
-            </div>
-            <div class="why-item">
-              <b data-i18n="why_4_t">Hardwood</b>
-              <span data-i18n="why_4_s">Натуральный древесный уголь без лишнего запаха.</span>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="packstack">
-            <div class="packs">
-              <img src="img/products/core-3kg.png" alt="CORE 3kg" loading="lazy">
-              <img src="img/products/core-10kg.png" alt="CORE 10kg" loading="lazy">
-              <img src="img/products/core-5kg.png" alt="CORE 5kg" loading="lazy">
-            </div>
-            <div class="hr"></div>
-            <div class="small" data-i18n="home_packnote">Фасовка: 3 / 5 / 10 кг • Доставка по Украине</div>
-          </div>
+          <button class="burger" type="button" data-burger>Меню</button>
         </div>
       </div>
-    </section>
 
-    <section style="margin-top:16px;">
-      <div class="grid-3">
-        <div class="card pad">
-          <p class="p"><b data-i18n="b_meat">Для мяса</b></p>
-          <p class="small" data-i18n="b_meat_t">Ровный жар и вкусная корочка.</p>
-        </div>
-        <div class="card pad">
-          <p class="p"><b data-i18n="b_veg">Для овощей</b></p>
-          <p class="small" data-i18n="b_veg_t">Без лишнего дыма, контролируемая температура.</p>
-        </div>
-        <div class="card pad">
-          <p class="p"><b data-i18n="b_pro">Для заведений</b></p>
-          <p class="small" data-i18n="b_pro_t">Удобные фасовки и быстрые поставки.</p>
-        </div>
+      <div class="container mobileMenu" data-mobilemenu>
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="shipping.html">Доставка</a>
+        <a href="about.html">О нас</a>
+        <a href="contacts.html">Контакты</a>
+        <a href="cart.html">Корзина</a>
       </div>
-    </section>
-  </main>
+    </header>
 
-  <footer class="site-footer">
-    <div class="container">© <span id="y"></span> BLACKWOOD • CHARCOAL</div>
-  </footer>
+    <main class="container heroWrap">
+      <div class="heroGrid">
+        <div class="heroCard">
+          <div class="badge"><span class="bDot"></span> Премиум уголь для гриля</div>
+
+          <h1 class="heroTitle">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
+
+          <p class="heroSub">
+            Длительное горение, минимум пепла, чистый жар.
+            Идеально для BBQ и гриля.
+          </p>
+
+          <div class="heroActions">
+            <a class="btn primary" href="catalog.html">Открыть каталог</a>
+            <a class="btn secondary" href="shipping.html">Доставка и оплата</a>
+            <a class="btn secondary" href="cart.html">Корзина</a>
+          </div>
+
+          <div class="footer" style="padding:18px 0 0;">
+            BLACKWOOD • CHARCOAL © 2026
+          </div>
+        </div>
+
+        <div></div>
+      </div>
+    </main>
+  </div>
 
   <script src="assets/app.js"></script>
-  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 </html>
