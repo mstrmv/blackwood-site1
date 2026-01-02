@@ -4,74 +4,81 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BLACKWOOD • CHARCOAL</title>
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="./assets/style.css" />
 </head>
-<body class="page-hero">
-  <header class="topbar">
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="index.html">
-          BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
-        </a>
-
-        <nav class="navlinks">
-          <a href="index.html" data-i18n="nav_home">Главная</a>
-          <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-          <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-          <a href="about.html" data-i18n="nav_about">О нас</a>
-          <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
-        </nav>
-
-        <div class="navright">
-          <div class="lang" aria-label="Language">
-            <button type="button" data-lang="ru">RU</button>
-            <button type="button" data-lang="ukr">UKR</button>
-            <button type="button" data-lang="en">EN</button>
+<body>
+  <div class="page" data-bg="hero">
+    <header class="topbar">
+      <div class="container">
+        <div class="topbar__inner">
+          <div class="brand">
+            <span>BLACKWOOD</span><span class="dot">•</span><span>CHARCOAL</span>
           </div>
 
-          <a class="badge" href="cart.html">
-            <span data-i18n="cart">Корзина</span> • <span data-cart-count>0</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
+          <nav class="nav">
+            <a href="./index.html" class="active">Главная</a>
+            <a href="./catalog.html">Каталог</a>
+            <a href="./shipping.html">Доставка</a>
+            <a href="./about.html">О нас</a>
+            <a href="./contacts.html">Контакты</a>
+          </nav>
 
-  <main class="hero">
-    <div class="container">
-      <div class="heroGrid">
-        <section class="heroCard" style="max-width:760px; margin-left: clamp(0px, 3vw, 36px);">
-          <div class="kicker"><i></i><span data-i18n="hero_kicker">Премиум уголь для гриля</span></div>
+          <div class="actions">
+            <button class="burger" data-burger>Меню</button>
 
-          <h1 class="h1" data-i18n-multiline="hero_title">PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
-          <p class="p" data-i18n-multiline="hero_desc">
-            Длительное горение, минимум пепла, чистый жар.<br>
-            Идеально для BBQ и гриля.
-          </p>
+            <div class="lang">
+              <button type="button" data-lang="RU">RU</button>
+              <button type="button" data-lang="UKR">UKR</button>
+              <button type="button" data-lang="EN">EN</button>
+            </div>
 
-          <div class="heroActions">
-            <a class="btn primary" href="catalog.html" data-i18n="btn_open_catalog">Открыть каталог</a>
-            <a class="btn ghost" href="shipping.html" data-i18n="btn_shipping">Доставка и оплата</a>
-            <button class="btn" type="button" data-go-cart data-i18n="btn_to_cart">Перейти в корзину</button>
+            <a class="cart-pill" href="./cart.html">
+              <span data-i18n-cart>Корзина</span> • <span class="badge" data-cart-count>0</span>
+            </a>
           </div>
-        </section>
+        </div>
 
-        <div class="heroVisual" aria-hidden="true">
-          <div class="hint">BLACKWOOD • CHARCOAL</div>
+        <div class="mobile-menu" data-mobile-menu>
+          <a href="./index.html">Главная</a>
+          <a href="./catalog.html">Каталог</a>
+          <a href="./shipping.html">Доставка</a>
+          <a href="./about.html">О нас</a>
+          <a href="./contacts.html">Контакты</a>
+          <a href="./cart.html"><span data-i18n-cart>Корзина</span> (<span data-cart-count>0</span>)</a>
         </div>
       </div>
-    </div>
-  </main>
+    </header>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footerRow">
-        <div class="mini"><b>BLACKWOOD</b><i></i>CHARCOAL</div>
-        <div>© 2026</div>
+    <main class="hero">
+      <div class="container">
+        <div class="hero__grid">
+          <div class="hero__card">
+            <div class="kicker"><span class="dot"></span> Премиум уголь для гриля</div>
+            <h1>PREMIUM<br>HARDWOOD<br>CHARCOAL</h1>
+            <p>Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.</p>
+
+            <div class="hero__buttons">
+              <button class="btn primary" data-go-catalog>Открыть каталог</button>
+              <a class="btn ghost" href="./shipping.html">Доставка и оплата</a>
+              <a class="btn" href="./cart.html">Перейти в корзину</a>
+            </div>
+          </div>
+
+          <!-- right placeholder hidden by CSS (keeps layout for future) -->
+          <div class="hero__right">
+            <div class="ghost-img"></div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="container" style="width:100%;margin:0;">
+            BLACKWOOD • CHARCOAL © 2026
+          </div>
+        </div>
       </div>
-    </div>
-  </footer>
+    </main>
+  </div>
 
-  <script src="assets/app.js"></script>
+  <script src="./assets/app.js"></script>
 </body>
 </html>
