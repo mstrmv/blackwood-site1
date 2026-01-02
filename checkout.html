@@ -1,88 +1,39 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Checkout · BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css">
-</head>
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Оформление — BLACKWOOD</title>
+<link rel="stylesheet" href="assets/style.css?v=5">
+</head><body class="page page-alt"><div class="vignette"></div>
 
-<body class="page-checkout bgCatalog">
+<header class="topbar"><div class="topbar__inner container">
+<a class="brand" href="index.html"><span>BLACKWOOD</span><span class="brand__dot">•</span><span>CHARCOAL</span></a>
+<nav class="nav">
+<a class="nav__link" href="index.html">Главная</a>
+<a class="nav__link" href="catalog.html">Каталог</a>
+<a class="nav__link" href="shipping.html">Доставка</a>
+<a class="nav__link" href="about.html">О нас</a>
+<a class="nav__link" href="contacts.html">Контакты</a>
+</nav>
+<div class="topbar__right">
+<div class="lang">
+<button class="lang__btn is-active" data-lang="ru">RU</button>
+<button class="lang__btn" data-lang="uk">UKR</button>
+<button class="lang__btn" data-lang="en">EN</button>
+</div>
+<a class="pill" href="cart.html">Корзина • <span id="cartCount">0</span></a>
+</div>
+</div></header>
 
-<header class="header">
-  <div class="container headerRow">
-    <a class="logo" href="index.html">BLACKWOOD <span>·</span> <b>CHARCOAL</b></a>
-
-    <nav class="nav">
-      <a href="index.html" data-i18n="home">Главная</a>
-      <a href="catalog.html" data-i18n="catalog">Каталог</a>
-      <a href="shipping.html" data-i18n="shipping">Доставка</a>
-      <a href="about.html" data-i18n="about">О нас</a>
-      <a href="contacts.html" data-i18n="contacts">Контакты</a>
-    </nav>
-
-    <div class="headerRight">
-      <div class="langs">
-        <button class="active" type="button" data-lang="ru">RU</button>
-        <button type="button" data-lang="ukr">UKR</button>
-        <button type="button" data-lang="en">EN</button>
-      </div>
-      <a class="cartBtn" href="cart.html"><span data-i18n="cart">Корзина</span> · <span id="cartCount">0</span></a>
-    </div>
+<main class="container section">
+  <h1 class="h1">Оформление</h1>
+  <div class="glass panel">
+    <p class="muted">Форма оформления будет здесь. Пока сделаем кнопку “Успех”.</p>
+    <a class="btn btn--gold" href="success.html" style="margin-top:12px;">Подтвердить</a>
   </div>
-</header>
+</main>
 
-<section class="section">
-  <div class="container">
-    <div class="sectionTitle">
-      <div>
-        <h2 data-i18n="checkout_title">Оформление заказа</h2>
-        <p data-i18n="choose_weight">Выберите вес и добавьте в корзину.</p>
-      </div>
-    </div>
+<footer class="footer"><div class="container footer__inner">
+<div class="footer__brand">BLACKWOOD • CHARCOAL</div><div>© <span id="year"></span></div>
+</div></footer>
 
-    <div class="cartBox">
-      <form id="checkoutForm">
-        <div class="form">
-          <div class="field">
-            <label data-i18n="name">Имя и Фамилия</label>
-            <input required placeholder="Иван Иванов">
-          </div>
-
-          <div class="field">
-            <label data-i18n="phone">Телефон</label>
-            <input required placeholder="+380...">
-          </div>
-
-          <div class="field">
-            <label data-i18n="city">Город</label>
-            <input required placeholder="Киев">
-          </div>
-
-          <div class="field">
-            <label data-i18n="address">Адрес</label>
-            <input required placeholder="Новая Почта / улица / дом">
-          </div>
-
-          <div class="field full">
-            <label data-i18n="comment">Комментарий</label>
-            <textarea placeholder="..."></textarea>
-          </div>
-        </div>
-
-        <div class="formActions">
-          <a class="btn dark" href="cart.html" data-i18n="back_to_cart">Назад в корзину</a>
-          <button class="btn gold" type="submit" data-i18n="place_order">Подтвердить заказ</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container">BLACKWOOD · CHARCOAL © 2026</div>
-</footer>
-
-<script src="assets/app.js"></script>
-</body>
-</html>
+<script src="assets/app.js?v=5"></script>
+</body></html>
