@@ -1,68 +1,72 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>BLACKWOOD • CHARCOAL</title>
+/* BLACKWOOD Mini App glue + cart helpers */
 
-  <!-- Telegram Mini App SDK -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+const tg = window.Telegram?.WebApp || null;
+const IS_TG = !!tg;
 
-  <link rel="stylesheet" href="./assets/style.css" />
-</head>
-<body class="page page-hero">
-  <header class="topbar">
-    <div class="topbar__inner">
-      <a class="brand" href="./index.html">BLACKWOOD <span>•</span> CHARCOAL</a>
+// --- Cart storage ---
+const CART_KEY = "bw_cart_v1";
 
-      <nav class="nav">
-        <a href="./index.html" class="nav__link is-active">Главная</a>
-        <a href="./catalog.html" class="nav__link">Каталог</a>
-        <a href="./shipping.html" class="nav__link">Доставка</a>
-        <a href="./about.html" class="nav__link">О нас</a>
-        <a href="./contacts.html" class="nav__link">Контакты</a>
-      </nav>
+function readCart() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY) || "[]"); }
+  catch { return []; }
+}
+function writeCart(cart) {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+function cartCount() {
+  const cart = readCart();
+  return cart.reduce((sum, it) => sum + (Number(it.qty) || 0), 0);
+}
+function cartTotalUAH() {
+  const cart = readCart();
+  return cart.reduce((sum, it) => sum + (Number(it.price) || 0) * (Number(it.qty) || 0), 0);
+}
 
-      <div class="right">
-        <div class="lang">
-          <button class="pill is-active" data-lang="ru">RU</button>
-          <button class="pill" data-lang="uk">UKR</button>
-          <button class="pill" data-lang="en">EN</button>
-        </div>
-        <a class="cart-pill" href="./cart.html">Корзина • <span id="cartCount">0</span></a>
-      </div>
-    </div>
-  </header>
+function updateCartBadges() {
+  const el = document.getElementById("cartCount");
+  if (el) el.textContent = String(cartCount());
+}
 
-  <main class="hero">
-    <div class="hero__content">
-      <div class="badge">Премиум уголь для гриля</div>
+// --- Telegram behavior ---
+function initTelegram() {
+  if (!IS_TG) return;
 
-      <h1 class="hero__title">
-        PREMIUM<br/>
-        HARDWOOD<br/>
-        CHARCOAL
-      </h1>
+  tg.ready();
+  tg.expand();
 
-      <p class="hero__text">
-        Длительное горение, минимум пепла, чистый жар.<br/>
-        Идеально для BBQ и гриля.
-      </p>
+  // цвета можно не трогать, но если хочешь:
+  // tg.setHeaderColor("#0b0b0c");
+  // tg.setBackgroundColor("#0b0b0c");
 
-      <div class="hero__actions">
-        <a class="btn btn--gold" href="./catalog.html">Открыть каталог</a>
-        <a class="btn" href="./shipping.html">Доставка и оплата</a>
-        <a class="btn" href="./cart.html">Перейти в корзину</a>
-      </div>
-    </div>
-  </main>
+  // Если есть товары — показываем MainButton внизу
+  const count = cartCount();
+  if (count > 0) {
+    tg.MainButton.setText(`Оформить • ${cartTotalUAH()} грн`);
+    tg.MainButton.show();
+    tg.MainButton.onClick(() => {
+      window.location.href = "./checkout.html";
+    });
+  } else {
+    tg.MainButton.hide();
+  }
+}
 
-  <footer class="footer">
-    <div class="footer__inner">
-      <div>BLACKWOOD • CHARCOAL © 2026</div>
-    </div>
-  </footer>
+// --- Public API (чтобы catalog/cart могли вызывать) ---
+window.BW = {
+  readCart,
+  writeCart,
+  cartCount,
+  cartTotalUAH,
+  updateCartBadges,
+  IS_TG,
+  tg,
+};
 
-  <script src="./assets/app.js"></script>
-</body>
-</html>
+// --- Boot ---
+document.addEventListener("DOMContentLoaded", () => {
+  // добавим класс на body чтобы CSS понимал что это телега
+  if (IS_TG) document.body.classList.add("is-telegram");
+
+  updateCartBadges();
+  initTelegram();
+});
