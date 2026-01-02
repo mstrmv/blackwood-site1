@@ -1,38 +1,62 @@
-<!doctype html><html lang="ru"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>О нас — BLACKWOOD</title>
-<link rel="stylesheet" href="assets/style.css?v=5">
-</head><body class="page page-alt"><div class="vignette"></div>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>О нас — BLACKWOOD</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body class="page-alt">
+  <header class="topbar">
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="index.html">BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span></a>
+        <nav class="navlinks">
+          <a href="index.html" data-i18n="nav_home">Главная</a>
+          <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+          <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+          <a href="about.html" data-i18n="nav_about">О нас</a>
+          <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
+        </nav>
+        <div class="navright">
+          <div class="lang">
+            <button type="button" data-lang="ru">RU</button>
+            <button type="button" data-lang="ukr">UKR</button>
+            <button type="button" data-lang="en">EN</button>
+          </div>
+          <a class="badge" href="cart.html"><span data-i18n="cart">Корзина</span> • <span data-cart-count>0</span></a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-<header class="topbar"><div class="topbar__inner container">
-<a class="brand" href="index.html"><span>BLACKWOOD</span><span class="brand__dot">•</span><span>CHARCOAL</span></a>
-<nav class="nav">
-<a class="nav__link" href="index.html">Главная</a>
-<a class="nav__link" href="catalog.html">Каталог</a>
-<a class="nav__link" href="shipping.html">Доставка</a>
-<a class="nav__link" href="about.html">О нас</a>
-<a class="nav__link" href="contacts.html">Контакты</a>
-</nav>
-<div class="topbar__right">
-<div class="lang">
-<button class="lang__btn is-active" data-lang="ru">RU</button>
-<button class="lang__btn" data-lang="uk">UKR</button>
-<button class="lang__btn" data-lang="en">EN</button>
-</div>
-<a class="pill" href="cart.html">Корзина • <span id="cartCount">0</span></a>
-</div>
-</div></header>
+  <main class="section">
+    <div class="container">
+      <div class="sectionTitle">
+        <div>
+          <h2 data-i18n="nav_about">О нас</h2>
+          <p>Премиальный уголь для гриля и BBQ.</p>
+        </div>
+      </div>
 
-<main class="container section">
-  <h1 class="h1">О нас</h1>
-  <div class="glass panel">
-    <p class="muted">Тут будет описание бренда/качества угля, преимущества и т.д.</p>
-  </div>
-</main>
+      <div class="formWrap">
+        <div style="color:rgba(255,255,255,.75);font-weight:650;line-height:1.6">
+          BLACKWOOD • CHARCOAL — фокус на чистом жаре, минимуме пепла и стабильном горении.<br>
+          Выбирай вес, добавляй в корзину, оформляй доставку Новой Почтой.
+        </div>
+      </div>
+    </div>
+  </main>
 
-<footer class="footer"><div class="container footer__inner">
-<div class="footer__brand">BLACKWOOD • CHARCOAL</div><div>© <span id="year"></span></div>
-</div></footer>
+  <footer class="footer">
+    <div class="container">
+      <div class="footerRow">
+        <div class="mini"><b>BLACKWOOD</b><i></i>CHARCOAL</div>
+        <div>© 2026</div>
+      </div>
+    </div>
+  </footer>
 
-<script src="assets/app.js?v=5"></script>
-</body></html>
+  <script src="assets/app.js"></script>
+</body>
+</html>
