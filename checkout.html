@@ -1,112 +1,122 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Оформление — BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css"/>
-  <script defer src="assets/app.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Оформление • BLACKWOOD</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
-<body class="page">
-<header class="header">
-  <div class="container">
-    <div class="row">
-      <a class="logo" href="index.html">
-        <span>BLACKWOOD</span><span class="dot"></span><span>CHARCOAL</span>
-      </a>
+<body>
+  <div class="page has-catalog-bg">
+    <header class="header">
+      <div class="container headerInner">
+        <a class="brand" href="index.html">
+          <span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span>
+        </a>
 
-      <nav class="nav">
-        <a href="index.html" data-i18n="nav_home">Главная</a>
-        <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-        <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-        <a href="about.html" data-i18n="nav_about">О нас</a>
-        <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
-      </nav>
+        <nav class="nav">
+          <a href="index.html">Главная</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="shipping.html">Доставка</a>
+          <a href="about.html">О нас</a>
+          <a href="contacts.html">Контакты</a>
+        </nav>
 
-      <div class="right">
-        <div class="lang">
-          <button type="button" data-lang="RU">RU</button>
-          <button type="button" data-lang="UKR">UKR</button>
-          <button type="button" data-lang="EN">EN</button>
+        <div class="rightBar">
+          <div class="lang">
+            <button type="button" data-lang="RU">RU</button>
+            <button type="button" data-lang="UKR">UKR</button>
+            <button type="button" data-lang="EN">EN</button>
+          </div>
+
+          <a class="cartPill" href="cart.html">
+            Корзина <span class="count" data-cart-count>0</span>
+          </a>
+
+          <button class="burger" type="button" data-burger>Меню</button>
         </div>
-        <a class="cartBadge" href="cart.html" data-cart-badge>Корзина • 0</a>
       </div>
-    </div>
-  </div>
-</header>
 
-<main class="main">
-  <div class="container">
-    <h1 class="pageTitle" data-i18n="checkout_title">Оформление заказа</h1>
-    <p class="pageSub"><span data-i18n="total">Итого</span>: <b data-checkout-total>0 грн</b></p>
+      <div class="container mobileMenu" data-mobilemenu>
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="shipping.html">Доставка</a>
+        <a href="about.html">О нас</a>
+        <a href="contacts.html">Контакты</a>
+        <a href="cart.html">Корзина</a>
+      </div>
+    </header>
 
-    <form id="checkoutForm">
-      <div class="form">
-        <div class="field">
-          <label for="fio" data-i18n="fio">ФИО</label>
-          <input id="fio" required placeholder="Иван Иванов"/>
+    <main class="container section">
+      <h1 class="h1">Оформление заказа</h1>
+      <p class="p">Итого: <b data-checkout-total>0 грн</b></p>
+
+      <div class="glass" style="padding:16px; margin-top:16px">
+        <div class="segment">
+          <button class="segBtn" type="button" data-delivery="branch">Отделение</button>
+          <button class="segBtn" type="button" data-delivery="postomat">Поштомат</button>
+          <button class="segBtn" type="button" data-delivery="courier">Курьер</button>
         </div>
 
-        <div class="field">
-          <label for="phone" data-i18n="phone">Телефон</label>
-          <input id="phone" required placeholder="+380..." />
-        </div>
+        <div class="form">
+          <div class="field">
+            <label for="fio">ФИО</label>
+            <input class="input" id="fio" placeholder="Иван Иванов" />
+          </div>
 
-        <div class="field full">
-          <label data-i18n="delivery">Доставка</label>
-          <div class="deliveryType">
-            <button type="button" class="active" data-delivery-type data-delivery-type="branch" data-i18n="delivery_branch">Отделение</button>
-            <button type="button" data-delivery-type data-delivery-type="locker" data-i18n="delivery_locker">Почтомат</button>
-            <button type="button" data-delivery-type data-delivery-type="courier" data-i18n="delivery_courier">Курьер</button>
+          <div class="field">
+            <label for="phone">Телефон</label>
+            <input class="input" id="phone" placeholder="+380..." />
+          </div>
+
+          <div class="field full suggest">
+            <label for="city">Город</label>
+            <input class="input" id="city" placeholder="Начните вводить город..." />
+            <div class="suggestList" data-city-list></div>
+            <div class="note">Подсказки подтягиваются с Новой Почты.</div>
+          </div>
+
+          <div class="field full suggest" data-warehouse-field>
+            <label for="warehouse">Отделение / Поштомат</label>
+            <input class="input" id="warehouse" placeholder="Введите отделение..." />
+            <div class="suggestList" data-wh-list></div>
+          </div>
+
+          <div class="field full" data-address-field style="display:none">
+            <label for="address">Адрес курьера</label>
+            <input class="input" id="address" placeholder="Улица, дом, квартира..." />
+          </div>
+
+          <div class="field">
+            <label for="pay">Оплата</label>
+            <select class="input" id="pay">
+              <option value="Наложенный платеж">Наложенный платеж</option>
+              <option value="Оплата на карту">Оплата на карту</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="comment">Комментарий</label>
+            <input class="input" id="comment" placeholder="Например: позвонить перед отправкой" />
+          </div>
+
+          <div class="field full" style="display:flex; flex-direction:row; gap:10px; justify-content:flex-end; align-items:center; margin-top:8px">
+            <a class="btn secondary" href="cart.html">Корзина</a>
+            <button class="btn primary" type="button" data-send-order>Отправить заказ</button>
           </div>
         </div>
 
-        <div class="field suggest">
-          <label for="npCity" data-i18n="city">Город</label>
-          <input id="npCity" autocomplete="off" placeholder="Киев / Львов..." required/>
-          <div class="hint" data-i18n="hint_np">Подсказки подтягиваются с Новой Почты.</div>
-          <div id="npCityList" class="suggestList"></div>
-        </div>
-
-        <div class="field suggest" data-wh-wrap>
-          <label for="npWh" data-i18n="branch">Отделение / Почтомат</label>
-          <input id="npWh" autocomplete="off" placeholder="Начни вводить..." required/>
-          <div id="npWhList" class="suggestList"></div>
-        </div>
-
-        <div class="field" data-addr-wrap style="display:none;">
-          <label for="courierAddress" data-i18n="address">Адрес (для курьера)</label>
-          <input id="courierAddress" placeholder="Улица, дом, квартира"/>
-        </div>
-
-        <div class="field">
-          <label for="pay" data-i18n="pay">Оплата</label>
-          <select id="pay" class="select" style="height:44px;border-radius:14px;">
-            <option value="cod" data-i18n="pay_cod">Наличными при получении</option>
-          </select>
-        </div>
-
-        <div class="field full">
-          <label for="comment" data-i18n="comment">Комментарий</label>
-          <textarea id="comment" placeholder="Например: позвонить перед отправкой"></textarea>
-        </div>
-
-        <div class="field full" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-          <a class="btn" href="cart.html" data-i18n="cart">Корзина</a>
-          <button class="btn primary" type="submit" data-i18n="send">Отправить заказ</button>
-        </div>
-
-        <div class="field full">
-          <div class="hint">
-            ⚠️ GitHub Pages — статический сайт. Заказ отправляется через <b>mailto</b> (откроет вашу почту).
-            Чтобы отправлялось “без почты” — нужен сервер/бот.
-          </div>
+        <div class="note">
+          ⚠️ GitHub Pages — статический сайт. Реальная отправка на email без сервера невозможна,
+          поэтому кнопка сформирует письмо через <b>mailto</b> (откроет вашу почту с готовым текстом).
         </div>
       </div>
-    </form>
 
-    <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
+      <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
+    </main>
   </div>
-</main>
+
+  <script src="assets/app.js"></script>
 </body>
 </html>
