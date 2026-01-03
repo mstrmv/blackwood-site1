@@ -6,18 +6,15 @@ window.I18N = {
     nav_about: "Про нас",
     nav_contacts: "Контакти",
     cart: "Кошик",
-
     hero_badge: "Преміум вугілля для гриля",
     hero_title: "PREMIUM HARDWOOD\nCHARCOAL",
     hero_text: "Довге горіння, мінімум попелу, чистий жар.\nІдеально для BBQ та гриля.",
     hero_catalog: "Відкрити каталог",
     hero_shipping: "Доставка і оплата",
     hero_cart: "Кошик",
-
     catalog_title: "Товари",
     catalog_sub: "Оберіть вагу та додайте в кошик.",
     add_to_cart: "В кошик",
-
     p_core_3: "CORE • 3 KG",
     p_core_5: "CORE • 5 KG",
     p_core_10: "CORE • 10 KG",
@@ -32,18 +29,15 @@ window.I18N = {
     nav_about: "О нас",
     nav_contacts: "Контакты",
     cart: "Корзина",
-
     hero_badge: "Премиум уголь для гриля",
     hero_title: "PREMIUM HARDWOOD\nCHARCOAL",
     hero_text: "Долгое горение, минимум пепла, чистый жар.\nИдеально для BBQ и гриля.",
     hero_catalog: "Открыть каталог",
     hero_shipping: "Доставка и оплата",
     hero_cart: "Корзина",
-
     catalog_title: "Товары",
     catalog_sub: "Выберите вес и добавьте в корзину.",
     add_to_cart: "В корзину",
-
     p_core_3: "CORE • 3 KG",
     p_core_5: "CORE • 5 KG",
     p_core_10: "CORE • 10 KG",
@@ -58,18 +52,15 @@ window.I18N = {
     nav_about: "About",
     nav_contacts: "Contacts",
     cart: "Cart",
-
     hero_badge: "Premium charcoal for grill",
     hero_title: "PREMIUM HARDWOOD\nCHARCOAL",
     hero_text: "Long burn, low ash, clean heat.\nPerfect for BBQ & grill.",
     hero_catalog: "Open catalog",
     hero_shipping: "Shipping & payment",
     hero_cart: "Cart",
-
     catalog_title: "Products",
     catalog_sub: "Pick weight and add to cart.",
     add_to_cart: "Add to cart",
-
     p_core_3: "CORE • 3 KG",
     p_core_5: "CORE • 5 KG",
     p_core_10: "CORE • 10 KG",
@@ -81,15 +72,9 @@ window.I18N = {
 
 window.applyI18n = function(lang){
   const dict = window.I18N?.[lang] || window.I18N.uk;
-
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    const val = dict[key];
-    if (!val) return;
-
-    // переносы строк
-    el.textContent = val;
+    if (dict[key]) el.textContent = dict[key];
   });
-
   document.documentElement.lang = lang;
 };
