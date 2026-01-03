@@ -1,112 +1,121 @@
 <!doctype html>
-<html lang="ru">
+<html lang="uk">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Оформление • BLACKWOOD</title>
+  <title>Оформлення • BLACKWOOD</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
-<body>
-  <div class="page has-catalog-bg">
-    <header class="header">
-      <div class="container headerInner">
-        <a class="brand" href="index.html">
-          <span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span>
-        </a>
+<body class="page bg-inner">
+  <div class="overlay">
 
-        <nav class="nav">
-          <a href="index.html">Главная</a>
-          <a href="catalog.html">Каталог</a>
-          <a href="shipping.html">Доставка</a>
-          <a href="about.html">О нас</a>
-          <a href="contacts.html">Контакты</a>
-        </nav>
-
-        <div class="rightBar">
-          <a class="cartPill" href="cart.html">
-            Корзина <span class="count" data-cart-count>0</span>
+    <header class="topbar">
+      <div class="container">
+        <div class="topbar-inner">
+          <a class="brand" href="index.html">
+            BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
           </a>
-          <button class="burger" type="button" data-burger>Меню</button>
-        </div>
-      </div>
 
-      <div class="container mobileMenu" data-mobilemenu>
-        <a href="index.html">Главная</a>
-        <a href="catalog.html">Каталог</a>
-        <a href="shipping.html">Доставка</a>
-        <a href="about.html">О нас</a>
-        <a href="contacts.html">Контакты</a>
-        <a href="cart.html">Корзина</a>
+          <nav class="nav">
+            <a data-nav href="index.html" data-i18n="nav_home">Головна</a>
+            <a data-nav href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+            <a data-nav href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+            <a data-nav href="about.html" data-i18n="nav_about">Про нас</a>
+            <a data-nav href="contacts.html" data-i18n="nav_contacts">Контакти</a>
+          </nav>
+
+          <div class="right">
+            <div class="lang">
+              <button type="button" data-lang="RU">RU</button>
+              <button type="button" data-lang="UKR">UKR</button>
+              <button type="button" data-lang="EN">EN</button>
+            </div>
+
+            <a class="cartPill" href="cart.html">
+              <span data-cart-label data-i18n="cart">Кошик</span>
+              <span class="count" data-cart-count>0</span>
+            </a>
+          </div>
+        </div>
       </div>
     </header>
 
-    <main class="container section">
-      <h1 class="h1">Оформление заказа</h1>
-      <p class="p">Итого: <b data-checkout-total>0 грн</b></p>
+    <main class="main">
+      <div class="container">
+        <h1 class="h1" data-i18n="checkout_title">ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</h1>
+        <p class="lead"><b data-i18n="total">Разом</b>: <span data-checkout-total>0 грн</span></p>
 
-      <div style="padding:16px; margin-top:16px; border:1px solid rgba(255,255,255,.10); border-radius:18px; background:rgba(0,0,0,.28)">
-        <div class="segment">
-          <button class="segBtn" type="button" data-delivery="branch">Отделение</button>
-          <button class="segBtn" type="button" data-delivery="postomat">Поштомат</button>
-          <button class="segBtn" type="button" data-delivery="courier">Курьер</button>
-        </div>
+        <div class="card">
+          <form data-checkout-form>
+            <div class="formGrid">
+              <div class="field">
+                <label data-i18n="fio">ПІБ</label>
+                <input class="input" data-fio placeholder="Іван Іванов" required />
+              </div>
 
-        <div class="form">
-          <div class="field">
-            <label for="fio">ФИО</label>
-            <input class="input" id="fio" placeholder="Иван Иванов" />
-          </div>
+              <div class="field">
+                <label data-i18n="phone">Телефон</label>
+                <input class="input" data-phone placeholder="+380..." required />
+              </div>
 
-          <div class="field">
-            <label for="phone">Телефон</label>
-            <input class="input" id="phone" placeholder="+380..." />
-          </div>
+              <div class="field">
+                <label data-i18n="city">Місто</label>
+                <input class="input" data-city list="cityList" placeholder="Київ" required />
+                <datalist id="cityList" data-city-list></datalist>
+                <div class="hint" data-i18n="np_hint">Підказки підтягуються з Нової Пошти.</div>
+              </div>
 
-          <div class="field full suggest">
-            <label for="city">Город</label>
-            <input class="input" id="city" placeholder="Начните вводить город..." />
-            <div class="suggestList" data-city-list></div>
-            <div class="note">Подсказки подтягиваются с Новой Почты.</div>
-          </div>
+              <div class="field">
+                <label data-i18n="delivery">Доставка</label>
+                <div class="deliveryBtns">
+                  <button type="button" data-delivery="branch" class="active" data-i18n="branch">Відділення</button>
+                  <button type="button" data-delivery="postomat" data-i18n="postomat">Поштомат</button>
+                  <button type="button" data-delivery="courier" data-i18n="courier">Курʼєр</button>
+                </div>
+              </div>
 
-          <div class="field full suggest" data-warehouse-field>
-            <label for="warehouse">Отделение / Поштомат</label>
-            <input class="input" id="warehouse" placeholder="Введите отделение..." />
-            <div class="suggestList" data-wh-list></div>
-          </div>
+              <div class="field" data-block="warehouse">
+                <label data-i18n="warehouse">Відділення / Поштомат</label>
+                <select class="input" data-warehouse required>
+                  <option value="">...</option>
+                </select>
+              </div>
 
-          <div class="field full" data-address-field style="display:none">
-            <label for="address">Адрес курьера</label>
-            <input class="input" id="address" placeholder="Улица, дом, квартира..." />
-          </div>
+              <div class="field hidden" data-block="address">
+                <label data-i18n="address">Адреса (для курʼєра)</label>
+                <input class="input" data-address placeholder="Вулиця, будинок, квартира" />
+              </div>
 
-          <div class="field">
-            <label for="pay">Оплата</label>
-            <select class="input" id="pay">
-              <option value="Наложенный платеж">Наложенный платеж</option>
-              <option value="Оплата на карту">Оплата на карту</option>
-            </select>
-          </div>
+              <div class="field">
+                <label data-i18n="pay">Оплата</label>
+                <select class="input" data-pay>
+                  <option data-i18n="pay_cod">Накладений платіж (при отриманні)</option>
+                </select>
+              </div>
 
-          <div class="field">
-            <label for="comment">Комментарий</label>
-            <input class="input" id="comment" placeholder="Например: позвонить перед отправкой" />
-          </div>
+              <div class="field">
+                <label data-i18n="comment">Коментар</label>
+                <textarea class="textarea" data-comment placeholder="Наприклад: зателефонувати перед відправкою"></textarea>
+              </div>
+            </div>
 
-          <div class="field full" style="display:flex; flex-direction:row; gap:10px; justify-content:flex-end; align-items:center; margin-top:8px">
-            <a class="btn secondary" href="cart.html">Корзина</a>
-            <button class="btn primary" type="button" data-send-order>Отправить заказ</button>
-          </div>
-        </div>
+            <div class="bottomActions">
+              <a class="btn" href="cart.html" data-i18n="to_cart">Перейти в кошик</a>
+              <button class="btn primary" type="submit" data-i18n="send">Відправити замовлення</button>
+            </div>
 
-        <div class="note">
-          ⚠️ GitHub Pages — статический сайт. Реальная отправка на email без сервера невозможна,
-          поэтому кнопка сформирует письмо через <b>mailto</b>.
+            <div class="smallNote">
+              GitHub Pages — статичний сайт. Реальна “авто-відправка” email без сервера неможлива, тому використовується mailto.
+            </div>
+          </form>
         </div>
       </div>
-
-      <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
     </main>
+
+    <footer class="footer">
+      <div class="container">BLACKWOOD • CHARCOAL © 2026</div>
+    </footer>
+
   </div>
 
   <script src="assets/app.js"></script>
