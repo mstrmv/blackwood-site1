@@ -3,79 +3,56 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Про нас • BLACKWOOD</title>
+  <title>About — BLACKWOOD</title>
   <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/app.js"></script>
 </head>
-<body class="page bg-inner">
-  <div class="overlay">
-
-    <header class="topbar">
-      <div class="container">
-        <div class="topbar-inner">
-          <a class="brand" href="index.html">
-            BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
-          </a>
-
-          <nav class="nav">
-            <a data-nav href="index.html" data-i18n="nav_home">Головна</a>
-            <a data-nav href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-            <a data-nav href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-            <a data-nav href="about.html" data-i18n="nav_about">Про нас</a>
-            <a data-nav href="contacts.html" data-i18n="nav_contacts">Контакти</a>
-          </nav>
-
-          <div class="right">
-            <div class="lang">
-              <button type="button" data-lang="RU">RU</button>
-              <button type="button" data-lang="UKR">UKR</button>
-              <button type="button" data-lang="EN">EN</button>
-            </div>
-
-            <a class="cartPill" href="cart.html">
-              <span data-cart-label data-i18n="cart">Кошик</span>
-              <span class="count" data-cart-count>0</span>
-            </a>
-          </div>
+<body class="page-inner">
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="index.html"><span class="brand__name">BLACKWOOD</span><span class="brand__dot">•</span><span class="brand__sub">CHARCOAL</span></a>
+      <nav class="nav">
+        <a class="nav__link" href="index.html" data-i18n="nav_home">Головна</a>
+        <a class="nav__link" href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+        <a class="nav__link" href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+        <a class="nav__link is-active" href="about.html" data-i18n="nav_about">Про нас</a>
+        <a class="nav__link" href="contacts.html" data-i18n="nav_contacts">Контакти</a>
+      </nav>
+      <div class="right">
+        <div class="lang">
+          <button class="pill lang__btn" data-lang="RU" type="button">RU</button>
+          <button class="pill lang__btn is-active" data-lang="UKR" type="button">UKR</button>
+          <button class="pill lang__btn" data-lang="EN" type="button">EN</button>
+        </div>
+        <a class="pill cart" href="cart.html"><span data-i18n="cart">Кошик</span><span class="cart__count" id="cartCount">0</span></a>
+        <div class="social">
+          <a class="social__btn" data-social="telegram" href="#" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" class="social__icon"><path d="M9.78 15.63 9.6 19.2c.46 0 .66-.2.9-.43l2.16-2.06 4.48 3.27c.82.45 1.4.22 1.62-.76l2.94-13.78c.28-1.28-.46-1.78-1.25-1.48L2.44 9.62c-1.25.49-1.23 1.2-.23 1.51l5.1 1.59L19.1 6.3c.56-.37 1.07-.17.65.2L9.78 15.63z"/></svg></a>
+          <a class="social__btn" data-social="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" class="social__icon"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4.5A5.5 5.5 0 1 1 6.5 14 5.5 5.5 0 0 1 12 8.5zm0 2A3.5 3.5 0 1 0 15.5 14 3.5 3.5 0 0 0 12 10.5zM18 6.8a1.2 1.2 0 1 1-1.2-1.2A1.2 1.2 0 0 1 18 6.8z"/></svg></a>
+          <a class="social__btn" data-social="tiktok" href="#" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" class="social__icon"><path d="M16.6 2h-2.7v12.1a3.3 3.3 0 1 1-2.3-3.1V8.2a6 6 0 1 0 4.6 5.8V7.6c1.2 1.2 2.8 2 4.6 2V7a4.8 4.8 0 0 1-4.2-5z"/></svg></a>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main class="main">
-      <div class="container">
-        <h1 class="h1">Про нас</h1>
+  <main class="section">
+    <div class="container">
+      <div class="card card__pad">
+        <h1 style="margin:0 0 10px" data-i18n="about_title">Про нас</h1>
+        <div class="muted" style="line-height:1.7">
+          <b>BLACKWOOD • CHARCOAL</b> — це вугілля, яке ми робимо з думкою про чистий жар і стабільний результат.
+          Ідея народилась просто: ми хотіли продукт, який не “стрибає” по якості — щоб і вдома, і на виїзді, і в закладі
+          можна було однаково впевнено готувати м’ясо, овочі та стейки.<br/><br/>
 
-        <div class="card">
-          <p class="lead">
-            BLACKWOOD • CHARCOAL — це ідея зробити вугілля, яке “працює” стабільно: довго тримає жар,
-            дає мінімум попелу та не псує смак мʼяса різким димом.
-          </p>
+          Ми зосередились на трьох речах:
+          <br/>• <b>довге горіння</b> (щоб не підкидати кожні 5 хвилин)
+          <br/>• <b>мінімум попелу</b> (щоб зручніше було працювати)
+          <br/>• <b>чистий жар</b> (без зайвих запахів, які перебивають смак)<br/><br/>
 
-          <p style="color:rgba(255,255,255,.78); line-height:1.65; margin:0 0 12px;">
-            Все почалось з простого: хотілося мати вугілля, яке не розсипається в пил,
-            швидко розпалюється та дає рівний жар для BBQ. Ми тестували різні партії,
-            різні породи та фракції, поки не зібрали формулу CORE — баланс щільності,
-            температури та чистоти горіння.
-          </p>
-
-          <p style="color:rgba(255,255,255,.78); line-height:1.65; margin:0;">
-            Зараз ми фокусуємось на якості: контроль фракції, акуратне пакування та чесні ваги.
-            Наша мета — щоб кожен гриль-вечір був передбачуваним: запалив, прогрів, готуй.
-          </p>
-
-          <div class="bottomActions">
-            <a class="btn primary" href="catalog.html">Перейти в каталог</a>
-            <a class="btn" href="contacts.html">Контакти</a>
-          </div>
+          Ми постійно оновлюємо упаковку, дизайн і сервіс — щоб покупка була такою ж приємною, як і результат на решітці 🔥
         </div>
       </div>
-    </main>
-
-    <footer class="footer">
-      <div class="container">BLACKWOOD • CHARCOAL © 2026</div>
-    </footer>
-
-  </div>
-
-  <script src="assets/app.js"></script>
+      <div class="footerLine">BLACKWOOD • CHARCOAL © 2026</div>
+    </div>
+  </main>
 </body>
 </html>
