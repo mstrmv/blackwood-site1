@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BLACKWOOD • Каталог</title>
 
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="i18n.js"></script>
-  <script defer src="app.js"></script>
+  <link rel="stylesheet" href="./style.css" />
+  <script defer src="./i18n.js"></script>
+  <script defer src="./app.js"></script>
 </head>
 
 <body class="page-inner">
@@ -19,7 +19,7 @@
 
     <nav class="navlinks">
       <a href="index.html" data-i18n="nav_home">Головна</a>
-      <a href="catalog.html" class="active" data-i18n="nav_catalog">Каталог</a>
+      <a href="catalog.html" data-i18n="nav_catalog" class="active">Каталог</a>
       <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
       <a href="about.html" data-i18n="nav_about">Про нас</a>
       <a href="contacts.html" data-i18n="nav_contacts">Контакти</a>
@@ -57,9 +57,9 @@
     <p data-i18n="catalog_sub">Оберіть категорію та додайте в кошик.</p>
   </section>
 
-  <div class="filters card" style="padding:14px; margin-bottom:14px;">
-    <label style="display:flex; gap:10px; align-items:center;">
-      <strong style="min-width:90px;">Категорія</strong>
+  <div class="card filters">
+    <label class="filter-row">
+      <strong>Категорія</strong>
       <select id="catFilter" class="select">
         <option value="all" data-i18n="cat_all">Усі</option>
         <option value="charcoal" data-i18n="cat_charcoal">Вугілля</option>
@@ -73,5 +73,9 @@
 
   <section id="productsGrid" class="products-grid"></section>
 </main>
+
+<footer class="footer">
+  <div class="container">BLACKWOOD • CHARCOAL © 2026</div>
+</footer>
 </body>
 </html>
