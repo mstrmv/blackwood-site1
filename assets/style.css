@@ -18,15 +18,26 @@ body{
   background: var(--bg);
 }
 
+/* FIX “фиолетовые ссылки” */
 a{color:inherit;text-decoration:none}
+a:visited{color:inherit}
+a:hover{text-decoration:none}
+
 .container{width:min(1180px, calc(100% - 48px)); margin:0 auto}
 
+/* Фоны */
 .page-hero{
   background:
     radial-gradient(1200px 520px at 40% -160px, rgba(200,164,90,.18), transparent 60%),
     radial-gradient(900px 420px at 90% 10%, rgba(255,255,255,.06), transparent 60%),
     linear-gradient(180deg, rgba(0,0,0,.66), rgba(0,0,0,.72)),
     url("../img/hero-bg.png") center/cover no-repeat fixed;
+}
+.page-inner{
+  background:
+    radial-gradient(900px 420px at 50% -160px, rgba(200,164,90,.12), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.72), rgba(0,0,0,.78)),
+    url("../img/catalog-bg.png") center/cover no-repeat fixed;
 }
 
 /* Topbar */
@@ -161,15 +172,12 @@ a{color:inherit;text-decoration:none}
   display:flex;
   align-items:center;
 }
-.hero__inner{
-  display:flex;
-  align-items:center;
-}
+.hero__inner{display:flex; align-items:center}
 
-/* LEFT SHIFT (чтобы пачки было лучше видно) */
+/* Сдвиг текста левее (чтобы пачки видно) */
 .heroCard{
   width:min(560px, 100%);
-  margin-left:-60px; /* <-- смещаем левее */
+  margin-left:-80px;
   background: var(--card);
   border:1px solid rgba(255,255,255,.10);
   border-radius: var(--r);
@@ -209,12 +217,7 @@ a{color:inherit;text-decoration:none}
   max-width:42ch;
 }
 
-.heroActions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:6px;
-}
+.heroActions{display:flex; flex-wrap:wrap; gap:10px; margin-top:6px}
 
 .btn{
   display:inline-flex;
@@ -227,6 +230,7 @@ a{color:inherit;text-decoration:none}
   font-weight:700;
   font-size:13px;
   transition:.2s ease;
+  cursor:pointer;
 }
 .btn:hover{background:rgba(255,255,255,.10)}
 .btn--gold{
@@ -247,11 +251,138 @@ a{color:inherit;text-decoration:none}
   color:rgba(255,255,255,.55);
 }
 
+/* Inner pages */
+.section{
+  padding:42px 0 70px;
+}
+.card{
+  background: var(--card);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+.card__pad{padding:24px}
+
+/* Catalog */
+.catalogTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.filters{display:flex; gap:8px; flex-wrap:wrap}
+.filterBtn{
+  padding:9px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  font-size:12px;
+  cursor:pointer;
+}
+.filterBtn.is-active{
+  border-color: rgba(200,164,90,.55);
+  background: rgba(200,164,90,.18);
+  color:#111;
+  font-weight:800;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:18px;
+}
+.product{
+  padding:16px;
+}
+.product__imgWrap{
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.25);
+  overflow:hidden;
+}
+.product__img{
+  width:100%;
+  height:220px;
+  object-fit:contain;
+  display:block;
+}
+.product__title{margin:12px 0 4px; font-weight:900; letter-spacing:.06em}
+.product__meta{color:rgba(255,255,255,.72); font-size:13px; display:flex; justify-content:space-between; gap:10px}
+.product__bottom{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:12px}
+.qty{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.22);
+  border-radius:999px;
+  padding:6px 8px;
+}
+.qty button{
+  width:28px;height:28px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  cursor:pointer;
+}
+.qty span{min-width:18px; text-align:center}
+
+/* Cart & checkout */
+.table{width:100%; border-collapse:collapse}
+.table td,.table th{padding:10px; border-bottom:1px solid rgba(255,255,255,.08); text-align:left}
+.muted{color:rgba(255,255,255,.7)}
+.rowActions{display:flex; gap:8px; flex-wrap:wrap}
+.input{
+  width:100%;
+  padding:12px 12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.25);
+  color:#fff;
+  outline:none;
+}
+.input::placeholder{color:rgba(255,255,255,.45)}
+.formGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.radioRow{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.radioBtn{
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  cursor:pointer;
+  font-size:12px;
+}
+.radioBtn.is-active{
+  border-color: rgba(200,164,90,.55);
+  background: rgba(200,164,90,.18);
+  color:#111;
+  font-weight:800;
+}
+
+.footerLine{
+  margin-top:18px;
+  color:rgba(255,255,255,.55);
+  font-size:12px;
+}
+
 /* Responsive */
 @media (max-width: 980px){
   .nav{display:none}
   .heroCard{margin-left:0}
   .heroTitle{font-size:46px}
+  .grid{grid-template-columns:1fr}
+  .formGrid{grid-template-columns:1fr}
 }
 @media (max-width: 520px){
   .container{width:calc(100% - 26px)}
