@@ -1,6 +1,11 @@
-// ===== CART STORAGE =====
 const CART_KEY = "bw_cart_v1";
 const LANG_KEY = "bw_lang_v1";
+
+const PRODUCTS = [
+  { id:"core-3",  nameKey:"p_core_3",  weightKey:"w_3",  price:399, img:"assets/img/products/core-3kg.png" },
+  { id:"core-5",  nameKey:"p_core_5",  weightKey:"w_5",  price:499, img:"assets/img/products/core-5kg.png" },
+  { id:"core-10", nameKey:"p_core_10", weightKey:"w_10", price:599, img:"assets/img/products/core-10kg.png" },
+];
 
 function loadCart(){
   try { return JSON.parse(localStorage.getItem(CART_KEY) || "[]"); }
@@ -18,43 +23,13 @@ function updateCartCount(){
   if (el) el.textContent = String(cartCount());
 }
 
-// ===== PRODUCTS (ТОЛЬКО ТВОИ 3 PNG ПАЧКИ) =====
-const PRODUCTS = [
-  {
-    id: "core-3",
-    nameKey: "p_core_3",
-    weightKey: "w_3",
-    price: 399,
-    img: "assets/img/products/core-3kg.png",
-    category: "charcoal"
-  },
-  {
-    id: "core-5",
-    nameKey: "p_core_5",
-    weightKey: "w_5",
-    price: 499,
-    img: "assets/img/products/core-5kg.png",
-    category: "charcoal"
-  },
-  {
-    id: "core-10",
-    nameKey: "p_core_10",
-    weightKey: "w_10",
-    price: 599,
-    img: "assets/img/products/core-10kg.png",
-    category: "charcoal"
-  }
-];
-
-// ===== HELPERS =====
 function getLang(){
-  return localStorage.getItem(LANG_KEY) || "uk"; // UKR главный
+  return localStorage.getItem(LANG_KEY) || "uk";
 }
 function setLang(lang){
   localStorage.setItem(LANG_KEY, lang);
 }
 
-// ===== RENDER CATALOG =====
 function renderCatalog(){
   const grid = document.getElementById("productsGrid");
   if (!grid) return;
@@ -65,13 +40,11 @@ function renderCatalog(){
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
-      <div class="img">
-        <img src="${p.img}" alt="">
-      </div>
+      <div class="img"><img src="${p.img}" alt=""></div>
       <div class="body">
         <div class="name" data-i18n="${p.nameKey}">CORE</div>
         <div class="meta">
-          <span data-i18n="${p.weightKey}">Вага</span>
+          <span data-i18n="${p.weightKey}">kg</span>
           <span class="price">${p.price} грн</span>
         </div>
         <div class="row">
@@ -87,35 +60,31 @@ function renderCatalog(){
 
     let qty = 1;
     const qtyEl = card.querySelector("[data-qty]");
+
     card.addEventListener("click", (e) => {
       const act = e.target?.getAttribute?.("data-act");
       if (!act) return;
 
-      if (act === "plus"){
-        qty = Math.min(99, qty + 1);
-        qtyEl.textContent = qty;
-      }
-      if (act === "minus"){
-        qty = Math.max(1, qty - 1);
-        qtyEl.textContent = qty;
-      }
+      if (act === "plus"){ qty = Math.min(99, qty + 1); qtyEl.textContent = qty; }
+      if (act === "minus"){ qty = Math.max(1, qty - 1); qtyEl.textContent = qty; }
+
       if (act === "add"){
         const cart = loadCart();
         const found = cart.find(x => x.id === p.id);
         if (found) found.qty += qty;
-        else cart.push({ id: p.id, qty, price: p.price, img: p.img, nameKey: p.nameKey, weightKey: p.weightKey });
+        else cart.push({ id: p.id, qty: qty });
         saveCart(cart);
+        qty = 1;
+        qtyEl.textContent = "1";
       }
     });
 
     grid.appendChild(card);
   });
 
-  // применяем переводы после рендера
   if (window.applyI18n) window.applyI18n(getLang());
 }
 
-// ===== ON LOAD =====
 document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
 
@@ -132,14 +101,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // set active button on load
+  // set active lang
   const lang = getLang();
   const activeBtn = document.querySelector(`.lang-switch button[data-lang="${lang}"]`);
   if (activeBtn){
     document.querySelectorAll(".lang-switch button").forEach(b => b.classList.remove("active"));
     activeBtn.classList.add("active");
   }
-
   if (window.applyI18n) window.applyI18n(lang);
 
   renderCatalog();
