@@ -1,587 +1,539 @@
+/* BLACKWOOD • CHARCOAL — app.js (full) */
+
 /* =========================
-   BLACKWOOD • CHARCOAL
-   i18n + cart + catalog + checkout
-   ========================= */
+   CONFIG
+========================= */
+const DEFAULT_LANG = "UKR"; // главный язык — украинский
 
-const NP_KEY = "e2d2f807d2464e81aae678bb51c9c569"; // ⚠️ visible on static hosting
+// УКАЖИ СВОИ ССЫЛКИ (иконки в шапке)
+const SOCIAL = {
+  telegram: "https://t.me/USERNAME",
+  instagram: "https://instagram.com/USERNAME",
+  tiktok: "https://tiktok.com/@USERNAME",
+};
 
+// ЦЕНЫ
 const PRODUCTS = [
-  { id: "core-3",  name: "CORE • 3 KG",  weight: "3 kg",  price: 399, tag: "3-5kg", img: "img/products/core-3kg.png" },
-  { id: "core-5",  name: "CORE • 5 KG",  weight: "5 kg",  price: 499, tag: "3-5kg", img: "img/products/core-5kg.png" },
-  { id: "core-10", name: "CORE • 10 KG", weight: "10 kg", price: 599, tag: "10kg",  img: "img/products/core-10kg.png" }
+  { id: "core-3kg",  name: "CORE • 3 KG",  weight: "3kg",  price: 399, img: "./img/products/core-3kg.png"  },
+  { id: "core-5kg",  name: "CORE • 5 KG",  weight: "5kg",  price: 499, img: "./img/products/core-5kg.png"  },
+  { id: "core-10kg", name: "CORE • 10 KG", weight: "10kg", price: 599, img: "./img/products/core-10kg.png" },
 ];
 
-const I18N = {
-  UKR: {
-    nav_home: "Головна",
-    nav_catalog: "Каталог",
-    nav_shipping: "Доставка",
-    nav_about: "Про нас",
-    nav_contacts: "Контакти",
-    cart: "Кошик",
+// Куда отправлять заказы (mailto)
+const ORDER_EMAIL = "YOUR_EMAIL@gmail.com";
 
-    hero_badge: "Преміум вугілля для гриля",
-    hero_title: "PREMIUM\nHARDWOOD\nCHARCOAL",
-    hero_sub: "Тривале горіння, мінімум попелу, чистий жар. Ідеально для BBQ і гриля.",
-    btn_catalog: "Відкрити каталог",
-    btn_shipping: "Доставка та оплата",
-    btn_cart: "Кошик",
+// ⚠️ ВАЖНО: Nova Poshta API key на GitHub Pages будет виден всем.
+// Лучше делать через сервер/бота. Если всё равно надо — вставь сюда:
+const NOVA_POSHTA_KEY = ""; // "e2d2f807d2464e81aae678bb51c9c569";
 
-    cat_title: "Товари",
-    cat_sub: "Виберіть вагу та додайте в кошик.",
-    sort: "Sort",
-    to_cart: "Перейти в кошик",
-    checkout: "Оформити замовлення",
-    add: "В КОШИК",
-
-    cart_title: "Кошик",
-    cart_empty: "Кошик порожній.",
-    total: "Разом",
-    back_catalog: "Назад до каталогу",
-    remove: "Видалити",
-
-    checkout_title: "ОФОРМЛЕННЯ ЗАМОВЛЕННЯ",
-    fio: "ПІБ",
-    phone: "Телефон",
-    city: "Місто",
-    delivery: "Доставка",
-    branch: "Відділення",
-    postomat: "Поштомат",
-    courier: "Курʼєр",
-    address: "Адреса (для курʼєра)",
-    warehouse: "Відділення / Поштомат",
-    comment: "Коментар",
-    pay: "Оплата",
-    pay_cod: "Накладений платіж (при отриманні)",
-    send: "Відправити замовлення",
-    np_hint: "Підказки підтягуються з Нової Пошти."
-  },
-
+/* =========================
+   I18N
+========================= */
+const i18n = {
   RU: {
-    nav_home: "Главная",
-    nav_catalog: "Каталог",
-    nav_shipping: "Доставка",
-    nav_about: "О нас",
-    nav_contacts: "Контакты",
-    cart: "Корзина",
-
-    hero_badge: "Премиум уголь для гриля",
-    hero_title: "PREMIUM\nHARDWOOD\nCHARCOAL",
-    hero_sub: "Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.",
-    btn_catalog: "Открыть каталог",
-    btn_shipping: "Доставка и оплата",
-    btn_cart: "Корзина",
-
-    cat_title: "Товары",
-    cat_sub: "Выберите вес и добавьте в корзину.",
-    sort: "Sort",
-    to_cart: "Перейти в корзину",
-    checkout: "Оформить заказ",
-    add: "В КОРЗИНУ",
-
-    cart_title: "Корзина",
-    cart_empty: "Корзина пуста.",
-    total: "Итого",
-    back_catalog: "Назад в каталог",
-    remove: "Удалить",
-
-    checkout_title: "ОФОРМЛЕНИЕ ЗАКАЗА",
-    fio: "ФИО",
-    phone: "Телефон",
-    city: "Город",
-    delivery: "Доставка",
-    branch: "Отделение",
-    postomat: "Почтомат",
-    courier: "Курьер",
-    address: "Адрес (для курьера)",
-    warehouse: "Отделение / Почтомат",
-    comment: "Комментарий",
-    pay: "Оплата",
-    pay_cod: "Наложенный платеж (при получении)",
-    send: "Отправить заказ",
-    np_hint: "Подсказки подтягиваются с Новой Почты."
+    nav_home:"Главная", nav_catalog:"Каталог", nav_shipping:"Доставка", nav_about:"О нас", nav_contacts:"Контакты",
+    cart:"Корзина",
+    hero_tag:"Премиум уголь для гриля",
+    hero_sub:"Длительное горение, минимум пепла, чистый жар.\nИдеально для BBQ и гриля.",
+    btn_catalog:"Открыть каталог", btn_shipping:"Доставка и оплата", btn_cart:"Корзина",
+    catalog_title:"Товары", catalog_sub:"Выберите вес и добавьте в корзину.",
+    filter_all:"All", filter_3:"3–5kg", filter_10:"10kg",
+    to_cart:"В корзину",
+    go_cart:"Перейти в корзину",
+    checkout:"Оформить заказ",
+    cart_title:"Корзина",
+    empty:"Пока пусто.",
+    total:"Итого",
+    checkout_title:"Оформление заказа",
+    fio:"ФИО", phone:"Телефон", city:"Город", comment:"Комментарий",
+    delivery_type:"Доставка",
+    np_branch:"Отделение", np_locker:"Почтомат", np_courier:"Курьер",
+    warehouse:"Отделение / Почтомат",
+    send_order:"Отправить заказ",
+    about_title:"О нас",
+    contacts_title:"Контакты",
+    shipping_title:"Доставка",
   },
-
+  UKR: {
+    nav_home:"Головна", nav_catalog:"Каталог", nav_shipping:"Доставка", nav_about:"Про нас", nav_contacts:"Контакти",
+    cart:"Кошик",
+    hero_tag:"Преміум вугілля для гриля",
+    hero_sub:"Довге горіння, мінімум попелу, чистий жар.\nІдеально для BBQ та гриля.",
+    btn_catalog:"Відкрити каталог", btn_shipping:"Доставка та оплата", btn_cart:"Кошик",
+    catalog_title:"Товари", catalog_sub:"Оберіть вагу та додайте у кошик.",
+    filter_all:"All", filter_3:"3–5kg", filter_10:"10kg",
+    to_cart:"У кошик",
+    go_cart:"Перейти в кошик",
+    checkout:"Оформити замовлення",
+    cart_title:"Кошик",
+    empty:"Поки порожньо.",
+    total:"Разом",
+    checkout_title:"Оформлення замовлення",
+    fio:"ПІБ", phone:"Телефон", city:"Місто", comment:"Коментар",
+    delivery_type:"Доставка",
+    np_branch:"Відділення", np_locker:"Поштомат", np_courier:"Курʼєр",
+    warehouse:"Відділення / Поштомат",
+    send_order:"Надіслати замовлення",
+    about_title:"Про нас",
+    contacts_title:"Контакти",
+    shipping_title:"Доставка",
+  },
   EN: {
-    nav_home: "Home",
-    nav_catalog: "Catalog",
-    nav_shipping: "Shipping",
-    nav_about: "About",
-    nav_contacts: "Contacts",
-    cart: "Cart",
-
-    hero_badge: "Premium charcoal for grill",
-    hero_title: "PREMIUM\nHARDWOOD\nCHARCOAL",
-    hero_sub: "Long heat, low ash, clean burn. Perfect for BBQ & grill.",
-    btn_catalog: "Open catalog",
-    btn_shipping: "Shipping & payment",
-    btn_cart: "Cart",
-
-    cat_title: "Products",
-    cat_sub: "Choose weight and add to cart.",
-    sort: "Sort",
-    to_cart: "Go to cart",
-    checkout: "Checkout",
-    add: "ADD TO CART",
-
-    cart_title: "Cart",
-    cart_empty: "Cart is empty.",
-    total: "Total",
-    back_catalog: "Back to catalog",
-    remove: "Remove",
-
-    checkout_title: "CHECKOUT",
-    fio: "Full name",
-    phone: "Phone",
-    city: "City",
-    delivery: "Delivery",
-    branch: "Branch",
-    postomat: "Postomat",
-    courier: "Courier",
-    address: "Address (courier)",
-    warehouse: "Branch / Postomat",
-    comment: "Comment",
-    pay: "Payment",
-    pay_cod: "Cash on delivery",
-    send: "Send order",
-    np_hint: "Hints are loaded from Nova Poshta."
+    nav_home:"Home", nav_catalog:"Catalog", nav_shipping:"Shipping", nav_about:"About", nav_contacts:"Contacts",
+    cart:"Cart",
+    hero_tag:"Premium charcoal for grill",
+    hero_sub:"Long burn, low ash, clean heat.\nPerfect for BBQ & grill.",
+    btn_catalog:"Open catalog", btn_shipping:"Shipping & payment", btn_cart:"Cart",
+    catalog_title:"Products", catalog_sub:"Choose weight and add to cart.",
+    filter_all:"All", filter_3:"3–5kg", filter_10:"10kg",
+    to_cart:"Add to cart",
+    go_cart:"Go to cart",
+    checkout:"Checkout",
+    cart_title:"Cart",
+    empty:"Empty for now.",
+    total:"Total",
+    checkout_title:"Checkout",
+    fio:"Full name", phone:"Phone", city:"City", comment:"Comment",
+    delivery_type:"Delivery",
+    np_branch:"Branch", np_locker:"Locker", np_courier:"Courier",
+    warehouse:"Branch / Locker",
+    send_order:"Send order",
+    about_title:"About",
+    contacts_title:"Contacts",
+    shipping_title:"Shipping",
   }
 };
 
-/* ========= i18n ========= */
-function getLang() {
-  return localStorage.getItem("bw_lang") || "UKR"; // UKR default
+function getLang(){
+  return localStorage.getItem("lang") || DEFAULT_LANG;
+}
+function setLang(lang){
+  localStorage.setItem("lang", lang);
+  applyI18n();
+  updateLangButtons();
 }
 
-function setLang(lang) {
-  localStorage.setItem("bw_lang", lang);
-  applyI18n(lang);
-  // если каталог/корзина/checkout на странице — обновим
-  updateCartCount();
-  renderCatalog();
-  renderCartPage();
-  renderCheckout();
-}
-
-function applyI18n(lang) {
-  const dict = I18N[lang] || I18N.UKR;
-
-  // Все элементы с data-i18n меняем
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    const val = dict[key];
-    if (val == null) return;
-
-    if (el.hasAttribute("data-i18n-multiline")) {
-      el.innerHTML = String(val).replaceAll("\n", "<br>");
-    } else {
-      el.textContent = val;
-    }
-  });
-
-  // подпись корзины (если используешь data-cart-label)
-  const cartLabel = document.querySelector("[data-cart-label]");
-  if (cartLabel) cartLabel.textContent = dict.cart || "Кошик";
-}
-
-function setupLangButtons() {
+function applyI18n(){
   const lang = getLang();
+  const dict = i18n[lang] || i18n[DEFAULT_LANG];
 
-  document.querySelectorAll("[data-lang]").forEach(btn => {
-    btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
-    btn.addEventListener("click", () => {
-      const chosen = btn.getAttribute("data-lang");
-      document.querySelectorAll("[data-lang]").forEach(b =>
-        b.classList.toggle("active", b.getAttribute("data-lang") === chosen)
-      );
-      setLang(chosen);
-    });
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if(!dict[key]) return;
+    el.textContent = dict[key];
   });
 
-  applyI18n(lang);
+  // multiline hero text support
+  document.querySelectorAll("[data-i18n-multiline]").forEach(el=>{
+    const key = el.getAttribute("data-i18n-multiline");
+    if(!dict[key]) return;
+    el.innerHTML = String(dict[key]).replace(/\n/g, "<br/>");
+  });
 }
 
-/* ========= CART ========= */
-function loadCart() {
-  try { return JSON.parse(localStorage.getItem("bw_cart") || "{}"); }
-  catch { return {}; }
+function updateLangButtons(){
+  const lang = getLang();
+  document.querySelectorAll(".lang__btn").forEach(b=>{
+    b.classList.toggle("is-active", b.dataset.lang === lang);
+  });
 }
 
-function saveCart(cart) {
-  localStorage.setItem("bw_cart", JSON.stringify(cart));
+/* =========================
+   CART (localStorage)
+========================= */
+function loadCart(){
+  try{
+    return JSON.parse(localStorage.getItem("cart")||"{}");
+  }catch{ return {}; }
+}
+function saveCart(cart){
+  localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
 }
-
-function cartCount() {
-  const cart = loadCart();
-  return Object.values(cart).reduce((a, b) => a + (Number(b) || 0), 0);
+function cartCount(cart = loadCart()){
+  return Object.values(cart).reduce((s, n)=>s + n, 0);
 }
-
-function cartTotal() {
-  const cart = loadCart();
-  let sum = 0;
-  for (const [id, qty] of Object.entries(cart)) {
-    const p = PRODUCTS.find(x => x.id === id);
-    if (p) sum += p.price * Number(qty);
-  }
-  return sum;
+function updateCartCount(){
+  const el = document.getElementById("cartCount");
+  if(!el) return;
+  el.textContent = String(cartCount());
 }
-
-function updateCartCount() {
-  const el = document.querySelector("[data-cart-count]");
-  if (el) el.textContent = String(cartCount());
-}
-
-function addToCart(id, qty) {
+function addToCart(productId, qty=1){
   const cart = loadCart();
-  cart[id] = (cart[id] || 0) + qty;
-  if (cart[id] <= 0) delete cart[id];
+  cart[productId] = (cart[productId]||0) + qty;
+  if(cart[productId] < 1) delete cart[productId];
+  saveCart(cart);
+}
+function setQty(productId, qty){
+  const cart = loadCart();
+  if(qty <= 0) delete cart[productId];
+  else cart[productId] = qty;
   saveCart(cart);
 }
 
-/* ========= CATALOG ========= */
-function escapeHtml(s) {
-  return String(s)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
+/* =========================
+   COMMON INIT
+========================= */
+function initHeader(){
+  // lang buttons
+  document.querySelectorAll(".lang__btn").forEach(btn=>{
+    btn.addEventListener("click", ()=> setLang(btn.dataset.lang));
+  });
+
+  // inject social links if present
+  const tg = document.querySelector('[data-social="telegram"]');
+  const ig = document.querySelector('[data-social="instagram"]');
+  const tt = document.querySelector('[data-social="tiktok"]');
+  if(tg) tg.href = SOCIAL.telegram;
+  if(ig) ig.href = SOCIAL.instagram;
+  if(tt) tt.href = SOCIAL.tiktok;
+
+  applyI18n();
+  updateLangButtons();
+  updateCartCount();
 }
 
-function cardHTML(p, addText) {
-  return `
-  <div class="card">
-    <div class="cardMedia">
-      <img src="${p.img}" alt="${escapeHtml(p.name)}">
-    </div>
-    <div class="cardTitle">${escapeHtml(p.name)}</div>
-    <div class="cardMeta">
-      <div>${escapeHtml(p.weight)}</div>
-      <div class="price">${p.price} грн</div>
-    </div>
-    <div class="qtyRow">
-      <div class="qty">
-        <button type="button" data-qty-minus="${p.id}">−</button>
-        <span data-qty-val="${p.id}">1</span>
-        <button type="button" data-qty-plus="${p.id}">+</button>
-      </div>
-      <button class="btn primary" type="button" data-add="${p.id}">${addText}</button>
-    </div>
-  </div>`;
-}
-
-function renderCatalog() {
-  const grid = document.querySelector("[data-catalog-grid]");
-  if (!grid) return;
-
-  const dict = I18N[getLang()] || I18N.UKR;
+/* =========================
+   CATALOG PAGE
+========================= */
+function renderCatalog(){
+  const mount = document.getElementById("catalogGrid");
+  if(!mount) return;
 
   let filter = "all";
-  const pills = document.querySelectorAll("[data-filter]");
-  pills.forEach(p => {
-    p.addEventListener("click", () => {
-      pills.forEach(x => x.classList.remove("active"));
-      p.classList.add("active");
-      filter = p.getAttribute("data-filter") || "all";
+
+  const buttons = document.querySelectorAll("[data-filter]");
+  buttons.forEach(b=>{
+    b.addEventListener("click", ()=>{
+      filter = b.dataset.filter;
+      buttons.forEach(x=>x.classList.toggle("is-active", x===b));
       draw();
     });
   });
 
-  const sortSel = document.querySelector("[data-sort]");
-  if (sortSel) sortSel.addEventListener("change", () => draw());
+  function draw(){
+    mount.innerHTML = "";
+    const list = PRODUCTS.filter(p=>{
+      if(filter === "all") return true;
+      if(filter === "3") return p.weight === "3kg" || p.weight === "5kg";
+      if(filter === "10") return p.weight === "10kg";
+      return true;
+    });
 
-  function draw() {
-    let items = [...PRODUCTS];
+    list.forEach(p=>{
+      const card = document.createElement("div");
+      card.className = "card product";
 
-    if (filter !== "all") items = items.filter(p => p.tag === filter);
+      card.innerHTML = `
+        <div class="product__imgWrap">
+          <img class="product__img" src="${p.img}" alt="${p.name}" loading="lazy" />
+        </div>
 
-    if (sortSel) {
-      const v = sortSel.value;
-      if (v === "price_asc") items.sort((a, b) => a.price - b.price);
-      if (v === "price_desc") items.sort((a, b) => b.price - a.price);
-      if (v === "weight") items.sort((a, b) => parseInt(a.weight) - parseInt(b.weight));
-    }
+        <div class="product__title">${p.name}</div>
+        <div class="product__meta">
+          <span>${p.weight}</span>
+          <span>${p.price} грн</span>
+        </div>
 
-    grid.innerHTML = items.map(p => cardHTML(p, dict.add)).join("");
+        <div class="product__bottom">
+          <div class="qty" data-qty="${p.id}">
+            <button type="button" data-dec>-</button>
+            <span>1</span>
+            <button type="button" data-inc>+</button>
+          </div>
+          <button class="btn btn--gold" type="button" data-add="${p.id}" data-i18n="to_cart">В корзину</button>
+        </div>
+      `;
 
-    grid.querySelectorAll("[data-qty-minus]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const id = btn.getAttribute("data-qty-minus");
-        const span = grid.querySelector(`[data-qty-val="${id}"]`);
-        span.textContent = String(Math.max(1, Number(span.textContent || "1") - 1));
+      mount.appendChild(card);
+
+      // qty handlers
+      const qtyWrap = card.querySelector(`[data-qty="${p.id}"]`);
+      const qtySpan = qtyWrap.querySelector("span");
+      let q = 1;
+
+      qtyWrap.querySelector("[data-dec]").addEventListener("click", ()=>{
+        q = Math.max(1, q-1);
+        qtySpan.textContent = String(q);
+      });
+      qtyWrap.querySelector("[data-inc]").addEventListener("click", ()=>{
+        q = Math.min(99, q+1);
+        qtySpan.textContent = String(q);
+      });
+
+      card.querySelector(`[data-add="${p.id}"]`).addEventListener("click", ()=>{
+        addToCart(p.id, q);
       });
     });
 
-    grid.querySelectorAll("[data-qty-plus]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const id = btn.getAttribute("data-qty-plus");
-        const span = grid.querySelector(`[data-qty-val="${id}"]`);
-        span.textContent = String(Math.max(1, Number(span.textContent || "1") + 1));
-      });
-    });
-
-    grid.querySelectorAll("[data-add]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const id = btn.getAttribute("data-add");
-        const span = grid.querySelector(`[data-qty-val="${id}"]`);
-        const qty = Math.max(1, Number(span?.textContent || "1"));
-        addToCart(id, qty);
-      });
-    });
+    applyI18n();
   }
 
   draw();
+
+  // buttons bottom
+  const go = document.getElementById("goCartBtn");
+  const ch = document.getElementById("checkoutBtn");
+  if(go) go.addEventListener("click", ()=> location.href="cart.html");
+  if(ch) ch.addEventListener("click", ()=> location.href="checkout.html");
 }
 
-/* ========= CART PAGE ========= */
-function renderCartPage() {
-  const list = document.querySelector("[data-cart-list]");
-  const sumEl = document.querySelector("[data-cart-sum]");
-  const emptyEl = document.querySelector("[data-cart-empty]");
-  if (!list || !sumEl || !emptyEl) return;
+/* =========================
+   CART PAGE
+========================= */
+function renderCartPage(){
+  const mount = document.getElementById("cartTable");
+  if(!mount) return;
 
-  const dict = I18N[getLang()] || I18N.UKR;
+  const totalEl = document.getElementById("cartTotal");
+  const emptyEl = document.getElementById("cartEmpty");
 
-  const cart = loadCart();
-  const ids = Object.keys(cart);
-
-  if (ids.length === 0) {
-    emptyEl.classList.remove("hidden");
-    list.innerHTML = "";
-    sumEl.textContent = "0 грн";
-    return;
+  function calcTotal(cart){
+    let total = 0;
+    for(const [id, qty] of Object.entries(cart)){
+      const p = PRODUCTS.find(x=>x.id===id);
+      if(!p) continue;
+      total += p.price * qty;
+    }
+    return total;
   }
-  emptyEl.classList.add("hidden");
 
-  list.innerHTML = ids.map(id => {
-    const p = PRODUCTS.find(x => x.id === id);
-    if (!p) return "";
-    const qty = Number(cart[id] || 0);
-    const subtotal = qty * p.price;
+  function draw(){
+    const cart = loadCart();
+    const items = Object.entries(cart);
 
-    return `
-      <div class="card cartItem">
-        <div class="thumb"><img src="${p.img}" alt="${escapeHtml(p.name)}"></div>
-        <div>
-          <div class="name">${escapeHtml(p.name)}</div>
-          <div class="sub">${qty} × ${p.price} грн = <b>${subtotal} грн</b></div>
-          <div class="sub">${escapeHtml(p.weight)}</div>
-        </div>
-        <div class="rightCol">
+    if(items.length === 0){
+      if(emptyEl) emptyEl.style.display = "block";
+      mount.innerHTML = "";
+      if(totalEl) totalEl.textContent = "0 грн";
+      return;
+    }
+    if(emptyEl) emptyEl.style.display = "none";
+
+    mount.innerHTML = `
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Товар</th>
+            <th>К-сть</th>
+            <th>Ціна</th>
+            <th>Сума</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    `;
+    const tbody = mount.querySelector("tbody");
+
+    items.forEach(([id, qty])=>{
+      const p = PRODUCTS.find(x=>x.id===id);
+      if(!p) return;
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><b>${p.name}</b><div class="muted">${p.weight}</div></td>
+        <td>
           <div class="qty">
-            <button type="button" data-cart-minus="${p.id}">−</button>
-            <span data-cart-val="${p.id}">${qty}</span>
-            <button type="button" data-cart-plus="${p.id}">+</button>
+            <button type="button" data-dec>-</button>
+            <span>${qty}</span>
+            <button type="button" data-inc>+</button>
           </div>
-          <button class="remove" type="button" data-remove="${p.id}">${dict.remove}</button>
-        </div>
-      </div>`;
-  }).join("");
+        </td>
+        <td>${p.price} грн</td>
+        <td><b>${p.price * qty} грн</b></td>
+        <td class="rowActions">
+          <button class="btn btn--dark" type="button" data-remove>Удалить</button>
+        </td>
+      `;
 
-  sumEl.textContent = `${cartTotal()} грн`;
+      const qtyWrap = tr.querySelector(".qty");
+      const qtySpan = qtyWrap.querySelector("span");
 
-  list.querySelectorAll("[data-cart-minus]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      addToCart(btn.getAttribute("data-cart-minus"), -1);
-      renderCartPage();
-    });
-  });
-
-  list.querySelectorAll("[data-cart-plus]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      addToCart(btn.getAttribute("data-cart-plus"), 1);
-      renderCartPage();
-    });
-  });
-
-  list.querySelectorAll("[data-remove]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const id = btn.getAttribute("data-remove");
-      const cart = loadCart();
-      delete cart[id];
-      saveCart(cart);
-      renderCartPage();
-    });
-  });
-}
-
-/* ========= NOVA POSHTA ========= */
-async function npRequest(modelName, calledMethod, methodProperties) {
-  const res = await fetch("https://api.novaposhta.ua/v2.0/json/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ apiKey: NP_KEY, modelName, calledMethod, methodProperties })
-  });
-  return await res.json();
-}
-
-/* ========= CHECKOUT ========= */
-function renderCheckout() {
-  const form = document.querySelector("[data-checkout-form]");
-  if (!form) return;
-
-  const totalEl = document.querySelector("[data-checkout-total]");
-  if (totalEl) totalEl.textContent = `${cartTotal()} грн`;
-
-  const btnBranch = document.querySelector("[data-delivery=branch]");
-  const btnPost = document.querySelector("[data-delivery=postomat]");
-  const btnCourier = document.querySelector("[data-delivery=courier]");
-  const blockWarehouse = document.querySelector("[data-block=warehouse]");
-  const blockAddress = document.querySelector("[data-block=address]");
-
-  let deliveryType = "branch";
-
-  function setDelivery(type) {
-    deliveryType = type;
-    [btnBranch, btnPost, btnCourier].forEach(b => b && b.classList.remove("active"));
-    if (type === "branch") btnBranch?.classList.add("active");
-    if (type === "postomat") btnPost?.classList.add("active");
-    if (type === "courier") btnCourier?.classList.add("active");
-
-    blockWarehouse?.classList.toggle("hidden", type === "courier");
-    blockAddress?.classList.toggle("hidden", type !== "courier");
-  }
-
-  btnBranch?.addEventListener("click", () => setDelivery("branch"));
-  btnPost?.addEventListener("click", () => setDelivery("postomat"));
-  btnCourier?.addEventListener("click", () => setDelivery("courier"));
-  setDelivery("branch");
-
-  const cityInput = document.querySelector("[data-city]");
-  const cityList = document.querySelector("[data-city-list]");
-  const whSelect = document.querySelector("[data-warehouse]");
-  let currentCityRef = "";
-
-  let timer = null;
-
-  cityInput?.addEventListener("input", () => {
-    clearTimeout(timer);
-    const q = cityInput.value.trim();
-    if (q.length < 2) return;
-
-    timer = setTimeout(async () => {
-      try {
-        const data = await npRequest("Address", "searchSettlements", { CityName: q, Limit: 10 });
-        const arr = data?.data?.[0]?.Addresses || [];
-
-        if (cityList) {
-          cityList.innerHTML = arr.map(x => `<option value="${escapeHtml(x.Present)}"></option>`).join("");
-        }
-
-        const map = new Map(arr.map(x => [x.Present, x.DeliveryCity]));
-
-        const bind = () => {
-          currentCityRef = map.get(cityInput.value) || "";
-          if (currentCityRef) loadWarehouses();
-        };
-
-        cityInput.onchange = bind;
-        cityInput.onblur = bind;
-
-      } catch (e) {}
-    }, 250);
-  });
-
-  async function loadWarehouses() {
-    if (!whSelect) return;
-    whSelect.innerHTML = `<option value="">...</option>`;
-
-    try {
-      const data = await npRequest("AddressGeneral", "getWarehouses", {
-        CityRef: currentCityRef,
-        Limit: 200,
-        Language: "UA"
+      qtyWrap.querySelector("[data-dec]").addEventListener("click", ()=>{
+        const n = Math.max(1, (loadCart()[id]||1) - 1);
+        setQty(id, n);
+        qtySpan.textContent = String(n);
+        draw();
+      });
+      qtyWrap.querySelector("[data-inc]").addEventListener("click", ()=>{
+        const n = Math.min(99, (loadCart()[id]||1) + 1);
+        setQty(id, n);
+        qtySpan.textContent = String(n);
+        draw();
       });
 
-      let list = data?.data || [];
+      tr.querySelector("[data-remove]").addEventListener("click", ()=>{
+        setQty(id, 0);
+        draw();
+      });
 
-      if (deliveryType === "postomat") {
-        list = list.filter(w =>
-          String(w.TypeOfWarehouse || "").includes("Postomat") ||
-          String(w.CategoryOfWarehouse || "").toLowerCase().includes("postomat")
-        );
-      } else if (deliveryType === "branch") {
-        list = list.filter(w =>
-          !(String(w.TypeOfWarehouse || "").includes("Postomat") ||
-            String(w.CategoryOfWarehouse || "").toLowerCase().includes("postomat"))
-        );
-      }
+      tbody.appendChild(tr);
+    });
 
-      whSelect.innerHTML =
-        `<option value="">Выберите...</option>` +
-        list.slice(0, 120).map(w => {
-          const label = w.Description || w.DescriptionRu || w.DescriptionEn || "Warehouse";
-          return `<option value="${escapeHtml(w.Ref || "")}">${escapeHtml(label)}</option>`;
-        }).join("");
-
-    } catch (e) {}
+    if(totalEl) totalEl.textContent = `${calcTotal(loadCart())} грн`;
   }
 
-  [btnBranch, btnPost].forEach(b => b?.addEventListener("click", () => currentCityRef && loadWarehouses()));
+  draw();
 
-  form.addEventListener("submit", (ev) => {
-    ev.preventDefault();
-
-    const fio = (document.querySelector("[data-fio]")?.value || "").trim();
-    const phone = (document.querySelector("[data-phone]")?.value || "").trim();
-    const city = (cityInput?.value || "").trim();
-    const pay = (document.querySelector("[data-pay]")?.value || "").trim();
-    const comment = (document.querySelector("[data-comment]")?.value || "").trim();
-
-    const whText = whSelect?.selectedOptions?.[0]?.textContent?.trim() || "";
-    const address = (document.querySelector("[data-address]")?.value || "").trim();
-
-    const cart = loadCart();
-    const lines = [];
-    for (const [id, qty] of Object.entries(cart)) {
-      const p = PRODUCTS.find(x => x.id === id);
-      if (!p) continue;
-      lines.push(`${p.name} — ${qty} × ${p.price} грн = ${Number(qty) * p.price} грн`);
-    }
-
-    const total = cartTotal();
-    const deliveryLine =
-      deliveryType === "courier" ? `Курʼєр: ${address}` :
-      (deliveryType === "postomat" ? `Поштомат: ${whText}` : `Відділення: ${whText}`);
-
-    const EMAIL_TO = "your-email@gmail.com"; // <-- поставь свой email
-
-    const subject = encodeURIComponent(`BLACKWOOD • заказ на ${total} грн`);
-    const body = encodeURIComponent(
-`Новый заказ BLACKWOOD
-
-ФИО: ${fio}
-Телефон: ${phone}
-Город: ${city}
-Доставка: ${deliveryLine}
-Оплата: ${pay}
-
-Товары:
-${lines.join("\n")}
-
-ИТОГО: ${total} грн
-
-Комментарий:
-${comment}`
-    );
-
-    window.location.href = `mailto:${EMAIL_TO}?subject=${subject}&body=${body}`;
-  });
+  const checkout = document.getElementById("toCheckout");
+  if(checkout) checkout.addEventListener("click", ()=> location.href="checkout.html");
 }
 
-/* ========= INIT ========= */
-document.addEventListener("DOMContentLoaded", () => {
-  setupLangButtons();
-  updateCartCount();
+/* =========================
+   CHECKOUT PAGE (total + delivery buttons)
+========================= */
+function renderCheckout(){
+  const totalEl = document.getElementById("checkoutTotal");
+  if(!totalEl) return;
+
+  // total
+  const cart = loadCart();
+  let total = 0;
+  for(const [id, qty] of Object.entries(cart)){
+    const p = PRODUCTS.find(x=>x.id===id);
+    if(p) total += p.price * qty;
+  }
+  totalEl.textContent = `${total} грн`;
+
+  // delivery buttons
+  let deliveryType = "branch"; // branch | locker | courier
+  const btns = document.querySelectorAll("[data-delivery]");
+  const whRow = document.getElementById("warehouseRow");
+
+  function setDelivery(type){
+    deliveryType = type;
+    btns.forEach(b=>b.classList.toggle("is-active", b.dataset.delivery===type));
+    if(whRow) whRow.style.display = (type==="courier") ? "none" : "block";
+  }
+  btns.forEach(b=> b.addEventListener("click", ()=> setDelivery(b.dataset.delivery)));
+  setDelivery("branch");
+
+  // Nova Poshta подсказки (опционально)
+  const cityInput = document.getElementById("cityInput");
+  const whInput = document.getElementById("warehouseInput");
+
+  async function npRequest(modelName, calledMethod, methodProps){
+    if(!NOVA_POSHTA_KEY) return null;
+    const res = await fetch("https://api.novaposhta.ua/v2.0/json/", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({
+        apiKey: NOVA_POSHTA_KEY,
+        modelName,
+        calledMethod,
+        methodProperties: methodProps
+      })
+    });
+    return await res.json();
+  }
+
+  // простая подсказка через datalist
+  const cityList = document.getElementById("cityList");
+  const whList = document.getElementById("whList");
+  let cityRef = "";
+
+  if(cityInput && cityList){
+    cityInput.addEventListener("input", async ()=>{
+      cityList.innerHTML = "";
+      cityRef = "";
+      const q = cityInput.value.trim();
+      if(q.length < 2) return;
+
+      const data = await npRequest("Address", "searchSettlements", { CityName: q, Limit: "10" });
+      const arr = data?.data?.[0]?.Addresses || [];
+      arr.forEach(item=>{
+        const opt = document.createElement("option");
+        opt.value = item.Present;
+        opt.dataset.ref = item.DeliveryCity;
+        cityList.appendChild(opt);
+      });
+    });
+
+    cityInput.addEventListener("change", ()=>{
+      // найти выбранный ref
+      const v = cityInput.value.trim();
+      const opt = Array.from(cityList.children).find(o=>o.value===v);
+      cityRef = opt?.dataset?.ref || "";
+      if(whInput) whInput.value = "";
+      if(whList) whList.innerHTML = "";
+    });
+  }
+
+  if(whInput && whList){
+    whInput.addEventListener("input", async ()=>{
+      whList.innerHTML = "";
+      const q = whInput.value.trim();
+      if(q.length < 1) return;
+      if(!cityRef) return;
+
+      const typeOfWh = (deliveryType === "locker") ? "Postomat" : "Branch";
+      const data = await npRequest("Address", "getWarehouses", {
+        CityRef: cityRef,
+        TypeOfWarehouseRef: typeOfWh,
+        FindByString: q,
+        Limit: "15"
+      });
+
+      const arr = data?.data || [];
+      arr.forEach(item=>{
+        const opt = document.createElement("option");
+        opt.value = item.Description;
+        whList.appendChild(opt);
+      });
+    });
+  }
+
+  // send order (mailto)
+  const sendBtn = document.getElementById("sendOrder");
+  if(sendBtn){
+    sendBtn.addEventListener("click", ()=>{
+      const fio = (document.getElementById("fioInput")?.value || "").trim();
+      const phone = (document.getElementById("phoneInput")?.value || "").trim();
+      const city = (cityInput?.value || "").trim();
+      const wh = (whInput?.value || "").trim();
+      const comment = (document.getElementById("commentInput")?.value || "").trim();
+
+      const items = Object.entries(loadCart()).map(([id, qty])=>{
+        const p = PRODUCTS.find(x=>x.id===id);
+        return p ? `${p.name} (${p.weight}) x${qty} = ${p.price*qty} грн` : "";
+      }).filter(Boolean).join("\n");
+
+      const deliveryText =
+        deliveryType === "courier" ? "Курʼєр" :
+        deliveryType === "locker" ? "Поштомат" : "Відділення";
+
+      const body =
+`Замовлення BLACKWOOD • CHARCOAL
+
+ПІБ: ${fio}
+Телефон: ${phone}
+
+Доставка: ${deliveryText}
+Місто: ${city}
+${deliveryType==="courier" ? "" : `Відділення/Поштомат: ${wh}\n`}
+
+Товари:
+${items}
+
+Разом: ${total} грн
+
+Коментар: ${comment}
+`;
+
+      const subject = `Замовлення BLACKWOOD • CHARCOAL — ${fio || "клієнт"}`;
+      const mailto = `mailto:${encodeURIComponent(ORDER_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+    });
+  }
+}
+
+/* =========================
+   BOOT
+========================= */
+document.addEventListener("DOMContentLoaded", ()=>{
+  initHeader();
   renderCatalog();
   renderCartPage();
   renderCheckout();
-
-  // Active menu
-  const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-  document.querySelectorAll("[data-nav]").forEach(a => {
-    const href = (a.getAttribute("href") || "").toLowerCase();
-    if (href === path) a.classList.add("active");
-  });
 });
