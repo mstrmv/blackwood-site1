@@ -1,54 +1,64 @@
 <!doctype html>
-<html lang="ru">
+<html lang="uk">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Заказ • BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css" />
+  <title>BLACKWOOD • Success</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="page has-catalog-bg">
-    <header class="header">
-      <div class="container headerInner">
-        <a class="brand" href="index.html"><span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span></a>
-        <nav class="nav">
-          <a href="index.html">Главная</a>
-          <a href="catalog.html">Каталог</a>
-          <a href="shipping.html">Доставка</a>
-          <a href="about.html">О нас</a>
-          <a href="contacts.html">Контакты</a>
-        </nav>
-        <div class="rightBar">
-          <a class="cartPill" href="cart.html">Корзина <span class="count" data-cart-count>0</span></a>
-          <button class="burger" type="button" data-burger>Меню</button>
+  <div class="page page-catalog">
+    <header class="topbar">
+      <div class="container">
+        <div class="nav">
+          <a class="brand" href="index.html">BLACKWOOD <span class="dot"></span> CHARCOAL</a>
+          <nav class="navlinks">
+            <a href="index.html" data-nav data-i18n="nav_home">Головна</a>
+            <a href="catalog.html" data-nav data-i18n="nav_catalog">Каталог</a>
+            <a href="shipping.html" data-nav data-i18n="nav_shipping">Доставка</a>
+            <a href="about.html" data-nav data-i18n="nav_about">Про нас</a>
+            <a href="contacts.html" data-nav data-i18n="nav_contacts">Контакти</a>
+          </nav>
+          <div class="rightbar">
+            <div class="lang">
+              <button type="button" data-lang="uk">UKR</button>
+              <button type="button" data-lang="ru">RU</button>
+              <button type="button" data-lang="en">EN</button>
+            </div>
+            <a class="pill" href="cart.html"><strong data-i18n="cart">Кошик</strong> • <span data-cart-count>0</span></a>
+            <div class="iconbar">
+              <a class="iconbtn" href="https://t.me/" target="_blank" rel="noopener" title="Telegram">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6c.2-1-0.7-1.8-1.6-1.4L2.9 10.3c-1 .4-.9 1.9.1 2.1l4.8 1.4 1.8 5.6c.3.9 1.5 1 2 .2l2.8-4 5.1 3.7c.8.6 2 .1 2.2-.9l2.2-13.8zM9.4 13.2l8.7-6.7-7 7.8-.3 3.7-1.4-4.3z"/></svg>
+              </a>
+              <a class="iconbtn" href="https://instagram.com/" target="_blank" rel="noopener" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4.5A5.5 5.5 0 1 1 6.5 14 5.5 5.5 0 0 1 12 8.5zm0 2A3.5 3.5 0 1 0 15.5 14 3.5 3.5 0 0 0 12 10.5zM18 6.8a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.8z"/></svg>
+              </a>
+              <a class="iconbtn" href="https://tiktok.com/" target="_blank" rel="noopener" title="TikTok">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 2c.4 2.6 2 4.7 4.4 5.5V11c-1.8.1-3.5-.5-4.9-1.5v6.1c0 4-3.2 7.3-7.2 7.3S1.6 19.6 1.6 15.6c0-4 3.2-7.3 7.2-7.3.4 0 .9 0 1.3.1v3.8c-.4-.2-.8-.3-1.3-.3-1.9 0-3.4 1.6-3.4 3.6S7 22 8.9 22s3.4-1.6 3.4-3.6V2h4.3z"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="container mobileMenu" data-mobilemenu>
-        <a href="index.html">Главная</a><a href="catalog.html">Каталог</a><a href="shipping.html">Доставка</a>
-        <a href="about.html">О нас</a><a href="contacts.html">Контакты</a><a href="cart.html">Корзина</a>
       </div>
     </header>
 
-    <main class="container section">
-      <h1 class="h1">Готово!</h1>
-      <p class="p">Ваш заказ сформирован. Осталось отправить письмо.</p>
-
-      <div style="padding:16px; margin-top:16px; border:1px solid rgba(255,255,255,.10); border-radius:18px; background:rgba(0,0,0,.28)">
-        <a class="btn primary" data-mailto style="display:none">Открыть письмо</a>
-        <div class="note" style="margin-top:10px">
-          Если письмо не открылось — проверьте установленную почтовую программу.
-        </div>
-
-        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
-          <a class="btn secondary" href="catalog.html">В каталог</a>
-          <a class="btn secondary" href="index.html">На главную</a>
+    <main class="page-inner">
+      <div class="container">
+        <div class="panel">
+          <div class="h2" data-i18n="success_title">Дякуємо!</div>
+          <p class="p" data-i18n="success_sub">Замовлення прийняте. Ми звʼяжемось з вами найближчим часом.</p>
+          <div class="btns" style="margin-top:14px;">
+            <a class="btn gold" href="catalog.html" data-i18n="open_catalog">Відкрити каталог</a>
+            <a class="btn" href="index.html" data-i18n="nav_home">Головна</a>
+          </div>
         </div>
       </div>
-
-      <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
     </main>
+
+    <div class="footerline"><div class="container">BLACKWOOD • CHARCOAL © 2026</div></div>
   </div>
 
-  <script src="assets/app.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
