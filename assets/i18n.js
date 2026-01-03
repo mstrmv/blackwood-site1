@@ -1,3 +1,4 @@
+/* ===== FILE: assets/i18n.js ===== */
 (() => {
   const DICT = {
     uk: {
@@ -14,23 +15,26 @@
       hero_cta_catalog: "Перейти в каталог",
       hero_cta_shipping: "Доставка та оплата",
 
-      b1_title: "Чисте горіння",
-      b1_text: "Мінімум іскор і попелу — більше тепла та смаку.",
-      b2_title: "Стабільна якість",
-      b2_text: "Рівномірна фракція, контрольована вологість.",
-      b3_title: "Швидка доставка",
-      b3_text: "Відправка по Україні. Самовивіз — за домовленістю.",
-
       section_popular: "Популярні товари",
       section_catalog: "Каталог",
       section_cart: "Ваш кошик",
       section_checkout: "Оформлення замовлення",
+      section_why: "Чому BLACKWOOD",
 
       search_placeholder: "Пошук товарів…",
       add_to_cart: "Додати в кошик",
       in_cart: "У кошику",
       weight: "Вага",
       grade: "Клас",
+
+      why_1_t: "Довге горіння",
+      why_1_s: "Стабільне тепло та економія.",
+      why_2_t: "Низька зольність",
+      why_2_s: "Менше попелу — чистіше.",
+      why_3_t: "Для BBQ та гриля",
+      why_3_s: "Ідеально для м’яса та овочів.",
+      why_4_t: "100% твердих порід",
+      why_4_s: "Стабільна якість сировини.",
 
       cart_empty: "Кошик порожній. Перейдіть у каталог та додайте товари.",
       cart_product: "Товар",
@@ -89,23 +93,26 @@
       hero_cta_catalog: "Перейти в каталог",
       hero_cta_shipping: "Доставка и оплата",
 
-      b1_title: "Чистое горение",
-      b1_text: "Минимум искр и золы — больше тепла и вкуса.",
-      b2_title: "Стабильное качество",
-      b2_text: "Равномерная фракция, контролируемая влажность.",
-      b3_title: "Быстрая доставка",
-      b3_text: "Отправка по Украине. Самовывоз — по договоренности.",
-
       section_popular: "Популярные товары",
       section_catalog: "Каталог",
       section_cart: "Ваша корзина",
       section_checkout: "Оформление заказа",
+      section_why: "Почему BLACKWOOD",
 
       search_placeholder: "Поиск товаров…",
       add_to_cart: "В корзину",
       in_cart: "В корзине",
       weight: "Вес",
       grade: "Класс",
+
+      why_1_t: "Долгое горение",
+      why_1_s: "Стабильное тепло и экономия.",
+      why_2_t: "Низкая зольность",
+      why_2_s: "Меньше золы — чище.",
+      why_3_t: "Для BBQ и гриля",
+      why_3_s: "Идеально для мяса и овощей.",
+      why_4_t: "100% твердых пород",
+      why_4_s: "Стабильное сырьё.",
 
       cart_empty: "Корзина пустая. Перейдите в каталог и добавьте товары.",
       cart_product: "Товар",
@@ -164,23 +171,26 @@
       hero_cta_catalog: "Open catalog",
       hero_cta_shipping: "Shipping & payment",
 
-      b1_title: "Clean burn",
-      b1_text: "Less sparks and ash — more heat and flavor.",
-      b2_title: "Stable quality",
-      b2_text: "Even pieces, controlled moisture.",
-      b3_title: "Fast delivery",
-      b3_text: "Shipping across Ukraine. Pickup by arrangement.",
-
       section_popular: "Popular products",
       section_catalog: "Catalog",
       section_cart: "Your cart",
       section_checkout: "Checkout",
+      section_why: "Why BLACKWOOD",
 
       search_placeholder: "Search products…",
       add_to_cart: "Add to cart",
       in_cart: "In cart",
       weight: "Weight",
       grade: "Grade",
+
+      why_1_t: "Long heat",
+      why_1_s: "Stable heat and savings.",
+      why_2_t: "Low ash",
+      why_2_s: "Less ash — cleaner.",
+      why_3_t: "For BBQ & grill",
+      why_3_s: "Great for meat and veggies.",
+      why_4_t: "100% hardwood",
+      why_4_s: "Consistent raw material.",
 
       cart_empty: "Your cart is empty. Go to the catalog and add items.",
       cart_product: "Product",
@@ -264,7 +274,6 @@
       btn.classList.toggle("is-active", btn.getAttribute("data-lang") === lang);
     });
 
-    // active nav link
     const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
     document.querySelectorAll(".navlinks a").forEach(a => {
       const href = (a.getAttribute("href") || "").toLowerCase();
