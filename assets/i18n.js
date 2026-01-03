@@ -1,221 +1,286 @@
-// Default language: UKR
-const DEFAULT_LANG = "uk";
+(() => {
+  const DICT = {
+    uk: {
+      nav_home: "Головна",
+      nav_catalog: "Каталог",
+      nav_shipping: "Доставка",
+      nav_about: "Про нас",
+      nav_contacts: "Контакти",
+      nav_cart: "Кошик",
 
-const I18N = {
-  uk: {
-    nav_home: "Головна",
-    nav_catalog: "Каталог",
-    nav_shipping: "Доставка",
-    nav_about: "Про нас",
-    nav_contacts: "Контакти",
+      hero_kicker: "Преміум деревне вугілля",
+      hero_title: "BLACKWOOD • CHARCOAL",
+      hero_text: "Чисте горіння, стабільна температура та мінімум диму. Ідеально для гриля, ресторанів та домашнього барбекю.",
+      hero_cta_catalog: "Перейти в каталог",
+      hero_cta_shipping: "Доставка та оплата",
 
-    cart: "Кошик",
-    open_catalog: "Відкрити каталог",
-    shipping_pay: "Доставка та оплата",
-    go_cart: "Кошик",
+      b1_title: "Чисте горіння",
+      b1_text: "Мінімум іскор і попелу — більше тепла та смаку.",
+      b2_title: "Стабільна якість",
+      b2_text: "Рівномірна фракція, контрольована вологість.",
+      b3_title: "Швидка доставка",
+      b3_text: "Відправка по Україні. Самовивіз — за домовленістю.",
 
-    hero_kicker: "Преміум вугілля для гриля",
-    hero_title: "PREMIUM\nHARDWOOD\nCHARCOAL",
-    hero_sub: "Тривале горіння, мінімум попелу, чистий жар. Ідеально для BBQ та гриля.",
+      section_popular: "Популярні товари",
+      section_catalog: "Каталог",
+      section_cart: "Ваш кошик",
+      section_checkout: "Оформлення замовлення",
 
-    page_catalog_title: "Товари",
-    page_catalog_sub: "Обери категорію та додай у кошик.",
-    chip_all: "Усе",
-    chip_charcoal: "Вугілля",
-    chip_accessories: "Аксесуари",
+      search_placeholder: "Пошук товарів…",
+      add_to_cart: "Додати в кошик",
+      in_cart: "У кошику",
+      weight: "Вага",
+      grade: "Клас",
 
-    sort_label: "Сортування",
-    sort_popular: "Популярні",
-    sort_price_asc: "Ціна ↑",
-    sort_price_desc: "Ціна ↓",
+      cart_empty: "Кошик порожній. Перейдіть у каталог та додайте товари.",
+      cart_product: "Товар",
+      cart_qty: "К-сть",
+      cart_price: "Ціна",
+      cart_sum: "Сума",
+      cart_total: "Разом",
+      cart_clear: "Очистити",
+      cart_to_checkout: "Оформити",
 
-    add_to_cart: "У КОШИК",
-    cart_title: "Кошик",
-    cart_sub: "Сума товарів у кошику",
-    empty_cart: "Кошик порожній.",
-    checkout: "Оформити",
-    continue_shopping: "До каталогу",
+      checkout_name: "Ім’я",
+      checkout_phone: "Телефон",
+      checkout_city: "Місто",
+      checkout_address: "Адреса/Відділення",
+      checkout_comment: "Коментар",
+      checkout_pay: "Спосіб оплати",
+      checkout_pay_cash: "Післяплата / готівка",
+      checkout_pay_card: "Картка (узгодимо)",
+      checkout_submit: "Підтвердити замовлення",
 
-    checkout_title: "Оформлення",
-    name: "Ім'я",
-    phone: "Телефон",
-    city: "Місто",
-    comment: "Коментар",
-    place_order: "Підтвердити замовлення",
+      shipping_title: "Доставка та оплата",
+      shipping_text: "Відправляємо по Україні. Точну вартість доставки та терміни уточнюємо під час підтвердження замовлення.",
+      shipping_points_1: "Нова пошта / інші служби — за домовленістю",
+      shipping_points_2: "Оплата: післяплата або картка",
+      shipping_points_3: "Оптові замовлення — індивідуальні умови",
 
-    success_title: "Дякуємо!",
-    success_sub: "Замовлення прийняте. Ми звʼяжемось з вами найближчим часом.",
+      about_title: "Про нас",
+      about_text: "BLACKWOOD • CHARCOAL — це якісне деревне вугілля для гриля та професійних кухонь. Ми робимо ставку на стабільну якість, акуратну упаковку та швидку комунікацію.",
 
-    shipping_title: "Доставка та оплата",
-    shipping_text:
-      "• Доставка: Нова Пошта / самовивіз\n• Оплата: на картку / накладений платіж\n• Термін: 1–3 дні по Україні",
+      contacts_title: "Контакти",
+      contacts_text: "Напишіть нам у соцмережі або залиште заявку — відповімо швидко.",
+      contacts_form_name: "Ваше ім’я",
+      contacts_form_phone: "Телефон/месенджер",
+      contacts_form_msg: "Повідомлення",
+      contacts_send: "Надіслати (збережеться локально)",
 
-    about_title: "Про нас",
-    about_text:
-      "BLACKWOOD — преміальні продукти для BBQ: вугілля, стартери та аксесуари. Робимо акцент на якості, чистому жарі та зручності.",
+      success_title: "Замовлення створено",
+      success_text: "Дякуємо! Дані збережено. Ми зв’яжемося з вами для підтвердження.",
+      back_home: "На головну",
+      back_catalog: "До каталогу",
 
-    contacts_title: "Контакти",
-    contacts_text: "Напиши нам у соцмережі:",
+      uah: "₴"
+    },
 
-    currency: "грн",
-  },
+    ru: {
+      nav_home: "Главная",
+      nav_catalog: "Каталог",
+      nav_shipping: "Доставка",
+      nav_about: "О нас",
+      nav_contacts: "Контакты",
+      nav_cart: "Корзина",
 
-  ru: {
-    nav_home: "Главная",
-    nav_catalog: "Каталог",
-    nav_shipping: "Доставка",
-    nav_about: "О нас",
-    nav_contacts: "Контакты",
+      hero_kicker: "Премиум древесный уголь",
+      hero_title: "BLACKWOOD • CHARCOAL",
+      hero_text: "Чистое горение, стабильная температура и минимум дыма. Идеально для гриля, ресторанов и домашнего барбекю.",
+      hero_cta_catalog: "Перейти в каталог",
+      hero_cta_shipping: "Доставка и оплата",
 
-    cart: "Корзина",
-    open_catalog: "Открыть каталог",
-    shipping_pay: "Доставка и оплата",
-    go_cart: "Корзина",
+      b1_title: "Чистое горение",
+      b1_text: "Минимум искр и золы — больше тепла и вкуса.",
+      b2_title: "Стабильное качество",
+      b2_text: "Равномерная фракция, контролируемая влажность.",
+      b3_title: "Быстрая доставка",
+      b3_text: "Отправка по Украине. Самовывоз — по договоренности.",
 
-    hero_kicker: "Премиум уголь для гриля",
-    hero_title: "PREMIUM\nHARDWOOD\nCHARCOAL",
-    hero_sub: "Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.",
+      section_popular: "Популярные товары",
+      section_catalog: "Каталог",
+      section_cart: "Ваша корзина",
+      section_checkout: "Оформление заказа",
 
-    page_catalog_title: "Товары",
-    page_catalog_sub: "Выбери категорию и добавь в корзину.",
-    chip_all: "Все",
-    chip_charcoal: "Уголь",
-    chip_accessories: "Аксессуары",
+      search_placeholder: "Поиск товаров…",
+      add_to_cart: "В корзину",
+      in_cart: "В корзине",
+      weight: "Вес",
+      grade: "Класс",
 
-    sort_label: "Сортировка",
-    sort_popular: "Популярные",
-    sort_price_asc: "Цена ↑",
-    sort_price_desc: "Цена ↓",
+      cart_empty: "Корзина пустая. Перейдите в каталог и добавьте товары.",
+      cart_product: "Товар",
+      cart_qty: "Кол-во",
+      cart_price: "Цена",
+      cart_sum: "Сумма",
+      cart_total: "Итого",
+      cart_clear: "Очистить",
+      cart_to_checkout: "Оформить",
 
-    add_to_cart: "В КОРЗИНУ",
-    cart_title: "Корзина",
-    cart_sub: "Сумма товаров в корзине",
-    empty_cart: "Корзина пустая.",
-    checkout: "Оформить",
-    continue_shopping: "В каталог",
+      checkout_name: "Имя",
+      checkout_phone: "Телефон",
+      checkout_city: "Город",
+      checkout_address: "Адрес/Отделение",
+      checkout_comment: "Комментарий",
+      checkout_pay: "Способ оплаты",
+      checkout_pay_cash: "Наложка / наличные",
+      checkout_pay_card: "Карта (согласуем)",
+      checkout_submit: "Подтвердить заказ",
 
-    checkout_title: "Оформление",
-    name: "Имя",
-    phone: "Телефон",
-    city: "Город",
-    comment: "Комментарий",
-    place_order: "Подтвердить заказ",
+      shipping_title: "Доставка и оплата",
+      shipping_text: "Отправляем по Украине. Точную стоимость доставки и сроки уточняем при подтверждении заказа.",
+      shipping_points_1: "Новая почта / другие службы — по договоренности",
+      shipping_points_2: "Оплата: наложка или карта",
+      shipping_points_3: "Опт — индивидуальные условия",
 
-    success_title: "Спасибо!",
-    success_sub: "Заказ принят. Мы свяжемся с вами в ближайшее время.",
+      about_title: "О нас",
+      about_text: "BLACKWOOD • CHARCOAL — качественный древесный уголь для гриля и профессиональных кухонь. Мы делаем ставку на стабильное качество, аккуратную упаковку и быструю коммуникацию.",
 
-    shipping_title: "Доставка и оплата",
-    shipping_text:
-      "• Доставка: Новая Почта / самовывоз\n• Оплата: на карту / наложенный платеж\n• Срок: 1–3 дня по Украине",
+      contacts_title: "Контакты",
+      contacts_text: "Напишите нам в соцсети или оставьте заявку — ответим быстро.",
+      contacts_form_name: "Ваше имя",
+      contacts_form_phone: "Телефон/мессенджер",
+      contacts_form_msg: "Сообщение",
+      contacts_send: "Отправить (сохранится локально)",
 
-    about_title: "О нас",
-    about_text:
-      "BLACKWOOD — премиальные продукты для BBQ: уголь, стартеры и аксессуары. Ставим акцент на качестве, чистом жаре и удобстве.",
+      success_title: "Заказ создан",
+      success_text: "Спасибо! Данные сохранены. Мы свяжемся с вами для подтверждения.",
+      back_home: "На главную",
+      back_catalog: "В каталог",
 
-    contacts_title: "Контакты",
-    contacts_text: "Напиши нам в соцсети:",
+      uah: "₴"
+    },
 
-    currency: "грн",
-  },
+    en: {
+      nav_home: "Home",
+      nav_catalog: "Catalog",
+      nav_shipping: "Shipping",
+      nav_about: "About",
+      nav_contacts: "Contacts",
+      nav_cart: "Cart",
 
-  en: {
-    nav_home: "Home",
-    nav_catalog: "Catalog",
-    nav_shipping: "Shipping",
-    nav_about: "About",
-    nav_contacts: "Contacts",
+      hero_kicker: "Premium charcoal",
+      hero_title: "BLACKWOOD • CHARCOAL",
+      hero_text: "Clean burn, stable heat, minimal smoke. Great for grills, restaurants and home BBQ.",
+      hero_cta_catalog: "Open catalog",
+      hero_cta_shipping: "Shipping & payment",
 
-    cart: "Cart",
-    open_catalog: "Open catalog",
-    shipping_pay: "Shipping & payment",
-    go_cart: "Cart",
+      b1_title: "Clean burn",
+      b1_text: "Less sparks and ash — more heat and flavor.",
+      b2_title: "Stable quality",
+      b2_text: "Even pieces, controlled moisture.",
+      b3_title: "Fast delivery",
+      b3_text: "Shipping across Ukraine. Pickup by arrangement.",
 
-    hero_kicker: "Premium charcoal for grill",
-    hero_title: "PREMIUM\nHARDWOOD\nCHARCOAL",
-    hero_sub: "Long burn, low ash, clean heat. Perfect for BBQ & grill.",
+      section_popular: "Popular products",
+      section_catalog: "Catalog",
+      section_cart: "Your cart",
+      section_checkout: "Checkout",
 
-    page_catalog_title: "Products",
-    page_catalog_sub: "Choose a category and add to cart.",
-    chip_all: "All",
-    chip_charcoal: "Charcoal",
-    chip_accessories: "Accessories",
+      search_placeholder: "Search products…",
+      add_to_cart: "Add to cart",
+      in_cart: "In cart",
+      weight: "Weight",
+      grade: "Grade",
 
-    sort_label: "Sort",
-    sort_popular: "Popular",
-    sort_price_asc: "Price ↑",
-    sort_price_desc: "Price ↓",
+      cart_empty: "Your cart is empty. Go to the catalog and add items.",
+      cart_product: "Product",
+      cart_qty: "Qty",
+      cart_price: "Price",
+      cart_sum: "Sum",
+      cart_total: "Total",
+      cart_clear: "Clear",
+      cart_to_checkout: "Checkout",
 
-    add_to_cart: "ADD",
-    cart_title: "Cart",
-    cart_sub: "Total in cart",
-    empty_cart: "Your cart is empty.",
-    checkout: "Checkout",
-    continue_shopping: "To catalog",
+      checkout_name: "Name",
+      checkout_phone: "Phone",
+      checkout_city: "City",
+      checkout_address: "Address/Branch",
+      checkout_comment: "Comment",
+      checkout_pay: "Payment",
+      checkout_pay_cash: "Cash on delivery",
+      checkout_pay_card: "Card (we'll confirm)",
+      checkout_submit: "Place order",
 
-    checkout_title: "Checkout",
-    name: "Name",
-    phone: "Phone",
-    city: "City",
-    comment: "Comment",
-    place_order: "Place order",
+      shipping_title: "Shipping & payment",
+      shipping_text: "We ship across Ukraine. Exact delivery cost and ETA are confirmed during order confirmation.",
+      shipping_points_1: "Nova Poshta / other carriers — by arrangement",
+      shipping_points_2: "Payment: COD or card",
+      shipping_points_3: "Wholesale — custom terms",
 
-    success_title: "Thank you!",
-    success_sub: "Order received. We will contact you shortly.",
+      about_title: "About",
+      about_text: "BLACKWOOD • CHARCOAL provides quality charcoal for grills and professional kitchens. We focus on consistent quality, neat packaging, and fast communication.",
 
-    shipping_title: "Shipping & payment",
-    shipping_text:
-      "• Shipping: Nova Poshta / pickup\n• Payment: card / cash on delivery\n• Time: 1–3 days in Ukraine",
+      contacts_title: "Contacts",
+      contacts_text: "Message us on social media or leave a request — we'll reply quickly.",
+      contacts_form_name: "Your name",
+      contacts_form_phone: "Phone/messenger",
+      contacts_form_msg: "Message",
+      contacts_send: "Send (saved locally)",
 
-    about_title: "About",
-    about_text:
-      "BLACKWOOD makes premium BBQ products: charcoal, starters and accessories. We focus on quality, clean heat and convenience.",
+      success_title: "Order created",
+      success_text: "Thank you! Your data is saved. We'll contact you to confirm.",
+      back_home: "Back home",
+      back_catalog: "Back to catalog",
 
-    contacts_title: "Contacts",
-    contacts_text: "Message us in socials:",
+      uah: "₴"
+    }
+  };
 
-    currency: "UAH",
+  const LANGS = ["uk","ru","en"];
+  const STORAGE_KEY = "bw_lang";
+
+  function getLang(){
+    const saved = (localStorage.getItem(STORAGE_KEY) || "").toLowerCase();
+    if (LANGS.includes(saved)) return saved;
+    return "uk";
   }
-};
 
-function getLang(){
-  const saved = localStorage.getItem("lang");
-  if (saved && I18N[saved]) return saved;
-  return DEFAULT_LANG;
-}
+  function setLang(lang){
+    const v = (lang || "").toLowerCase();
+    if (!LANGS.includes(v)) return;
+    localStorage.setItem(STORAGE_KEY, v);
+    applyI18n(v);
+    window.dispatchEvent(new CustomEvent("bw:lang", { detail:{ lang:v }}));
+  }
 
-function setLang(lang){
-  if (!I18N[lang]) lang = DEFAULT_LANG;
-  localStorage.setItem("lang", lang);
+  function t(key, lang = getLang()){
+    return (DICT[lang] && DICT[lang][key]) || (DICT.uk && DICT.uk[key]) || key;
+  }
 
-  document.documentElement.lang = lang === "uk" ? "uk" : (lang === "ru" ? "ru" : "en");
+  function applyI18n(lang = getLang()){
+    document.documentElement.lang = lang === "uk" ? "uk" : (lang === "ru" ? "ru" : "en");
 
-  // Buttons active
-  document.querySelectorAll("[data-lang]").forEach(btn=>{
-    btn.classList.toggle("active", btn.dataset.lang === lang);
-  });
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      el.textContent = t(key, lang);
+    });
 
-  // Texts
-  document.querySelectorAll("[data-i18n]").forEach(el=>{
-    const key = el.dataset.i18n;
-    const val = I18N[lang][key];
-    if (typeof val === "string") el.textContent = val;
-  });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      el.setAttribute("placeholder", t(key, lang));
+    });
 
-  // Multiline hero title support
-  document.querySelectorAll("[data-i18n-multiline]").forEach(el=>{
-    const key = el.dataset.i18nMultiline;
-    const val = I18N[lang][key];
-    if (typeof val === "string") {
-      el.innerHTML = val.replace(/\n/g, "<br>");
+    document.querySelectorAll(".lang [data-lang]").forEach(btn => {
+      btn.classList.toggle("is-active", btn.getAttribute("data-lang") === lang);
+    });
+
+    // active nav link
+    const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    document.querySelectorAll(".navlinks a").forEach(a => {
+      const href = (a.getAttribute("href") || "").toLowerCase();
+      a.classList.toggle("active", href === path);
+    });
+  }
+
+  window.BW_I18N = { getLang, setLang, t, applyI18n, DICT };
+
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-lang]");
+    if (btn && btn.closest(".lang")) {
+      e.preventDefault();
+      setLang(btn.getAttribute("data-lang"));
     }
   });
 
-  // Render pages that depend on language
-  if (window.App && typeof window.App.onLangChange === "function") {
-    window.App.onLangChange(lang);
-  }
-}
-
-window.I18N = I18N;
-window.getLang = getLang;
-window.setLang = setLang;
+  document.addEventListener("DOMContentLoaded", () => applyI18n(getLang()));
+})();
