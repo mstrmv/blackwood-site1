@@ -1,98 +1,92 @@
-<!-- checkout.html -->
 <!doctype html>
 <html lang="uk">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Оформлення — BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BLACKWOOD • Оформлення</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="site-header"></div>
-
-  <main class="main">
-    <section class="container section">
-      <div class="section-head">
-        <h1 class="h1" data-i18n="checkout_title">Оформлення замовлення</h1>
-        <p class="muted" data-i18n="checkout_sub">Заповніть дані доставки Новою Поштою.</p>
-      </div>
-
-      <div class="panel">
-        <div class="checkout-top">
-          <div class="sum-row">
-            <span class="muted" data-i18n="checkout_total">Разом:</span>
-            <strong id="checkoutTotal">0 грн</strong>
+  <div class="page page-catalog">
+    <header class="topbar">
+      <div class="container">
+        <div class="nav">
+          <a class="brand" href="index.html">BLACKWOOD <span class="dot"></span> CHARCOAL</a>
+          <nav class="navlinks">
+            <a href="index.html" data-nav data-i18n="nav_home">Головна</a>
+            <a href="catalog.html" data-nav data-i18n="nav_catalog">Каталог</a>
+            <a href="shipping.html" data-nav data-i18n="nav_shipping">Доставка</a>
+            <a href="about.html" data-nav data-i18n="nav_about">Про нас</a>
+            <a href="contacts.html" data-nav data-i18n="nav_contacts">Контакти</a>
+          </nav>
+          <div class="rightbar">
+            <div class="lang">
+              <button type="button" data-lang="uk">UKR</button>
+              <button type="button" data-lang="ru">RU</button>
+              <button type="button" data-lang="en">EN</button>
+            </div>
+            <a class="pill" href="cart.html"><strong data-i18n="cart">Кошик</strong> • <span data-cart-count>0</span></a>
+            <div class="iconbar">
+              <a class="iconbtn" href="https://t.me/" target="_blank" rel="noopener" title="Telegram">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6c.2-1-0.7-1.8-1.6-1.4L2.9 10.3c-1 .4-.9 1.9.1 2.1l4.8 1.4 1.8 5.6c.3.9 1.5 1 2 .2l2.8-4 5.1 3.7c.8.6 2 .1 2.2-.9l2.2-13.8zM9.4 13.2l8.7-6.7-7 7.8-.3 3.7-1.4-4.3z"/></svg>
+              </a>
+              <a class="iconbtn" href="https://instagram.com/" target="_blank" rel="noopener" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4.5A5.5 5.5 0 1 1 6.5 14 5.5 5.5 0 0 1 12 8.5zm0 2A3.5 3.5 0 1 0 15.5 14 3.5 3.5 0 0 0 12 10.5zM18 6.8a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.8z"/></svg>
+              </a>
+              <a class="iconbtn" href="https://tiktok.com/" target="_blank" rel="noopener" title="TikTok">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 2c.4 2.6 2 4.7 4.4 5.5V11c-1.8.1-3.5-.5-4.9-1.5v6.1c0 4-3.2 7.3-7.2 7.3S1.6 19.6 1.6 15.6c0-4 3.2-7.3 7.2-7.3.4 0 .9 0 1.3.1v3.8c-.4-.2-.8-.3-1.3-.3-1.9 0-3.4 1.6-3.4 3.6S7 22 8.9 22s3.4-1.6 3.4-3.6V2h4.3z"/></svg>
+              </a>
+            </div>
           </div>
-          <a class="btn btn-dark" href="cart.html" data-i18n="to_cart">Кошик</a>
         </div>
-
-        <form id="checkoutForm" class="form">
-          <div class="form-grid">
-            <div class="field">
-              <label data-i18n="f_name">ПІБ</label>
-              <input id="fName" class="input" autocomplete="name" placeholder="Іван Іванов" required />
-            </div>
-
-            <div class="field">
-              <label data-i18n="f_phone">Телефон</label>
-              <input id="fPhone" class="input" autocomplete="tel" placeholder="+380..." required />
-            </div>
-
-            <div class="field field-wide">
-              <label data-i18n="f_city">Місто (Нова Пошта)</label>
-              <input id="fCity" class="input" placeholder="Київ" required />
-              <div class="hint" data-i18n="np_hint">Підказки підтягуються з Нової Пошти.</div>
-              <div id="citySuggest" class="suggest hidden"></div>
-            </div>
-
-            <div class="field field-wide">
-              <label data-i18n="f_delivery_type">Тип доставки</label>
-              <div class="segmented" id="deliveryType">
-                <button type="button" class="seg active" data-type="warehouse" data-i18n="del_warehouse">Відділення</button>
-                <button type="button" class="seg" data-type="postomat" data-i18n="del_postomat">Поштомат</button>
-                <button type="button" class="seg" data-type="courier" data-i18n="del_courier">Курʼєр</button>
-              </div>
-            </div>
-
-            <div class="field field-wide" id="warehouseBlock">
-              <label data-i18n="f_warehouse">Відділення / Поштомат</label>
-              <input id="fWarehouse" class="input" placeholder="№1, вул..." />
-              <div id="whSuggest" class="suggest hidden"></div>
-            </div>
-
-            <div class="field field-wide hidden" id="courierBlock">
-              <label data-i18n="f_address">Адреса курʼєра</label>
-              <input id="fAddress" class="input" placeholder="Вулиця, будинок, квартира" />
-            </div>
-
-            <div class="field field-wide">
-              <label data-i18n="f_pay">Оплата</label>
-              <select id="fPay" class="select">
-                <option value="cod" data-i18n="pay_cod">Накладений платіж (при отриманні)</option>
-                <option value="prepay" data-i18n="pay_prepay">Передоплата (узгодимо)</option>
-              </select>
-            </div>
-
-            <div class="field field-wide">
-              <label data-i18n="f_comment">Коментар</label>
-              <input id="fComment" class="input" placeholder="Наприклад: подзвонити перед відправкою" />
-            </div>
-          </div>
-
-          <div class="checkout-actions">
-            <button class="btn btn-gold" type="submit" data-i18n="send_order">Відправити замовлення</button>
-            <div class="note" data-i18n="email_note">
-              Це статичний сайт (GitHub Pages). Відправка робиться через mailto (відкриє вашу пошту з готовим листом).
-            </div>
-          </div>
-        </form>
       </div>
-    </section>
-  </main>
+    </header>
 
-  <div id="site-footer"></div>
+    <main class="page-inner">
+      <div class="container">
+        <div class="panel">
+          <div class="h2" data-i18n="checkout_title">Оформлення</div>
 
-  <script src="assets/i18n.js"></script>
-  <script src="assets/app.js"></script>
+          <form data-checkout-form style="margin-top:12px; display:grid; gap:10px; max-width:520px;">
+            <input class="select" required placeholder="Ім'я" data-i18n-placeholder="name" name="name">
+            <input class="select" required placeholder="Телефон" data-i18n-placeholder="phone" name="phone">
+            <input class="select" required placeholder="Місто" data-i18n-placeholder="city" name="city">
+            <textarea class="select" placeholder="Коментар" data-i18n-placeholder="comment" name="comment" rows="4"></textarea>
+            <button class="btn gold" type="submit" data-i18n="place_order">Підтвердити замовлення</button>
+          </form>
+
+          <div class="p" style="margin-top:14px;opacity:.75">
+            <span data-i18n="cart_sub">Сума товарів у кошику</span>:
+            <strong data-cart-total>0</strong>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="footerline"><div class="container">BLACKWOOD • CHARCOAL © 2026</div></div>
+  </div>
+
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // placeholder i18n for inputs
+    document.addEventListener("DOMContentLoaded", ()=>{
+      const lang = getLang();
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+        const key = el.dataset.i18nPlaceholder;
+        const val = I18N[lang][key];
+        if (val) el.placeholder = val;
+      });
+    });
+    window.App.onLangChange = (lang)=>{
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+        const key = el.dataset.i18nPlaceholder;
+        const val = I18N[lang][key];
+        if (val) el.placeholder = val;
+      });
+      // also refresh dynamic parts
+      if (typeof renderCart === "function") renderCart();
+    };
+  </script>
 </body>
 </html>
