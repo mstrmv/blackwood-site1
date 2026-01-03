@@ -1,311 +1,386 @@
-// Simple shop logic (catalog + cart) using localStorage
-const CART_KEY = "bw_cart_v1";
+(() => {
+  const CART_KEY = "bw_cart_v1";
 
-function money(n){ return Math.round(n); }
+  // ====== PRODUCTS (EDIT PRICES/ITEMS HERE) ======
+  const PRODUCTS = [
+    {
+      id: "core-3kg",
+      img: "img/core-3kg.png",
+      weight: "3 кг",
+      grade: "CORE",
+      price: 199,
+      name: { uk: "Вугілля BLACKWOOD CORE 3 кг", ru: "Уголь BLACKWOOD CORE 3 кг", en: "BLACKWOOD CORE Charcoal 3 kg" }
+    },
+    {
+      id: "core-5kg",
+      img: "img/core-5kg.png",
+      weight: "5 кг",
+      grade: "CORE",
+      price: 299,
+      name: { uk: "Вугілля BLACKWOOD CORE 5 кг", ru: "Уголь BLACKWOOD CORE 5 кг", en: "BLACKWOOD CORE Charcoal 5 kg" }
+    },
+    {
+      id: "core-10kg",
+      img: "img/core-10kg.png",
+      weight: "10 кг",
+      grade: "CORE",
+      price: 499,
+      name: { uk: "Вугілля BLACKWOOD CORE 10 кг", ru: "Уголь BLACKWOOD CORE 10 кг", en: "BLACKWOOD CORE Charcoal 10 kg" }
+    },
 
-function loadCart(){
-  try{
-    const raw = localStorage.getItem(CART_KEY);
-    const obj = raw ? JSON.parse(raw) : {};
-    return obj && typeof obj === "object" ? obj : {};
-  }catch{
-    return {};
-  }
-}
+    // examples for your JPG products — rename img path to your real files:
+    {
+      id: "bbq-starter",
+      img: "img/product-1.jpg",
+      weight: "—",
+      grade: "BBQ",
+      price: 149,
+      name: { uk: "Розпалювач (приклад товару)", ru: "Розжиг (пример товара)", en: "Fire starter (sample)" }
+    },
+    {
+      id: "chips",
+      img: "img/product-2.jpg",
+      weight: "—",
+      grade: "BBQ",
+      price: 129,
+      name: { uk: "Щепа для копчення (приклад)", ru: "Щепа для копчения (пример)", en: "Smoking wood chips (sample)" }
+    },
+    {
+      id: "gloves",
+      img: "img/product-3.jpg",
+      weight: "—",
+      grade: "BBQ",
+      price: 199,
+      name: { uk: "Рукавиці для гриля (приклад)", ru: "Перчатки для гриля (пример)", en: "BBQ gloves (sample)" }
+    }
+  ];
 
-function saveCart(cart){
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  updateCartBadges();
-}
+  // ====== CART HELPERS ======
+  const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+  const money = (n) => `${Number(n || 0).toFixed(0)} ${window.BW_I18N?.t("uah") || "₴"}`;
 
-function cartCount(cart){
-  return Object.values(cart).reduce((sum, item)=> sum + (item.qty||0), 0);
-}
-
-function cartTotal(cart){
-  return Object.values(cart).reduce((sum, item)=> sum + (item.qty||0) * (item.price||0), 0);
-}
-
-function updateCartBadges(){
-  const cart = loadCart();
-  const count = cartCount(cart);
-  document.querySelectorAll("[data-cart-count]").forEach(el=> el.textContent = String(count));
-}
-
-const PRODUCTS = [
-  // Charcoal
-  { id:"core-3kg",  name:{uk:"CORE • 3 KG",  ru:"CORE • 3 KG",  en:"CORE • 3 KG"},  desc:{uk:"Вугілля 3 кг", ru:"Уголь 3 кг", en:"Charcoal 3 kg"},  price:399, img:"core-3kg.png",  cat:"charcoal", pop:10 },
-  { id:"core-5kg",  name:{uk:"CORE • 5 KG",  ru:"CORE • 5 KG",  en:"CORE • 5 KG"},  desc:{uk:"Вугілля 5 кг", ru:"Уголь 5 кг", en:"Charcoal 5 kg"},  price:499, img:"core-5kg.png",  cat:"charcoal", pop:9 },
-  { id:"core-10kg", name:{uk:"CORE • 10 KG", ru:"CORE • 10 KG", en:"CORE • 10 KG"}, desc:{uk:"Вугілля 10 кг",ru:"Уголь 10 кг",en:"Charcoal 10 kg"}, price:599, img:"core-10kg.png", cat:"charcoal", pop:8 },
-
-  // Accessories (your JPGs)
-  { id:"starter",       name:{uk:"CHARCOAL STARTER", ru:"CHARCOAL STARTER", en:"CHARCOAL STARTER"}, desc:{uk:"Стартер для вугілля",ru:"Стартер для угля",en:"Charcoal starter"}, price:799, img:"starter.jpg", cat:"accessories", pop:7 },
-  { id:"royal-ignition",name:{uk:"ROYAL IGNITION", ru:"ROYAL IGNITION", en:"ROYAL IGNITION"}, desc:{uk:"Рідина для розпалу",ru:"Жидкость для розжига",en:"Ignition fluid"}, price:299, img:"royal-ignition.jpg", cat:"accessories", pop:7 },
-  { id:"thermometer",   name:{uk:"DIGITAL THERMOMETER", ru:"DIGITAL THERMOMETER", en:"DIGITAL THERMOMETER"}, desc:{uk:"Термометр",ru:"Термометр",en:"Thermometer"}, price:549, img:"thermometer.jpg", cat:"accessories", pop:6 },
-
-  { id:"grid-double",   name:{uk:"GRID DOUBLE", ru:"GRID DOUBLE", en:"GRID DOUBLE"}, desc:{uk:"Подвійна решітка",ru:"Двойная решетка",en:"Double grill grid"}, price:699, img:"grid-double.jpg", cat:"accessories", pop:6 },
-  { id:"grid-sausage",  name:{uk:"GRID SAUSAGE", ru:"GRID SAUSAGE", en:"GRID SAUSAGE"}, desc:{uk:"Решітка для ковбасок",ru:"Решетка для сосисок",en:"Sausage grid"}, price:649, img:"grid-sausage.jpg", cat:"accessories", pop:5 },
-  { id:"grid-flat",     name:{uk:"GRID FLAT", ru:"GRID FLAT", en:"GRID FLAT"}, desc:{uk:"Пласка решітка",ru:"Плоская решетка",en:"Flat grid"}, price:629, img:"grid-flat.jpg", cat:"accessories", pop:5 },
-
-  { id:"gloves",        name:{uk:"GLOVES", ru:"GLOVES", en:"GLOVES"}, desc:{uk:"Рукавички",ru:"Перчатки",en:"Gloves"}, price:499, img:"gloves.jpg", cat:"accessories", pop:4 },
-  { id:"apron",         name:{uk:"APRON", ru:"APRON", en:"APRON"}, desc:{uk:"Фартух",ru:"Фартук",en:"Apron"}, price:699, img:"apron.jpg", cat:"accessories", pop:4 },
-  { id:"blower",        name:{uk:"BLOWER", ru:"BLOWER", en:"BLOWER"}, desc:{uk:"Міх для роздування",ru:"Мех для раздува",en:"BBQ blower"}, price:249, img:"blower.jpg", cat:"accessories", pop:3 },
-  { id:"grill-set",     name:{uk:"GRILL SET", ru:"GRILL SET", en:"GRILL SET"}, desc:{uk:"Набір для гриля",ru:"Набор для гриля",en:"Grill tools set"}, price:1499, img:"grill-set.jpg", cat:"accessories", pop:3 },
-  { id:"weekend-box",   name:{uk:"WEEKEND BOX", ru:"WEEKEND BOX", en:"WEEKEND BOX"}, desc:{uk:"Набір вихідного дня",ru:"Набор выходного дня",en:"Weekend box"}, price:1999, img:"weekend-box.jpg", cat:"accessories", pop:2 },
-];
-
-function getProduct(id){
-  return PRODUCTS.find(p=>p.id===id);
-}
-
-function getCurrency(lang){
-  return (window.I18N?.[lang]?.currency) || "грн";
-}
-
-function renderCatalog(){
-  const root = document.querySelector("[data-catalog]");
-  if (!root) return;
-
-  const lang = getLang();
-  const currency = getCurrency(lang);
-
-  const state = window.AppState || (window.AppState = {
-    cat: "all",
-    sort: "popular",
-  });
-
-  let list = [...PRODUCTS];
-
-  if (state.cat !== "all") list = list.filter(p=>p.cat === state.cat);
-
-  if (state.sort === "popular") list.sort((a,b)=>(b.pop||0)-(a.pop||0));
-  if (state.sort === "price_asc") list.sort((a,b)=>(a.price||0)-(b.price||0));
-  if (state.sort === "price_desc") list.sort((a,b)=>(b.price||0)-(a.price||0));
-
-  root.innerHTML = list.map(p=>{
-    const title = p.name[lang] || p.name.uk;
-    const desc  = p.desc[lang] || p.desc.uk;
-    return `
-      <div class="card">
-        <div class="img"><img src="${p.img}" alt="${title}"></div>
-        <div class="body">
-          <div class="title">
-            <h3>${title}</h3>
-            <div class="price">${money(p.price)} ${currency}</div>
-          </div>
-          <div class="meta">${desc}</div>
-          <div class="row">
-            <div class="qty">
-              <button type="button" data-qty-minus="${p.id}">−</button>
-              <span data-qty="${p.id}">1</span>
-              <button type="button" data-qty-plus="${p.id}">+</button>
-            </div>
-            <button class="add" type="button" data-add="${p.id}" data-i18n="add_to_cart">${window.I18N[lang].add_to_cart}</button>
-          </div>
-        </div>
-      </div>
-    `;
-  }).join("");
-
-  // qty controllers
-  const qtyMap = window.QTYMAP || (window.QTYMAP = {});
-  list.forEach(p=>{ if (!qtyMap[p.id]) qtyMap[p.id] = 1; });
-
-  root.querySelectorAll("[data-qty]").forEach(el=>{
-    const id = el.dataset.qty;
-    el.textContent = String(qtyMap[id] || 1);
-  });
-
-  root.querySelectorAll("[data-qty-minus]").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      const id = btn.dataset.qtyMinus;
-      qtyMap[id] = Math.max(1, (qtyMap[id]||1) - 1);
-      const el = root.querySelector(`[data-qty="${id}"]`);
-      if (el) el.textContent = String(qtyMap[id]);
-    });
-  });
-  root.querySelectorAll("[data-qty-plus]").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      const id = btn.dataset.qtyPlus;
-      qtyMap[id] = Math.min(99, (qtyMap[id]||1) + 1);
-      const el = root.querySelector(`[data-qty="${id}"]`);
-      if (el) el.textContent = String(qtyMap[id]);
-    });
-  });
-
-  root.querySelectorAll("[data-add]").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      const id = btn.dataset.add;
-      const p = getProduct(id);
-      if (!p) return;
-
-      const cart = loadCart();
-      const addQty = qtyMap[id] || 1;
-
-      if (!cart[id]) {
-        cart[id] = { id, qty: 0, price: p.price, img: p.img };
-      }
-      cart[id].qty += addQty;
-      saveCart(cart);
-    });
-  });
-}
-
-function bindCatalogControls(){
-  const chips = document.querySelectorAll("[data-chip]");
-  const sortSel = document.querySelector("[data-sort]");
-
-  if (!chips.length && !sortSel) return;
-
-  const state = window.AppState || (window.AppState = { cat:"all", sort:"popular" });
-
-  function setChipActive(){
-    chips.forEach(c=> c.classList.toggle("active", c.dataset.chip === state.cat));
+  function loadCart(){
+    try{
+      const raw = localStorage.getItem(CART_KEY);
+      const obj = raw ? JSON.parse(raw) : {};
+      if (obj && typeof obj === "object") return obj;
+      return {};
+    }catch(_){ return {}; }
   }
 
-  chips.forEach(c=>{
-    c.addEventListener("click", ()=>{
-      state.cat = c.dataset.chip;
-      setChipActive();
-      renderCatalog();
-    });
-  });
-
-  if (sortSel){
-    sortSel.addEventListener("change", ()=>{
-      state.sort = sortSel.value;
-      renderCatalog();
-    });
+  function saveCart(cart){
+    localStorage.setItem(CART_KEY, JSON.stringify(cart || {}));
+    renderCartBadge();
+    window.dispatchEvent(new CustomEvent("bw:cart"));
   }
 
-  setChipActive();
-}
-
-function renderCart(){
-  const root = document.querySelector("[data-cart]");
-  if (!root) return;
-
-  const lang = getLang();
-  const currency = getCurrency(lang);
-
-  const cart = loadCart();
-  const items = Object.values(cart).filter(it=>it.qty>0);
-
-  if (!items.length){
-    root.innerHTML = `<div class="p" data-i18n="empty_cart">${window.I18N[lang].empty_cart}</div>`;
-    document.querySelectorAll("[data-cart-total]").forEach(el=>el.textContent = `0 ${currency}`);
-    return;
-  }
-
-  root.innerHTML = `
-    <div class="cartlist">
-      ${items.map(it=>{
-        const p = getProduct(it.id);
-        const title = (p?.name?.[lang]) || (p?.name?.uk) || it.id;
-        const lineTotal = money((it.qty||0) * (it.price||0));
-        return `
-          <div class="cartitem">
-            <img src="${it.img}" alt="${title}">
-            <div class="ci">
-              <div>
-                <h4>${title}</h4>
-                <div class="small">${money(it.price)} ${currency} • x${it.qty} = <strong>${lineTotal} ${currency}</strong></div>
-              </div>
-              <div class="actions">
-                <button type="button" data-ci-minus="${it.id}">−</button>
-                <button type="button" data-ci-plus="${it.id}">+</button>
-                <button type="button" data-ci-del="${it.id}">✕</button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join("")}
-    </div>
-  `;
-
-  root.querySelectorAll("[data-ci-minus]").forEach(b=>{
-    b.addEventListener("click", ()=>{
-      const id = b.dataset.ciMinus;
-      const cart = loadCart();
-      if (!cart[id]) return;
-      cart[id].qty = Math.max(0, (cart[id].qty||0)-1);
-      if (cart[id].qty === 0) delete cart[id];
-      saveCart(cart);
-      renderCart();
-    });
-  });
-
-  root.querySelectorAll("[data-ci-plus]").forEach(b=>{
-    b.addEventListener("click", ()=>{
-      const id = b.dataset.ciPlus;
-      const cart = loadCart();
-      if (!cart[id]) return;
-      cart[id].qty = Math.min(99, (cart[id].qty||0)+1);
-      saveCart(cart);
-      renderCart();
-    });
-  });
-
-  root.querySelectorAll("[data-ci-del]").forEach(b=>{
-    b.addEventListener("click", ()=>{
-      const id = b.dataset.ciDel;
-      const cart = loadCart();
-      delete cart[id];
-      saveCart(cart);
-      renderCart();
-    });
-  });
-
-  const total = cartTotal(loadCart());
-  document.querySelectorAll("[data-cart-total]").forEach(el=>el.textContent = `${money(total)} ${currency}`);
-}
-
-function bindCheckout(){
-  const form = document.querySelector("[data-checkout-form]");
-  if (!form) return;
-
-  form.addEventListener("submit", (e)=>{
-    e.preventDefault();
+  function addToCart(id, qty=1){
     const cart = loadCart();
-    if (cartCount(cart) === 0){
-      alert("Cart is empty");
+    cart[id] = clamp((cart[id] || 0) + qty, 0, 999);
+    if (cart[id] <= 0) delete cart[id];
+    saveCart(cart);
+  }
+
+  function setQty(id, qty){
+    const cart = loadCart();
+    const v = clamp(qty, 0, 999);
+    if (v <= 0) delete cart[id];
+    else cart[id] = v;
+    saveCart(cart);
+  }
+
+  function clearCart(){
+    saveCart({});
+  }
+
+  function cartCount(){
+    const cart = loadCart();
+    return Object.values(cart).reduce((a,b)=>a + (Number(b)||0), 0);
+  }
+
+  function cartTotal(){
+    const cart = loadCart();
+    let total = 0;
+    for (const [id, qty] of Object.entries(cart)){
+      const p = PRODUCTS.find(x => x.id === id);
+      if (!p) continue;
+      total += (p.price * (Number(qty)||0));
+    }
+    return total;
+  }
+
+  function renderCartBadge(){
+    const count = cartCount();
+    document.querySelectorAll("[data-cart-count]").forEach(el => {
+      el.textContent = String(count);
+      el.style.display = count > 0 ? "inline-block" : "none";
+    });
+  }
+
+  // ====== RENDER CATALOG ======
+  function productName(p){
+    const lang = window.BW_I18N?.getLang?.() || "uk";
+    return (p.name && (p.name[lang] || p.name.uk || p.name.en)) || p.id;
+  }
+
+  function renderCatalog(targetSel){
+    const wrap = document.querySelector(targetSel);
+    if (!wrap) return;
+
+    const q = (document.querySelector("[data-catalog-search]")?.value || "").trim().toLowerCase();
+    const cart = loadCart();
+    const lang = window.BW_I18N?.getLang?.() || "uk";
+
+    const list = PRODUCTS
+      .filter(p => productName(p).toLowerCase().includes(q) || (p.grade || "").toLowerCase().includes(q))
+      .map(p => {
+        const inCart = !!cart[p.id];
+        const btnText = inCart ? (window.BW_I18N?.t("in_cart", lang) || "In cart") : (window.BW_I18N?.t("add_to_cart", lang) || "Add");
+        const btnClass = inCart ? "btn small" : "btn primary small";
+
+        return `
+          <article class="card product" data-product="${p.id}">
+            <div class="thumb">
+              <img src="${p.img}" alt="${escapeHtml(productName(p))}" loading="lazy" onerror="this.style.opacity='.35';this.style.filter='grayscale(1)';" />
+            </div>
+            <div class="body">
+              <div class="name">${escapeHtml(productName(p))}</div>
+              <div class="meta">
+                <div class="mini">
+                  <span class="pill">${escapeHtml(p.grade || "")}</span>
+                  <span style="margin-left:8px; color: var(--muted2)">${escapeHtml(window.BW_I18N?.t("weight", lang) || "Weight")}: ${escapeHtml(p.weight || "—")}</span>
+                </div>
+                <div class="price">${money(p.price)}</div>
+              </div>
+              <button class="${btnClass}" data-add="${p.id}">${escapeHtml(btnText)}</button>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+    wrap.innerHTML = list || `<div class="notice">—</div>`;
+  }
+
+  // ====== RENDER POPULAR (HOME) ======
+  function renderPopular(targetSel){
+    const wrap = document.querySelector(targetSel);
+    if (!wrap) return;
+    const top = PRODUCTS.slice(0, 3);
+
+    wrap.innerHTML = top.map(p => `
+      <article class="card product">
+        <div class="thumb">
+          <img src="${p.img}" alt="${escapeHtml(productName(p))}" loading="lazy" onerror="this.style.opacity='.35';this.style.filter='grayscale(1)';" />
+        </div>
+        <div class="body">
+          <div class="name">${escapeHtml(productName(p))}</div>
+          <div class="meta">
+            <div class="mini">
+              <span class="pill">${escapeHtml(p.grade || "")}</span>
+              <span style="margin-left:8px; color: var(--muted2)">${escapeHtml(window.BW_I18N?.t("weight") || "Weight")}: ${escapeHtml(p.weight || "—")}</span>
+            </div>
+            <div class="price">${money(p.price)}</div>
+          </div>
+          <a class="btn primary small" href="catalog.html" data-i18n="hero_cta_catalog">Перейти в каталог</a>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  // ====== RENDER CART PAGE ======
+  function renderCartTable(){
+    const tableWrap = document.querySelector("[data-cart-table]");
+    const emptyWrap = document.querySelector("[data-cart-empty]");
+    const totalEl = document.querySelector("[data-cart-total]");
+    const checkoutBtn = document.querySelector("[data-go-checkout]");
+
+    if (!tableWrap || !emptyWrap || !totalEl) return;
+
+    const cart = loadCart();
+    const items = Object.entries(cart)
+      .map(([id, qty]) => {
+        const p = PRODUCTS.find(x => x.id === id);
+        if (!p) return null;
+        const q = Number(qty) || 0;
+        const sum = p.price * q;
+        return { p, q, sum };
+      })
+      .filter(Boolean);
+
+    if (items.length === 0){
+      tableWrap.style.display = "none";
+      emptyWrap.style.display = "block";
+      totalEl.textContent = money(0);
+      if (checkoutBtn) checkoutBtn.setAttribute("disabled", "disabled");
       return;
     }
 
-    // Here you can интегрировать Telegram/CRM позже.
-    // Сейчас — имитация успешного заказа.
-    localStorage.removeItem(CART_KEY);
-    updateCartBadges();
-    window.location.href = "success.html";
-  });
-}
+    if (checkoutBtn) checkoutBtn.removeAttribute("disabled");
+    emptyWrap.style.display = "none";
+    tableWrap.style.display = "block";
 
-function highlightActiveNav(){
-  const file = location.pathname.split("/").pop() || "index.html";
-  document.querySelectorAll("[data-nav]").forEach(a=>{
-    a.classList.toggle("active", a.getAttribute("href") === file);
-  });
-}
+    const rows = items.map(({p,q,sum}) => `
+      <tr>
+        <td>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <div class="rowimg"><img src="${p.img}" alt="${escapeHtml(productName(p))}" onerror="this.style.opacity='.35';this.style.filter='grayscale(1)';" /></div>
+            <div>
+              <div style="font-weight:900">${escapeHtml(productName(p))}</div>
+              <div class="mini">${escapeHtml(p.grade || "")} • ${escapeHtml(p.weight || "—")}</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="qty">
+            <button type="button" data-qty-dec="${p.id}">−</button>
+            <span data-qty-val="${p.id}">${q}</span>
+            <button type="button" data-qty-inc="${p.id}">+</button>
+          </div>
+        </td>
+        <td>${money(p.price)}</td>
+        <td><strong>${money(sum)}</strong></td>
+      </tr>
+    `).join("");
 
-window.App = {
-  onLangChange(){
-    // re-render dynamic parts
-    renderCatalog();
-    renderCart();
+    tableWrap.querySelector("tbody").innerHTML = rows;
+    totalEl.textContent = money(cartTotal());
   }
-};
 
-document.addEventListener("DOMContentLoaded", ()=>{
-  // Lang init (default UKR)
-  setLang(getLang());
+  // ====== CONTACT FORM (LOCAL SAVE) ======
+  function setupContactsForm(){
+    const form = document.querySelector("[data-contacts-form]");
+    if (!form) return;
 
-  // Global UI
-  highlightActiveNav();
-  updateCartBadges();
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      localStorage.setItem("bw_contacts_last", JSON.stringify({ ...data, ts: Date.now() }));
+      form.reset();
+      const note = document.querySelector("[data-contacts-note]");
+      if (note){
+        note.style.display = "block";
+        setTimeout(()=> note.style.display="none", 2500);
+      }
+    });
+  }
 
-  // Catalog + cart + checkout
-  bindCatalogControls();
-  renderCatalog();
-  renderCart();
-  bindCheckout();
-});
+  // ====== CHECKOUT ======
+  function setupCheckout(){
+    const form = document.querySelector("[data-checkout-form]");
+    if (!form) return;
+
+    // block if empty cart
+    if (cartCount() === 0){
+      location.href = "cart.html";
+      return;
+    }
+
+    const totalEl = document.querySelector("[data-checkout-total]");
+    if (totalEl) totalEl.textContent = money(cartTotal());
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const order = Object.fromEntries(new FormData(form).entries());
+      const cart = loadCart();
+      const items = Object.entries(cart).map(([id,qty]) => {
+        const p = PRODUCTS.find(x=>x.id===id);
+        if (!p) return null;
+        return { id, qty:Number(qty)||0, price:p.price, name: productName(p) };
+      }).filter(Boolean);
+
+      const payload = {
+        order,
+        items,
+        total: cartTotal(),
+        ts: Date.now()
+      };
+
+      localStorage.setItem("bw_last_order", JSON.stringify(payload));
+      clearCart();
+      location.href = "success.html";
+    });
+  }
+
+  // ====== UTILS ======
+  function escapeHtml(s){
+    return String(s ?? "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  // ====== EVENTS ======
+  document.addEventListener("click", (e) => {
+    const addBtn = e.target.closest("[data-add]");
+    if (addBtn){
+      const id = addBtn.getAttribute("data-add");
+      addToCart(id, 1);
+      // refresh catalog button state
+      renderCatalog("[data-catalog-grid]");
+      renderPopular("[data-popular-grid]");
+      renderCartTable();
+      return;
+    }
+
+    const inc = e.target.closest("[data-qty-inc]");
+    const dec = e.target.closest("[data-qty-dec]");
+    if (inc){
+      const id = inc.getAttribute("data-qty-inc");
+      addToCart(id, 1);
+      renderCartTable();
+      return;
+    }
+    if (dec){
+      const id = dec.getAttribute("data-qty-dec");
+      const cart = loadCart();
+      setQty(id, (cart[id] || 0) - 1);
+      renderCartTable();
+      return;
+    }
+
+    const clear = e.target.closest("[data-cart-clear]");
+    if (clear){
+      clearCart();
+      renderCartTable();
+      return;
+    }
+
+    const go = e.target.closest("[data-go-checkout]");
+    if (go){
+      if (cartCount() > 0) location.href = "checkout.html";
+      return;
+    }
+  });
+
+  document.addEventListener("input", (e) => {
+    if (e.target && e.target.matches("[data-catalog-search]")){
+      renderCatalog("[data-catalog-grid]");
+    }
+  });
+
+  window.addEventListener("bw:lang", () => {
+    // re-render text-based product names when language changes
+    renderCatalog("[data-catalog-grid]");
+    renderPopular("[data-popular-grid]");
+    renderCartTable();
+    const totalEl = document.querySelector("[data-checkout-total]");
+    if (totalEl) totalEl.textContent = money(cartTotal());
+  });
+
+  window.addEventListener("bw:cart", () => {
+    renderCatalog("[data-catalog-grid]");
+    renderPopular("[data-popular-grid]");
+    renderCartTable();
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderCartBadge();
+    renderCatalog("[data-catalog-grid]");
+    renderPopular("[data-popular-grid]");
+    renderCartTable();
+    setupContactsForm();
+    setupCheckout();
+  });
+})();
