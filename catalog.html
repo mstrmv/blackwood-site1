@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BLACKWOOD • Каталог</title>
 
-  <link rel="stylesheet" href="assets/style.css" />
-  <script defer src="assets/i18n.js"></script>
-  <script defer src="assets/app.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="i18n.js"></script>
+  <script defer src="app.js"></script>
 </head>
 
 <body class="page-inner">
@@ -53,9 +53,23 @@
 
 <main class="container">
   <section class="page-title">
-    <h1 data-i18n="catalog_title">Товари</h1>
-    <p data-i18n="catalog_sub">Оберіть вагу та додайте в кошик.</p>
+    <h1 data-i18n="catalog_title">Каталог товарів</h1>
+    <p data-i18n="catalog_sub">Оберіть категорію та додайте в кошик.</p>
   </section>
+
+  <div class="filters card" style="padding:14px; margin-bottom:14px;">
+    <label style="display:flex; gap:10px; align-items:center;">
+      <strong style="min-width:90px;">Категорія</strong>
+      <select id="catFilter" class="select">
+        <option value="all" data-i18n="cat_all">Усі</option>
+        <option value="charcoal" data-i18n="cat_charcoal">Вугілля</option>
+        <option value="grids" data-i18n="cat_grids">Решітки</option>
+        <option value="tools" data-i18n="cat_tools">Розпал / Інструменти</option>
+        <option value="merch" data-i18n="cat_merch">Аксесуари</option>
+        <option value="sets" data-i18n="cat_sets">Набори</option>
+      </select>
+    </label>
+  </div>
 
   <section id="productsGrid" class="products-grid"></section>
 </main>
