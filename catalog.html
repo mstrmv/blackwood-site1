@@ -1,50 +1,55 @@
-<!-- catalog.html -->
 <!doctype html>
 <html lang="uk">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
   <title>Каталог — BLACKWOOD</title>
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
-  <div id="site-header"></div>
 
-  <main class="main">
-    <section class="container section">
-      <div class="section-head">
-        <h1 class="h1" data-i18n="catalog_title">Товари</h1>
-        <p class="muted" data-i18n="catalog_sub">Оберіть категорію та додайте в кошик.</p>
+<body class="page-inner">
+
+  <main class="catalog">
+    <h1>Товари</h1>
+
+    <div class="catalog-grid">
+
+      <!-- УГОЛЬ (PNG) -->
+      <div class="product-card">
+        <img src="assets/img/products/core-3kg.png" alt="CORE 3 KG">
+        <div class="product-title">CORE — 3 kg</div>
+        <div class="product-price">399 грн</div>
       </div>
 
-      <div class="toolbar">
-        <div class="chips" id="catChips"></div>
-
-        <div class="right-tools">
-          <label class="label-inline">
-            <span class="muted" data-i18n="sort_label">Сортування</span>
-            <select id="sortSel" class="select">
-              <option value="popular" data-i18n="sort_pop">Популярні</option>
-              <option value="price_asc" data-i18n="sort_price_asc">Ціна ↑</option>
-              <option value="price_desc" data-i18n="sort_price_desc">Ціна ↓</option>
-              <option value="name" data-i18n="sort_name">Назва</option>
-            </select>
-          </label>
-        </div>
+      <div class="product-card">
+        <img src="assets/img/products/core-5kg.png" alt="CORE 5 KG">
+        <div class="product-title">CORE — 5 kg</div>
+        <div class="product-price">499 грн</div>
       </div>
 
-      <div class="grid" id="productsGrid"></div>
-
-      <div class="bottom-actions">
-        <a class="btn btn-dark" href="cart.html" data-i18n="go_cart">Перейти в кошик</a>
-        <a class="btn btn-gold" href="checkout.html" data-i18n="go_checkout">Оформити замовлення</a>
+      <div class="product-card">
+        <img src="assets/img/products/core-10kg.png" alt="CORE 10 KG">
+        <div class="product-title">CORE — 10 kg</div>
+        <div class="product-price">599 грн</div>
       </div>
-    </section>
+
+      <!-- АКСЕССУАРЫ (JPG) -->
+      <div class="product-card">
+        <img src="assets/img/products/grid-double.jpg" alt="Grid Double">
+        <div class="product-title">Сітка подвійна</div>
+      </div>
+
+      <div class="product-card">
+        <img src="assets/img/products/grid-sausage.jpg" alt="Grid Sausage">
+        <div class="product-title">Сітка для ковбас</div>
+      </div>
+
+      <div class="product-card">
+        <img src="assets/img/products/grid-flat.jpg" alt="Grid Flat">
+        <div class="product-title">Плоска решітка</div>
+      </div>
+
+    </div>
   </main>
 
-  <div id="site-footer"></div>
-
-  <script src="assets/i18n.js"></script>
-  <script src="assets/app.js"></script>
 </body>
 </html>
