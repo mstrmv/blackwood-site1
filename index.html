@@ -1,45 +1,108 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="uk">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>BLACKWOOD • CHARCOAL</title>
+
+  <!-- СТИЛИ -->
   <link rel="stylesheet" href="assets/style.css" />
+
+  <!-- JS -->
+  <script defer src="assets/i18n.js"></script>
+  <script defer src="assets/app.js"></script>
 </head>
-<body class="page-hero">
-  <div id="site-header"></div>
 
-  <main class="main">
-    <section class="hero container">
-      <div class="hero-card">
-        <div class="badge">
-          <span class="dot"></span>
-          <span data-i18n="hero_badge">Преміум вугілля для гриля</span>
-        </div>
+<body class="page-home">
 
-        <h1 class="hero-title">
-          PREMIUM<br/>HARDWOOD<br/>CHARCOAL
-        </h1>
+<!-- ================= HEADER ================= -->
+<header class="topbar">
+  <div class="container nav">
 
-        <p class="hero-sub" data-i18n="hero_sub">
-          Тривале горіння, мінімум попелу, чистий жар. Ідеально для BBQ та гриля.
-        </p>
+    <!-- ЛОГО -->
+    <a href="index.html" class="brand">
+      BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
+    </a>
 
-        <div class="hero-actions">
-          <a class="btn btn-gold" href="catalog.html" data-i18n="hero_btn_catalog">Відкрити каталог</a>
-          <a class="btn btn-ghost" href="shipping.html" data-i18n="hero_btn_shipping">Доставка та оплата</a>
-          <a class="btn btn-dark" href="cart.html" data-i18n="hero_btn_cart">Кошик</a>
-        </div>
+    <!-- НАВИГАЦИЯ -->
+    <nav class="navlinks">
+      <a href="index.html" data-i18n="nav_home">Головна</a>
+      <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+      <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+      <a href="about.html" data-i18n="nav_about">Про нас</a>
+      <a href="contacts.html" data-i18n="nav_contacts">Контакти</a>
+    </nav>
 
-        <div class="mini-note">BLACKWOOD • CHARCOAL © <span id="year"></span></div>
+    <!-- ПРАВО -->
+    <div class="nav-right">
+
+      <!-- ЯЗЫК -->
+      <div class="lang-switch">
+        <button data-lang="uk" class="active">UKR</button>
+        <button data-lang="ru">RU</button>
+        <button data-lang="en">EN</button>
       </div>
-    </section>
-  </main>
 
-  <div id="site-footer"></div>
+      <!-- КОРЗИНА -->
+      <a href="cart.html" class="cart-btn">
+        <span data-i18n="cart">Кошик</span> • <span id="cartCount">0</span>
+      </a>
 
-  <script src="assets/i18n.js"></script>
-  <script src="assets/app.js"></script>
+      <!-- СОЦСЕТИ -->
+      <div class="socials">
+        <a href="https://t.me/" target="_blank" aria-label="Telegram">
+          <img src="assets/img/icons/telegram.svg" alt="Telegram">
+        </a>
+        <a href="https://instagram.com/" target="_blank" aria-label="Instagram">
+          <img src="assets/img/icons/instagram.svg" alt="Instagram">
+        </a>
+        <a href="https://tiktok.com/" target="_blank" aria-label="TikTok">
+          <img src="assets/img/icons/tiktok.svg" alt="TikTok">
+        </a>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<main class="hero">
+  <div class="hero-card">
+
+    <span class="badge" data-i18n="hero_badge">
+      Преміум вугілля для гриля
+    </span>
+
+    <h1 data-i18n="hero_title">
+      PREMIUM HARDWOOD<br>CHARCOAL
+    </h1>
+
+    <p data-i18n="hero_text">
+      Довге горіння, мінімум попелу, чистий жар.
+      Ідеально для BBQ та гриля.
+    </p>
+
+    <div class="hero-actions">
+      <a href="catalog.html" class="btn gold" data-i18n="hero_catalog">
+        Відкрити каталог
+      </a>
+
+      <a href="shipping.html" class="btn outline" data-i18n="hero_shipping">
+        Доставка і оплата
+      </a>
+
+      <a href="cart.html" class="btn ghost" data-i18n="hero_cart">
+        Кошик
+      </a>
+    </div>
+
+    <div class="hero-footer">
+      BLACKWOOD • CHARCOAL © 2026
+    </div>
+
+  </div>
+</main>
+
 </body>
 </html>
