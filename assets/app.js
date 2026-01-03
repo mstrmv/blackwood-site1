@@ -1,61 +1,84 @@
+/* ===== FILE: assets/app.js ===== */
 (() => {
   const CART_KEY = "bw_cart_v1";
 
-  // ====== PRODUCTS (EDIT PRICES/ITEMS HERE) ======
-  const PRODUCTS = [
-    {
-      id: "core-3kg",
-      img: "img/core-3kg.png",
-      weight: "3 кг",
-      grade: "CORE",
-      price: 199,
-      name: { uk: "Вугілля BLACKWOOD CORE 3 кг", ru: "Уголь BLACKWOOD CORE 3 кг", en: "BLACKWOOD CORE Charcoal 3 kg" }
-    },
-    {
-      id: "core-5kg",
-      img: "img/core-5kg.png",
-      weight: "5 кг",
-      grade: "CORE",
-      price: 299,
-      name: { uk: "Вугілля BLACKWOOD CORE 5 кг", ru: "Уголь BLACKWOOD CORE 5 кг", en: "BLACKWOOD CORE Charcoal 5 kg" }
-    },
-    {
-      id: "core-10kg",
-      img: "img/core-10kg.png",
-      weight: "10 кг",
-      grade: "CORE",
-      price: 499,
-      name: { uk: "Вугілля BLACKWOOD CORE 10 кг", ru: "Уголь BLACKWOOD CORE 10 кг", en: "BLACKWOOD CORE Charcoal 10 kg" }
-    },
-
-    // examples for your JPG products — rename img path to your real files:
-    {
-      id: "bbq-starter",
-      img: "img/product-1.jpg",
-      weight: "—",
-      grade: "BBQ",
-      price: 149,
-      name: { uk: "Розпалювач (приклад товару)", ru: "Розжиг (пример товара)", en: "Fire starter (sample)" }
-    },
-    {
-      id: "chips",
-      img: "img/product-2.jpg",
-      weight: "—",
-      grade: "BBQ",
-      price: 129,
-      name: { uk: "Щепа для копчення (приклад)", ru: "Щепа для копчения (пример)", en: "Smoking wood chips (sample)" }
-    },
-    {
-      id: "gloves",
-      img: "img/product-3.jpg",
-      weight: "—",
-      grade: "BBQ",
-      price: 199,
-      name: { uk: "Рукавиці для гриля (приклад)", ru: "Перчатки для гриля (пример)", en: "BBQ gloves (sample)" }
-    }
+  // ===== IMAGE FIXER (case/extension fallback for GitHub Pages) =====
+  const EXT_TRIES = [
+    (src) => src,
+    (src) => src.replace(/\.jpg$/i, ".JPG"),
+    (src) => src.replace(/\.JPG$/i, ".jpg"),
+    (src) => src.replace(/\.jpeg$/i, ".JPEG"),
+    (src) => src.replace(/\.JPEG$/i, ".jpeg"),
+    (src) => src.replace(/\.png$/i, ".PNG"),
+    (src) => src.replace(/\.PNG$/i, ".png"),
+    (src) => src.replace(/\.jpg$/i, ".png"),
+    (src) => src.replace(/\.png$/i, ".jpg"),
+    (src) => "img/core-10kg.png"
   ];
 
-  // ====== CART HELPERS ======
+  function onImgError(img){
+    try{
+      const tried = Number(img.getAttribute("data-try") || "0");
+      const next = tried + 1;
+      img.setAttribute("data-try", String(next));
+      const base = img.getAttribute("data-src") || img.src || "";
+      const clean = base.split("?")[0];
+
+      const fn = EXT_TRIES[next] || null;
+      if (!fn){
+        img.style.opacity = ".35";
+        img.style.filter = "grayscale(1)";
+        return;
+      }
+      const nextSrc = fn(clean) + "?v=" + next;
+      img.src = nextSrc;
+    }catch(_){
+      img.style.opacity = ".35";
+      img.style.filter = "grayscale(1)";
+    }
+  }
+
+  window.BW_IMG = { onError: onImgError };
+
+  // ===== PRODUCTS (БОЛЬШЕ ТОВАРОВ) =====
+  // ВАЖНО: файлы должны реально существовать в /img/
+  // Если какой-то jpg назван по-другому — просто поменяй img: "img/....jpg"
+  const PRODUCTS = [
+    { id:"core-3kg",  img:"img/core-3kg.png",  weight:"3 кг",  grade:"CORE", price:199,
+      name:{uk:"Вугілля BLACKWOOD CORE 3 кг", ru:"Уголь BLACKWOOD CORE 3 кг", en:"BLACKWOOD CORE Charcoal 3 kg"} },
+    { id:"core-5kg",  img:"img/core-5kg.png",  weight:"5 кг",  grade:"CORE", price:299,
+      name:{uk:"Вугілля BLACKWOOD CORE 5 кг", ru:"Уголь BLACKWOOD CORE 5 кг", en:"BLACKWOOD CORE Charcoal 5 kg"} },
+    { id:"core-10kg", img:"img/core-10kg.png", weight:"10 кг", grade:"CORE", price:499,
+      name:{uk:"Вугілля BLACKWOOD CORE 10 кг", ru:"Уголь BLACKWOOD CORE 10 кг", en:"BLACKWOOD CORE Charcoal 10 kg"} },
+
+    // JPG товары (примерные названия файлов):
+    { id:"product-01", img:"img/product-01.jpg", weight:"—", grade:"BBQ", price:149,
+      name:{uk:"Розпалювач для гриля", ru:"Розжиг для гриля", en:"BBQ fire starter"} },
+    { id:"product-02", img:"img/product-02.jpg", weight:"—", grade:"BBQ", price:129,
+      name:{uk:"Щепа для копчення", ru:"Щепа для копчения", en:"Smoking wood chips"} },
+    { id:"product-03", img:"img/product-03.jpg", weight:"—", grade:"BBQ", price:199,
+      name:{uk:"Рукавиці для гриля", ru:"Перчатки для гриля", en:"BBQ gloves"} },
+    { id:"product-04", img:"img/product-04.jpg", weight:"—", grade:"BBQ", price:179,
+      name:{uk:"Щипці для гриля", ru:"Щипцы для гриля", en:"BBQ tongs"} },
+    { id:"product-05", img:"img/product-05.jpg", weight:"—", grade:"BBQ", price:169,
+      name:{uk:"Щітка для решітки", ru:"Щетка для решетки", en:"Grill brush"} },
+    { id:"product-06", img:"img/product-06.jpg", weight:"—", grade:"BBQ", price:119,
+      name:{uk:"Підпалювач кубики", ru:"Кубики для розжига", en:"Firelighter cubes"} },
+    { id:"product-07", img:"img/product-07.jpg", weight:"—", grade:"BBQ", price:139,
+      name:{uk:"Термометр (приклад)", ru:"Термометр (пример)", en:"Thermometer (sample)"} },
+    { id:"product-08", img:"img/product-08.jpg", weight:"—", grade:"BBQ", price:99,
+      name:{uk:"Фольга для BBQ (приклад)", ru:"Фольга для BBQ (пример)", en:"BBQ foil (sample)"} },
+    { id:"product-09", img:"img/product-09.jpg", weight:"—", grade:"BBQ", price:89,
+      name:{uk:"Шампури (приклад)", ru:"Шампура (пример)", en:"Skewers (sample)"} },
+    { id:"product-10", img:"img/product-10.jpg", weight:"—", grade:"BBQ", price:159,
+      name:{uk:"Решітка (приклад)", ru:"Решетка (пример)", en:"Grill grate (sample)"} },
+    { id:"product-11", img:"img/product-11.jpg", weight:"—", grade:"BBQ", price:109,
+      name:{uk:"Рукав/фартух (приклад)", ru:"Фартук (пример)", en:"Apron (sample)"} },
+    { id:"product-12", img:"img/product-12.jpg", weight:"—", grade:"BBQ", price:149,
+      name:{uk:"Сумка для вугілля (приклад)", ru:"Сумка для угля (пример)", en:"Charcoal bag (sample)"} }
+  ];
+
+  // ===== CART HELPERS =====
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
   const money = (n) => `${Number(n || 0).toFixed(0)} ${window.BW_I18N?.t("uah") || "₴"}`;
 
@@ -117,10 +140,19 @@
     });
   }
 
-  // ====== RENDER CATALOG ======
+  // ===== RENDER =====
   function productName(p){
     const lang = window.BW_I18N?.getLang?.() || "uk";
     return (p.name && (p.name[lang] || p.name.uk || p.name.en)) || p.id;
+  }
+
+  function escapeHtml(s){
+    return String(s ?? "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
   }
 
   function renderCatalog(targetSel){
@@ -138,10 +170,11 @@
         const btnText = inCart ? (window.BW_I18N?.t("in_cart", lang) || "In cart") : (window.BW_I18N?.t("add_to_cart", lang) || "Add");
         const btnClass = inCart ? "btn small" : "btn primary small";
 
+        const src = encodeURI(p.img);
         return `
           <article class="card product" data-product="${p.id}">
             <div class="thumb">
-              <img src="${p.img}" alt="${escapeHtml(productName(p))}" loading="lazy" onerror="this.style.opacity='.35';this.style.filter='grayscale(1)';" />
+              <img data-src="${src}" src="${src}" alt="${escapeHtml(productName(p))}" loading="lazy" onerror="BW_IMG.onError(this)" />
             </div>
             <div class="body">
               <div class="name">${escapeHtml(productName(p))}</div>
@@ -161,33 +194,34 @@
     wrap.innerHTML = list || `<div class="notice">—</div>`;
   }
 
-  // ====== RENDER POPULAR (HOME) ======
   function renderPopular(targetSel){
     const wrap = document.querySelector(targetSel);
     if (!wrap) return;
     const top = PRODUCTS.slice(0, 3);
 
-    wrap.innerHTML = top.map(p => `
-      <article class="card product">
-        <div class="thumb">
-          <img src="${p.img}" alt="${escapeHtml(productName(p))}" loading="lazy" onerror="this.style.opacity='.35';this.style.filter='grayscale(1)';" />
-        </div>
-        <div class="body">
-          <div class="name">${escapeHtml(productName(p))}</div>
-          <div class="meta">
-            <div class="mini">
-              <span class="pill">${escapeHtml(p.grade || "")}</span>
-              <span style="margin-left:8px; color: var(--muted2)">${escapeHtml(window.BW_I18N?.t("weight") || "Weight")}: ${escapeHtml(p.weight || "—")}</span>
-            </div>
-            <div class="price">${money(p.price)}</div>
+    wrap.innerHTML = top.map(p => {
+      const src = encodeURI(p.img);
+      return `
+        <article class="card product">
+          <div class="thumb">
+            <img data-src="${src}" src="${src}" alt="${escapeHtml(productName(p))}" loading="lazy" onerror="BW_IMG.onError(this)" />
           </div>
-          <a class="btn primary small" href="catalog.html" data-i18n="hero_cta_catalog">Перейти в каталог</a>
-        </div>
-      </article>
-    `).join("");
+          <div class="body">
+            <div class="name">${escapeHtml(productName(p))}</div>
+            <div class="meta">
+              <div class="mini">
+                <span class="pill">${escapeHtml(p.grade || "")}</span>
+                <span style="margin-left:8px; color: var(--muted2)">${escapeHtml(window.BW_I18N?.t("weight") || "Weight")}: ${escapeHtml(p.weight || "—")}</span>
+              </div>
+              <div class="price">${money(p.price)}</div>
+            </div>
+            <a class="btn primary small" href="catalog.html" data-i18n="hero_cta_catalog">Перейти в каталог</a>
+          </div>
+        </article>
+      `;
+    }).join("");
   }
 
-  // ====== RENDER CART PAGE ======
   function renderCartTable(){
     const tableWrap = document.querySelector("[data-cart-table]");
     const emptyWrap = document.querySelector("[data-cart-empty]");
@@ -219,34 +253,38 @@
     emptyWrap.style.display = "none";
     tableWrap.style.display = "block";
 
-    const rows = items.map(({p,q,sum}) => `
-      <tr>
-        <td>
-          <div style="display:flex; gap:10px; align-items:center;">
-            <div class="rowimg"><img src="${p.img}" alt="${escapeHtml(productName(p))}" onerror="this.style.opacity='.35';this.style.filter='grayscale(1)';" /></div>
-            <div>
-              <div style="font-weight:900">${escapeHtml(productName(p))}</div>
-              <div class="mini">${escapeHtml(p.grade || "")} • ${escapeHtml(p.weight || "—")}</div>
+    const rows = items.map(({p,q,sum}) => {
+      const src = encodeURI(p.img);
+      return `
+        <tr>
+          <td>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <div class="rowimg">
+                <img data-src="${src}" src="${src}" alt="${escapeHtml(productName(p))}" onerror="BW_IMG.onError(this)" />
+              </div>
+              <div>
+                <div style="font-weight:900">${escapeHtml(productName(p))}</div>
+                <div class="mini">${escapeHtml(p.grade || "")} • ${escapeHtml(p.weight || "—")}</div>
+              </div>
             </div>
-          </div>
-        </td>
-        <td>
-          <div class="qty">
-            <button type="button" data-qty-dec="${p.id}">−</button>
-            <span data-qty-val="${p.id}">${q}</span>
-            <button type="button" data-qty-inc="${p.id}">+</button>
-          </div>
-        </td>
-        <td>${money(p.price)}</td>
-        <td><strong>${money(sum)}</strong></td>
-      </tr>
-    `).join("");
+          </td>
+          <td>
+            <div class="qty">
+              <button type="button" data-qty-dec="${p.id}">−</button>
+              <span data-qty-val="${p.id}">${q}</span>
+              <button type="button" data-qty-inc="${p.id}">+</button>
+            </div>
+          </td>
+          <td>${money(p.price)}</td>
+          <td><strong>${money(sum)}</strong></td>
+        </tr>
+      `;
+    }).join("");
 
     tableWrap.querySelector("tbody").innerHTML = rows;
     totalEl.textContent = money(cartTotal());
   }
 
-  // ====== CONTACT FORM (LOCAL SAVE) ======
   function setupContactsForm(){
     const form = document.querySelector("[data-contacts-form]");
     if (!form) return;
@@ -264,12 +302,10 @@
     });
   }
 
-  // ====== CHECKOUT ======
   function setupCheckout(){
     const form = document.querySelector("[data-checkout-form]");
     if (!form) return;
 
-    // block if empty cart
     if (cartCount() === 0){
       location.href = "cart.html";
       return;
@@ -288,36 +324,19 @@
         return { id, qty:Number(qty)||0, price:p.price, name: productName(p) };
       }).filter(Boolean);
 
-      const payload = {
-        order,
-        items,
-        total: cartTotal(),
-        ts: Date.now()
-      };
-
+      const payload = { order, items, total: cartTotal(), ts: Date.now() };
       localStorage.setItem("bw_last_order", JSON.stringify(payload));
       clearCart();
       location.href = "success.html";
     });
   }
 
-  // ====== UTILS ======
-  function escapeHtml(s){
-    return String(s ?? "")
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-  }
-
-  // ====== EVENTS ======
+  // ===== EVENTS =====
   document.addEventListener("click", (e) => {
     const addBtn = e.target.closest("[data-add]");
     if (addBtn){
       const id = addBtn.getAttribute("data-add");
       addToCart(id, 1);
-      // refresh catalog button state
       renderCatalog("[data-catalog-grid]");
       renderPopular("[data-popular-grid]");
       renderCartTable();
@@ -361,7 +380,6 @@
   });
 
   window.addEventListener("bw:lang", () => {
-    // re-render text-based product names when language changes
     renderCatalog("[data-catalog-grid]");
     renderPopular("[data-popular-grid]");
     renderCartTable();
