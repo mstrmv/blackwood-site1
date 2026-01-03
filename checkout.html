@@ -3,121 +3,108 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Оформлення • BLACKWOOD</title>
+  <title>Checkout — BLACKWOOD</title>
   <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/app.js"></script>
 </head>
-<body class="page bg-inner">
-  <div class="overlay">
 
-    <header class="topbar">
-      <div class="container">
-        <div class="topbar-inner">
-          <a class="brand" href="index.html">
-            BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
+<body class="page-inner">
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__name">BLACKWOOD</span><span class="brand__dot">•</span><span class="brand__sub">CHARCOAL</span>
+      </a>
+
+      <nav class="nav">
+        <a class="nav__link" href="index.html" data-i18n="nav_home">Головна</a>
+        <a class="nav__link" href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+        <a class="nav__link" href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+        <a class="nav__link" href="about.html" data-i18n="nav_about">Про нас</a>
+        <a class="nav__link" href="contacts.html" data-i18n="nav_contacts">Контакти</a>
+      </nav>
+
+      <div class="right">
+        <div class="lang">
+          <button class="pill lang__btn" data-lang="RU" type="button">RU</button>
+          <button class="pill lang__btn is-active" data-lang="UKR" type="button">UKR</button>
+          <button class="pill lang__btn" data-lang="EN" type="button">EN</button>
+        </div>
+
+        <a class="pill cart" href="cart.html">
+          <span data-i18n="cart">Кошик</span>
+          <span class="cart__count" id="cartCount">0</span>
+        </a>
+
+        <div class="social">
+          <a class="social__btn" data-social="telegram" href="#" target="_blank" rel="noopener" aria-label="Telegram">
+            <svg viewBox="0 0 24 24" class="social__icon"><path d="M9.78 15.63 9.6 19.2c.46 0 .66-.2.9-.43l2.16-2.06 4.48 3.27c.82.45 1.4.22 1.62-.76l2.94-13.78c.28-1.28-.46-1.78-1.25-1.48L2.44 9.62c-1.25.49-1.23 1.2-.23 1.51l5.1 1.59L19.1 6.3c.56-.37 1.07-.17.65.2L9.78 15.63z"/></svg>
           </a>
+          <a class="social__btn" data-social="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" class="social__icon"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4.5A5.5 5.5 0 1 1 6.5 14 5.5 5.5 0 0 1 12 8.5zm0 2A3.5 3.5 0 1 0 15.5 14 3.5 3.5 0 0 0 12 10.5zM18 6.8a1.2 1.2 0 1 1-1.2-1.2A1.2 1.2 0 0 1 18 6.8z"/></svg>
+          </a>
+          <a class="social__btn" data-social="tiktok" href="#" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" class="social__icon"><path d="M16.6 2h-2.7v12.1a3.3 3.3 0 1 1-2.3-3.1V8.2a6 6 0 1 0 4.6 5.8V7.6c1.2 1.2 2.8 2 4.6 2V7a4.8 4.8 0 0 1-4.2-5z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-          <nav class="nav">
-            <a data-nav href="index.html" data-i18n="nav_home">Головна</a>
-            <a data-nav href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-            <a data-nav href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-            <a data-nav href="about.html" data-i18n="nav_about">Про нас</a>
-            <a data-nav href="contacts.html" data-i18n="nav_contacts">Контакти</a>
-          </nav>
+  <main class="section">
+    <div class="container">
+      <div class="card card__pad">
+        <h1 style="margin:0 0 10px" data-i18n="checkout_title">Оформлення замовлення</h1>
+        <div class="muted"><span data-i18n="total">Разом</span>: <b id="checkoutTotal">0 грн</b></div>
 
-          <div class="right">
-            <div class="lang">
-              <button type="button" data-lang="RU">RU</button>
-              <button type="button" data-lang="UKR">UKR</button>
-              <button type="button" data-lang="EN">EN</button>
+        <div style="height:16px"></div>
+
+        <div class="formGrid">
+          <div>
+            <div class="muted" style="margin-bottom:6px" data-i18n="fio">ПІБ</div>
+            <input class="input" id="fioInput" placeholder="Іван Іванов" />
+          </div>
+          <div>
+            <div class="muted" style="margin-bottom:6px" data-i18n="phone">Телефон</div>
+            <input class="input" id="phoneInput" placeholder="+380..." />
+          </div>
+
+          <div>
+            <div class="muted" style="margin-bottom:6px" data-i18n="city">Місто</div>
+            <input class="input" id="cityInput" list="cityList" placeholder="Київ / Львів..." />
+            <datalist id="cityList"></datalist>
+          </div>
+
+          <div>
+            <div class="muted" style="margin-bottom:6px" data-i18n="delivery_type">Доставка</div>
+            <div class="radioRow">
+              <button class="radioBtn is-active" type="button" data-delivery="branch" data-i18n="np_branch">Відділення</button>
+              <button class="radioBtn" type="button" data-delivery="locker" data-i18n="np_locker">Поштомат</button>
+              <button class="radioBtn" type="button" data-delivery="courier" data-i18n="np_courier">Курʼєр</button>
             </div>
+          </div>
 
-            <a class="cartPill" href="cart.html">
-              <span data-cart-label data-i18n="cart">Кошик</span>
-              <span class="count" data-cart-count>0</span>
-            </a>
+          <div id="warehouseRow">
+            <div class="muted" style="margin-bottom:6px" data-i18n="warehouse">Відділення / Поштомат</div>
+            <input class="input" id="warehouseInput" list="whList" placeholder="№ / адреса..." />
+            <datalist id="whList"></datalist>
+          </div>
+
+          <div>
+            <div class="muted" style="margin-bottom:6px" data-i18n="comment">Коментар</div>
+            <input class="input" id="commentInput" placeholder="Наприклад: зателефонувати перед відправкою" />
           </div>
         </div>
-      </div>
-    </header>
 
-    <main class="main">
-      <div class="container">
-        <h1 class="h1" data-i18n="checkout_title">ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</h1>
-        <p class="lead"><b data-i18n="total">Разом</b>: <span data-checkout-total>0 грн</span></p>
+        <div style="height:14px"></div>
+        <button class="btn btn--gold" id="sendOrder" type="button" data-i18n="send_order">Надіслати замовлення</button>
 
-        <div class="card">
-          <form data-checkout-form>
-            <div class="formGrid">
-              <div class="field">
-                <label data-i18n="fio">ПІБ</label>
-                <input class="input" data-fio placeholder="Іван Іванов" required />
-              </div>
-
-              <div class="field">
-                <label data-i18n="phone">Телефон</label>
-                <input class="input" data-phone placeholder="+380..." required />
-              </div>
-
-              <div class="field">
-                <label data-i18n="city">Місто</label>
-                <input class="input" data-city list="cityList" placeholder="Київ" required />
-                <datalist id="cityList" data-city-list></datalist>
-                <div class="hint" data-i18n="np_hint">Підказки підтягуються з Нової Пошти.</div>
-              </div>
-
-              <div class="field">
-                <label data-i18n="delivery">Доставка</label>
-                <div class="deliveryBtns">
-                  <button type="button" data-delivery="branch" class="active" data-i18n="branch">Відділення</button>
-                  <button type="button" data-delivery="postomat" data-i18n="postomat">Поштомат</button>
-                  <button type="button" data-delivery="courier" data-i18n="courier">Курʼєр</button>
-                </div>
-              </div>
-
-              <div class="field" data-block="warehouse">
-                <label data-i18n="warehouse">Відділення / Поштомат</label>
-                <select class="input" data-warehouse required>
-                  <option value="">...</option>
-                </select>
-              </div>
-
-              <div class="field hidden" data-block="address">
-                <label data-i18n="address">Адреса (для курʼєра)</label>
-                <input class="input" data-address placeholder="Вулиця, будинок, квартира" />
-              </div>
-
-              <div class="field">
-                <label data-i18n="pay">Оплата</label>
-                <select class="input" data-pay>
-                  <option data-i18n="pay_cod">Накладений платіж (при отриманні)</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label data-i18n="comment">Коментар</label>
-                <textarea class="textarea" data-comment placeholder="Наприклад: зателефонувати перед відправкою"></textarea>
-              </div>
-            </div>
-
-            <div class="bottomActions">
-              <a class="btn" href="cart.html" data-i18n="to_cart">Перейти в кошик</a>
-              <button class="btn primary" type="submit" data-i18n="send">Відправити замовлення</button>
-            </div>
-
-            <div class="smallNote">
-              GitHub Pages — статичний сайт. Реальна “авто-відправка” email без сервера неможлива, тому використовується mailto.
-            </div>
-          </form>
+        <div class="footerLine">
+          ⚠️ Якщо ти хочеш реальну відправку через Нову Пошту без “mailto” — треба сервер/бот (бо GitHub Pages не може відправляти email сам).
         </div>
       </div>
-    </main>
 
-    <footer class="footer">
-      <div class="container">BLACKWOOD • CHARCOAL © 2026</div>
-    </footer>
-
-  </div>
-
-  <script src="assets/app.js"></script>
+      <div class="footerLine">BLACKWOOD • CHARCOAL © 2026</div>
+    </div>
+  </main>
 </body>
 </html>
