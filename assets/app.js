@@ -2,9 +2,23 @@ const CART_KEY = "bw_cart_v1";
 const LANG_KEY = "bw_lang_v1";
 
 const PRODUCTS = [
-  { id:"core-3",  nameKey:"p_core_3",  weightKey:"w_3",  price:399, img:"assets/img/products/core-3kg.png" },
-  { id:"core-5",  nameKey:"p_core_5",  weightKey:"w_5",  price:499, img:"assets/img/products/core-5kg.png" },
-  { id:"core-10", nameKey:"p_core_10", weightKey:"w_10", price:599, img:"assets/img/products/core-10kg.png" },
+  // Уголь
+  { id:"core-3",  nameKey:"p_core_3",  weightKey:"w_3",  price:399, img:"core-3kg.png", cat:"charcoal" },
+  { id:"core-5",  nameKey:"p_core_5",  weightKey:"w_5",  price:499, img:"core-5kg.png", cat:"charcoal" },
+  { id:"core-10", nameKey:"p_core_10", weightKey:"w_10", price:599, img:"core-10kg.png", cat:"charcoal" },
+
+  // Аксессуары/товары (jpg)
+  { id:"grid-double",   nameKey:"p_grid_double",   weightKey:"", price:999, img:"grid-double.jpg", cat:"grids" },
+  { id:"grid-sausage",  nameKey:"p_grid_sausage",  weightKey:"", price:799, img:"grid-sausage.jpg", cat:"grids" },
+  { id:"grid-flat",     nameKey:"p_grid_flat",     weightKey:"", price:699, img:"grid-flat.jpg", cat:"grids" },
+  { id:"starter",       nameKey:"p_starter",       weightKey:"", price:299, img:"starter.jpg", cat:"tools" },
+  { id:"royal-ignition",nameKey:"p_royal_ignition",weightKey:"", price:349, img:"royal-ignition.jpg", cat:"tools" },
+  { id:"thermometer",   nameKey:"p_thermometer",   weightKey:"", price:499, img:"thermometer.jpg", cat:"tools" },
+  { id:"apron",         nameKey:"p_apron",         weightKey:"", price:899, img:"apron.jpg", cat:"merch" },
+  { id:"gloves",        nameKey:"p_gloves",        weightKey:"", price:599, img:"gloves.jpg", cat:"merch" },
+  { id:"bloweR",        nameKey:"p_blower",        weightKey:"", price:259, img:"blower.jpg", cat:"tools" },
+  { id:"grill-set",     nameKey:"p_grill_set",     weightKey:"", price:1999, img:"grill-set.jpg", cat:"sets" },
+  { id:"weekend-box",   nameKey:"p_weekend_box",   weightKey:"", price:2499, img:"weekend-box.jpg", cat:"sets" },
 ];
 
 function loadCart(){
@@ -41,14 +55,12 @@ function setActiveNav(){
 function initLangSwitch(){
   const lang = getLang();
 
-  // выставить активную кнопку
   const btn = document.querySelector(`.lang-switch button[data-lang="${lang}"]`);
   if (btn){
     document.querySelectorAll(".lang-switch button").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
   }
 
-  // клики
   document.querySelectorAll(".lang-switch button").forEach(b => {
     b.addEventListener("click", () => {
       const l = b.getAttribute("data-lang");
@@ -56,7 +68,8 @@ function initLangSwitch(){
       document.querySelectorAll(".lang-switch button").forEach(x => x.classList.remove("active"));
       b.classList.add("active");
       if (window.applyI18n) window.applyI18n(l);
-      renderCart(); // чтобы корзина перевелась/перерисовалась
+      renderCatalog();
+      renderCart();
     });
   });
 
@@ -71,26 +84,31 @@ function findProduct(id){
   return PRODUCTS.find(p => p.id === id);
 }
 
-/* =========================
-   CATALOG RENDER
-   ========================= */
+/* ======== Каталог ======== */
 function renderCatalog(){
   const grid = document.getElementById("productsGrid");
   if (!grid) return;
 
+  const catFilter = document.getElementById("catFilter");
+  const activeCat = catFilter ? (catFilter.value || "all") : "all";
+
+  const list = PRODUCTS.filter(p => activeCat === "all" ? true : p.cat === activeCat);
+
   grid.innerHTML = "";
 
-  PRODUCTS.forEach(p => {
+  list.forEach(p => {
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
       <div class="img"><img src="${p.img}" alt=""></div>
       <div class="body">
-        <div class="name" data-i18n="${p.nameKey}">CORE</div>
+        <div class="name" data-i18n="${p.nameKey}">ITEM</div>
+
         <div class="meta">
-          <span data-i18n="${p.weightKey}">kg</span>
+          ${p.weightKey ? `<span data-i18n="${p.weightKey}">...</span>` : `<span></span>`}
           <span class="price">${formatUAH(p.price)}</span>
         </div>
+
         <div class="row">
           <div class="qty">
             <button type="button" data-act="minus">-</button>
@@ -129,9 +147,7 @@ function renderCatalog(){
   if (window.applyI18n) window.applyI18n(getLang());
 }
 
-/* =========================
-   CART RENDER
-   ========================= */
+/* ======== Корзина ======== */
 function renderCart(){
   const wrap = document.getElementById("cartWrap");
   if (!wrap) return;
@@ -169,8 +185,8 @@ function renderCart(){
         </div>
 
         <div style="flex:1">
-          <div style="font-weight:900" data-i18n="${p.nameKey}">CORE</div>
-          <div style="color:rgba(255,255,255,.75); font-size:13px" data-i18n="${p.weightKey}">kg</div>
+          <div style="font-weight:900" data-i18n="${p.nameKey}">ITEM</div>
+          ${p.weightKey ? `<div style="color:rgba(255,255,255,.75); font-size:13px" data-i18n="${p.weightKey}">...</div>` : ``}
           <div style="margin-top:6px; color:var(--gold); font-weight:900">${formatUAH(p.price)}</div>
         </div>
 
@@ -241,13 +257,17 @@ function renderCart(){
   updateCartCount();
 }
 
-/* =========================
-   BOOT
-   ========================= */
+/* ======== BOOT ======== */
 document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
   setActiveNav();
   initLangSwitch();
+
+  const catFilter = document.getElementById("catFilter");
+  if (catFilter){
+    catFilter.addEventListener("change", () => renderCatalog());
+  }
+
   renderCatalog();
   renderCart();
 });
