@@ -1,67 +1,63 @@
-window.I18N = {
+// Default language: UKR
+const DEFAULT_LANG = "uk";
+
+const I18N = {
   uk: {
     nav_home: "Головна",
     nav_catalog: "Каталог",
     nav_shipping: "Доставка",
     nav_about: "Про нас",
     nav_contacts: "Контакти",
+
     cart: "Кошик",
+    open_catalog: "Відкрити каталог",
+    shipping_pay: "Доставка та оплата",
+    go_cart: "Кошик",
 
-    hero_badge: "Преміум вугілля для гриля",
-    hero_title: "PREMIUM HARDWOOD\nCHARCOAL",
-    hero_text: "Довге горіння, мінімум попелу, чистий жар.\nІдеально для BBQ та гриля.",
-    hero_catalog: "Відкрити каталог",
-    hero_shipping: "Доставка і оплата",
-    hero_cart: "Кошик",
+    hero_kicker: "Преміум вугілля для гриля",
+    hero_title: "PREMIUM\nHARDWOOD\nCHARCOAL",
+    hero_sub: "Тривале горіння, мінімум попелу, чистий жар. Ідеально для BBQ та гриля.",
 
-    catalog_title: "Каталог товарів",
-    catalog_sub: "Оберіть категорію та додайте в кошик.",
-    add_to_cart: "В кошик",
+    page_catalog_title: "Товари",
+    page_catalog_sub: "Обери категорію та додай у кошик.",
+    chip_all: "Усе",
+    chip_charcoal: "Вугілля",
+    chip_accessories: "Аксесуари",
 
-    cat_all: "Усі",
-    cat_charcoal: "Вугілля",
-    cat_grids: "Решітки",
-    cat_tools: "Розпал / Інструменти",
-    cat_merch: "Аксесуари",
-    cat_sets: "Набори",
+    sort_label: "Сортування",
+    sort_popular: "Популярні",
+    sort_price_asc: "Ціна ↑",
+    sort_price_desc: "Ціна ↓",
 
-    p_core_3: "CORE • 3 KG",
-    p_core_5: "CORE • 5 KG",
-    p_core_10:"CORE • 10 KG",
-    w_3: "3 kg",
-    w_5: "5 kg",
-    w_10:"10 kg",
+    add_to_cart: "У КОШИК",
+    cart_title: "Кошик",
+    cart_sub: "Сума товарів у кошику",
+    empty_cart: "Кошик порожній.",
+    checkout: "Оформити",
+    continue_shopping: "До каталогу",
 
-    p_grid_double: "Решітка Double",
-    p_grid_sausage:"Решітка для ковбасок",
-    p_grid_flat:   "Решітка Flat",
-    p_starter:     "Стартер (розпал)",
-    p_royal_ignition:"Royal Ignition",
-    p_thermometer: "Термометр",
-    p_apron:       "Фартух BLACKWOOD",
-    p_gloves:      "Рукавиці BLACKWOOD",
-    p_blower:      "Роздув (blower)",
-    p_grill_set:   "Набір для гриля",
-    p_weekend_box: "Weekend Box",
+    checkout_title: "Оформлення",
+    name: "Ім'я",
+    phone: "Телефон",
+    city: "Місто",
+    comment: "Коментар",
+    place_order: "Підтвердити замовлення",
+
+    success_title: "Дякуємо!",
+    success_sub: "Замовлення прийняте. Ми звʼяжемось з вами найближчим часом.",
 
     shipping_title: "Доставка та оплата",
-    shipping_text: "Доставляємо по Україні Новою Поштою. Після оформлення замовлення ми зв’яжемося з вами для підтвердження та відправки.",
+    shipping_text:
+      "• Доставка: Нова Пошта / самовивіз\n• Оплата: на картку / накладений платіж\n• Термін: 1–3 дні по Україні",
 
     about_title: "Про нас",
-    about_text: "BLACKWOOD — преміальний деревний вуголь для гриля та BBQ. Ми робимо акцент на чистому жарі, стабільному горінні та мінімумі попелу.",
+    about_text:
+      "BLACKWOOD — преміальні продукти для BBQ: вугілля, стартери та аксесуари. Робимо акцент на якості, чистому жарі та зручності.",
 
     contacts_title: "Контакти",
-    contacts_text: "Напишіть нам у соцмережі або на email — відповімо швидко.",
+    contacts_text: "Напиши нам у соцмережі:",
 
-    cart_title: "Кошик",
-    cart_empty: "Кошик порожній",
-    cart_empty_hint: "Додайте товари з каталогу.",
-    go_catalog: "Відкрити каталог",
-    remove: "Видалити",
-    total: "Разом",
-    total_hint: "Сума товарів у кошику",
-    checkout: "Оформити",
-    clear_cart: "Очистити",
+    currency: "грн",
   },
 
   ru: {
@@ -70,63 +66,56 @@ window.I18N = {
     nav_shipping: "Доставка",
     nav_about: "О нас",
     nav_contacts: "Контакты",
+
     cart: "Корзина",
+    open_catalog: "Открыть каталог",
+    shipping_pay: "Доставка и оплата",
+    go_cart: "Корзина",
 
-    hero_badge: "Премиум уголь для гриля",
-    hero_title: "PREMIUM HARDWOOD\nCHARCOAL",
-    hero_text: "Долгое горение, минимум пепла, чистый жар.\nИдеально для BBQ и гриля.",
-    hero_catalog: "Открыть каталог",
-    hero_shipping: "Доставка и оплата",
-    hero_cart: "Корзина",
+    hero_kicker: "Премиум уголь для гриля",
+    hero_title: "PREMIUM\nHARDWOOD\nCHARCOAL",
+    hero_sub: "Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.",
 
-    catalog_title: "Каталог товаров",
-    catalog_sub: "Выберите категорию и добавьте в корзину.",
-    add_to_cart: "В корзину",
+    page_catalog_title: "Товары",
+    page_catalog_sub: "Выбери категорию и добавь в корзину.",
+    chip_all: "Все",
+    chip_charcoal: "Уголь",
+    chip_accessories: "Аксессуары",
 
-    cat_all: "Все",
-    cat_charcoal: "Уголь",
-    cat_grids: "Решетки",
-    cat_tools: "Розжиг / Инструменты",
-    cat_merch: "Аксессуары",
-    cat_sets: "Наборы",
+    sort_label: "Сортировка",
+    sort_popular: "Популярные",
+    sort_price_asc: "Цена ↑",
+    sort_price_desc: "Цена ↓",
 
-    p_core_3: "CORE • 3 KG",
-    p_core_5: "CORE • 5 KG",
-    p_core_10:"CORE • 10 KG",
-    w_3: "3 kg",
-    w_5: "5 kg",
-    w_10:"10 kg",
+    add_to_cart: "В КОРЗИНУ",
+    cart_title: "Корзина",
+    cart_sub: "Сумма товаров в корзине",
+    empty_cart: "Корзина пустая.",
+    checkout: "Оформить",
+    continue_shopping: "В каталог",
 
-    p_grid_double: "Решетка Double",
-    p_grid_sausage:"Решетка для сосисок",
-    p_grid_flat:   "Решетка Flat",
-    p_starter:     "Стартер (розжиг)",
-    p_royal_ignition:"Royal Ignition",
-    p_thermometer: "Термометр",
-    p_apron:       "Фартук BLACKWOOD",
-    p_gloves:      "Перчатки BLACKWOOD",
-    p_blower:      "Раздув (blower)",
-    p_grill_set:   "Набор для гриля",
-    p_weekend_box: "Weekend Box",
+    checkout_title: "Оформление",
+    name: "Имя",
+    phone: "Телефон",
+    city: "Город",
+    comment: "Комментарий",
+    place_order: "Подтвердить заказ",
+
+    success_title: "Спасибо!",
+    success_sub: "Заказ принят. Мы свяжемся с вами в ближайшее время.",
 
     shipping_title: "Доставка и оплата",
-    shipping_text: "Доставляем по Украине Новой Почтой. После оформления заказа мы свяжемся для подтверждения и отправки.",
+    shipping_text:
+      "• Доставка: Новая Почта / самовывоз\n• Оплата: на карту / наложенный платеж\n• Срок: 1–3 дня по Украине",
 
     about_title: "О нас",
-    about_text: "BLACKWOOD — премиальный древесный уголь для гриля и BBQ. Мы делаем упор на чистый жар, стабильное горение и минимум пепла.",
+    about_text:
+      "BLACKWOOD — премиальные продукты для BBQ: уголь, стартеры и аксессуары. Ставим акцент на качестве, чистом жаре и удобстве.",
 
     contacts_title: "Контакты",
-    contacts_text: "Напишите нам в соцсети или на email — ответим быстро.",
+    contacts_text: "Напиши нам в соцсети:",
 
-    cart_title: "Корзина",
-    cart_empty: "Корзина пуста",
-    cart_empty_hint: "Добавьте товары из каталога.",
-    go_catalog: "Открыть каталог",
-    remove: "Удалить",
-    total: "Итого",
-    total_hint: "Сумма товаров в корзине",
-    checkout: "Оформить",
-    clear_cart: "Очистить",
+    currency: "грн",
   },
 
   en: {
@@ -135,71 +124,98 @@ window.I18N = {
     nav_shipping: "Shipping",
     nav_about: "About",
     nav_contacts: "Contacts",
+
     cart: "Cart",
+    open_catalog: "Open catalog",
+    shipping_pay: "Shipping & payment",
+    go_cart: "Cart",
 
-    hero_badge: "Premium charcoal for grill",
-    hero_title: "PREMIUM HARDWOOD\nCHARCOAL",
-    hero_text: "Long burn, low ash, clean heat.\nPerfect for BBQ & grill.",
-    hero_catalog: "Open catalog",
-    hero_shipping: "Shipping & payment",
-    hero_cart: "Cart",
+    hero_kicker: "Premium charcoal for grill",
+    hero_title: "PREMIUM\nHARDWOOD\nCHARCOAL",
+    hero_sub: "Long burn, low ash, clean heat. Perfect for BBQ & grill.",
 
-    catalog_title: "Product catalog",
-    catalog_sub: "Pick a category and add to cart.",
-    add_to_cart: "Add to cart",
+    page_catalog_title: "Products",
+    page_catalog_sub: "Choose a category and add to cart.",
+    chip_all: "All",
+    chip_charcoal: "Charcoal",
+    chip_accessories: "Accessories",
 
-    cat_all: "All",
-    cat_charcoal: "Charcoal",
-    cat_grids: "Grids",
-    cat_tools: "Ignition / Tools",
-    cat_merch: "Accessories",
-    cat_sets: "Sets",
+    sort_label: "Sort",
+    sort_popular: "Popular",
+    sort_price_asc: "Price ↑",
+    sort_price_desc: "Price ↓",
 
-    p_core_3: "CORE • 3 KG",
-    p_core_5: "CORE • 5 KG",
-    p_core_10:"CORE • 10 KG",
-    w_3: "3 kg",
-    w_5: "5 kg",
-    w_10:"10 kg",
+    add_to_cart: "ADD",
+    cart_title: "Cart",
+    cart_sub: "Total in cart",
+    empty_cart: "Your cart is empty.",
+    checkout: "Checkout",
+    continue_shopping: "To catalog",
 
-    p_grid_double: "Double Grid",
-    p_grid_sausage:"Sausage Grid",
-    p_grid_flat:   "Flat Grid",
-    p_starter:     "Starter",
-    p_royal_ignition:"Royal Ignition",
-    p_thermometer: "Thermometer",
-    p_apron:       "BLACKWOOD Apron",
-    p_gloves:      "BLACKWOOD Gloves",
-    p_blower:      "Blower",
-    p_grill_set:   "Grill Set",
-    p_weekend_box: "Weekend Box",
+    checkout_title: "Checkout",
+    name: "Name",
+    phone: "Phone",
+    city: "City",
+    comment: "Comment",
+    place_order: "Place order",
+
+    success_title: "Thank you!",
+    success_sub: "Order received. We will contact you shortly.",
 
     shipping_title: "Shipping & payment",
-    shipping_text: "We ship across Ukraine via Nova Poshta. After checkout we’ll contact you to confirm and dispatch.",
+    shipping_text:
+      "• Shipping: Nova Poshta / pickup\n• Payment: card / cash on delivery\n• Time: 1–3 days in Ukraine",
 
     about_title: "About",
-    about_text: "BLACKWOOD is premium hardwood charcoal for grill & BBQ. We focus on clean heat, stable burn and low ash.",
+    about_text:
+      "BLACKWOOD makes premium BBQ products: charcoal, starters and accessories. We focus on quality, clean heat and convenience.",
 
     contacts_title: "Contacts",
-    contacts_text: "Message us via social media or email — we reply fast.",
+    contacts_text: "Message us in socials:",
 
-    cart_title: "Cart",
-    cart_empty: "Your cart is empty",
-    cart_empty_hint: "Add products from the catalog.",
-    go_catalog: "Open catalog",
-    remove: "Remove",
-    total: "Total",
-    total_hint: "Items total",
-    checkout: "Checkout",
-    clear_cart: "Clear",
+    currency: "UAH",
   }
 };
 
-window.applyI18n = function(lang){
-  const dict = window.I18N?.[lang] || window.I18N.uk;
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    if (dict[key]) el.textContent = dict[key];
+function getLang(){
+  const saved = localStorage.getItem("lang");
+  if (saved && I18N[saved]) return saved;
+  return DEFAULT_LANG;
+}
+
+function setLang(lang){
+  if (!I18N[lang]) lang = DEFAULT_LANG;
+  localStorage.setItem("lang", lang);
+
+  document.documentElement.lang = lang === "uk" ? "uk" : (lang === "ru" ? "ru" : "en");
+
+  // Buttons active
+  document.querySelectorAll("[data-lang]").forEach(btn=>{
+    btn.classList.toggle("active", btn.dataset.lang === lang);
   });
-  document.documentElement.lang = lang;
-};
+
+  // Texts
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.dataset.i18n;
+    const val = I18N[lang][key];
+    if (typeof val === "string") el.textContent = val;
+  });
+
+  // Multiline hero title support
+  document.querySelectorAll("[data-i18n-multiline]").forEach(el=>{
+    const key = el.dataset.i18nMultiline;
+    const val = I18N[lang][key];
+    if (typeof val === "string") {
+      el.innerHTML = val.replace(/\n/g, "<br>");
+    }
+  });
+
+  // Render pages that depend on language
+  if (window.App && typeof window.App.onLangChange === "function") {
+    window.App.onLangChange(lang);
+  }
+}
+
+window.I18N = I18N;
+window.getLang = getLang;
+window.setLang = setLang;
