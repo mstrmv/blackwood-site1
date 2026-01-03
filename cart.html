@@ -1,67 +1,75 @@
 <!doctype html>
-<html lang="ru">
+<html lang="uk">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Корзина • BLACKWOOD</title>
+  <title>Кошик • BLACKWOOD</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
-<body>
-  <div class="page has-catalog-bg">
-    <header class="header">
-      <div class="container headerInner">
-        <a class="brand" href="index.html">
-          <span>BLACKWOOD</span><span class="dot"></span><span><b>CHARCOAL</b></span>
-        </a>
+<body class="page bg-inner">
+  <div class="overlay">
 
-        <nav class="nav">
-          <a href="index.html">Главная</a>
-          <a href="catalog.html">Каталог</a>
-          <a href="shipping.html">Доставка</a>
-          <a href="about.html">О нас</a>
-          <a href="contacts.html">Контакты</a>
-        </nav>
-
-        <div class="rightBar">
-          <a class="cartPill" href="cart.html">
-            Корзина <span class="count" data-cart-count>0</span>
+    <header class="topbar">
+      <div class="container">
+        <div class="topbar-inner">
+          <a class="brand" href="index.html">
+            BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
           </a>
-          <button class="burger" type="button" data-burger>Меню</button>
-        </div>
-      </div>
 
-      <div class="container mobileMenu" data-mobilemenu>
-        <a href="index.html">Главная</a>
-        <a href="catalog.html">Каталог</a>
-        <a href="shipping.html">Доставка</a>
-        <a href="about.html">О нас</a>
-        <a href="contacts.html">Контакты</a>
-        <a href="cart.html">Корзина</a>
+          <nav class="nav">
+            <a data-nav href="index.html" data-i18n="nav_home">Головна</a>
+            <a data-nav href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+            <a data-nav href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+            <a data-nav href="about.html" data-i18n="nav_about">Про нас</a>
+            <a data-nav href="contacts.html" data-i18n="nav_contacts">Контакти</a>
+          </nav>
+
+          <div class="right">
+            <div class="lang">
+              <button type="button" data-lang="RU">RU</button>
+              <button type="button" data-lang="UKR">UKR</button>
+              <button type="button" data-lang="EN">EN</button>
+            </div>
+
+            <a class="cartPill" href="cart.html">
+              <span data-cart-label data-i18n="cart">Кошик</span>
+              <span class="count" data-cart-count>0</span>
+            </a>
+          </div>
+        </div>
       </div>
     </header>
 
-    <main class="container section">
-      <h1 class="h1">Корзина</h1>
-      <p class="p">Проверьте количество и переходите к оформлению.</p>
+    <main class="main">
+      <div class="container">
+        <h1 class="h1" data-i18n="cart_title">Кошик</h1>
 
-      <div data-cart-empty style="padding:16px; margin-top:16px; display:none; border:1px solid rgba(255,255,255,.10); border-radius:18px; background:rgba(0,0,0,.28)">
-        Корзина пуста. <a class="btn primary" href="catalog.html" style="margin-top:10px">Открыть каталог</a>
+        <div class="card hidden" data-cart-empty>
+          <div data-i18n="cart_empty">Кошик порожній.</div>
+          <div class="bottomActions" style="margin-top:12px">
+            <a class="btn primary" href="catalog.html" data-i18n="back_catalog">Назад до каталогу</a>
+          </div>
+        </div>
+
+        <div class="cartList" data-cart-list></div>
+
+        <div class="totalBar">
+          <div>
+            <div style="color:rgba(255,255,255,.75); font-size:12px" data-i18n="total">Разом</div>
+            <div class="sum" data-cart-sum>0 грн</div>
+          </div>
+          <div class="bottomActions" style="margin-top:0">
+            <a class="btn" href="catalog.html" data-i18n="back_catalog">Назад до каталогу</a>
+            <a class="btn primary" href="checkout.html" data-i18n="checkout">Оформити замовлення</a>
+          </div>
+        </div>
       </div>
-
-      <div class="cartList" data-cart-list></div>
-
-      <div class="summaryRow">
-        <div style="color:rgba(255,255,255,.78); font-weight:800">Итого:</div>
-        <div class="total" data-cart-total>0 грн</div>
-      </div>
-
-      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px">
-        <a class="btn secondary" href="catalog.html">Назад в каталог</a>
-        <a class="btn primary" href="checkout.html">Оформить заказ</a>
-      </div>
-
-      <div class="footer">BLACKWOOD • CHARCOAL © 2026</div>
     </main>
+
+    <footer class="footer">
+      <div class="container">BLACKWOOD • CHARCOAL © 2026</div>
+    </footer>
+
   </div>
 
   <script src="assets/app.js"></script>
