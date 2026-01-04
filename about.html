@@ -4,11 +4,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BLACKWOOD • CHARCOAL — Про нас</title>
+  <title>BLACKWOOD • Про нас</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <div class="bg"></div>
+  <div class="bg bg--catalog"></div>
   <div class="grain"></div>
 
   <header class="topbar">
@@ -24,7 +24,10 @@
           <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
           <a href="about.html" data-i18n="nav_about">Про нас</a>
           <a href="contacts.html" data-i18n="nav_contacts">Контакти</a>
-          <a href="cart.html" data-i18n="nav_cart">Кошик <span data-cart-count style="display:none;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid rgba(200,164,90,.25);background:rgba(200,164,90,.12);font-weight:900;font-size:12px;">0</span></a>
+          <a href="cart.html" data-i18n="nav_cart">
+            Кошик
+            <span data-cart-count style="display:none;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid rgba(200,164,90,.25);background:rgba(200,164,90,.12);font-weight:900;font-size:12px;">0</span>
+          </a>
         </nav>
 
         <div class="rightbar">
@@ -60,28 +63,17 @@
   </header>
 
   <main class="container">
-    <div class="card" style="padding:18px">
-      <div class="section-title" data-i18n="about_title">Про нас</div>
-      <p class="p" data-i18n="about_text">BLACKWOOD • CHARCOAL — це якісне деревне вугілля...</p>
+    <section class="card" style="padding:18px">
+      <div class="kicker" data-i18n="section_about">Про нас</div>
+      <h1 class="h2" style="margin-top:10px" data-i18n="section_about">Про нас</h1>
+      <p class="p" data-i18n="about_text">BLACKWOOD • CHARCOAL — преміальне тверде деревне вугілля для BBQ та професійної кухні.</p>
 
-      <div class="hero-actions" style="margin-top:14px">
-        <a class="btn primary" href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-        <a class="btn" href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-      </div>
-    </div>
+      <div class="section-title">BLACKWOOD CORE</div>
+      <div class="notice">• Довге тепло • Низька зольність • Чисте горіння</div>
+    </section>
   </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="mini">BLACKWOOD • CHARCOAL</div>
-        <div class="mini">© <span id="y"></span></div>
-      </div>
-    </div>
-  </footer>
 
   <script src="assets/i18n.js"></script>
   <script src="assets/app.js"></script>
-  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 </html>
