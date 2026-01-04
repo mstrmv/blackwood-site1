@@ -2,104 +2,182 @@
 (() => {
   const CART_KEY = "bw_cart_v2";
 
-  const money = (n) =>
-    new Intl.NumberFormat("uk-UA", { style: "currency", currency: "UAH", maximumFractionDigits: 0 }).format(n);
+  const PRODUCTS = [
+    // CORE (PNG) — твої реальні файли
+    {
+      id: "core-3",
+      brand: "CORE",
+      category: "core",
+      weight: "3 kg",
+      price: 299,
+      img: "img/core-3kg.png",
+      name: { uk: "BLACKWOOD CORE 3 кг", ru: "BLACKWOOD CORE 3 кг", en: "BLACKWOOD CORE 3 kg" },
+    },
+    {
+      id: "core-5",
+      brand: "CORE",
+      category: "core",
+      weight: "5 kg",
+      price: 459,
+      img: "img/core-5kg.png",
+      name: { uk: "BLACKWOOD CORE 5 кг", ru: "BLACKWOOD CORE 5 кг", en: "BLACKWOOD CORE 5 kg" },
+    },
+    {
+      id: "core-10",
+      brand: "CORE",
+      category: "core",
+      weight: "10 kg",
+      price: 799,
+      img: "img/core-10kg.png",
+      name: { uk: "BLACKWOOD CORE 10 кг", ru: "BLACKWOOD CORE 10 кг", en: "BLACKWOOD CORE 10 kg" },
+    },
 
-  // IMPORTANT:
-  // CORE images are exact (png). Other products try multiple common filenames (jpg/png/webp).
-  // If a file exists in img/, it will be used automatically.
-  const imgCandidates = (id, explicit) => {
-    const base = id.toLowerCase();
-    const common = [
-      explicit,
-      `img/${base}.jpg`,
-      `img/${base}.jpeg`,
-      `img/${base}.png`,
-      `img/${base}.webp`,
-      `img/${base}-1.jpg`,
-      `img/${base}-1.png`,
-      `img/${base}_1.jpg`,
-      `img/${base}_1.png`,
-      `img/${base.replaceAll("-", "_")}.jpg`,
-      `img/${base.replaceAll("-", "_")}.png`,
-      `img/product-${base}.jpg`,
-      `img/product-${base}.png`,
-      `img/${base}.JPG`,
-      `img/${base}.PNG`,
-    ].filter(Boolean);
+    // YARD (пока у тебя нет файлов — добавь их в img/ как ниже)
+    {
+      id: "yard-3",
+      brand: "YARD",
+      category: "yard",
+      weight: "3 kg",
+      price: 269,
+      img: "img/yard-3kg.jpg",
+      name: { uk: "BLACKWOOD YARD 3 кг", ru: "BLACKWOOD YARD 3 кг", en: "BLACKWOOD YARD 3 kg" },
+    },
+    {
+      id: "yard-5",
+      brand: "YARD",
+      category: "yard",
+      weight: "5 kg",
+      price: 419,
+      img: "img/yard-5kg.jpg",
+      name: { uk: "BLACKWOOD YARD 5 кг", ru: "BLACKWOOD YARD 5 кг", en: "BLACKWOOD YARD 5 kg" },
+    },
+    {
+      id: "yard-10",
+      brand: "YARD",
+      category: "yard",
+      weight: "10 kg",
+      price: 739,
+      img: "img/yard-10kg.jpg",
+      name: { uk: "BLACKWOOD YARD 10 кг", ru: "BLACKWOOD YARD 10 кг", en: "BLACKWOOD YARD 10 kg" },
+    },
 
-    // Also try "yard-3kg" style from id split
-    const alt = [];
-    if (base.startsWith("yard-")) {
-      const tail = base.replace("yard-", "");
-      alt.push(
-        `img/yard-${tail}.jpg`,
-        `img/yard-${tail}.png`,
-        `img/yard-${tail}.jpeg`,
-        `img/yard-${tail}.webp`,
-        `img/yard_${tail}.jpg`,
-        `img/yard_${tail}.png`
-      );
-    }
-    if (base.startsWith("sets-")) {
-      const tail = base.replace("sets-", "");
-      alt.push(
-        `img/${tail}.jpg`,
-        `img/${tail}.png`,
-        `img/${tail}.jpeg`,
-        `img/${tail}.webp`,
-        `img/sets-${tail}.jpg`,
-        `img/sets-${tail}.png`
-      );
-    }
-    return [...new Set([...common, ...alt])];
-  };
+    // СЕТКИ / СЕТЫ / АКСЕССУАРЫ — твои реальные JPG
+    {
+      id: "acc-gloves",
+      brand: "SET",
+      category: "sets",
+      weight: "—",
+      price: 249,
+      img: "img/gloves.jpg",
+      name: { uk: "Рукавички для гриля", ru: "Перчатки для гриля", en: "Grill gloves" },
+    },
+    {
+      id: "acc-apron",
+      brand: "SET",
+      category: "sets",
+      weight: "—",
+      price: 299,
+      img: "img/apron.jpg",
+      name: { uk: "Фартух для гриля", ru: "Фартук для гриля", en: "BBQ apron" },
+    },
+    {
+      id: "acc-blower",
+      brand: "SET",
+      category: "sets",
+      weight: "—",
+      price: 149,
+      img: "img/blower.jpg",
+      name: { uk: "Віяло для роздуву", ru: "Опахало для раздува", en: "Charcoal blower" },
+    },
+    {
+      id: "acc-thermometer",
+      brand: "SET",
+      category: "sets",
+      weight: "—",
+      price: 349,
+      img: "img/thermometer.jpg",
+      name: { uk: "Термометр для гриля", ru: "Термометр для гриля", en: "BBQ thermometer" },
+    },
+    {
+      id: "acc-starter",
+      brand: "SET",
+      category: "sets",
+      weight: "—",
+      price: 199,
+      img: "img/starter.jpg",
+      name: { uk: "Стартер для розпалювання", ru: "Стартер для розжига", en: "Chimney starter" },
+    },
+    {
+      id: "acc-ignition",
+      brand: "SET",
+      category: "sets",
+      weight: "—",
+      price: 129,
+      img: "img/royal-ignition.jpg",
+      name: { uk: "Розпалювач", ru: "Розжиг", en: "Firestarter" },
+    },
+    {
+      id: "acc-grill-set",
+      brand: "SET",
+      category: "sets",
+      weight: "—",
+      price: 699,
+      img: "img/grill-set.jpg",
+      name: { uk: "Набір для гриля", ru: "Набор для гриля", en: "Grill tool set" },
+    },
+    {
+      id: "acc-weekend-box",
+      brand: "SET",
+      category: "sets",
+      weight: "—",
+      price: 999,
+      img: "img/weekend-box.jpg",
+      name: { uk: "Weekend Box (набір)", ru: "Weekend Box (набор)", en: "Weekend Box (kit)" },
+    },
+    {
+      id: "acc-grid-flat",
+      brand: "SET",
+      category: "sets",
+      weight: "—",
+      price: 499,
+      img: "img/grid-flat.jpg",
+      name: { uk: "Решітка для гриля (пласка)", ru: "Решетка для гриля (плоская)", en: "Grill grate (flat)" },
+    },
+    {
+      id: "acc-grid-double",
+      brand: "SET",
+      category: "sets",
+      weight: "—",
+      price: 549,
+      img: "img/grid-double.jpg",
+      name: { uk: "Решітка для гриля (подвійна)", ru: "Решетка для гриля (двойная)", en: "Grill grate (double)" },
+    },
+    {
+      id: "acc-grid-sausage",
+      brand: "SET",
+      category: "sets",
+      weight: "—",
+      price: 529,
+      img: "img/grid-sausage.jpg",
+      name: { uk: "Решітка для ковбасок", ru: "Решетка для сосисок", en: "Sausage grill grate" },
+    },
+
+    // 18-й товар (пока файла нет — добавь img/mesh-5.jpg или поменяй на свой файл)
+    {
+      id: "acc-mesh-5",
+      brand: "SET",
+      category: "sets",
+      weight: "—",
+      price: 299,
+      img: "img/mesh-5.jpg",
+      name: { uk: "Сітки для вугілля (5 шт)", ru: "Сетки для угля (5 шт)", en: "Charcoal mesh bags (5 pcs)" },
+    },
+  ];
 
   const FALLBACK_IMG = "img/core-3kg.png";
 
-  const PRODUCTS = [
-    // CORE (exact png)
-    { id: "core-3", brand: "CORE", category: "core", weight: "3 kg", price: 299, img: "img/core-3kg.png",
-      name: { uk: "BLACKWOOD CORE 3 кг", ru: "BLACKWOOD CORE 3 кг", en: "BLACKWOOD CORE 3 kg" } },
-    { id: "core-5", brand: "CORE", category: "core", weight: "5 kg", price: 459, img: "img/core-5kg.png",
-      name: { uk: "BLACKWOOD CORE 5 кг", ru: "BLACKWOOD CORE 5 кг", en: "BLACKWOOD CORE 5 kg" } },
-    { id: "core-10", brand: "CORE", category: "core", weight: "10 kg", price: 799, img: "img/core-10kg.png",
-      name: { uk: "BLACKWOOD CORE 10 кг", ru: "BLACKWOOD CORE 10 кг", en: "BLACKWOOD CORE 10 kg" } },
-
-    // YARD (tries yard-*.jpg/png automatically)
-    { id: "yard-3", brand: "YARD", category: "yard", weight: "3 kg", price: 269, img: null,
-      name: { uk: "BLACKWOOD YARD 3 кг", ru: "BLACKWOOD YARD 3 кг", en: "BLACKWOOD YARD 3 kg" } },
-    { id: "yard-5", brand: "YARD", category: "yard", weight: "5 kg", price: 419, img: null,
-      name: { uk: "BLACKWOOD YARD 5 кг", ru: "BLACKWOOD YARD 5 кг", en: "BLACKWOOD YARD 5 kg" } },
-    { id: "yard-10", brand: "YARD", category: "yard", weight: "10 kg", price: 739, img: null,
-      name: { uk: "BLACKWOOD YARD 10 кг", ru: "BLACKWOOD YARD 10 кг", en: "BLACKWOOD YARD 10 kg" } },
-
-    // Accessories / sets (tries unique filenames automatically)
-    { id: "sets-mesh-1", brand: "SET", category: "sets", weight: "—", price: 79, img: null,
-      name: { uk: "Сітка для вугілля (1 шт)", ru: "Сетка для угля (1 шт)", en: "Charcoal mesh bag (1 pc)" } },
-    { id: "sets-mesh-5", brand: "SET", category: "sets", weight: "—", price: 299, img: null,
-      name: { uk: "Сітки для вугілля (5 шт)", ru: "Сетки для угля (5 шт)", en: "Charcoal mesh bags (5 pcs)" } },
-    { id: "sets-starter", brand: "SET", category: "sets", weight: "—", price: 349, img: null,
-      name: { uk: "Стартовий набір для гриля", ru: "Стартовый набор для гриля", en: "Grill starter kit" } },
-    { id: "sets-firestarter", brand: "SET", category: "sets", weight: "—", price: 129, img: null,
-      name: { uk: "Розпалювач", ru: "Розжиг", en: "Firestarter" } },
-    { id: "sets-gloves", brand: "SET", category: "sets", weight: "—", price: 249, img: null,
-      name: { uk: "Рукавички для гриля", ru: "Перчатки для гриля", en: "Grill gloves" } },
-    { id: "sets-tongs", brand: "SET", category: "sets", weight: "—", price: 219, img: null,
-      name: { uk: "Щипці для гриля", ru: "Щипцы для гриля", en: "Grill tongs" } },
-    { id: "sets-brush", brand: "SET", category: "sets", weight: "—", price: 189, img: null,
-      name: { uk: "Щітка для решітки", ru: "Щетка для решетки", en: "Grill brush" } },
-    { id: "sets-grate", brand: "SET", category: "sets", weight: "—", price: 499, img: null,
-      name: { uk: "Решітка для гриля", ru: "Решетка для гриля", en: "Grill grate" } },
-    { id: "sets-container", brand: "SET", category: "sets", weight: "—", price: 159, img: null,
-      name: { uk: "Контейнер для зберігання", ru: "Контейнер для хранения", en: "Storage container" } },
-    { id: "sets-bbq-set", brand: "SET", category: "sets", weight: "—", price: 699, img: null,
-      name: { uk: "BBQ сет (аксесуари)", ru: "BBQ сет (аксессуары)", en: "BBQ set (accessories)" } },
-    { id: "sets-core-bundle", brand: "SET", category: "sets", weight: "—", price: 1099, img: null,
-      name: { uk: "CORE сет (3+5 кг)", ru: "CORE сет (3+5 кг)", en: "CORE bundle (3+5 kg)" } },
-    { id: "sets-yard-bundle", brand: "SET", category: "sets", weight: "—", price: 999, img: null,
-      name: { uk: "YARD сет (3+5 кг)", ru: "YARD сет (3+5 кг)", en: "YARD bundle (3+5 kg)" } },
-  ];
+  const money = (n) =>
+    new Intl.NumberFormat("uk-UA", { style: "currency", currency: "UAH", maximumFractionDigits: 0 }).format(n);
 
   function getLang() {
     return (window.BW_I18N && BW_I18N.getLang()) || "uk";
@@ -114,21 +192,24 @@
 
   function loadCart() {
     try {
-      const raw = localStorage.getItem(CART_KEY);
+      const raw = localStorage.getItem("bw_cart_v2");
       const obj = raw ? JSON.parse(raw) : {};
       return obj && typeof obj === "object" ? obj : {};
     } catch {
       return {};
     }
   }
+
   function saveCart(cart) {
-    localStorage.setItem(CART_KEY, JSON.stringify(cart || {}));
+    localStorage.setItem("bw_cart_v2", JSON.stringify(cart || {}));
     updateCartBadge();
     window.dispatchEvent(new CustomEvent("bw:cart"));
   }
+
   function cartCount(cart) {
     return Object.values(cart || {}).reduce((a, b) => a + (Number(b) || 0), 0);
   }
+
   function cartTotal(cart) {
     let sum = 0;
     for (const [id, qty] of Object.entries(cart || {})) {
@@ -138,6 +219,7 @@
     }
     return sum;
   }
+
   function updateCartBadge() {
     const cart = loadCart();
     const n = cartCount(cart);
@@ -150,9 +232,7 @@
     el.textContent = msg;
     el.style.display = "block";
     clearTimeout(el._t);
-    el._t = setTimeout(() => {
-      el.style.display = "none";
-    }, 1600);
+    el._t = setTimeout(() => (el.style.display = "none"), 1600);
   }
 
   function setActiveNav() {
@@ -172,21 +252,13 @@
       .replaceAll("'", "&#039;");
   }
 
-  function bindMultiSrc(imgEl, candidates) {
-    const list = (candidates || []).filter(Boolean);
-    let idx = 0;
-
-    const tryNext = () => {
-      if (idx >= list.length) {
-        imgEl.onerror = null;
-        imgEl.src = FALLBACK_IMG;
-        return;
-      }
-      imgEl.src = list[idx++];
-    };
-
-    imgEl.onerror = () => tryNext();
-    tryNext();
+  function applyImgFallback(root) {
+    (root || document).querySelectorAll("img[data-fallback='1']").forEach((img) => {
+      img.onerror = () => {
+        img.onerror = null;
+        img.src = FALLBACK_IMG;
+      };
+    });
   }
 
   function renderCatalog() {
@@ -240,13 +312,11 @@
       const pill = (p.brand || p.category || "").toUpperCase();
       const btnLabel = inCart ? t("in_cart") : t("add_to_cart");
 
-      const cands = imgCandidates(p.id, p.img);
-
       return `
         <article class="panel product" data-pid="${esc(p.id)}">
           <div class="thumb">
             <span class="pill">${esc(pill)}</span>
-            <img data-multisrc="${esc(cands.join("|"))}" alt="${esc(nameOf(p))}" loading="lazy">
+            <img src="${esc(p.img)}" data-fallback="1" alt="${esc(nameOf(p))}" loading="lazy">
           </div>
           <div class="body">
             <div class="title">${esc(nameOf(p))}</div>
@@ -262,14 +332,6 @@
       `;
     }
 
-    function applyImages() {
-      root.querySelectorAll("img[data-multisrc]").forEach((img) => {
-        const raw = img.getAttribute("data-multisrc") || "";
-        const list = raw.split("|").map((s) => s.trim()).filter(Boolean);
-        bindMultiSrc(img, [...list, FALLBACK_IMG]);
-      });
-    }
-
     function render() {
       const list = filtered();
       const empty = document.getElementById("catalogEmpty");
@@ -280,7 +342,7 @@
       }
       if (empty) empty.style.display = "none";
       root.innerHTML = list.map(card).join("");
-      applyImages();
+      applyImgFallback(root);
     }
 
     if (input) input.addEventListener("input", render);
@@ -327,13 +389,12 @@
     const checkoutBtn = document.getElementById("checkoutBtn");
 
     function row(p, qty) {
-      const cands = imgCandidates(p.id, p.img).concat([FALLBACK_IMG]);
       return `
         <tr>
           <td>
             <div style="display:flex; gap:12px; align-items:center;">
               <div style="width:70px; height:52px; border:1px solid var(--stroke); border-radius:12px; overflow:hidden; background:rgba(255,255,255,.03); display:grid; place-items:center;">
-                <img data-multisrc="${esc(cands.join("|"))}" alt="${esc(nameOf(p))}" style="width:100%; height:100%; object-fit:cover;">
+                <img src="${esc(p.img)}" data-fallback="1" alt="${esc(nameOf(p))}" style="width:100%; height:100%; object-fit:cover;">
               </div>
               <div>
                 <div style="font-weight:980; letter-spacing:.03em;">${esc(nameOf(p))}</div>
@@ -355,14 +416,6 @@
           </td>
         </tr>
       `;
-    }
-
-    function applyImages() {
-      tableBody.querySelectorAll("img[data-multisrc]").forEach((img) => {
-        const raw = img.getAttribute("data-multisrc") || "";
-        const list = raw.split("|").map((s) => s.trim()).filter(Boolean);
-        bindMultiSrc(img, list);
-      });
     }
 
     function render() {
@@ -392,7 +445,7 @@
 
       if (emptyEl) emptyEl.style.display = "none";
       tableBody.innerHTML = rows.join("");
-      applyImages();
+      applyImgFallback(tableBody);
 
       if (totalEl) totalEl.textContent = money(cartTotal(cart));
       if (checkoutBtn) checkoutBtn.removeAttribute("disabled");
@@ -471,7 +524,9 @@
         const qty = Number(cart[id]) || 0;
         const p = PRODUCTS.find((x) => x.id === id);
         if (!p || qty <= 0) continue;
-        items.push(`<div class="summary-row"><span>${esc(nameOf(p))} × ${qty}</span><strong>${money(p.price * qty)}</strong></div>`);
+        items.push(
+          `<div class="summary-row"><span>${esc(nameOf(p))} × ${qty}</span><strong>${money(p.price * qty)}</strong></div>`
+        );
       }
       if (listEl) listEl.innerHTML = items.join("");
       const hasItems = items.length > 0;
@@ -538,7 +593,9 @@
           .join("");
         detailsEl.innerHTML =
           items +
-          `<hr class="sep"><div class="summary-row"><span><strong>${esc(t("total"))}</strong></span><strong>${money(obj.payload.total || 0)}</strong></div>`;
+          `<hr class="sep"><div class="summary-row"><span><strong>${esc(t("total"))}</strong></span><strong>${money(
+            obj.payload.total || 0
+          )}</strong></div>`;
       }
     } catch {}
   }
