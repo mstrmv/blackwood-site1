@@ -5,11 +5,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n-title="nav_catalog">Каталог • BLACKWOOD CHARCOAL</title>
-  <link rel="stylesheet" href="assets/style.css" />
-  <script defer src="assets/i18n.js"></script>
-  <script defer src="assets/app.js"></script>
+  <link rel="stylesheet" href="assets/style.css?v=3" />
+  <script defer src="assets/i18n.js?v=3"></script>
+  <script defer src="assets/app.js?v=3"></script>
 </head>
-<body class="page has-bg" data-page-bg="img/catalog-bg.png">
+<body class="page has-bg" style="--page-bg: url('img/catalog-bg.png');">
   <div class="noise"></div>
 
   <header class="topbar">
@@ -69,11 +69,11 @@
           <div class="row">
             <input id="searchInput" class="input" type="search" data-i18n-placeholder="search_ph" placeholder="Пошук товару…" />
             <select id="sortSelect" class="select" aria-label="Sort">
-              <option value="popular">Popular</option>
-              <option value="price-asc">Price ↑</option>
-              <option value="price-desc">Price ↓</option>
-              <option value="name-asc">Name A→Z</option>
-              <option value="name-desc">Name Z→A</option>
+              <option value="popular" data-i18n="sort_popular">Популярне</option>
+              <option value="price-asc" data-i18n="sort_price_asc">Ціна ↑</option>
+              <option value="price-desc" data-i18n="sort_price_desc">Ціна ↓</option>
+              <option value="name-asc" data-i18n="sort_name_asc">Назва A→Z</option>
+              <option value="name-desc" data-i18n="sort_name_desc">Назва Z→A</option>
             </select>
           </div>
 
@@ -91,12 +91,6 @@
 
         <div class="card">
           <div id="catalogRoot" class="products"></div>
-        </div>
-
-        <div class="card pad">
-          <p class="note">
-            Якщо якісь JPG назви відрізняються — просто перейменуй файли у папці <b>img/</b> під ці назви, або змінюй назви у <b>assets/app.js</b> (поле <b>img</b>).
-          </p>
         </div>
       </section>
     </div>
