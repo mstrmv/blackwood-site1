@@ -266,4 +266,238 @@
           <td>
             <div class="qty" data-qty="${p.id}">
               <button type="button" data-dec="${p.id}">−</button>
-              <input type="text" value="${qty}" inputmode="numeric" data-q="${p.id}" a
+              <input type="text" value="${qty}" inputmode="numeric" data-q="${p.id}" aria-label="qty">
+              <button type="button" data-inc="${p.id}">+</button>
+            </div>
+          </td>
+          <td class="price">${sum}</td>
+          <td style="width:1%; white-space:nowrap;">
+            <button class="btn" style="padding:10px 12px; border-radius:12px;" type="button" data-del="${p.id}">✕</button>
+          </td>
+        </tr>
+      `;
+    }
+
+    function render(){
+      const cart = loadCart();
+      const ids = Object.keys(cart);
+      if (!ids.length){
+        tableBody.innerHTML = "";
+        if (emptyEl) emptyEl.style.display = "block";
+        if (totalEl) totalEl.textContent = money(0);
+        if (checkoutBtn) checkoutBtn.setAttribute("disabled", "true");
+        return;
+      }
+      if (emptyEl) emptyEl.style.display = "none";
+      const rows = [];
+      for (const id of ids){
+        const qty = Number(cart[id]) || 0;
+        const p = PRODUCTS.find(x => x.id === id);
+        if (!p || qty <= 0) continue;
+        rows.push(row(p, qty));
+      }
+      tableBody.innerHTML = rows.join("");
+      if (totalEl) totalEl.textContent = money(cartTotal(cart));
+      if (checkoutBtn) checkoutBtn.removeAttribute("disabled");
+    }
+
+    function setQty(id, qty){
+      const cart = loadCart();
+      const q = Math.max(0, Math.min(999, Number(qty) || 0));
+      if (q <= 0) delete cart[id];
+      else cart[id] = q;
+      saveCart(cart);
+      render();
+    }
+
+    tableBody.addEventListener("click", (e) => {
+      const inc = e.target.closest("[data-inc]");
+      const dec = e.target.closest("[data-dec]");
+      const del = e.target.closest("[data-del]");
+      if (inc){
+        const id = inc.getAttribute("data-inc");
+        const cart = loadCart();
+        setQty(id, (Number(cart[id]) || 0) + 1);
+      } else if (dec){
+        const id = dec.getAttribute("data-dec");
+        const cart = loadCart();
+        setQty(id, (Number(cart[id]) || 0) - 1);
+      } else if (del){
+        const id = del.getAttribute("data-del");
+        setQty(id, 0);
+      }
+    });
+
+    tableBody.addEventListener("input", (e) => {
+      const inp = e.target.closest("[data-q]");
+      if (!inp) return;
+      const id = inp.getAttribute("data-q");
+      const v = (inp.value || "").replace(/[^\d]/g, "");
+      inp.value = v;
+      setQty(id, Number(v || 0));
+    });
+
+    if (clearBtn){
+      clearBtn.addEventListener("click", () => {
+        saveCart({});
+        render();
+      });
+    }
+
+    if (checkoutBtn){
+      checkoutBtn.addEventListener("click", () => {
+        location.href = "checkout.html";
+      });
+    }
+
+    window.addEventListener("bw:lang", () => render());
+    window.addEventListener("bw:cart", () => render());
+    render();
+  }
+
+  // Checkout
+  function initCheckout(){
+    const form = document.getElementById("checkoutForm");
+    if (!form) return;
+
+    const totalEl = document.getElementById("checkoutTotal");
+    const listEl = document.getElementById("checkoutList");
+    const emptyEl = document.getElementById("checkoutEmpty");
+
+    function render(){
+      const cart = loadCart();
+      const ids = Object.keys(cart);
+      const total = cartTotal(cart);
+      if (totalEl) totalEl.textContent = money(total);
+
+      const items = [];
+      for (const id of ids){
+        const qty = Number(cart[id]) || 0;
+        const p = PRODUCTS.find(x => x.id === id);
+        if (!p || qty <= 0) continue;
+        items.push(`<div class="summary-row"><span>${escapeHtml(nameOf(p))} × ${qty}</span><strong>${money(p.price * qty)}</strong></div>`);
+      }
+      if (listEl) listEl.innerHTML = items.join("");
+      const hasItems = items.length > 0;
+      if (emptyEl) emptyEl.style.display = hasItems ? "none" : "block";
+      const btn = form.querySelector("button[type='submit']");
+      if (btn) btn.disabled = !hasItems;
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const cart = loadCart();
+      if (!cartCount(cart)) return;
+
+      const fd = new FormData(form);
+      const payload = {
+        name: (fd.get("name") || "").toString().trim(),
+        phone: (fd.get("phone") || "").toString().trim(),
+        city: (fd.get("city") || "").toString().trim(),
+        address: (fd.get("address") || "").toString().trim(),
+        comment: (fd.get("comment") || "").toString().trim(),
+        payment: (fd.get("payment") || "").toString().trim(),
+        total: cartTotal(cart),
+        items: Object.entries(cart).map(([id, qty]) => ({ id, qty: Number(qty)||0 }))
+      };
+
+      // minimal validation
+      if (!payload.name || !payload.phone || !payload.city || !payload.address){
+        toast("⚠️ " + (window.BW_I18N ? BW_I18N.t("checkout_hint") : "Fill required fields"));
+        return;
+      }
+
+      const orderId = "BW-" + Math.random().toString(36).slice(2, 7).toUpperCase();
+      sessionStorage.setItem("bw_last_order", JSON.stringify({ orderId, payload }));
+      saveCart({});
+      location.href = "success.html?order=" + encodeURIComponent(orderId);
+    });
+
+    window.addEventListener("bw:lang", render);
+    window.addEventListener("bw:cart", render);
+    render();
+  }
+
+  // Success page
+  function initSuccess(){
+    const box = document.getElementById("successBox");
+    if (!box) return;
+
+    const params = new URLSearchParams(location.search);
+    const order = params.get("order") || "";
+    const orderEl = document.getElementById("orderId");
+    if (orderEl) orderEl.textContent = order ? ("#" + order) : "";
+
+    const detailsEl = document.getElementById("orderDetails");
+    try{
+      const raw = sessionStorage.getItem("bw_last_order");
+      const obj = raw ? JSON.parse(raw) : null;
+      if (obj && obj.payload && detailsEl){
+        const lang = getLang();
+        const items = (obj.payload.items || [])
+          .map(it => {
+            const p = PRODUCTS.find(x => x.id === it.id);
+            if (!p) return null;
+            return `<div class="summary-row"><span>${escapeHtml(nameOf(p))} × ${it.qty}</span><strong>${money(p.price * it.qty)}</strong></div>`;
+          })
+          .filter(Boolean)
+          .join("");
+        detailsEl.innerHTML = items + `<hr class="sep"><div class="summary-row"><span><strong>${escapeHtml(window.BW_I18N ? BW_I18N.t("total") : "Total")}</strong></span><strong>${money(obj.payload.total || 0)}</strong></div>`;
+      }
+    }catch{}
+  }
+
+  // Contacts simple form
+  function initContacts(){
+    const form = document.getElementById("contactForm");
+    if (!form) return;
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      toast("✅ " + (window.BW_I18N ? BW_I18N.t("send") : "Sent"));
+      form.reset();
+    });
+  }
+
+  function escapeHtml(s){
+    return String(s || "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  function applyPageBackground(){
+    const el = document.querySelector("[data-page-bg]");
+    if (!el) return;
+    const bg = el.getAttribute("data-page-bg");
+    document.body.classList.add("page");
+    document.body.classList.add("has-bg");
+    document.body.style.setProperty("--page-bg", `url('${bg}')`);
+  }
+
+  function init(){
+    applyPageBackground();
+    setActiveNav();
+    updateCartBadge();
+
+    document.querySelectorAll("img[data-fallback]").forEach(img => {
+      img.addEventListener("error", () => onImgError(img), { once:true });
+    });
+
+    renderCatalog();
+    renderCartPage();
+    initCheckout();
+    initSuccess();
+    initContacts();
+
+    window.addEventListener("bw:lang", () => {
+      setActiveNav();
+      updateCartBadge();
+    });
+    window.addEventListener("bw:cart", updateCartBadge);
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+})();
