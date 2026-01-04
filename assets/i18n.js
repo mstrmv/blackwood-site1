@@ -1,6 +1,9 @@
-/* assets/i18n.js */
-(function(){
-  const I18N = {
+// assets/i18n.js
+(() => {
+  const LANG_KEY = "bw_lang";
+  const supported = ["uk", "ru", "en"];
+
+  const dict = {
     uk: {
       nav_home: "Головна",
       nav_catalog: "Каталог",
@@ -8,89 +11,70 @@
       nav_about: "Про нас",
       nav_contacts: "Контакти",
       nav_cart: "Кошик",
-
-      cta_catalog: "Перейти в каталог",
-      cta_shipping: "Умови доставки",
-      hero_title: "BLACKWOOD • CHARCOAL",
-      hero_sub: "Преміальний деревний вугілля для гриля та мангалу. CORE лінійка (3/5/10 кг) + товари для BBQ.",
-      pill_1: "Швидкий розпал",
-      pill_2: "Стабільне тепло",
-      pill_3: "Мінімум попелу",
-      pill_4: "Для HoReCa та дому",
-
-      home_b1_t: "CORE лінійка",
-      home_b1_d: "Пакування 3 / 5 / 10 кг (PNG), ідеально для швидких замовлень.",
-      home_b2_t: "18 товарів у каталозі",
-      home_b2_d: "Категорії, пошук, додавання в кошик — все працює на GitHub Pages.",
-      home_b3_t: "Швидке оформлення",
-      home_b3_d: "Форма замовлення + сторінка успіху (success).",
-
+      buy_now: "Купити",
+      hero_kicker: "Преміальний твердолистовий вуголь",
+      hero_title_1: "BLACKWOOD",
+      hero_title_2: "CHARCOAL",
+      hero_lead: "Довге горіння, низька зольність, чисте тепло. CORE / YARD та аксесуари для гриля.",
+      hero_cta_catalog: "Перейти в каталог",
+      hero_cta_shipping: "Доставка та оплата",
+      why_title: "Чому BLACKWOOD",
+      why_hint: "Стабільна якість для BBQ та гриля",
+      why_1_t: "Довге горіння",
+      why_1_p: "Стабільне тепло та контроль жару.",
+      why_2_t: "Низька зольність",
+      why_2_p: "Менше попелу — чистіше приготування.",
+      why_3_t: "Для BBQ та гриля",
+      why_3_p: "Підходить для м'яса, овочів і копчення.",
       catalog_title: "Каталог",
-      catalog_sub: "Оберіть товари, додайте в кошик та оформіть замовлення.",
+      catalog_hint: "18 товарів • CORE / YARD / Сітки та аксесуари",
       search_ph: "Пошук товару…",
-      category_all: "Усі категорії",
-      sort_label: "Сортування",
-      sort_pop: "За популярністю",
-      sort_price_asc: "Ціна: зростання",
-      sort_price_desc: "Ціна: спадання",
-      sort_name: "Назва: A→Z",
-      add_to_cart: "Додати",
-      in_cart: "У кошику",
-      empty_catalog: "Нічого не знайдено. Спробуйте інший запит або категорію.",
-
-      cart_title: "Кошик",
-      cart_sub: "Перевірте товари та кількість перед оформленням.",
-      cart_empty: "Кошик порожній. Перейдіть у каталог та додайте товари.",
-      cart_clear: "Очистити кошик",
-      cart_checkout: "Оформити",
-      cart_continue: "Продовжити покупки",
-      cart_th_item: "Товар",
-      cart_th_price: "Ціна",
-      cart_th_qty: "К-сть",
-      cart_th_sum: "Сума",
-      cart_th_remove: "Видалити",
-      total_label: "Разом",
-      currency: "₴",
-
+      category_all: "Усі",
+      category_core: "CORE вугілля",
+      category_yard: "YARD вугілля",
+      category_sets: "Сітки / Сети / Аксесуари",
+      add_to_cart: "Додати в кошик",
+      added_to_cart: "Додано в кошик",
+      in_cart: "В кошику",
+      empty_catalog: "Нічого не знайдено.",
       shipping_title: "Доставка",
-      shipping_sub: "Умови та способи доставки.",
-      shipping_p1: "Доставка по Україні. Вартість і терміни залежать від служби доставки та міста.",
-      shipping_p2: "Після оформлення замовлення ми зв'яжемося з вами для підтвердження та уточнення деталей.",
-      shipping_p3: "Можливі способи: самовивіз (за домовленістю), поштові служби, кур'єр (за наявності).",
-
+      shipping_text: "Відправка по Україні. Опрацювання замовлення — щодня. Термін доставки зазвичай 1–3 дні (залежить від перевізника). Оплата: картка / готівка / післяплата (за домовленістю).",
       about_title: "Про нас",
-      about_sub: "Коротко про BLACKWOOD • CHARCOAL.",
-      about_p1: "BLACKWOOD • CHARCOAL — про стабільну якість деревного вугілля та зручний сервіс.",
-      about_p2: "Ми збираємо лінійку CORE та товари для BBQ, щоб ви отримували прогнозований результат на грилі.",
-      about_p3: "Працюємо з роздрібними та оптовими замовленнями.",
-
+      about_text: "BLACKWOOD • CHARCOAL — преміальний деревний вуголь для гриля та BBQ. Лінійки CORE і YARD, а також аксесуари: сітки, рукавички, щипці та набори для старту.",
       contacts_title: "Контакти",
-      contacts_sub: "Напишіть нам у зручній соцмережі.",
-      contacts_p1: "Telegram / Instagram / TikTok — іконки у шапці. Також можете залишити коментар при оформленні замовлення.",
-
+      contacts_text: "Напишіть нам у соцмережах або залиште заявку. Ми відповімо якнайшвидше.",
+      contact_name: "Ім'я",
+      contact_phone: "Телефон",
+      contact_msg: "Повідомлення",
+      send: "Надіслати",
+      cart_title: "Кошик",
+      cart_hint: "Керуйте кількістю та оформлюйте замовлення",
+      cart_empty: "Кошик порожній.",
+      product: "Товар",
+      price: "Ціна",
+      qty: "К-сть",
+      total: "Разом",
+      clear_cart: "Очистити кошик",
+      go_checkout: "Оформити",
       checkout_title: "Оформлення",
-      checkout_sub: "Заповніть форму, ми зв'яжемося для підтвердження.",
+      checkout_hint: "Заповніть дані — і ми підтвердимо замовлення",
       f_name: "Ім'я",
       f_phone: "Телефон",
       f_city: "Місто",
       f_address: "Адреса",
       f_comment: "Коментар",
-      f_pay: "Оплата",
-      pay_cash: "Готівка / при отриманні",
-      pay_card: "Картка / переказ",
-      pay_online: "Онлайн (узгодження)",
+      f_payment: "Оплата",
+      pay_card: "Картка",
+      pay_cash: "Готівка",
+      pay_cod: "Післяплата",
       place_order: "Підтвердити замовлення",
-      must_cart: "Кошик порожній. Додайте товари перед оформленням.",
-
       success_title: "Замовлення прийнято",
-      success_sub: "Дякуємо! Ми отримали заявку та скоро зв'яжемося з вами.",
-      success_btn: "Повернутися на головну",
-
-      toast_added: "Додано в кошик",
-      toast_removed: "Видалено",
-      toast_cleared: "Кошик очищено"
+      success_text: "Дякуємо! Ми зв'яжемося з вами найближчим часом для підтвердження.",
+      back_home: "На головну",
+      back_catalog: "Продовжити покупки",
+      footer_left: "© BLACKWOOD • CHARCOAL",
+      footer_right: "GitHub Pages • HTML/CSS/JS"
     },
-
     ru: {
       nav_home: "Главная",
       nav_catalog: "Каталог",
@@ -98,89 +82,70 @@
       nav_about: "О нас",
       nav_contacts: "Контакты",
       nav_cart: "Корзина",
-
-      cta_catalog: "Перейти в каталог",
-      cta_shipping: "Условия доставки",
-      hero_title: "BLACKWOOD • CHARCOAL",
-      hero_sub: "Премиальный древесный уголь для гриля и мангала. Линейка CORE (3/5/10 кг) + товары для BBQ.",
-      pill_1: "Быстрый розжиг",
-      pill_2: "Стабильный жар",
-      pill_3: "Минимум золы",
-      pill_4: "Для HoReCa и дома",
-
-      home_b1_t: "Линейка CORE",
-      home_b1_d: "Упаковки 3 / 5 / 10 кг (PNG) — удобно и быстро.",
-      home_b2_t: "18 товаров в каталоге",
-      home_b2_d: "Категории, поиск, добавление в корзину — всё работает на GitHub Pages.",
-      home_b3_t: "Быстрое оформление",
-      home_b3_d: "Форма заказа + страница успеха (success).",
-
+      buy_now: "Купить",
+      hero_kicker: "Премиальный древесный уголь",
+      hero_title_1: "BLACKWOOD",
+      hero_title_2: "CHARCOAL",
+      hero_lead: "Долгое горение, низкая зольность, чистое тепло. CORE / YARD и аксессуары для гриля.",
+      hero_cta_catalog: "Перейти в каталог",
+      hero_cta_shipping: "Доставка и оплата",
+      why_title: "Почему BLACKWOOD",
+      why_hint: "Стабильное качество для BBQ и гриля",
+      why_1_t: "Долгое горение",
+      why_1_p: "Стабильное тепло и контроль жара.",
+      why_2_t: "Низкая зольность",
+      why_2_p: "Меньше золы — чище приготовление.",
+      why_3_t: "Для BBQ и гриля",
+      why_3_p: "Подходит для мяса, овощей и копчения.",
       catalog_title: "Каталог",
-      catalog_sub: "Выберите товары, добавьте в корзину и оформите заказ.",
+      catalog_hint: "18 товаров • CORE / YARD / Сетки и аксессуары",
       search_ph: "Поиск товара…",
-      category_all: "Все категории",
-      sort_label: "Сортировка",
-      sort_pop: "По популярности",
-      sort_price_asc: "Цена: по возрастанию",
-      sort_price_desc: "Цена: по убыванию",
-      sort_name: "Название: A→Z",
-      add_to_cart: "Добавить",
+      category_all: "Все",
+      category_core: "CORE уголь",
+      category_yard: "YARD уголь",
+      category_sets: "Сетки / Сеты / Аксессуары",
+      add_to_cart: "В корзину",
+      added_to_cart: "Добавлено в корзину",
       in_cart: "В корзине",
-      empty_catalog: "Ничего не найдено. Попробуйте другой запрос или категорию.",
-
-      cart_title: "Корзина",
-      cart_sub: "Проверьте товары и количество перед оформлением.",
-      cart_empty: "Корзина пуста. Перейдите в каталог и добавьте товары.",
-      cart_clear: "Очистить корзину",
-      cart_checkout: "Оформить",
-      cart_continue: "Продолжить покупки",
-      cart_th_item: "Товар",
-      cart_th_price: "Цена",
-      cart_th_qty: "Кол-во",
-      cart_th_sum: "Сумма",
-      cart_th_remove: "Удалить",
-      total_label: "Итого",
-      currency: "₴",
-
+      empty_catalog: "Ничего не найдено.",
       shipping_title: "Доставка",
-      shipping_sub: "Условия и способы доставки.",
-      shipping_p1: "Доставка по Украине. Стоимость и сроки зависят от службы доставки и города.",
-      shipping_p2: "После оформления заказа мы свяжемся с вами для подтверждения и уточнения деталей.",
-      shipping_p3: "Возможные способы: самовывоз (по договоренности), почтовые службы, курьер (при наличии).",
-
+      shipping_text: "Отправка по Украине. Обработка заказа — ежедневно. Срок доставки обычно 1–3 дня (зависит от перевозчика). Оплата: карта / наличные / наложенный платеж (по договоренности).",
       about_title: "О нас",
-      about_sub: "Коротко про BLACKWOOD • CHARCOAL.",
-      about_p1: "BLACKWOOD • CHARCOAL — про стабильное качество древесного угля и удобный сервис.",
-      about_p2: "Мы собираем линейку CORE и товары для BBQ, чтобы вы получали предсказуемый результат на гриле.",
-      about_p3: "Работаем с розничными и оптовыми заказами.",
-
+      about_text: "BLACKWOOD • CHARCOAL — премиальный древесный уголь для гриля и BBQ. Линейки CORE и YARD, а также аксессуары: сетки, перчатки, щипцы и стартовые наборы.",
       contacts_title: "Контакты",
-      contacts_sub: "Напишите нам в удобной соцсети.",
-      contacts_p1: "Telegram / Instagram / TikTok — иконки в шапке. Также можно оставить комментарий при оформлении заказа.",
-
+      contacts_text: "Напишите нам в соцсетях или оставьте заявку. Мы ответим как можно быстрее.",
+      contact_name: "Имя",
+      contact_phone: "Телефон",
+      contact_msg: "Сообщение",
+      send: "Отправить",
+      cart_title: "Корзина",
+      cart_hint: "Управляйте количеством и оформляйте заказ",
+      cart_empty: "Корзина пуста.",
+      product: "Товар",
+      price: "Цена",
+      qty: "Кол-во",
+      total: "Итого",
+      clear_cart: "Очистить корзину",
+      go_checkout: "Оформить",
       checkout_title: "Оформление",
-      checkout_sub: "Заполните форму, мы свяжемся для подтверждения.",
+      checkout_hint: "Заполните данные — и мы подтвердим заказ",
       f_name: "Имя",
       f_phone: "Телефон",
       f_city: "Город",
       f_address: "Адрес",
       f_comment: "Комментарий",
-      f_pay: "Оплата",
-      pay_cash: "Наличные / при получении",
-      pay_card: "Карта / перевод",
-      pay_online: "Онлайн (согласование)",
+      f_payment: "Оплата",
+      pay_card: "Карта",
+      pay_cash: "Наличные",
+      pay_cod: "Наложенный платеж",
       place_order: "Подтвердить заказ",
-      must_cart: "Корзина пуста. Добавьте товары перед оформлением.",
-
       success_title: "Заказ принят",
-      success_sub: "Спасибо! Мы получили заявку и скоро свяжемся с вами.",
-      success_btn: "Вернуться на главную",
-
-      toast_added: "Добавлено в корзину",
-      toast_removed: "Удалено",
-      toast_cleared: "Корзина очищена"
+      success_text: "Спасибо! Мы свяжемся с вами в ближайшее время для подтверждения.",
+      back_home: "На главную",
+      back_catalog: "Продолжить покупки",
+      footer_left: "© BLACKWOOD • CHARCOAL",
+      footer_right: "GitHub Pages • HTML/CSS/JS"
     },
-
     en: {
       nav_home: "Home",
       nav_catalog: "Catalog",
@@ -188,137 +153,124 @@
       nav_about: "About",
       nav_contacts: "Contacts",
       nav_cart: "Cart",
-
-      cta_catalog: "Open catalog",
-      cta_shipping: "Shipping info",
-      hero_title: "BLACKWOOD • CHARCOAL",
-      hero_sub: "Premium charcoal for grill & BBQ. CORE line (3/5/10 kg) + BBQ essentials.",
-      pill_1: "Fast ignition",
-      pill_2: "Stable heat",
-      pill_3: "Low ash",
-      pill_4: "Home & HoReCa",
-
-      home_b1_t: "CORE line",
-      home_b1_d: "3 / 5 / 10 kg packs (PNG) — quick and convenient.",
-      home_b2_t: "18 products in catalog",
-      home_b2_d: "Categories, search, add to cart — works on GitHub Pages.",
-      home_b3_t: "Fast checkout",
-      home_b3_d: "Order form + success page.",
-
+      buy_now: "Buy",
+      hero_kicker: "Premium hardwood charcoal",
+      hero_title_1: "BLACKWOOD",
+      hero_title_2: "CHARCOAL",
+      hero_lead: "Long burn, low ash, clean heat. CORE / YARD and grill accessories.",
+      hero_cta_catalog: "Explore catalog",
+      hero_cta_shipping: "Shipping & payment",
+      why_title: "Why BLACKWOOD",
+      why_hint: "Consistent quality for BBQ & grill",
+      why_1_t: "Long burn",
+      why_1_p: "Stable heat and easy control.",
+      why_2_t: "Low ash",
+      why_2_p: "Less ash — cleaner cooking.",
+      why_3_t: "For BBQ & grill",
+      why_3_p: "Great for meat, veggies and smoking.",
       catalog_title: "Catalog",
-      catalog_sub: "Pick items, add to cart and checkout.",
+      catalog_hint: "18 products • CORE / YARD / Mesh & accessories",
       search_ph: "Search products…",
-      category_all: "All categories",
-      sort_label: "Sorting",
-      sort_pop: "By popularity",
-      sort_price_asc: "Price: low to high",
-      sort_price_desc: "Price: high to low",
-      sort_name: "Name: A→Z",
-      add_to_cart: "Add",
+      category_all: "All",
+      category_core: "CORE charcoal",
+      category_yard: "YARD charcoal",
+      category_sets: "Mesh / Sets / Accessories",
+      add_to_cart: "Add to cart",
+      added_to_cart: "Added to cart",
       in_cart: "In cart",
-      empty_catalog: "Nothing found. Try another query or category.",
-
-      cart_title: "Cart",
-      cart_sub: "Review items and quantities before checkout.",
-      cart_empty: "Your cart is empty. Go to catalog and add items.",
-      cart_clear: "Clear cart",
-      cart_checkout: "Checkout",
-      cart_continue: "Continue shopping",
-      cart_th_item: "Item",
-      cart_th_price: "Price",
-      cart_th_qty: "Qty",
-      cart_th_sum: "Sum",
-      cart_th_remove: "Remove",
-      total_label: "Total",
-      currency: "₴",
-
+      empty_catalog: "No results found.",
       shipping_title: "Shipping",
-      shipping_sub: "Delivery options and terms.",
-      shipping_p1: "Shipping across Ukraine. Cost and timing depend on carrier and city.",
-      shipping_p2: "After placing an order we will contact you to confirm details.",
-      shipping_p3: "Options: pickup (by arrangement), postal services, courier (if available).",
-
+      shipping_text: "Delivery across Ukraine. Orders are processed daily. Typical delivery time is 1–3 days (carrier dependent). Payment: card / cash / COD (by arrangement).",
       about_title: "About",
-      about_sub: "About BLACKWOOD • CHARCOAL.",
-      about_p1: "BLACKWOOD • CHARCOAL is about stable charcoal quality and a smooth buying experience.",
-      about_p2: "We offer the CORE line and BBQ essentials to keep your grill results consistent.",
-      about_p3: "Retail and wholesale orders are welcome.",
-
+      about_text: "BLACKWOOD • CHARCOAL is premium hardwood charcoal for grill and BBQ. CORE and YARD lines plus accessories: mesh bags, gloves, tongs and starter kits.",
       contacts_title: "Contacts",
-      contacts_sub: "Message us via social networks.",
-      contacts_p1: "Telegram / Instagram / TikTok icons are in the header. You can also leave a comment during checkout.",
-
+      contacts_text: "Message us on social or leave a request. We’ll reply ASAP.",
+      contact_name: "Name",
+      contact_phone: "Phone",
+      contact_msg: "Message",
+      send: "Send",
+      cart_title: "Cart",
+      cart_hint: "Manage quantities and checkout",
+      cart_empty: "Your cart is empty.",
+      product: "Product",
+      price: "Price",
+      qty: "Qty",
+      total: "Total",
+      clear_cart: "Clear cart",
+      go_checkout: "Checkout",
       checkout_title: "Checkout",
-      checkout_sub: "Fill in the form and we’ll confirm your order.",
+      checkout_hint: "Fill in details — we will confirm your order",
       f_name: "Name",
       f_phone: "Phone",
       f_city: "City",
       f_address: "Address",
       f_comment: "Comment",
-      f_pay: "Payment",
-      pay_cash: "Cash on delivery",
-      pay_card: "Card / transfer",
-      pay_online: "Online (arranged)",
+      f_payment: "Payment",
+      pay_card: "Card",
+      pay_cash: "Cash",
+      pay_cod: "COD",
       place_order: "Place order",
-      must_cart: "Cart is empty. Add products before checkout.",
-
       success_title: "Order received",
-      success_sub: "Thank you! We’ve received your request and will contact you soon.",
-      success_btn: "Back to home",
-
-      toast_added: "Added to cart",
-      toast_removed: "Removed",
-      toast_cleared: "Cart cleared"
+      success_text: "Thank you! We’ll contact you shortly to confirm.",
+      back_home: "Back home",
+      back_catalog: "Continue shopping",
+      footer_left: "© BLACKWOOD • CHARCOAL",
+      footer_right: "GitHub Pages • HTML/CSS/JS"
     }
   };
 
   function getLang(){
-    const saved = localStorage.getItem("bw_lang");
-    if(saved && I18N[saved]) return saved;
+    const fromStorage = (localStorage.getItem(LANG_KEY) || "").toLowerCase();
+    if (supported.includes(fromStorage)) return fromStorage;
     return "uk";
   }
 
   function setLang(lang){
-    if(!I18N[lang]) lang = "uk";
-    localStorage.setItem("bw_lang", lang);
+    const l = (lang || "").toLowerCase();
+    if (!supported.includes(l)) return;
+    localStorage.setItem(LANG_KEY, l);
     applyI18n();
   }
 
   function t(key){
     const lang = getLang();
-    return (I18N[lang] && I18N[lang][key]) || key;
+    return (dict[lang] && dict[lang][key]) || (dict.uk && dict.uk[key]) || key;
   }
 
   function applyI18n(){
     const lang = getLang();
+    document.documentElement.setAttribute("lang", lang);
 
-    document.documentElement.lang = (lang === "uk" ? "uk" : lang);
-
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
+    document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
       el.textContent = t(key);
     });
 
-    document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
-      const key = el.getAttribute("data-i18n-ph");
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      const key = el.getAttribute("data-i18n-placeholder");
       el.setAttribute("placeholder", t(key));
     });
 
-    document.querySelectorAll(".lang button[data-lang]").forEach(btn=>{
-      btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+    document.querySelectorAll("[data-lang]").forEach(btn => {
+      const l = btn.getAttribute("data-lang");
+      btn.classList.toggle("active", l === lang);
+      btn.setAttribute("aria-pressed", l === lang ? "true" : "false");
     });
 
-    // update dynamic UI if app.js exposes hooks
-    if(window.BW && typeof window.BW.onLangChanged === "function"){
-      window.BW.onLangChanged(lang);
+    const titleEl = document.querySelector("title[data-i18n-title]");
+    if (titleEl){
+      const key = titleEl.getAttribute("data-i18n-title");
+      titleEl.textContent = `${t(key)} • BLACKWOOD CHARCOAL`;
     }
+
+    window.dispatchEvent(new CustomEvent("bw:lang", { detail: { lang } }));
   }
 
-  window.BW_I18N = { I18N, getLang, setLang, t, applyI18n };
+  window.BW_I18N = { getLang, setLang, t, applyI18n, dict };
 
-  document.addEventListener("click", (e)=>{
-    const btn = e.target.closest(".lang button[data-lang]");
-    if(!btn) return;
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-lang]");
+    if (!btn) return;
     e.preventDefault();
     setLang(btn.getAttribute("data-lang"));
   });
