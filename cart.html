@@ -5,9 +5,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n-title="nav_cart">Кошик • BLACKWOOD CHARCOAL</title>
-  <link rel="stylesheet" href="assets/style.css?v=3" />
-  <script defer src="assets/i18n.js?v=3"></script>
-  <script defer src="assets/app.js?v=3"></script>
+  <link rel="stylesheet" href="assets/style.css?v=20260104a" />
+  <script defer src="assets/i18n.js?v=20260104a"></script>
+  <script defer src="assets/app.js?v=20260104a"></script>
 </head>
 <body class="page has-bg" style="--page-bg: url('img/catalog-bg.png');">
   <div class="noise"></div>
@@ -65,12 +65,12 @@
           <div class="hint" data-i18n="cart_hint"></div>
         </div>
 
-        <div id="cartEmpty" class="card pad" style="display:none;">
+        <div id="cartEmpty" class="panel pad" style="display:none;">
           <p class="note" data-i18n="cart_empty">Кошик порожній.</p>
           <a class="btn primary" href="catalog.html" data-i18n="back_catalog">Продовжити покупки</a>
         </div>
 
-        <div class="card" style="overflow:hidden;">
+        <div class="panel" style="overflow:hidden;">
           <div style="overflow:auto;">
             <table class="table">
               <thead>
@@ -87,7 +87,7 @@
           </div>
         </div>
 
-        <div class="card summary">
+        <div class="panel summary">
           <div class="summary-row">
             <span><strong data-i18n="total">Разом</strong></span>
             <strong id="cartTotal">0</strong>
@@ -108,4 +108,9 @@
         <div data-i18n="footer_left">© BLACKWOOD • CHARCOAL</div>
         <div data-i18n="footer_right">GitHub Pages • HTML/CSS/JS</div>
       </div>
-    </div
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
