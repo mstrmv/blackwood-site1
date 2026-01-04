@@ -3,29 +3,102 @@
   const CART_KEY = "bw_cart_v1";
   const ORDER_KEY = "bw_order_v1";
 
-  /* Реальні файли (як у твоїй папці img/) + 4 нових товарів (додай JPG у img/ з цими назвами) */
+  /*
+    ВАЖНО по картинкам:
+    - ВСЕ пути только так: "img/...."
+    - Имена файлов должны совпадать 1 в 1 (регистр важен)
+  */
+
   const PRODUCTS = [
-    /* Пачки вугілля (3 штуки) */
-    { id:"core-3",  group:"charcoal", badge:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 3 кг",  ru:"Уголь BLACKWOOD CORE 3 кг",  en:"BLACKWOOD CORE 3 kg"},  weightKg:3,  price:199, img:"img/core-3kg.png" },
-    { id:"core-5",  group:"charcoal", badge:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 5 кг",  ru:"Уголь BLACKWOOD CORE 5 кг",  en:"BLACKWOOD CORE 5 kg"},  weightKg:5,  price:299, img:"img/core-5kg.png" },
-    { id:"core-10", group:"charcoal", badge:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 10 кг", ru:"Уголь BLACKWOOD CORE 10 кг", en:"BLACKWOOD CORE 10 kg"}, weightKg:10, price:499, img:"img/core-10kg.png" },
+    /* =========================
+       КАТЕГОРИЯ: ПАЧКИ ВУГІЛЛЯ (YARD)
+       ========================= */
+    {
+      id: "yard-3",
+      group: "charcoal",
+      badge: "YARD",
+      name: { uk: "Вугілля BLACKWOOD YARD 3 кг", ru: "Уголь BLACKWOOD YARD 3 кг", en: "BLACKWOOD YARD 3 kg" },
+      weightKg: 3,
+      price: 219,
+      img: "img/yard-3kg.png"
+    },
+    {
+      id: "yard-5",
+      group: "charcoal",
+      badge: "YARD",
+      name: { uk: "Вугілля BLACKWOOD YARD 5 кг", ru: "Уголь BLACKWOOD YARD 5 кг", en: "BLACKWOOD YARD 5 kg" },
+      weightKg: 5,
+      price: 329,
+      img: "img/yard-5kg.png"
+    },
+    {
+      id: "yard-10",
+      group: "charcoal",
+      badge: "YARD",
+      name: { uk: "Вугілля BLACKWOOD YARD 10 кг", ru: "Уголь BLACKWOOD YARD 10 кг", en: "BLACKWOOD YARD 10 kg" },
+      weightKg: 10,
+      price: 549,
+      img: "img/yard-10kg.png"
+    },
 
-    /* Сет */
-    { id:"weekend", group:"set", badge:"SET", name:{uk:"Набір Weekend Box", ru:"Набор Weekend Box", en:"Weekend Box set"}, weightKg:1, price:799, img:"img/weekend-box.jpg" },
+    /* =========================
+       4 ТОВАРА ИЗ ТВОИХ 2 ФОТО
+       (1 фото = yard-bag.jpg, 2 фото = yard-set.jpg)
+       ========================= */
 
-    /* +4 нових товарів (поклади файли у img/ з цими назвами) */
-    { id:"charcoal-5kg", group:"charcoal", badge:"CHARCOAL", name:{uk:"Вугілля BLACKWOOD 5 кг (kraft)", ru:"Уголь BLACKWOOD 5 кг (kraft)", en:"BLACKWOOD Charcoal 5 kg (kraft)"}, weightKg:5, price:329, img:"img/charcoal-5kg.jpg" },
-    { id:"charcoal-10kg", group:"charcoal", badge:"CHARCOAL", name:{uk:"Вугілля BLACKWOOD 10 кг (kraft)", ru:"Уголь BLACKWOOD 10 кг (kraft)", en:"BLACKWOOD Charcoal 10 kg (kraft)"}, weightKg:10, price:549, img:"img/charcoal-10kg.jpg" },
-    { id:"royal", group:"set", badge:"SET", name:{uk:"BLACKWOOD Royal Ignition", ru:"BLACKWOOD Royal Ignition", en:"BLACKWOOD Royal Ignition"}, weightKg:1, price:179, img:"img/royal-ignition.jpg" },
-    { id:"starter-set", group:"set", badge:"SET", name:{uk:"Сет Starter (вугілля + розпал)", ru:"Сет Starter (уголь + розжиг)", en:"Starter Set (charcoal + ignition)"}, weightKg:1, price:899, img:"img/starter-set.jpg" },
+    // 1) Пачка (фото 1)
+    {
+      id: "yard-bag-single",
+      group: "charcoal",
+      badge: "YARD",
+      name: { uk: "BLACKWOOD YARD (kraft) — пачка", ru: "BLACKWOOD YARD (kraft) — пачка", en: "BLACKWOOD YARD (kraft) — bag" },
+      weightKg: 5,
+      price: 349,
+      img: "img/yard-bag.jpg"
+    },
 
-    /* Інші товари (як у твоїй папці img/) */
+    // 2) Та же пачка как “Premium Pack” (тот же файл фото 1)
+    {
+      id: "yard-bag-premium",
+      group: "charcoal",
+      badge: "YARD",
+      name: { uk: "BLACKWOOD YARD Premium Pack", ru: "BLACKWOOD YARD Premium Pack", en: "BLACKWOOD YARD Premium Pack" },
+      weightKg: 5,
+      price: 379,
+      img: "img/yard-bag.jpg"
+    },
+
+    // 3) Royal Ignition (фото 2)
+    {
+      id: "yard-royal-ignition",
+      group: "set",
+      badge: "SET",
+      name: { uk: "BLACKWOOD Royal Ignition", ru: "BLACKWOOD Royal Ignition", en: "BLACKWOOD Royal Ignition" },
+      weightKg: 1,
+      price: 179,
+      img: "img/yard-set.jpg"
+    },
+
+    // 4) Сет (фото 2)
+    {
+      id: "yard-starter-set",
+      group: "set",
+      badge: "SET",
+      name: { uk: "Сет YARD Starter (пачка + розпал)", ru: "Сет YARD Starter (пачка + розжиг)", en: "YARD Starter Set (bag + ignition)" },
+      weightKg: 1,
+      price: 899,
+      img: "img/yard-set.jpg"
+    },
+
+    /* =========================
+       (ОПЦИОНАЛЬНО) ДРУГИЕ ТОВАРЫ ИЗ ТВОЕЙ ПАПКИ img/
+       можешь оставить или удалить — сайт будет работать в любом случае
+       ========================= */
     { id:"starter",  group:"other", badge:"BBQ", name:{uk:"Розпалювач", ru:"Розжиг", en:"Fire starter"}, weightKg:1, price:149, img:"img/starter.jpg" },
     { id:"apron",    group:"other", badge:"ACCESS", name:{uk:"Фартух BBQ", ru:"Фартук BBQ", en:"BBQ apron"}, weightKg:1, price:299, img:"img/apron.jpg" },
     { id:"gloves",   group:"other", badge:"ACCESS", name:{uk:"Рукавиці для гриля", ru:"Перчатки для гриля", en:"BBQ gloves"}, weightKg:1, price:249, img:"img/gloves.jpg" },
     { id:"thermo",   group:"other", badge:"ACCESS", name:{uk:"Термометр", ru:"Термометр", en:"Thermometer"}, weightKg:1, price:219, img:"img/thermometer.jpg" },
     { id:"blower",   group:"other", badge:"ACCESS", name:{uk:"Міх для роздуву", ru:"Мех для раздува", en:"BBQ blower"}, weightKg:1, price:129, img:"img/blower.jpg" },
-
     { id:"grid-set",    group:"other", badge:"GRILL", name:{uk:"Набір для гриля", ru:"Набор для гриля", en:"Grill set"}, weightKg:1, price:349, img:"img/grill-set.jpg" },
     { id:"grid-flat",   group:"other", badge:"GRILL", name:{uk:"Решітка (пласка)", ru:"Решетка (плоская)", en:"Grill grid (flat)"}, weightKg:1, price:279, img:"img/grid-flat.jpg" },
     { id:"grid-double", group:"other", badge:"GRILL", name:{uk:"Решітка (подвійна)", ru:"Решетка (двойная)", en:"Grill grid (double)"}, weightKg:1, price:319, img:"img/grid-double.jpg" },
@@ -91,7 +164,6 @@
     const grid = document.querySelector("[data-catalog-grid]");
     if (!grid) return;
 
-    const lang = window.BW_I18N?.getLang?.() || "uk";
     const qInput = document.querySelector("[data-catalog-search]");
     const filterWrap = document.querySelector("[data-filters]");
     let activeGroup = "all";
