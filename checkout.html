@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title data-i18n-title="checkout_title">Оформлення • BLACKWOOD CHARCOAL</title>
-  <link rel="stylesheet" href="assets/style.css?v=20260104a" />
-  <script defer src="assets/i18n.js?v=20260104a"></script>
-  <script defer src="assets/app.js?v=20260104a"></script>
+  <title>Оформлення • BLACKWOOD • CHARCOAL</title>
+  <link rel="stylesheet" href="assets/style.css?v=20260104b" />
+  <script defer src="assets/i18n.js?v=20260104b"></script>
+  <script defer src="assets/app.js?v=20260104b"></script>
 </head>
 <body class="page has-bg" style="--page-bg: url('img/catalog-bg.png');">
   <div class="noise"></div>
@@ -30,18 +30,6 @@
         <div class="spacer"></div>
 
         <div class="pills">
-          <div class="social" aria-label="Social links">
-            <a class="iconbtn" href="https://t.me/" target="_blank" rel="noopener" aria-label="Telegram">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.04 15.47 8.86 19c.26 0 .37-.11.51-.25l1.22-1.18 2.53 1.85c.46.25.8.12.92-.42l1.67-7.82c.16-.74-.27-1.03-.72-.86L4.3 11.9c-.73.28-.72.69-.13.87l3.01.94 6.97-4.4c.33-.2.63-.09 .38.13"/></svg>
-            </a>
-            <a class="iconbtn" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-5 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm4.6-2.2a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>
-            </a>
-            <a class="iconbtn" href="https://tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3c.6 3.2 2.8 5.1 6 5.2v3c-2.2.1-4.1-.7-6-2v6.8c0 3-2.4 5.2-5.4 5.2S3 19 3 16.2c0-3.4 3.2-5.8 6.6-4.9v3.2c-.6-.2-1.3-.1-1.8.2-1 .5-1.3 1.9-.7 2.8.7 1.1 2.3 1 3.1.1.3-.3.6-.9.6-1.4V3h3.2Z"/></svg>
-            </a>
-          </div>
-
           <div class="lang" aria-label="Language switch">
             <button type="button" data-lang="uk">UKR</button>
             <button type="button" data-lang="ru">RU</button>
@@ -59,72 +47,63 @@
 
   <main class="main">
     <div class="container">
-      <section class="section">
-        <div class="section-title">
-          <h2 data-i18n="checkout_title">Оформлення</h2>
-          <div class="hint" data-i18n="checkout_hint"></div>
-        </div>
+      <div class="section-title">
+        <h2 data-i18n="checkout_title">Оформлення</h2>
+        <div class="hint" data-i18n="checkout_hint">Заповніть дані — і ми підтвердимо замовлення</div>
+      </div>
 
-        <div class="panel pad">
-          <div id="checkoutEmpty" class="note" style="display:none;">
-            <span data-i18n="cart_empty">Кошик порожній.</span>
-            <div style="margin-top:10px;">
-              <a class="btn primary" href="catalog.html" data-i18n="back_catalog">Продовжити покупки</a>
+      <section class="panel" style="margin-top:12px;">
+        <form id="checkoutForm" class="form">
+          <label class="label">
+            <span data-i18n="f_name">Ім'я</span>
+            <input class="input" name="name" required />
+          </label>
+
+          <label class="label">
+            <span data-i18n="f_phone">Телефон</span>
+            <input class="input" name="phone" required />
+          </label>
+
+          <label class="label">
+            <span data-i18n="f_city">Місто</span>
+            <input class="input" name="city" required />
+          </label>
+
+          <label class="label">
+            <span data-i18n="f_address">Адреса</span>
+            <input class="input" name="address" required />
+          </label>
+
+          <label class="label full">
+            <span data-i18n="f_comment">Коментар</span>
+            <textarea class="input" name="comment"></textarea>
+          </label>
+
+          <label class="label full">
+            <span data-i18n="f_payment">Оплата</span>
+            <select class="select" name="payment" required>
+              <option value="card" data-i18n="pay_card">Картка</option>
+              <option value="cash" data-i18n="pay_cash">Готівка</option>
+              <option value="cod" data-i18n="pay_cod">Післяплата</option>
+            </select>
+          </label>
+
+          <div class="full" style="padding:0 14px 14px;">
+            <div class="panel pad">
+              <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+                <div style="font-weight:980; letter-spacing:.12em; text-transform:uppercase; font-size:12px;" data-i18n="your_order">Ваше замовлення</div>
+                <div><strong id="checkoutTotal">₴0</strong></div>
+              </div>
+              <hr class="sep">
+              <div id="checkoutEmpty" class="note" style="display:none;" data-i18n="cart_empty">Кошик порожній.</div>
+              <div id="checkoutList" class="summary" style="padding:0;"></div>
             </div>
-          </div>
 
-          <div class="summary" style="padding:0;">
-            <div id="checkoutList"></div>
-            <hr class="sep">
-            <div class="summary-row">
-              <span><strong data-i18n="total">Разом</strong></span>
-              <strong id="checkoutTotal">0</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <form id="checkoutForm" class="form">
-            <label class="label">
-              <span data-i18n="f_name">Ім'я</span>
-              <input class="input" name="name" type="text" required />
-            </label>
-
-            <label class="label">
-              <span data-i18n="f_phone">Телефон</span>
-              <input class="input" name="phone" type="tel" required />
-            </label>
-
-            <label class="label">
-              <span data-i18n="f_city">Місто</span>
-              <input class="input" name="city" type="text" required />
-            </label>
-
-            <label class="label">
-              <span data-i18n="f_address">Адреса</span>
-              <input class="input" name="address" type="text" required />
-            </label>
-
-            <label class="label full">
-              <span data-i18n="f_comment">Коментар</span>
-              <textarea class="input" name="comment"></textarea>
-            </label>
-
-            <label class="label full">
-              <span data-i18n="f_payment">Оплата</span>
-              <select class="select" name="payment" required>
-                <option value="card" data-i18n="pay_card">Картка</option>
-                <option value="cash" data-i18n="pay_cash">Готівка</option>
-                <option value="cod" data-i18n="pay_cod">Післяплата</option>
-              </select>
-            </label>
-
-            <div class="full" style="display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
-              <a class="btn" href="cart.html" data-i18n="nav_cart">Кошик</a>
+            <div style="display:flex; justify-content:flex-end; margin-top:12px;">
               <button class="btn primary" type="submit" data-i18n="place_order">Підтвердити замовлення</button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </section>
     </div>
   </main>
@@ -132,8 +111,8 @@
   <footer class="footer">
     <div class="container">
       <div class="inner">
-        <div data-i18n="footer_left">© BLACKWOOD • CHARCOAL</div>
-        <div data-i18n="footer_right">GitHub Pages • HTML/CSS/JS</div>
+        <div>© BLACKWOOD • CHARCOAL</div>
+        <div>GitHub Pages • HTML/CSS/JS</div>
       </div>
     </div>
   </footer>
