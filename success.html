@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <div class="bg bg--catalog"></div>
+  <div class="bg"></div>
   <div class="grain"></div>
 
   <header class="topbar">
@@ -24,10 +24,7 @@
           <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
           <a href="about.html" data-i18n="nav_about">Про нас</a>
           <a href="contacts.html" data-i18n="nav_contacts">Контакти</a>
-          <a href="cart.html" data-i18n="nav_cart">
-            Кошик
-            <span data-cart-count style="display:none;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid rgba(200,164,90,.25);background:rgba(200,164,90,.12);font-weight:900;font-size:12px;">0</span>
-          </a>
+          <a href="cart.html" data-i18n="nav_cart">Кошик</a>
         </nav>
 
         <div class="rightbar">
@@ -63,16 +60,15 @@
   </header>
 
   <main class="container">
-    <section class="card" style="padding:18px" data-success-box>
+    <div class="card" style="padding:16px">
       <div class="kicker" data-i18n="success_title">Замовлення прийнято!</div>
       <h1 class="h2" style="margin-top:10px" data-i18n="success_title">Замовлення прийнято!</h1>
       <p class="p" data-i18n="success_text">Дякуємо! Ми зв’яжемося з вами найближчим часом.</p>
 
-      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+      <div style="margin-top:14px">
         <a class="btn primary" href="index.html" data-i18n="back_home">Повернутися на головну</a>
-        <a class="btn" href="catalog.html" data-i18n="nav_catalog">Каталог</a>
       </div>
-    </section>
+    </div>
   </main>
 
   <script src="assets/i18n.js"></script>
