@@ -3,25 +3,33 @@
   const CART_KEY = "bw_cart_v1";
   const ORDER_KEY = "bw_order_v1";
 
-  /* ВАЖНО: имена картинок = ровно как у тебя в папке img/ */
+  /* Реальні файли (як у твоїй папці img/) + 4 нових товарів (додай JPG у img/ з цими назвами) */
   const PRODUCTS = [
-    { id:"core-3",  cat:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 3 кг",  ru:"Уголь BLACKWOOD CORE 3 кг",  en:"BLACKWOOD CORE 3 kg"},  weightKg:3,  price:199, img:"img/core-3kg.png" },
-    { id:"core-5",  cat:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 5 кг",  ru:"Уголь BLACKWOOD CORE 5 кг",  en:"BLACKWOOD CORE 5 kg"},  weightKg:5,  price:299, img:"img/core-5kg.png" },
-    { id:"core-10", cat:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 10 кг", ru:"Уголь BLACKWOOD CORE 10 кг", en:"BLACKWOOD CORE 10 kg"}, weightKg:10, price:499, img:"img/core-10kg.png" },
+    /* Пачки вугілля (3 штуки) */
+    { id:"core-3",  group:"charcoal", badge:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 3 кг",  ru:"Уголь BLACKWOOD CORE 3 кг",  en:"BLACKWOOD CORE 3 kg"},  weightKg:3,  price:199, img:"img/core-3kg.png" },
+    { id:"core-5",  group:"charcoal", badge:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 5 кг",  ru:"Уголь BLACKWOOD CORE 5 кг",  en:"BLACKWOOD CORE 5 kg"},  weightKg:5,  price:299, img:"img/core-5kg.png" },
+    { id:"core-10", group:"charcoal", badge:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 10 кг", ru:"Уголь BLACKWOOD CORE 10 кг", en:"BLACKWOOD CORE 10 kg"}, weightKg:10, price:499, img:"img/core-10kg.png" },
 
-    { id:"starter",  cat:"BBQ",    name:{uk:"Розпалювач",            ru:"Розжиг",               en:"Fire starter"},       weightKg:1, price:149, img:"img/starter.jpg" },
-    { id:"royal",    cat:"BBQ",    name:{uk:"Royal ignition",        ru:"Royal ignition",       en:"Royal ignition"},     weightKg:1, price:179, img:"img/royal-ignition.jpg" },
-    { id:"apron",    cat:"ACCESS", name:{uk:"Фартух BBQ",            ru:"Фартук BBQ",           en:"BBQ apron"},          weightKg:1, price:299, img:"img/apron.jpg" },
-    { id:"gloves",   cat:"ACCESS", name:{uk:"Рукавиці для гриля",    ru:"Перчатки для гриля",   en:"BBQ gloves"},         weightKg:1, price:249, img:"img/gloves.jpg" },
-    { id:"thermo",   cat:"ACCESS", name:{uk:"Термометр",             ru:"Термометр",            en:"Thermometer"},        weightKg:1, price:219, img:"img/thermometer.jpg" },
-    { id:"blower",   cat:"ACCESS", name:{uk:"Міх для роздуву",       ru:"Мех для раздува",      en:"BBQ blower"},         weightKg:1, price:129, img:"img/blower.jpg" },
+    /* Сет */
+    { id:"weekend", group:"set", badge:"SET", name:{uk:"Набір Weekend Box", ru:"Набор Weekend Box", en:"Weekend Box set"}, weightKg:1, price:799, img:"img/weekend-box.jpg" },
 
-    { id:"grid-set",   cat:"GRILL", name:{uk:"Набір для гриля",      ru:"Набор для гриля",      en:"Grill set"},           weightKg:1, price:349, img:"img/grill-set.jpg" },
-    { id:"grid-flat",  cat:"GRILL", name:{uk:"Решітка (пласка)",     ru:"Решетка (плоская)",    en:"Grill grid (flat)"},  weightKg:1, price:279, img:"img/grid-flat.jpg" },
-    { id:"grid-double",cat:"GRILL", name:{uk:"Решітка (подвійна)",   ru:"Решетка (двойная)",    en:"Grill grid (double)"},weightKg:1, price:319, img:"img/grid-double.jpg" },
-    { id:"grid-saus",  cat:"GRILL", name:{uk:"Решітка для ковбасок", ru:"Решетка для сосисок",  en:"Sausage grill grid"},  weightKg:1, price:259, img:"img/grid-sausage.jpg" },
+    /* +4 нових товарів (поклади файли у img/ з цими назвами) */
+    { id:"charcoal-5kg", group:"charcoal", badge:"CHARCOAL", name:{uk:"Вугілля BLACKWOOD 5 кг (kraft)", ru:"Уголь BLACKWOOD 5 кг (kraft)", en:"BLACKWOOD Charcoal 5 kg (kraft)"}, weightKg:5, price:329, img:"img/charcoal-5kg.jpg" },
+    { id:"charcoal-10kg", group:"charcoal", badge:"CHARCOAL", name:{uk:"Вугілля BLACKWOOD 10 кг (kraft)", ru:"Уголь BLACKWOOD 10 кг (kraft)", en:"BLACKWOOD Charcoal 10 kg (kraft)"}, weightKg:10, price:549, img:"img/charcoal-10kg.jpg" },
+    { id:"royal", group:"set", badge:"SET", name:{uk:"BLACKWOOD Royal Ignition", ru:"BLACKWOOD Royal Ignition", en:"BLACKWOOD Royal Ignition"}, weightKg:1, price:179, img:"img/royal-ignition.jpg" },
+    { id:"starter-set", group:"set", badge:"SET", name:{uk:"Сет Starter (вугілля + розпал)", ru:"Сет Starter (уголь + розжиг)", en:"Starter Set (charcoal + ignition)"}, weightKg:1, price:899, img:"img/starter-set.jpg" },
 
-    { id:"weekend",  cat:"SET",   name:{uk:"Набір Weekend Box",      ru:"Набор Weekend Box",    en:"Weekend Box set"},     weightKg:1, price:799, img:"img/weekend-box.jpg" },
+    /* Інші товари (як у твоїй папці img/) */
+    { id:"starter",  group:"other", badge:"BBQ", name:{uk:"Розпалювач", ru:"Розжиг", en:"Fire starter"}, weightKg:1, price:149, img:"img/starter.jpg" },
+    { id:"apron",    group:"other", badge:"ACCESS", name:{uk:"Фартух BBQ", ru:"Фартук BBQ", en:"BBQ apron"}, weightKg:1, price:299, img:"img/apron.jpg" },
+    { id:"gloves",   group:"other", badge:"ACCESS", name:{uk:"Рукавиці для гриля", ru:"Перчатки для гриля", en:"BBQ gloves"}, weightKg:1, price:249, img:"img/gloves.jpg" },
+    { id:"thermo",   group:"other", badge:"ACCESS", name:{uk:"Термометр", ru:"Термометр", en:"Thermometer"}, weightKg:1, price:219, img:"img/thermometer.jpg" },
+    { id:"blower",   group:"other", badge:"ACCESS", name:{uk:"Міх для роздуву", ru:"Мех для раздува", en:"BBQ blower"}, weightKg:1, price:129, img:"img/blower.jpg" },
+
+    { id:"grid-set",    group:"other", badge:"GRILL", name:{uk:"Набір для гриля", ru:"Набор для гриля", en:"Grill set"}, weightKg:1, price:349, img:"img/grill-set.jpg" },
+    { id:"grid-flat",   group:"other", badge:"GRILL", name:{uk:"Решітка (пласка)", ru:"Решетка (плоская)", en:"Grill grid (flat)"}, weightKg:1, price:279, img:"img/grid-flat.jpg" },
+    { id:"grid-double", group:"other", badge:"GRILL", name:{uk:"Решітка (подвійна)", ru:"Решетка (двойная)", en:"Grill grid (double)"}, weightKg:1, price:319, img:"img/grid-double.jpg" },
+    { id:"grid-saus",   group:"other", badge:"GRILL", name:{uk:"Решітка для ковбасок", ru:"Решетка для сосисок", en:"Sausage grill grid"}, weightKg:1, price:259, img:"img/grid-sausage.jpg" },
   ];
 
   function safeImg(img){
@@ -85,19 +93,25 @@
 
     const lang = window.BW_I18N?.getLang?.() || "uk";
     const qInput = document.querySelector("[data-catalog-search]");
+    const filterWrap = document.querySelector("[data-filters]");
+    let activeGroup = "all";
 
     const draw = () => {
+      const langNow = window.BW_I18N?.getLang?.() || "uk";
       const q = (qInput?.value || "").trim().toLowerCase();
+
       const list = PRODUCTS.filter(p => {
-        const name = (p.name?.[lang] || p.name?.uk || "").toLowerCase();
-        return !q || name.includes(q) || (p.cat||"").toLowerCase().includes(q);
+        const name = (p.name?.[langNow] || p.name?.uk || "").toLowerCase();
+        const okQuery = !q || name.includes(q) || (p.badge||"").toLowerCase().includes(q);
+        const okGroup = activeGroup === "all" || p.group === activeGroup;
+        return okQuery && okGroup;
       });
 
       grid.innerHTML = list.map(p => {
-        const name = p.name?.[lang] || p.name?.uk || p.id;
-        const addLabel = window.BW_I18N?.t?.("add_to_cart", lang) || "Add";
-        const weightLabel = window.BW_I18N?.t?.("weight", lang) || "Weight";
-        const kgLabel = window.BW_I18N?.t?.("kg", lang) || "kg";
+        const name = p.name?.[langNow] || p.name?.uk || p.id;
+        const addLabel = window.BW_I18N?.t?.("add_to_cart", langNow) || "Add";
+        const weightLabel = window.BW_I18N?.t?.("weight", langNow) || "Weight";
+        const kgLabel = window.BW_I18N?.t?.("kg", langNow) || "kg";
         return `
           <article class="card product">
             <div class="thumb">
@@ -106,7 +120,7 @@
             <div class="body">
               <div class="name">${name}</div>
               <div class="meta">
-                <div class="mini"><span class="pill">${p.cat}</span> &nbsp; ${weightLabel}: <b>${p.weightKg}</b> ${kgLabel}</div>
+                <div class="mini"><span class="pill">${p.badge}</span> &nbsp; ${weightLabel}: <b>${p.weightKg}</b> ${kgLabel}</div>
                 <div class="price">${money(p.price)}</div>
               </div>
               <button class="btn primary small" data-add="${p.id}">${addLabel}</button>
@@ -115,6 +129,16 @@
         `;
       }).join("");
     };
+
+    if (filterWrap){
+      filterWrap.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-group]");
+        if (!b) return;
+        activeGroup = b.getAttribute("data-group") || "all";
+        filterWrap.querySelectorAll("[data-group]").forEach(x => x.classList.toggle("is-active", x === b));
+        draw();
+      });
+    }
 
     draw();
     qInput?.addEventListener("input", draw);
@@ -155,7 +179,7 @@
               <span class="rowimg"><img src="${p.img}?v=1" alt="${name}" onerror="this.onerror=null;(${safeImg.toString()})(this)"></span>
               <div>
                 <div style="font-weight:950">${name}</div>
-                <div class="mini"><span class="pill">${p.cat}</span></div>
+                <div class="mini"><span class="pill">${p.badge}</span></div>
               </div>
             </td>
             <td>
