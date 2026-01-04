@@ -163,16 +163,19 @@
     },
 
     // 18-й товар (пока файла нет — добавь img/mesh-5.jpg или поменяй на свой файл)
-    {
-      id: "acc-mesh-5",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 299,
-      img: "img/mesh-5.jpg",
-      name: { uk: "Сітки для вугілля (5 шт)", ru: "Сетки для угля (5 шт)", en: "Charcoal mesh bags (5 pcs)" },
-    },
-  ];
+  {
+  id: "starter-kit",
+  brand: "SET",
+  category: "sets",
+  weight: "—",
+  price: 349,
+  img: "img/yard-set.jpg",
+  name: {
+    uk: "BLACKWOOD Starter Kit",
+    ru: "BLACKWOOD Starter Kit",
+    en: "BLACKWOOD Starter Kit"
+  }
+},
 
   const FALLBACK_IMG = "img/core-3kg.png";
 
