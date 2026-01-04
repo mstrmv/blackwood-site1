@@ -4,25 +4,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BLACKWOOD • CHARCOAL</title>
-
-  <link rel="stylesheet" href="assets/style.css" />
-  <script defer src="assets/i18n.js"></script>
-  <script defer src="assets/app.js"></script>
+  <title data-i18n-title="nav_home">Головна • BLACKWOOD CHARCOAL</title>
+  <link rel="stylesheet" href="assets/style.css?v=20260104a" />
+  <script defer src="assets/i18n.js?v=20260104a"></script>
+  <script defer src="assets/app.js?v=20260104a"></script>
 </head>
-
 <body class="page has-bg" style="--page-bg: url('img/hero-bg.png');">
   <div class="noise"></div>
 
-  <!-- HEADER -->
   <header class="topbar">
     <div class="container">
       <div class="nav">
-        <a class="brand" href="index.html">
+        <a class="brand" href="index.html" aria-label="BLACKWOOD CHARCOAL">
           BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
         </a>
 
-        <nav class="navlinks">
+        <nav class="navlinks" aria-label="Navigation">
           <a href="index.html" data-i18n="nav_home">Головна</a>
           <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
           <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
@@ -33,13 +30,13 @@
         <div class="spacer"></div>
 
         <div class="pills">
-          <div class="lang">
-            <button data-lang="uk">UKR</button>
-            <button data-lang="ru">RU</button>
-            <button data-lang="en">EN</button>
+          <div class="lang" aria-label="Language switch">
+            <button type="button" data-lang="uk">UKR</button>
+            <button type="button" data-lang="ru">RU</button>
+            <button type="button" data-lang="en">EN</button>
           </div>
 
-          <a class="cartbtn" href="cart.html">
+          <a class="cartbtn" href="cart.html" aria-label="Cart">
             <small data-i18n="nav_cart">Кошик</small>
             <span class="badge" data-cart-count>0</span>
           </a>
@@ -48,33 +45,41 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <main class="main hero">
     <div class="container">
-      <div class="hero-card" style="max-width:560px;">
-        <div class="hero-card-inner" style="text-align:left;">
-          <h1 class="hero-title">
-            <span>PREMIUM</span>
-            <span class="sub">HARDWOOD CHARCOAL</span>
-          </h1>
+      <div class="hero-grid" style="grid-template-columns: 520px 1fr;">
+        <div class="hero-card">
+          <div class="hero-card-inner">
+            <div class="hero-badge">
+              <span class="dot"></span>
+              <span data-i18n="hero_kicker">Преміальний вуголь для гриля</span>
+            </div>
 
-          <p class="hero-desc">
-            Преміальний деревний вуголь для BBQ та гриля
-          </p>
+            <h1 class="hero-title">
+              <span data-i18n="hero_title_1">PREMIUM</span>
+              <span class="sub" data-i18n="hero_title_2">HARDWOOD CHARCOAL</span>
+            </h1>
+
+            <p class="hero-desc" data-i18n="hero_lead">
+              Довге горіння, мінімум попелу, чистий жар. Ідеально для BBQ та гриля.
+            </p>
+          </div>
         </div>
+
+        <div></div>
       </div>
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="inner">
         <div>© BLACKWOOD • CHARCOAL</div>
-        <div>GitHub Pages • HTML / CSS / JS</div>
+        <div>GitHub Pages • HTML/CSS/JS</div>
       </div>
     </div>
   </footer>
 
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
