@@ -3,59 +3,31 @@
   const CART_KEY = "bw_cart_v1";
   const ORDER_KEY = "bw_order_v1";
 
+  /* ВАЖНО: имена картинок = ровно как у тебя в папке img/ */
   const PRODUCTS = [
-    { id:"core-3",  cat:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 3 кг", ru:"Уголь BLACKWOOD CORE 3 кг", en:"BLACKWOOD CORE 3 kg"},  weightKg:3,  price:199, img:"img/core-3kg.png" },
-    { id:"core-5",  cat:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 5 кг", ru:"Уголь BLACKWOOD CORE 5 кг", en:"BLACKWOOD CORE 5 kg"},  weightKg:5,  price:299, img:"img/core-5kg.png" },
-    { id:"core-10", cat:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 10 кг",ru:"Уголь BLACKWOOD CORE 10 кг",en:"BLACKWOOD CORE 10 kg"}, weightKg:10, price:499, img:"img/core-10kg.png" },
+    { id:"core-3",  cat:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 3 кг",  ru:"Уголь BLACKWOOD CORE 3 кг",  en:"BLACKWOOD CORE 3 kg"},  weightKg:3,  price:199, img:"img/core-3kg.png" },
+    { id:"core-5",  cat:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 5 кг",  ru:"Уголь BLACKWOOD CORE 5 кг",  en:"BLACKWOOD CORE 5 kg"},  weightKg:5,  price:299, img:"img/core-5kg.png" },
+    { id:"core-10", cat:"CORE", name:{uk:"Вугілля BLACKWOOD CORE 10 кг", ru:"Уголь BLACKWOOD CORE 10 кг", en:"BLACKWOOD CORE 10 kg"}, weightKg:10, price:499, img:"img/core-10kg.png" },
 
-    /* дополнительные товары (jpg). Если у тебя других названий — просто переименуй файлы в img/ */
-    { id:"prod-01", cat:"BBQ", name:{uk:"Розпалювач 1 л", ru:"Розжиг 1 л", en:"Fire starter 1 L"}, weightKg:1, price:179, img:"img/product-01.jpg" },
-    { id:"prod-02", cat:"BBQ", name:{uk:"Розпалювач 0.5 л", ru:"Розжиг 0.5 л", en:"Fire starter 0.5 L"}, weightKg:0.5, price:119, img:"img/product-02.jpg" },
-    { id:"prod-03", cat:"BBQ", name:{uk:"Брикети 2 кг", ru:"Брикеты 2 кг", en:"Briquettes 2 kg"}, weightKg:2, price:189, img:"img/product-03.jpg" },
-    { id:"prod-04", cat:"BBQ", name:{uk:"Брикети 5 кг", ru:"Брикеты 5 кг", en:"Briquettes 5 kg"}, weightKg:5, price:349, img:"img/product-04.jpg" },
-    { id:"prod-05", cat:"ACCESS", name:{uk:"Рукавиці для гриля", ru:"Перчатки для гриля", en:"BBQ gloves"}, weightKg:1, price:249, img:"img/product-05.jpg" },
-    { id:"prod-06", cat:"ACCESS", name:{uk:"Щипці для гриля", ru:"Щипцы для гриля", en:"BBQ tongs"}, weightKg:1, price:159, img:"img/product-06.jpg" },
-    { id:"prod-07", cat:"ACCESS", name:{uk:"Щітка для решітки", ru:"Щетка для решетки", en:"Grill brush"}, weightKg:1, price:149, img:"img/product-07.jpg" },
-    { id:"prod-08", cat:"ACCESS", name:{uk:"Фартух BBQ", ru:"Фартук BBQ", en:"BBQ apron"}, weightKg:1, price:299, img:"img/product-08.jpg" },
-    { id:"prod-09", cat:"BBQ", name:{uk:"Тріска для копчення", ru:"Щепа для копчения", en:"Smoking wood chips"}, weightKg:1, price:129, img:"img/product-09.jpg" },
-    { id:"prod-10", cat:"BBQ", name:{uk:"Паливні кубики", ru:"Топливные кубики", en:"Firelighters"}, weightKg:1, price:99, img:"img/product-10.jpg" },
-    { id:"prod-11", cat:"BBQ", name:{uk:"Деревне вугілля 2 кг", ru:"Древесный уголь 2 кг", en:"Hardwood charcoal 2 kg"}, weightKg:2, price:159, img:"img/product-11.jpg" },
-    { id:"prod-12", cat:"BBQ", name:{uk:"Деревне вугілля 8 кг", ru:"Древесный уголь 8 кг", en:"Hardwood charcoal 8 kg"}, weightKg:8, price:399, img:"img/product-12.jpg" },
+    { id:"starter",  cat:"BBQ",    name:{uk:"Розпалювач",            ru:"Розжиг",               en:"Fire starter"},       weightKg:1, price:149, img:"img/starter.jpg" },
+    { id:"royal",    cat:"BBQ",    name:{uk:"Royal ignition",        ru:"Royal ignition",       en:"Royal ignition"},     weightKg:1, price:179, img:"img/royal-ignition.jpg" },
+    { id:"apron",    cat:"ACCESS", name:{uk:"Фартух BBQ",            ru:"Фартук BBQ",           en:"BBQ apron"},          weightKg:1, price:299, img:"img/apron.jpg" },
+    { id:"gloves",   cat:"ACCESS", name:{uk:"Рукавиці для гриля",    ru:"Перчатки для гриля",   en:"BBQ gloves"},         weightKg:1, price:249, img:"img/gloves.jpg" },
+    { id:"thermo",   cat:"ACCESS", name:{uk:"Термометр",             ru:"Термометр",            en:"Thermometer"},        weightKg:1, price:219, img:"img/thermometer.jpg" },
+    { id:"blower",   cat:"ACCESS", name:{uk:"Міх для роздуву",       ru:"Мех для раздува",      en:"BBQ blower"},         weightKg:1, price:129, img:"img/blower.jpg" },
+
+    { id:"grid-set",   cat:"GRILL", name:{uk:"Набір для гриля",      ru:"Набор для гриля",      en:"Grill set"},           weightKg:1, price:349, img:"img/grill-set.jpg" },
+    { id:"grid-flat",  cat:"GRILL", name:{uk:"Решітка (пласка)",     ru:"Решетка (плоская)",    en:"Grill grid (flat)"},  weightKg:1, price:279, img:"img/grid-flat.jpg" },
+    { id:"grid-double",cat:"GRILL", name:{uk:"Решітка (подвійна)",   ru:"Решетка (двойная)",    en:"Grill grid (double)"},weightKg:1, price:319, img:"img/grid-double.jpg" },
+    { id:"grid-saus",  cat:"GRILL", name:{uk:"Решітка для ковбасок", ru:"Решетка для сосисок",  en:"Sausage grill grid"},  weightKg:1, price:259, img:"img/grid-sausage.jpg" },
+
+    { id:"weekend",  cat:"SET",   name:{uk:"Набір Weekend Box",      ru:"Набор Weekend Box",    en:"Weekend Box set"},     weightKg:1, price:799, img:"img/weekend-box.jpg" },
   ];
 
-  const EXT_TRIES = [
-    (src) => src,
-    (src) => src.replace(/\.jpg$/i, ".JPG"),
-    (src) => src.replace(/\.JPG$/i, ".jpg"),
-    (src) => src.replace(/\.jpeg$/i, ".JPEG"),
-    (src) => src.replace(/\.JPEG$/i, ".jpeg"),
-    (src) => src.replace(/\.png$/i, ".PNG"),
-    (src) => src.replace(/\.PNG$/i, ".png"),
-    (src) => src.replace(/\.jpg$/i, ".png"),
-    (src) => src.replace(/\.png$/i, ".jpg"),
-    (src) => "img/core-10kg.png"
-  ];
-
-  function onImgError(img){
-    try{
-      const tried = Number(img.getAttribute("data-try") || "0");
-      const next = tried + 1;
-      img.setAttribute("data-try", String(next));
-      const base = img.getAttribute("data-src") || img.src || "";
-      const clean = base.split("?")[0];
-      const fn = EXT_TRIES[next] || null;
-      if (!fn){
-        img.style.opacity = ".35";
-        img.style.filter = "grayscale(1)";
-        return;
-      }
-      img.src = fn(clean) + "?v=" + next;
-    }catch(_){
-      img.style.opacity = ".35";
-      img.style.filter = "grayscale(1)";
-    }
+  function safeImg(img){
+    img.style.opacity = ".35";
+    img.style.filter = "grayscale(1)";
   }
-  window.BW_IMG = { onError: onImgError };
 
   function money(n){
     const lang = window.BW_I18N?.getLang?.() || "uk";
@@ -129,7 +101,7 @@
         return `
           <article class="card product">
             <div class="thumb">
-              <img src="${p.img}?v=1" data-src="${p.img}" alt="${name}" onerror="BW_IMG.onError(this)">
+              <img src="${p.img}?v=1" alt="${name}" onerror="this.onerror=null;(${safeImg.toString()})(this)">
             </div>
             <div class="body">
               <div class="name">${name}</div>
@@ -162,15 +134,15 @@
     const emptyEl = document.querySelector("[data-cart-empty]");
     if (!tableBody || !totalEl || !emptyEl) return;
 
-    const lang = window.BW_I18N?.getLang?.() || "uk";
-
     const draw = () => {
+      const lang = window.BW_I18N?.getLang?.() || "uk";
       const cart = loadCart();
       const ids = Object.keys(cart);
       const items = ids.map(id => ({ p: productById(id), id, qty: Number(cart[id])||0 })).filter(x => x.p && x.qty>0);
 
       emptyEl.style.display = items.length ? "none" : "block";
-      document.querySelector("[data-cart-table]")?.style?.setProperty("display", items.length ? "table" : "none");
+      const table = document.querySelector("[data-cart-table]");
+      if (table) table.style.display = items.length ? "table" : "none";
 
       let total = 0;
       tableBody.innerHTML = items.map(({p, id, qty}) => {
@@ -180,10 +152,10 @@
         return `
           <tr>
             <td style="display:flex;gap:10px;align-items:center;">
-              <span class="rowimg"><img src="${p.img}?v=1" data-src="${p.img}" alt="${name}" onerror="BW_IMG.onError(this)"></span>
+              <span class="rowimg"><img src="${p.img}?v=1" alt="${name}" onerror="this.onerror=null;(${safeImg.toString()})(this)"></span>
               <div>
                 <div style="font-weight:950">${name}</div>
-                <div class="mini"><span class="pill">${p.cat}</span> &nbsp; ${window.BW_I18N.t("weight",lang)}: <b>${p.weightKg}</b> ${window.BW_I18N.t("kg",lang)}</div>
+                <div class="mini"><span class="pill">${p.cat}</span></div>
               </div>
             </td>
             <td>
@@ -211,10 +183,8 @@
       const id = row.getAttribute("data-qty");
       const cart = loadCart();
       const cur = Number(cart[id])||0;
-
       if (e.target.matches("[data-inc]")) setQty(id, cur + 1);
       if (e.target.matches("[data-dec]")) setQty(id, cur - 1);
-
       draw();
     });
 
@@ -230,8 +200,6 @@
     const form = document.querySelector("[data-checkout-form]");
     if (!form) return;
 
-    const lang = window.BW_I18N?.getLang?.() || "uk";
-
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const cart = loadCart();
@@ -241,6 +209,7 @@
         return;
       }
 
+      const lang = window.BW_I18N?.getLang?.() || "uk";
       const fd = new FormData(form);
       const order = {
         ts: Date.now(),
@@ -264,16 +233,6 @@
       clearCart();
       location.href = "success.html";
     });
-
-    window.addEventListener("bw:lang", () => {
-      // ничего, тексты обновляет i18n.js
-    });
-  }
-
-  function renderSuccess(){
-    const box = document.querySelector("[data-success-box]");
-    if (!box) return;
-    renderCartBadge();
   }
 
   function boot(){
@@ -281,7 +240,6 @@
     renderCatalog();
     renderCartPage();
     setupCheckout();
-    renderSuccess();
 
     const year = document.getElementById("y");
     if (year) year.textContent = String(new Date().getFullYear());
