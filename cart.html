@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <div class="bg bg--catalog"></div>
+  <div class="bg"></div>
   <div class="grain"></div>
 
   <header class="topbar">
@@ -63,13 +63,15 @@
   </header>
 
   <main class="container">
-    <section class="card" style="padding:18px">
+    <div class="card" style="padding:16px">
       <div class="kicker" data-i18n="section_cart">Кошик</div>
       <h1 class="h2" style="margin-top:10px" data-i18n="section_cart">Кошик</h1>
 
-      <div class="notice" data-cart-empty style="margin-top:14px; display:none" data-i18n="cart_empty">Ваш кошик порожній.</div>
+      <div class="notice" data-cart-empty data-i18n="cart_empty" style="margin-top:14px">
+        Ваш кошик порожній.
+      </div>
 
-      <table class="table" data-cart-table style="margin-top:14px">
+      <table class="table" data-cart-table style="margin-top:14px;display:none">
         <thead>
           <tr>
             <th data-i18n="col_item">Товар</th>
@@ -81,16 +83,17 @@
         <tbody data-cart-body></tbody>
       </table>
 
-      <div class="split" style="margin-top:14px">
-        <div class="notice">
-          <b data-i18n="cart_total">Разом</b>: <span data-cart-total style="font-weight:950">0 ₴</span>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-top:14px">
+        <div class="notice" style="display:flex;gap:10px;align-items:center">
+          <span data-i18n="cart_total">Разом</span>
+          <b data-cart-total>0 ₴</b>
         </div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
-          <button class="btn danger small" type="button" data-cart-clear data-i18n="cart_clear">Очистити кошик</button>
-          <a class="btn primary small" href="checkout.html" data-i18n="cart_checkout">Оформити замовлення</a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn danger" type="button" data-cart-clear data-i18n="cart_clear">Очистити кошик</button>
+          <a class="btn primary" href="checkout.html" data-i18n="cart_checkout">Оформити замовлення</a>
         </div>
       </div>
-    </section>
+    </div>
   </main>
 
   <script src="assets/i18n.js"></script>
