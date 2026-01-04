@@ -11,7 +11,6 @@
       nav_about: "Про нас",
       nav_contacts: "Контакти",
       nav_cart: "Кошик",
-      buy_now: "Купити",
       hero_kicker: "Преміальний вуголь для гриля",
       hero_title_1: "PREMIUM",
       hero_title_2: "HARDWOOD CHARCOAL",
@@ -33,6 +32,11 @@
       category_core: "CORE вугілля",
       category_yard: "YARD вугілля",
       category_sets: "Сітки / Сети / Аксесуари",
+      sort_popular: "Популярне",
+      sort_price_asc: "Ціна ↑",
+      sort_price_desc: "Ціна ↓",
+      sort_name_asc: "Назва A→Z",
+      sort_name_desc: "Назва Z→A",
       add_to_cart: "Додати в кошик",
       added_to_cart: "Додано в кошик",
       in_cart: "В кошику",
@@ -40,7 +44,7 @@
       shipping_title: "Доставка",
       shipping_text: "Відправка по Україні. Опрацювання замовлення — щодня. Термін доставки зазвичай 1–3 дні (залежить від перевізника). Оплата: картка / готівка / післяплата (за домовленістю).",
       about_title: "Про нас",
-      about_text: "BLACKWOOD • CHARCOAL — преміальний деревний вуголь для гриля та BBQ. Лінійки CORE і YARD, а також аксесуари: сітки, рукавички, щипці та набори для старту.",
+      about_text: "BLACKWOOD • CHARCOAL — преміальний деревний вуголь для гриля та BBQ. Лінійки CORE і YARD, а також аксесуари: сітки, рукавички, щипці та набори.",
       contacts_title: "Контакти",
       contacts_text: "Напишіть нам у соцмережах або залиште заявку. Ми відповімо якнайшвидше.",
       contact_name: "Ім'я",
@@ -82,7 +86,6 @@
       nav_about: "О нас",
       nav_contacts: "Контакты",
       nav_cart: "Корзина",
-      buy_now: "Купить",
       hero_kicker: "Премиум уголь для гриля",
       hero_title_1: "PREMIUM",
       hero_title_2: "HARDWOOD CHARCOAL",
@@ -104,6 +107,11 @@
       category_core: "CORE уголь",
       category_yard: "YARD уголь",
       category_sets: "Сетки / Сеты / Аксессуары",
+      sort_popular: "Популярное",
+      sort_price_asc: "Цена ↑",
+      sort_price_desc: "Цена ↓",
+      sort_name_asc: "Название A→Z",
+      sort_name_desc: "Название Z→A",
       add_to_cart: "В корзину",
       added_to_cart: "Добавлено в корзину",
       in_cart: "В корзине",
@@ -153,7 +161,6 @@
       nav_about: "About",
       nav_contacts: "Contacts",
       nav_cart: "Cart",
-      buy_now: "Buy",
       hero_kicker: "Premium charcoal for grill",
       hero_title_1: "PREMIUM",
       hero_title_2: "HARDWOOD CHARCOAL",
@@ -175,6 +182,11 @@
       category_core: "CORE charcoal",
       category_yard: "YARD charcoal",
       category_sets: "Mesh / Sets / Accessories",
+      sort_popular: "Popular",
+      sort_price_asc: "Price ↑",
+      sort_price_desc: "Price ↓",
+      sort_name_asc: "Name A→Z",
+      sort_name_desc: "Name Z→A",
       add_to_cart: "Add to cart",
       added_to_cart: "Added to cart",
       in_cart: "In cart",
@@ -257,11 +269,10 @@
       btn.setAttribute("aria-pressed", l === lang ? "true" : "false");
     });
 
-    const titleEl = document.querySelector("title[data-i18n-title]");
-    if (titleEl){
-      const key = titleEl.getAttribute("data-i18n-title");
-      titleEl.textContent = `${t(key)} • BLACKWOOD CHARCOAL`;
-    }
+    document.querySelectorAll("[data-i18n-title]").forEach(el => {
+      const key = el.getAttribute("data-i18n-title");
+      el.textContent = `${t(key)} • BLACKWOOD CHARCOAL`;
+    });
 
     window.dispatchEvent(new CustomEvent("bw:lang", { detail: { lang } }));
   }
