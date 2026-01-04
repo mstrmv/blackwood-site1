@@ -31,7 +31,7 @@ button,input,select,textarea{font-family:inherit}
 
 .container{width:min(var(--container), calc(100% - 32px)); margin:0 auto}
 
-/* ===== BACKGROUND (с нормальным fallback, чтобы точно работало) ===== */
+/* ===== BACKGROUND (точно работает на GitHub Pages) ===== */
 .bg{
   position:fixed; inset:0; z-index:-2;
   background:
@@ -40,38 +40,24 @@ button,input,select,textarea{font-family:inherit}
     radial-gradient(600px 280px at 15% 10%, rgba(255,255,255,.06), transparent 60%),
     linear-gradient(180deg, rgba(0,0,0,.76), rgba(0,0,0,.92));
 }
-
 .bg::before{
   content:"";
   position:absolute; inset:0;
-  /* Fallback 1: png */
-  background-image:url("../img/catalog-bg.png");
   background-size:cover;
   background-position:center;
   opacity:.18;
   filter:saturate(.92) contrast(1.06);
 }
-
-/* Fallback 2: если файл у тебя с другим регистром/расширением */
-.bg::before{
-  background-image:
-    image-set(
-      url("../img/catalog-bg.png") 1x,
-      url("../img/catalog-bg.PNG") 1x,
-      url("../img/catalog-bg.jpg") 1x,
-      url("../img/catalog-bg.JPG") 1x,
-      url("../img/catalog-bg.jpeg") 1x,
-      url("../img/catalog-bg.JPEG") 1x
-    );
-}
-
 .bg--hero::before{
-  /* Fallback 1 */
   background-image:url("../img/hero-bg.png");
-  opacity:.34;
+  opacity:.36;
+}
+.bg--catalog::before{
+  background-image:url("../img/catalog-bg.png");
+  opacity:.18;
 }
 
-/* Fallback 2 */
+/* fallback на случай другого расширения/регистра */
 .bg--hero::before{
   background-image:
     image-set(
@@ -81,6 +67,17 @@ button,input,select,textarea{font-family:inherit}
       url("../img/hero-bg.JPG") 1x,
       url("../img/hero-bg.jpeg") 1x,
       url("../img/hero-bg.JPEG") 1x
+    );
+}
+.bg--catalog::before{
+  background-image:
+    image-set(
+      url("../img/catalog-bg.png") 1x,
+      url("../img/catalog-bg.PNG") 1x,
+      url("../img/catalog-bg.jpg") 1x,
+      url("../img/catalog-bg.JPG") 1x,
+      url("../img/catalog-bg.jpeg") 1x,
+      url("../img/catalog-bg.JPEG") 1x
     );
 }
 
@@ -182,7 +179,7 @@ button,input,select,textarea{font-family:inherit}
 .iconbtn:hover{transform:translateY(-1px); background:rgba(255,255,255,.09)}
 .iconbtn svg{width:18px; height:18px; opacity:.92}
 
-/* ===== MAIN ===== */
+/* ===== COMMON ===== */
 main{padding:26px 0 60px}
 
 .kicker{
@@ -198,11 +195,18 @@ main{padding:26px 0 60px}
 }
 .h1{
   margin:14px 0 10px;
-  font-size:54px;
+  font-size:52px;
   line-height:1.03;
   letter-spacing:.3px;
 }
 @media (max-width:520px){ .h1{font-size:36px} }
+
+.h2{
+  margin:0 0 8px;
+  font-size:22px;
+  font-weight:950;
+  letter-spacing:.2px;
+}
 
 .p{
   margin:0;
@@ -211,9 +215,13 @@ main{padding:26px 0 60px}
   line-height:1.55;
 }
 
-.hero-actions{
-  display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;
+.card{
+  border:1px solid var(--stroke);
+  background:linear-gradient(180deg, var(--panel), var(--panel2));
+  border-radius:var(--r2);
+  box-shadow:var(--shadow);
 }
+
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:10px;
   padding:12px 14px;
@@ -221,7 +229,7 @@ main{padding:26px 0 60px}
   border:1px solid rgba(255,255,255,.10);
   background:rgba(255,255,255,.07);
   color:#fff;
-  font-weight:800;
+  font-weight:850;
   cursor:pointer;
   transition:.15s ease;
 }
@@ -232,8 +240,28 @@ main{padding:26px 0 60px}
 }
 .btn.primary:hover{background:linear-gradient(180deg, rgba(200,164,90,.28), rgba(200,164,90,.16))}
 .btn.small{padding:9px 12px; border-radius:12px; font-size:14px}
+.btn.block{width:100%}
+.btn.danger{border-color:rgba(255,255,255,.10); background:rgba(255,80,80,.10)}
+.btn.danger:hover{background:rgba(255,80,80,.16)}
 
-/* ===== HOME (как на втором фото: только фон + левый текстовый блок) ===== */
+.pill{
+  font-size:12px;
+  color:#fff;
+  border:1px solid rgba(200,164,90,.22);
+  background:rgba(200,164,90,.10);
+  padding:6px 10px;
+  border-radius:999px;
+  font-weight:900;
+}
+
+.section-title{
+  margin:18px 0 12px;
+  font-size:18px;
+  font-weight:950;
+  letter-spacing:.2px;
+}
+
+/* ===== HOME (только фон + левый блок) ===== */
 .page-home main{padding:34px 0 40px}
 .home-hero{
   min-height: calc(100vh - 88px);
@@ -242,21 +270,168 @@ main{padding:26px 0 60px}
   justify-content:flex-start;
 }
 .home-card{
-  width:min(620px, 100%);
+  width:min(640px, 100%);
   padding:22px 22px 20px;
   border-radius:24px;
   border:1px solid rgba(255,255,255,.10);
   background: rgba(20,20,22,.34);
   box-shadow:0 26px 70px rgba(0,0,0,.60);
   backdrop-filter: blur(18px);
-  margin-left: 0; /* текст максимально левее (внутри container) */
 }
 @media (max-width: 520px){
   .home-card{padding:18px; border-radius:20px}
 }
+.home-actions{display:flex; gap:10px; margin-top:16px; flex-wrap:wrap}
 .home-foot{
   margin-top:14px;
   color:rgba(255,255,255,.52);
   font-size:12px;
   letter-spacing:.4px;
 }
+
+/* ===== CATALOG ===== */
+.toolbar{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px;
+}
+@media (max-width: 720px){
+  .toolbar{flex-direction:column; align-items:stretch}
+}
+.search{
+  flex:1;
+  display:flex; gap:10px; align-items:center;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,.05);
+}
+.search input{
+  width:100%;
+  border:0;
+  background:transparent;
+  outline:none;
+  color:#fff;
+  font-weight:800;
+}
+.search svg{width:18px;height:18px;opacity:.85; flex:0 0 auto}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:14px;
+}
+@media (max-width: 980px){ .grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width: 560px){ .grid{grid-template-columns:1fr} }
+
+.product{overflow:hidden; display:flex; flex-direction:column; min-height:100%}
+.product .thumb{
+  position:relative;
+  aspect-ratio: 4 / 3;
+  background: radial-gradient(600px 280px at 50% 0%, rgba(200,164,90,.16), transparent 60%),
+              rgba(255,255,255,.04);
+  border-bottom:1px solid var(--stroke);
+  display:grid;
+  place-items:center;
+  padding:10px;
+}
+.product .thumb img{
+  max-height:100%;
+  object-fit:contain;
+  filter: drop-shadow(0 14px 30px rgba(0,0,0,.55));
+}
+.product .body{padding:14px; display:grid; gap:10px}
+.product .name{font-weight:950; letter-spacing:.2px}
+.product .meta{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.price{font-weight:950; letter-spacing:.2px}
+.mini{color:var(--muted2); font-size:13px}
+
+/* ===== CART / TABLE ===== */
+.table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  overflow:hidden;
+  border:1px solid var(--stroke);
+  border-radius:18px;
+  background:rgba(255,255,255,.04);
+}
+.table th,.table td{
+  padding:12px 12px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  text-align:left;
+  vertical-align:middle;
+}
+.table th{
+  color:var(--muted2);
+  font-size:12px;
+  letter-spacing:.7px;
+  text-transform:uppercase;
+}
+.table tr:last-child td{border-bottom:0}
+.rowimg{
+  width:56px; height:42px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.05);
+  display:grid; place-items:center;
+  overflow:hidden;
+}
+.rowimg img{width:100%;height:100%;object-fit:contain}
+
+.qty{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.05);
+}
+.qty button{
+  width:32px; height:32px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  cursor:pointer;
+  font-weight:950;
+}
+.qty button:hover{background:rgba(255,255,255,.10)}
+.qty span{min-width:24px; text-align:center; font-weight:950}
+
+.split{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:14px;
+}
+@media (max-width: 980px){ .split{grid-template-columns:1fr} }
+
+.notice{
+  padding:12px 14px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.05);
+  border-radius:16px;
+  color:var(--muted);
+}
+
+.form{display:grid; gap:10px; padding:16px}
+.field{display:grid; gap:6px}
+.field label{font-size:13px; color:var(--muted2); font-weight:900}
+.field input,.field textarea, .field select{
+  padding:12px 12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.05);
+  color:#fff;
+  outline:none;
+  font-weight:800;
+}
+.field textarea{min-height:110px; resize:vertical}
+
+.footer{
+  padding:26px 0;
+  border-top:1px solid var(--stroke);
+  color:var(--muted2);
+  background: rgba(0,0,0,.20);
+}
+.footer .row{display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap}
