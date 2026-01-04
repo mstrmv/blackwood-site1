@@ -4,11 +4,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BLACKWOOD • CHARCOAL — Успіх</title>
+  <title>BLACKWOOD • Успіх</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <div class="bg"></div>
+  <div class="bg bg--catalog"></div>
   <div class="grain"></div>
 
   <header class="topbar">
@@ -24,7 +24,10 @@
           <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
           <a href="about.html" data-i18n="nav_about">Про нас</a>
           <a href="contacts.html" data-i18n="nav_contacts">Контакти</a>
-          <a href="cart.html" data-i18n="nav_cart">Кошик <span data-cart-count style="display:none;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid rgba(200,164,90,.25);background:rgba(200,164,90,.12);font-weight:900;font-size:12px;">0</span></a>
+          <a href="cart.html" data-i18n="nav_cart">
+            Кошик
+            <span data-cart-count style="display:none;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid rgba(200,164,90,.25);background:rgba(200,164,90,.12);font-weight:900;font-size:12px;">0</span>
+          </a>
         </nav>
 
         <div class="rightbar">
@@ -60,28 +63,19 @@
   </header>
 
   <main class="container">
-    <div class="card" style="padding:18px">
-      <div class="section-title" data-i18n="success_title">Замовлення створено</div>
-      <p class="p" data-i18n="success_text">Дякуємо! Дані збережено. Ми зв’яжемося з вами для підтвердження.</p>
+    <section class="card" style="padding:18px" data-success-box>
+      <div class="kicker" data-i18n="success_title">Замовлення прийнято!</div>
+      <h1 class="h2" style="margin-top:10px" data-i18n="success_title">Замовлення прийнято!</h1>
+      <p class="p" data-i18n="success_text">Дякуємо! Ми зв’яжемося з вами найближчим часом.</p>
 
-      <div class="hero-actions" style="margin-top:14px">
-        <a class="btn primary" href="index.html" data-i18n="back_home">На головну</a>
-        <a class="btn" href="catalog.html" data-i18n="back_catalog">До каталогу</a>
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+        <a class="btn primary" href="index.html" data-i18n="back_home">Повернутися на головну</a>
+        <a class="btn" href="catalog.html" data-i18n="nav_catalog">Каталог</a>
       </div>
-    </div>
+    </section>
   </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="mini">BLACKWOOD • CHARCOAL</div>
-        <div class="mini">© <span id="y"></span></div>
-      </div>
-    </div>
-  </footer>
 
   <script src="assets/i18n.js"></script>
   <script src="assets/app.js"></script>
-  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 </html>
