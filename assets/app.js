@@ -2,8 +2,6 @@
 (() => {
   const CART_KEY = "bw_cart_v1";
 
-  const money = (n) => new Intl.NumberFormat("uk-UA", { style:"currency", currency:"UAH", maximumFractionDigits:0 }).format(n);
-
   const FALLBACK_IMG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
     <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900">
       <defs>
@@ -33,37 +31,62 @@
   `);
 
   const PRODUCTS = [
-    // CORE (png files exist)
-    { id:"core-3",  brand:"core", category:"core", weight:"3 kg",  price:299, img:"img/core-3kg.png",  nameKey:{uk:"BLACKWOOD CORE 3 кг", ru:"BLACKWOOD CORE 3 кг", en:"BLACKWOOD CORE 3 kg"} },
-    { id:"core-5",  brand:"core", category:"core", weight:"5 kg",  price:459, img:"img/core-5kg.png",  nameKey:{uk:"BLACKWOOD CORE 5 кг", ru:"BLACKWOOD CORE 5 кг", en:"BLACKWOOD CORE 5 kg"} },
-    { id:"core-10", brand:"core", category:"core", weight:"10 kg", price:799, img:"img/core-10kg.png", nameKey:{uk:"BLACKWOOD CORE 10 кг",ru:"BLACKWOOD CORE 10 кг",en:"BLACKWOOD CORE 10 kg"} },
+    { id:"core-3",  category:"core", weight:"3 kg",  price:299, img:"img/core-3kg.png",
+      nameKey:{uk:"BLACKWOOD CORE 3 кг", ru:"BLACKWOOD CORE 3 кг", en:"BLACKWOOD CORE 3 kg"} },
+    { id:"core-5",  category:"core", weight:"5 kg",  price:459, img:"img/core-5kg.png",
+      nameKey:{uk:"BLACKWOOD CORE 5 кг", ru:"BLACKWOOD CORE 5 кг", en:"BLACKWOOD CORE 5 kg"} },
+    { id:"core-10", category:"core", weight:"10 kg", price:799, img:"img/core-10kg.png",
+      nameKey:{uk:"BLACKWOOD CORE 10 кг", ru:"BLACKWOOD CORE 10 кг", en:"BLACKWOOD CORE 10 kg"} },
 
-    // YARD (jpg placeholders - keep names = your real .jpg)
-    { id:"yard-3",  brand:"yard", category:"yard", weight:"3 kg",  price:269, img:"img/yard-3kg.jpg",  nameKey:{uk:"BLACKWOOD YARD 3 кг", ru:"BLACKWOOD YARD 3 кг", en:"BLACKWOOD YARD 3 kg"} },
-    { id:"yard-5",  brand:"yard", category:"yard", weight:"5 kg",  price:419, img:"img/yard-5kg.jpg",  nameKey:{uk:"BLACKWOOD YARD 5 кг", ru:"BLACKWOOD YARD 5 кг", en:"BLACKWOOD YARD 5 kg"} },
-    { id:"yard-10", brand:"yard", category:"yard", weight:"10 kg", price:739, img:"img/yard-10kg.jpg", nameKey:{uk:"BLACKWOOD YARD 10 кг",ru:"BLACKWOOD YARD 10 кг",en:"BLACKWOOD YARD 10 kg"} },
+    /* JPG items (імена файлів мають відповідати вашим реальним .jpg у папці img/) */
+    { id:"yard-3",  category:"yard", weight:"3 kg",  price:269, img:"img/yard-3kg.jpg",
+      nameKey:{uk:"BLACKWOOD YARD 3 кг", ru:"BLACKWOOD YARD 3 кг", en:"BLACKWOOD YARD 3 kg"} },
+    { id:"yard-5",  category:"yard", weight:"5 kg",  price:419, img:"img/yard-5kg.jpg",
+      nameKey:{uk:"BLACKWOOD YARD 5 кг", ru:"BLACKWOOD YARD 5 кг", en:"BLACKWOOD YARD 5 kg"} },
+    { id:"yard-10", category:"yard", weight:"10 kg", price:739, img:"img/yard-10kg.jpg",
+      nameKey:{uk:"BLACKWOOD YARD 10 кг", ru:"BLACKWOOD YARD 10 кг", en:"BLACKWOOD YARD 10 kg"} },
 
-    // Sets / Mesh / Accessories (jpg placeholders)
-    { id:"mesh-1",  brand:"set", category:"sets", weight:"—", price:79,  img:"img/mesh-bag-1.jpg",  nameKey:{uk:"Сітка для вугілля (1 шт)", ru:"Сетка для угля (1 шт)", en:"Charcoal mesh bag (1 pc)"} },
-    { id:"mesh-5",  brand:"set", category:"sets", weight:"—", price:299, img:"img/mesh-bag-5.jpg",  nameKey:{uk:"Сітки для вугілля (5 шт)", ru:"Сетки для угля (5 шт)", en:"Charcoal mesh bags (5 pcs)"} },
-    { id:"starter", brand:"set", category:"sets", weight:"—", price:349, img:"img/starter-kit.jpg",  nameKey:{uk:"Стартовий набір для гриля", ru:"Стартовый набор для гриля", en:"Grill starter kit"} },
-    { id:"fire",    brand:"set", category:"sets", weight:"—", price:129, img:"img/firestarter.jpg",  nameKey:{uk:"Розпалювач", ru:"Розжиг", en:"Firestarter"} },
-    { id:"gloves",  brand:"set", category:"sets", weight:"—", price:249, img:"img/grill-gloves.jpg", nameKey:{uk:"Рукавички для гриля", ru:"Перчатки для гриля", en:"Grill gloves"} },
-    { id:"tongs",   brand:"set", category:"sets", weight:"—", price:219, img:"img/tongs.jpg",       nameKey:{uk:"Щипці для гриля", ru:"Щипцы для гриля", en:"Grill tongs"} },
-    { id:"brush",   brand:"set", category:"sets", weight:"—", price:189, img:"img/brush.jpg",       nameKey:{uk:"Щітка для решітки", ru:"Щетка для решетки", en:"Grill brush"} },
-    { id:"grate",   brand:"set", category:"sets", weight:"—", price:499, img:"img/grate.jpg",       nameKey:{uk:"Решітка для гриля", ru:"Решетка для гриля", en:"Grill grate"} },
-    { id:"box",     brand:"set", category:"sets", weight:"—", price:159, img:"img/storage-box.jpg", nameKey:{uk:"Контейнер для зберігання", ru:"Контейнер для хранения", en:"Storage container"} },
-    { id:"set-bbq", brand:"set", category:"sets", weight:"—", price:699, img:"img/bbq-set.jpg",     nameKey:{uk:"BBQ сет (аксесуари)", ru:"BBQ сет (аксессуары)", en:"BBQ set (accessories)"} },
-    { id:"bundle-core", brand:"set", category:"sets", weight:"—", price:1099, img:"img/core-bundle.jpg", nameKey:{uk:"CORE сет (3+5 кг)", ru:"CORE сет (3+5 кг)", en:"CORE bundle (3+5 kg)"} },
-    { id:"bundle-yard", brand:"set", category:"sets", weight:"—", price:999, img:"img/yard-bundle.jpg", nameKey:{uk:"YARD сет (3+5 кг)", ru:"YARD сет (3+5 кг)", en:"YARD bundle (3+5 kg)"} },
+    { id:"mesh-1",  category:"sets", weight:"—", price:79,  img:"img/mesh-1.jpg",
+      nameKey:{uk:"Сітка для вугілля (1 шт)", ru:"Сетка для угля (1 шт)", en:"Charcoal mesh bag (1 pc)"} },
+    { id:"mesh-5",  category:"sets", weight:"—", price:299, img:"img/mesh-5.jpg",
+      nameKey:{uk:"Сітки для вугілля (5 шт)", ru:"Сетки для угля (5 шт)", en:"Charcoal mesh bags (5 pcs)"} },
+    { id:"starter", category:"sets", weight:"—", price:349, img:"img/starter-kit.jpg",
+      nameKey:{uk:"Стартовий набір для гриля", ru:"Стартовый набор для гриля", en:"Grill starter kit"} },
+    { id:"fire",    category:"sets", weight:"—", price:129, img:"img/firestarter.jpg",
+      nameKey:{uk:"Розпалювач", ru:"Розжиг", en:"Firestarter"} },
+    { id:"gloves",  category:"sets", weight:"—", price:249, img:"img/gloves.jpg",
+      nameKey:{uk:"Рукавички для гриля", ru:"Перчатки для гриля", en:"Grill gloves"} },
+    { id:"tongs",   category:"sets", weight:"—", price:219, img:"img/tongs.jpg",
+      nameKey:{uk:"Щипці для гриля", ru:"Щипцы для гриля", en:"Grill tongs"} },
+    { id:"brush",   category:"sets", weight:"—", price:189, img:"img/brush.jpg",
+      nameKey:{uk:"Щітка для решітки", ru:"Щетка для решетки", en:"Grill brush"} },
+    { id:"grate",   category:"sets", weight:"—", price:499, img:"img/grate.jpg",
+      nameKey:{uk:"Решітка для гриля", ru:"Решетка для гриля", en:"Grill grate"} },
+    { id:"box",     category:"sets", weight:"—", price:159, img:"img/box.jpg",
+      nameKey:{uk:"Контейнер для зберігання", ru:"Контейнер для хранения", en:"Storage container"} },
+    { id:"set-bbq", category:"sets", weight:"—", price:699, img:"img/bbq-set.jpg",
+      nameKey:{uk:"BBQ сет (аксесуари)", ru:"BBQ сет (аксессуары)", en:"BBQ set (accessories)"} },
+    { id:"bundle-core", category:"sets", weight:"—", price:1099, img:"img/core-bundle.jpg",
+      nameKey:{uk:"CORE сет (3+5 кг)", ru:"CORE сет (3+5 кг)", en:"CORE bundle (3+5 kg)"} },
+    { id:"bundle-yard", category:"sets", weight:"—", price:999, img:"img/yard-bundle.jpg",
+      nameKey:{uk:"YARD сет (3+5 кг)", ru:"YARD сет (3+5 кг)", en:"YARD bundle (3+5 kg)"} },
   ];
 
-  function getLang(){
-    return (window.BW_I18N && BW_I18N.getLang()) || "uk";
-  }
+  function getLang(){ return (window.BW_I18N && BW_I18N.getLang()) || "uk"; }
+  function t(key){ return (window.BW_I18N && BW_I18N.t(key)) || key; }
   function nameOf(p){
     const lang = getLang();
     return (p.nameKey && (p.nameKey[lang] || p.nameKey.uk)) || p.id;
+  }
+
+  function money(n){
+    try{
+      return new Intl.NumberFormat(getLang() === "en" ? "en-US" : "uk-UA", {
+        style:"currency", currency:"UAH", maximumFractionDigits:0
+      }).format(n);
+    }catch{
+      return `${n} UAH`;
+    }
   }
 
   function loadCart(){
@@ -102,7 +125,7 @@
     el.textContent = msg;
     el.style.display = "block";
     clearTimeout(el._t);
-    el._t = setTimeout(()=>{ el.style.display="none"; }, 1600);
+    el._t = setTimeout(()=>{ el.style.display="none"; }, 1400);
   }
 
   function setActiveNav(){
@@ -113,17 +136,15 @@
     });
   }
 
-  // Background
-  function applyPageBackground(){
-    const el = document.querySelector("[data-page-bg]");
-    if (!el) return;
-    const bg = el.getAttribute("data-page-bg");
-    document.body.classList.add("page");
-    document.body.classList.add("has-bg");
-    document.body.style.setProperty("--page-bg", `url('${bg}')`);
+  function escapeHtml(s){
+    return String(s || "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
   }
 
-  // Catalog
   function renderCatalog(){
     const root = document.getElementById("catalogRoot");
     if (!root) return;
@@ -132,51 +153,41 @@
     const select = document.getElementById("sortSelect");
     const chips = document.querySelectorAll("[data-cat]");
 
-    let state = { q:"", cat:"all", sort:"popular" };
-
     function readState(){
-      state.q = (input && input.value || "").trim().toLowerCase();
-      state.sort = (select && select.value) || "popular";
+      const q = (input && input.value || "").trim().toLowerCase();
+      const sort = (select && select.value) || "popular";
       const active = document.querySelector("[data-cat].active");
-      state.cat = active ? active.getAttribute("data-cat") : "all";
+      const cat = active ? active.getAttribute("data-cat") : "all";
+      return { q, sort, cat };
     }
 
     function filtered(){
-      readState();
+      const st = readState();
       let list = [...PRODUCTS];
-      if (state.cat !== "all") list = list.filter(p => p.category === state.cat);
 
-      if (state.q){
+      if (st.cat !== "all") list = list.filter(p => p.category === st.cat);
+
+      if (st.q){
         list = list.filter(p => {
           const n = nameOf(p).toLowerCase();
-          const b = (p.brand || "").toLowerCase();
           const w = (p.weight || "").toLowerCase();
-          return n.includes(state.q) || b.includes(state.q) || w.includes(state.q);
+          return n.includes(st.q) || w.includes(st.q) || p.id.includes(st.q);
         });
       }
 
-      if (state.sort === "price-asc") list.sort((a,b)=>a.price-b.price);
-      if (state.sort === "price-desc") list.sort((a,b)=>b.price-a.price);
-      if (state.sort === "name-asc") list.sort((a,b)=>nameOf(a).localeCompare(nameOf(b)));
-      if (state.sort === "name-desc") list.sort((a,b)=>nameOf(b).localeCompare(nameOf(a)));
-      return list;
-    }
+      if (st.sort === "price-asc") list.sort((a,b)=>a.price-b.price);
+      if (st.sort === "price-desc") list.sort((a,b)=>b.price-a.price);
+      if (st.sort === "name-asc") list.sort((a,b)=>nameOf(a).localeCompare(nameOf(b)));
+      if (st.sort === "name-desc") list.sort((a,b)=>nameOf(b).localeCompare(nameOf(a)));
 
-    function escapeHtml(s){
-      return String(s || "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+      return list;
     }
 
     function card(p){
       const cart = loadCart();
       const inCart = !!cart[p.id];
       const pill = (p.category || "").toUpperCase();
-      const btnLabel = (window.BW_I18N ? BW_I18N.t(inCart ? "in_cart" : "add_to_cart") : (inCart ? "In cart" : "Add to cart"));
-      const priceLabel = money(p.price);
+      const btnLabel = t(inCart ? "in_cart" : "add_to_cart");
 
       return `
         <article class="card product">
@@ -188,7 +199,7 @@
             <div class="title">${escapeHtml(nameOf(p))}</div>
             <div class="meta">
               <span class="muted">${escapeHtml(p.weight || "")}</span>
-              <span class="price">${priceLabel}</span>
+              <span class="price">${money(p.price)}</span>
             </div>
             <div class="actions">
               <button class="btn primary" data-add="${p.id}">${btnLabel}</button>
@@ -230,17 +241,29 @@
       const cart = loadCart();
       cart[id] = (Number(cart[id]) || 0) + 1;
       saveCart(cart);
-      btn.textContent = (window.BW_I18N ? BW_I18N.t("in_cart") : "In cart");
-      toast(window.BW_I18N ? BW_I18N.t("added_to_cart") : "Added to cart");
+      btn.textContent = t("in_cart");
+      toast(t("added_to_cart"));
     });
 
-    window.addEventListener("bw:lang", render);
+    function applySortLabels(){
+      if (!select) return;
+      const opts = Array.from(select.options);
+      for (const o of opts){
+        if (o.value === "popular") o.textContent = t("sort_popular");
+        if (o.value === "price-asc") o.textContent = t("sort_price_asc");
+        if (o.value === "price-desc") o.textContent = t("sort_price_desc");
+        if (o.value === "name-asc") o.textContent = t("sort_name_asc");
+        if (o.value === "name-desc") o.textContent = t("sort_name_desc");
+      }
+    }
+
+    window.addEventListener("bw:lang", () => { applySortLabels(); render(); });
     window.addEventListener("bw:cart", render);
 
+    applySortLabels();
     setChipActive("all");
   }
 
-  // Cart page
   function renderCartPage(){
     const tableBody = document.getElementById("cartBody");
     if (!tableBody) return;
@@ -249,15 +272,6 @@
     const totalEl = document.getElementById("cartTotal");
     const clearBtn = document.getElementById("clearCartBtn");
     const checkoutBtn = document.getElementById("checkoutBtn");
-
-    function escapeHtml(s){
-      return String(s || "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
 
     function row(p, qty){
       const sum = money(p.price * qty);
@@ -297,7 +311,7 @@
         tableBody.innerHTML = "";
         if (emptyEl) emptyEl.style.display = "block";
         if (totalEl) totalEl.textContent = money(0);
-        if (checkoutBtn) checkoutBtn.setAttribute("disabled", "true");
+        if (checkoutBtn) checkoutBtn.setAttribute("disabled","true");
         return;
       }
       if (emptyEl) emptyEl.style.display = "none";
@@ -367,7 +381,6 @@
     render();
   }
 
-  // Checkout
   function initCheckout(){
     const form = document.getElementById("checkoutForm");
     if (!form) return;
@@ -375,15 +388,6 @@
     const totalEl = document.getElementById("checkoutTotal");
     const listEl = document.getElementById("checkoutList");
     const emptyEl = document.getElementById("checkoutEmpty");
-
-    function escapeHtml(s){
-      return String(s || "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
 
     function render(){
       const cart = loadCart();
@@ -398,6 +402,7 @@
         if (!p || qty <= 0) continue;
         items.push(`<div class="summary-row"><span>${escapeHtml(nameOf(p))} × ${qty}</span><strong>${money(p.price * qty)}</strong></div>`);
       }
+
       if (listEl) listEl.innerHTML = items.join("");
       const hasItems = items.length > 0;
       if (emptyEl) emptyEl.style.display = hasItems ? "none" : "block";
@@ -407,7 +412,6 @@
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-
       const cart = loadCart();
       if (!cartCount(cart)) return;
 
@@ -424,7 +428,7 @@
       };
 
       if (!payload.name || !payload.phone || !payload.city || !payload.address){
-        toast("⚠️ " + (window.BW_I18N ? BW_I18N.t("checkout_hint") : "Fill required fields"));
+        toast("⚠️ " + t("checkout_hint"));
         return;
       }
 
@@ -439,7 +443,6 @@
     render();
   }
 
-  // Success page
   function initSuccess(){
     const box = document.getElementById("successBox");
     if (!box) return;
@@ -458,41 +461,34 @@
           .map(it => {
             const p = PRODUCTS.find(x => x.id === it.id);
             if (!p) return null;
-            return `<div class="summary-row"><span>${(String(nameOf(p)).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"))} × ${it.qty}</span><strong>${money(p.price * it.qty)}</strong></div>`;
+            return `<div class="summary-row"><span>${escapeHtml(nameOf(p))} × ${it.qty}</span><strong>${money(p.price * it.qty)}</strong></div>`;
           })
           .filter(Boolean)
           .join("");
-        detailsEl.innerHTML = items + `<hr class="sep"><div class="summary-row"><span><strong>${window.BW_I18N ? BW_I18N.t("total") : "Total"}</strong></span><strong>${money(obj.payload.total || 0)}</strong></div>`;
+        detailsEl.innerHTML = items + `<hr class="sep"><div class="summary-row"><span><strong>${t("total")}</strong></span><strong>${money(obj.payload.total || 0)}</strong></div>`;
       }
     }catch{}
   }
 
-  // Contacts simple form
   function initContacts(){
     const form = document.getElementById("contactForm");
     if (!form) return;
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      toast("✅ " + (window.BW_I18N ? BW_I18N.t("send") : "Sent"));
+      toast("✅ " + t("send"));
       form.reset();
     });
   }
 
   function init(){
-    applyPageBackground();
     setActiveNav();
     updateCartBadge();
-
     renderCatalog();
     renderCartPage();
     initCheckout();
     initSuccess();
     initContacts();
-
-    window.addEventListener("bw:lang", () => {
-      setActiveNav();
-      updateCartBadge();
-    });
+    window.addEventListener("bw:lang", () => { setActiveNav(); updateCartBadge(); });
     window.addEventListener("bw:cart", updateCartBadge);
   }
 
