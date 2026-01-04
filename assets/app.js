@@ -172,8 +172,8 @@
       img: "img/yard-set.jpg",
       name: {
       uk: "BLACKWOOD Starter Kit", ru: "BLACKWOOD Starter Kit", en: "BLACKWOOD Starter Kit" },
-     },
-
+    }
+  },
   const FALLBACK_IMG = "img/core-3kg.png";
 
   const money = (n) =>
