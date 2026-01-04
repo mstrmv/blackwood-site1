@@ -98,10 +98,10 @@
       nav_contacts: "Контакты",
       nav_cart: "Корзина",
 
-      hero_kicker: "Премиум уголь для гриля",
+      hero_kicker: "Премиальный уголь для гриля",
       hero_title_1: "PREMIUM",
       hero_title_2: "HARDWOOD CHARCOAL",
-      hero_lead: "Длительное горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.",
+      hero_lead: "Долгое горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.",
       hero_cta_catalog: "Открыть каталог",
       hero_cta_shipping: "Доставка и оплата",
       hero_cta_cart: "Корзина",
