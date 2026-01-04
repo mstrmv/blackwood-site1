@@ -1,15 +1,16 @@
-<!-- ===== FILE: success.html ===== -->
+<!-- success.html -->
 <!doctype html>
 <html lang="uk">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BLACKWOOD • Успіх</title>
+  <title data-i18n-title="success_title">Замовлення прийнято • BLACKWOOD CHARCOAL</title>
   <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/i18n.js"></script>
+  <script defer src="assets/app.js"></script>
 </head>
-<body>
-  <div class="bg"></div>
-  <div class="grain"></div>
+<body class="page has-bg" data-page-bg="img/hero-bg.png">
+  <div class="noise"></div>
 
   <header class="topbar">
     <div class="container">
@@ -24,54 +25,71 @@
           <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
           <a href="about.html" data-i18n="nav_about">Про нас</a>
           <a href="contacts.html" data-i18n="nav_contacts">Контакти</a>
-          <a href="cart.html" data-i18n="nav_cart">Кошик</a>
         </nav>
 
-        <div class="rightbar">
+        <div class="spacer"></div>
+
+        <div class="pills">
           <div class="social" aria-label="Social links">
             <a class="iconbtn" href="https://t.me/" target="_blank" rel="noopener" aria-label="Telegram">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M21.6 4.6 3.7 11.5c-1.2.5-1.2 1.2-.2 1.5l4.6 1.4 1.7 5.2c.2.6.1.8.6.8.4 0 .6-.2.8-.4l2.2-2.1 4.5 3.3c.8.4 1.4.2 1.6-.8L23 6c.3-1.2-.5-1.8-1.4-1.4Z" stroke="rgba(255,255,255,.92)" stroke-width="1.4" stroke-linejoin="round"/>
-                <path d="M8.1 14.3 18.9 7.7" stroke="rgba(255,255,255,.92)" stroke-width="1.4" stroke-linecap="round"/>
-              </svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.04 15.47 8.86 19c.26 0 .37-.11.51-.25l1.22-1.18 2.53 1.85c.46.25.8.12.92-.42l1.67-7.82c.16-.74-.27-1.03-.72-.86L4.3 11.9c-.73.28-.72.69-.13.87l3.01.94 6.97-4.4c.33-.2.63-.09.38.13"/></svg>
             </a>
             <a class="iconbtn" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M7.5 3.8h9A3.7 3.7 0 0 1 20.2 7.5v9a3.7 3.7 0 0 1-3.7 3.7h-9A3.7 3.7 0 0 1 3.8 16.5v-9A3.7 3.7 0 0 1 7.5 3.8Z" stroke="rgba(255,255,255,.92)" stroke-width="1.4"/>
-                <path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="rgba(255,255,255,.92)" stroke-width="1.4"/>
-                <path d="M17.2 6.8h.01" stroke="rgba(255,255,255,.92)" stroke-width="2.6" stroke-linecap="round"/>
-              </svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-5 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm4.6-2.2a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>
             </a>
             <a class="iconbtn" href="https://tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M14 4c.7 3.1 2.6 4.9 6 5v3.2c-2.3 0-4.2-.7-6-2v6.1c0 3.4-2.7 6-6.2 6A5.8 5.8 0 0 1 2 16.7c0-3.4 2.8-6 6.2-6 .4 0 .9.1 1.3.2v3.4c-.4-.2-.8-.3-1.3-.3-1.6 0-2.9 1.2-2.9 2.7s1.3 2.7 2.9 2.7c1.8 0 3-1.1 3-3.3V4h2.7Z" stroke="rgba(255,255,255,.92)" stroke-width="1.4" stroke-linejoin="round"/>
-              </svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3c.6 3.2 2.8 5.1 6 5.2v3c-2.2.1-4.1-.7-6-2v6.8c0 3-2.4 5.2-5.4 5.2S3 19 3 16.2c0-3.4 3.2-5.8 6.6-4.9v3.2c-.6-.2-1.3-.1-1.8.2-1 .5-1.3 1.9-.7 2.8.7 1.1 2.3 1 3.1.1.3-.3.6-.9.6-1.4V3h3.2Z"/></svg>
             </a>
           </div>
 
-          <div class="lang" aria-label="Language">
+          <div class="lang" aria-label="Language switch">
             <button type="button" data-lang="uk">UKR</button>
             <button type="button" data-lang="ru">RU</button>
             <button type="button" data-lang="en">EN</button>
           </div>
+
+          <a class="cartbtn" href="cart.html" aria-label="Cart">
+            <small data-i18n="nav_cart">Кошик</small>
+            <span class="badge" data-cart-count>0</span>
+          </a>
         </div>
       </div>
     </div>
   </header>
 
-  <main class="container">
-    <div class="card" style="padding:16px">
-      <div class="kicker" data-i18n="success_title">Замовлення прийнято!</div>
-      <h1 class="h2" style="margin-top:10px" data-i18n="success_title">Замовлення прийнято!</h1>
-      <p class="p" data-i18n="success_text">Дякуємо! Ми зв’яжемося з вами найближчим часом.</p>
+  <main class="main">
+    <div class="container">
+      <section class="section" id="successBox">
+        <div class="section-title">
+          <h2 data-i18n="success_title">Замовлення прийнято</h2>
+          <div class="hint" id="orderId"></div>
+        </div>
 
-      <div style="margin-top:14px">
-        <a class="btn primary" href="index.html" data-i18n="back_home">Повернутися на головну</a>
-      </div>
+        <div class="card pad">
+          <p class="note" data-i18n="success_text">
+            Дякуємо! Ми зв'яжемося з вами найближчим часом для підтвердження.
+          </p>
+          <div class="card pad" style="margin-top:12px;">
+            <div id="orderDetails"></div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; margin-top:14px;">
+            <a class="btn" href="index.html" data-i18n="back_home">На головну</a>
+            <a class="btn primary" href="catalog.html" data-i18n="back_catalog">Продовжити покупки</a>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 
-  <script src="assets/i18n.js"></script>
-  <script src="assets/app.js"></script>
+  <footer class="footer">
+    <div class="container">
+      <div class="inner">
+        <div data-i18n="footer_left">© BLACKWOOD • CHARCOAL</div>
+        <div data-i18n="footer_right">GitHub Pages • HTML/CSS/JS</div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
