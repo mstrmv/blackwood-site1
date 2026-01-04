@@ -4,33 +4,7 @@
 
   const money = (n) => new Intl.NumberFormat("uk-UA", { style:"currency", currency:"UAH", maximumFractionDigits:0 }).format(n);
 
-  const FALLBACK_IMG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
-    <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900">
-      <defs>
-        <linearGradient id="g" x1="0" x2="1">
-          <stop offset="0" stop-color="#2a2a2d"/>
-          <stop offset="1" stop-color="#151518"/>
-        </linearGradient>
-        <radialGradient id="r" cx="30%" cy="20%" r="80%">
-          <stop offset="0" stop-color="#c8a45a" stop-opacity=".18"/>
-          <stop offset="1" stop-color="#000" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-      <rect width="1200" height="900" fill="url(#g)"/>
-      <rect width="1200" height="900" fill="url(#r)"/>
-      <g fill="#ffffff" fill-opacity=".92" font-family="Arial" font-size="44" font-weight="700">
-        <text x="80" y="130">BLACKWOOD • CHARCOAL</text>
-      </g>
-      <g fill="#ffffff" fill-opacity=".65" font-family="Arial" font-size="28">
-        <text x="80" y="200">Image not found</text>
-      </g>
-      <g fill="none" stroke="#ffffff" stroke-opacity=".20" stroke-width="6">
-        <rect x="80" y="260" width="1040" height="560" rx="28"/>
-        <path d="M140 740 L460 450 L670 640 L820 520 L1060 740"/>
-        <circle cx="310" cy="420" r="42"/>
-      </g>
-    </svg>
-  `);
+  const FALLBACK_IMG = "img/core-3kg.png";
 
   const PRODUCTS = [
     { id:"core-3",  brand:"CORE", category:"core", weight:"3 kg",  price:299, img:"img/core-3kg.png",
@@ -40,36 +14,36 @@
     { id:"core-10", brand:"CORE", category:"core", weight:"10 kg", price:799, img:"img/core-10kg.png",
       name:{uk:"BLACKWOOD CORE 10 кг", ru:"BLACKWOOD CORE 10 кг", en:"BLACKWOOD CORE 10 kg"} },
 
-    { id:"yard-3",  brand:"YARD", category:"yard", weight:"3 kg",  price:269, img:"img/yard-3kg.jpg",
+    { id:"yard-3",  brand:"YARD", category:"yard", weight:"3 kg",  price:269, img:"img/core-3kg.png",
       name:{uk:"BLACKWOOD YARD 3 кг", ru:"BLACKWOOD YARD 3 кг", en:"BLACKWOOD YARD 3 kg"} },
-    { id:"yard-5",  brand:"YARD", category:"yard", weight:"5 kg",  price:419, img:"img/yard-5kg.jpg",
+    { id:"yard-5",  brand:"YARD", category:"yard", weight:"5 kg",  price:419, img:"img/core-3kg.png",
       name:{uk:"BLACKWOOD YARD 5 кг", ru:"BLACKWOOD YARD 5 кг", en:"BLACKWOOD YARD 5 kg"} },
-    { id:"yard-10", brand:"YARD", category:"yard", weight:"10 kg", price:739, img:"img/yard-10kg.jpg",
+    { id:"yard-10", brand:"YARD", category:"yard", weight:"10 kg", price:739, img:"img/core-3kg.png",
       name:{uk:"BLACKWOOD YARD 10 кг", ru:"BLACKWOOD YARD 10 кг", en:"BLACKWOOD YARD 10 kg"} },
 
-    { id:"mesh-1",  brand:"SET", category:"sets", weight:"—", price:79,  img:"img/mesh-1.jpg",
+    { id:"mesh-1",  brand:"SET", category:"sets", weight:"—", price:79,  img:"img/core-3kg.png",
       name:{uk:"Сітка для вугілля (1 шт)", ru:"Сетка для угля (1 шт)", en:"Charcoal mesh bag (1 pc)"} },
-    { id:"mesh-5",  brand:"SET", category:"sets", weight:"—", price:299, img:"img/mesh-5.jpg",
+    { id:"mesh-5",  brand:"SET", category:"sets", weight:"—", price:299, img:"img/core-3kg.png",
       name:{uk:"Сітки для вугілля (5 шт)", ru:"Сетки для угля (5 шт)", en:"Charcoal mesh bags (5 pcs)"} },
-    { id:"starter", brand:"SET", category:"sets", weight:"—", price:349, img:"img/starter-kit.jpg",
+    { id:"starter", brand:"SET", category:"sets", weight:"—", price:349, img:"img/core-3kg.png",
       name:{uk:"Стартовий набір для гриля", ru:"Стартовый набор для гриля", en:"Grill starter kit"} },
-    { id:"fire",    brand:"SET", category:"sets", weight:"—", price:129, img:"img/firestarter.jpg",
+    { id:"fire",    brand:"SET", category:"sets", weight:"—", price:129, img:"img/core-3kg.png",
       name:{uk:"Розпалювач", ru:"Розжиг", en:"Firestarter"} },
-    { id:"gloves",  brand:"SET", category:"sets", weight:"—", price:249, img:"img/gloves.jpg",
+    { id:"gloves",  brand:"SET", category:"sets", weight:"—", price:249, img:"img/core-3kg.png",
       name:{uk:"Рукавички для гриля", ru:"Перчатки для гриля", en:"Grill gloves"} },
-    { id:"tongs",   brand:"SET", category:"sets", weight:"—", price:219, img:"img/tongs.jpg",
+    { id:"tongs",   brand:"SET", category:"sets", weight:"—", price:219, img:"img/core-3kg.png",
       name:{uk:"Щипці для гриля", ru:"Щипцы для гриля", en:"Grill tongs"} },
-    { id:"brush",   brand:"SET", category:"sets", weight:"—", price:189, img:"img/brush.jpg",
+    { id:"brush",   brand:"SET", category:"sets", weight:"—", price:189, img:"img/core-3kg.png",
       name:{uk:"Щітка для решітки", ru:"Щетка для решетки", en:"Grill brush"} },
-    { id:"grate",   brand:"SET", category:"sets", weight:"—", price:499, img:"img/grate.jpg",
+    { id:"grate",   brand:"SET", category:"sets", weight:"—", price:499, img:"img/core-3kg.png",
       name:{uk:"Решітка для гриля", ru:"Решетка для гриля", en:"Grill grate"} },
-    { id:"box",     brand:"SET", category:"sets", weight:"—", price:159, img:"img/storage-box.jpg",
+    { id:"box",     brand:"SET", category:"sets", weight:"—", price:159, img:"img/core-3kg.png",
       name:{uk:"Контейнер для зберігання", ru:"Контейнер для хранения", en:"Storage container"} },
-    { id:"set-bbq", brand:"SET", category:"sets", weight:"—", price:699, img:"img/bbq-set.jpg",
+    { id:"set-bbq", brand:"SET", category:"sets", weight:"—", price:699, img:"img/core-3kg.png",
       name:{uk:"BBQ сет (аксесуари)", ru:"BBQ сет (аксессуары)", en:"BBQ set (accessories)"} },
-    { id:"bundle-core", brand:"SET", category:"sets", weight:"—", price:1099, img:"img/core-bundle.jpg",
+    { id:"bundle-core", brand:"SET", category:"sets", weight:"—", price:1099, img:"img/core-3kg.png",
       name:{uk:"CORE сет (3+5 кг)", ru:"CORE сет (3+5 кг)", en:"CORE bundle (3+5 kg)"} },
-    { id:"bundle-yard", brand:"SET", category:"sets", weight:"—", price:999, img:"img/yard-bundle.jpg",
+    { id:"bundle-yard", brand:"SET", category:"sets", weight:"—", price:999, img:"img/core-3kg.png",
       name:{uk:"YARD сет (3+5 кг)", ru:"YARD сет (3+5 кг)", en:"YARD bundle (3+5 kg)"} },
   ];
 
@@ -193,7 +167,8 @@
         <article class="panel product">
           <div class="thumb">
             <span class="pill">${esc(pill)}</span>
-            <img src="${p.img}" alt="${esc(nameOf(p))}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
+            <img src="${p.img}" alt="${esc(nameOf(p))}" loading="lazy"
+              onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
           </div>
           <div class="body">
             <div class="title">${esc(nameOf(p))}</div>
@@ -268,7 +243,8 @@
           <td>
             <div style="display:flex; gap:12px; align-items:center;">
               <div style="width:70px; height:52px; border:1px solid var(--stroke); border-radius:12px; overflow:hidden; background:rgba(255,255,255,.03); display:grid; place-items:center;">
-                <img src="${p.img}" alt="${esc(nameOf(p))}" style="max-width:100%; max-height:100%; object-fit:contain; padding:6px;" onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
+                <img src="${p.img}" alt="${esc(nameOf(p))}" style="max-width:100%; max-height:100%; object-fit:contain; padding:6px;"
+                  onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
               </div>
               <div>
                 <div style="font-weight:980; letter-spacing:.03em;">${esc(nameOf(p))}</div>
