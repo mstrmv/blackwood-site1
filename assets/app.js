@@ -113,9 +113,14 @@
     });
   }
 
-  function onImgError(img){
-    img.onerror = null;
-    img.src = FALLBACK_IMG;
+  // Background
+  function applyPageBackground(){
+    const el = document.querySelector("[data-page-bg]");
+    if (!el) return;
+    const bg = el.getAttribute("data-page-bg");
+    document.body.classList.add("page");
+    document.body.classList.add("has-bg");
+    document.body.style.setProperty("--page-bg", `url('${bg}')`);
   }
 
   // Catalog
@@ -127,11 +132,7 @@
     const select = document.getElementById("sortSelect");
     const chips = document.querySelectorAll("[data-cat]");
 
-    let state = {
-      q: (input && input.value || "").trim().toLowerCase(),
-      cat: "all",
-      sort: (select && select.value) || "popular"
-    };
+    let state = { q:"", cat:"all", sort:"popular" };
 
     function readState(){
       state.q = (input && input.value || "").trim().toLowerCase();
@@ -158,16 +159,22 @@
       if (state.sort === "price-desc") list.sort((a,b)=>b.price-a.price);
       if (state.sort === "name-asc") list.sort((a,b)=>nameOf(a).localeCompare(nameOf(b)));
       if (state.sort === "name-desc") list.sort((a,b)=>nameOf(b).localeCompare(nameOf(a)));
-      // popular: keep original order
-
       return list;
+    }
+
+    function escapeHtml(s){
+      return String(s || "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
     }
 
     function card(p){
       const cart = loadCart();
       const inCart = !!cart[p.id];
       const pill = (p.category || "").toUpperCase();
-
       const btnLabel = (window.BW_I18N ? BW_I18N.t(inCart ? "in_cart" : "add_to_cart") : (inCart ? "In cart" : "Add to cart"));
       const priceLabel = money(p.price);
 
@@ -208,12 +215,9 @@
       render();
     }
 
-    if (input){
-      input.addEventListener("input", () => render());
-    }
-    if (select){
-      select.addEventListener("change", () => render());
-    }
+    if (input) input.addEventListener("input", render);
+    if (select) select.addEventListener("change", render);
+
     chips.forEach(c => c.addEventListener("click", (e) => {
       e.preventDefault();
       setChipActive(c.getAttribute("data-cat"));
@@ -230,10 +234,9 @@
       toast(window.BW_I18N ? BW_I18N.t("added_to_cart") : "Added to cart");
     });
 
-    window.addEventListener("bw:lang", () => render());
-    window.addEventListener("bw:cart", () => render());
+    window.addEventListener("bw:lang", render);
+    window.addEventListener("bw:cart", render);
 
-    // default active chip
     setChipActive("all");
   }
 
@@ -247,6 +250,15 @@
     const clearBtn = document.getElementById("clearCartBtn");
     const checkoutBtn = document.getElementById("checkoutBtn");
 
+    function escapeHtml(s){
+      return String(s || "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
     function row(p, qty){
       const sum = money(p.price * qty);
       return `
@@ -257,7 +269,7 @@
                 <img src="${p.img}" alt="${escapeHtml(nameOf(p))}" style="max-width:100%; max-height:100%; object-fit:contain; padding:6px;" onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
               </div>
               <div>
-                <div style="font-weight:900; letter-spacing:.03em;">${escapeHtml(nameOf(p))}</div>
+                <div style="font-weight:950; letter-spacing:.03em;">${escapeHtml(nameOf(p))}</div>
                 <div class="muted" style="font-size:13px">${escapeHtml(p.weight || "")}</div>
               </div>
             </div>
@@ -350,8 +362,8 @@
       });
     }
 
-    window.addEventListener("bw:lang", () => render());
-    window.addEventListener("bw:cart", () => render());
+    window.addEventListener("bw:lang", render);
+    window.addEventListener("bw:cart", render);
     render();
   }
 
@@ -363,6 +375,15 @@
     const totalEl = document.getElementById("checkoutTotal");
     const listEl = document.getElementById("checkoutList");
     const emptyEl = document.getElementById("checkoutEmpty");
+
+    function escapeHtml(s){
+      return String(s || "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
 
     function render(){
       const cart = loadCart();
@@ -402,7 +423,6 @@
         items: Object.entries(cart).map(([id, qty]) => ({ id, qty: Number(qty)||0 }))
       };
 
-      // minimal validation
       if (!payload.name || !payload.phone || !payload.city || !payload.address){
         toast("⚠️ " + (window.BW_I18N ? BW_I18N.t("checkout_hint") : "Fill required fields"));
         return;
@@ -434,16 +454,15 @@
       const raw = sessionStorage.getItem("bw_last_order");
       const obj = raw ? JSON.parse(raw) : null;
       if (obj && obj.payload && detailsEl){
-        const lang = getLang();
         const items = (obj.payload.items || [])
           .map(it => {
             const p = PRODUCTS.find(x => x.id === it.id);
             if (!p) return null;
-            return `<div class="summary-row"><span>${escapeHtml(nameOf(p))} × ${it.qty}</span><strong>${money(p.price * it.qty)}</strong></div>`;
+            return `<div class="summary-row"><span>${(String(nameOf(p)).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"))} × ${it.qty}</span><strong>${money(p.price * it.qty)}</strong></div>`;
           })
           .filter(Boolean)
           .join("");
-        detailsEl.innerHTML = items + `<hr class="sep"><div class="summary-row"><span><strong>${escapeHtml(window.BW_I18N ? BW_I18N.t("total") : "Total")}</strong></span><strong>${money(obj.payload.total || 0)}</strong></div>`;
+        detailsEl.innerHTML = items + `<hr class="sep"><div class="summary-row"><span><strong>${window.BW_I18N ? BW_I18N.t("total") : "Total"}</strong></span><strong>${money(obj.payload.total || 0)}</strong></div>`;
       }
     }catch{}
   }
@@ -459,32 +478,10 @@
     });
   }
 
-  function escapeHtml(s){
-    return String(s || "")
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-  }
-
-  function applyPageBackground(){
-    const el = document.querySelector("[data-page-bg]");
-    if (!el) return;
-    const bg = el.getAttribute("data-page-bg");
-    document.body.classList.add("page");
-    document.body.classList.add("has-bg");
-    document.body.style.setProperty("--page-bg", `url('${bg}')`);
-  }
-
   function init(){
     applyPageBackground();
     setActiveNav();
     updateCartBadge();
-
-    document.querySelectorAll("img[data-fallback]").forEach(img => {
-      img.addEventListener("error", () => onImgError(img), { once:true });
-    });
 
     renderCatalog();
     renderCartPage();
