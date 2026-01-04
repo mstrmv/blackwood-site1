@@ -163,17 +163,17 @@
     },
 
     // 18-й товар (пока файла нет — добавь img/mesh-5.jpg или поменяй на свой файл)
-    {
+        {
       id: "starter-kit",
       brand: "SET",
       category: "sets",
       weight: "—",
       price: 349,
       img: "img/yard-set.jpg",
-      name: {
-      uk: "BLACKWOOD Starter Kit", ru: "BLACKWOOD Starter Kit", en: "BLACKWOOD Starter Kit" },
-    }
-  },
+      name: { uk: "BLACKWOOD Starter Kit", ru: "BLACKWOOD Starter Kit", en: "BLACKWOOD Starter Kit" },
+    },
+  ];
+
   const FALLBACK_IMG = "img/core-3kg.png";
 
   const money = (n) =>
