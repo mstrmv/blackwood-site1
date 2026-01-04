@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <div class="bg bg--catalog"></div>
+  <div class="bg"></div>
   <div class="grain"></div>
 
   <header class="topbar">
@@ -63,16 +63,17 @@
   </header>
 
   <main class="container">
-    <section class="card" style="padding:18px">
+    <div class="card" style="padding:16px">
       <div class="kicker" data-i18n="section_contacts">Контакти</div>
       <h1 class="h2" style="margin-top:10px" data-i18n="section_contacts">Контакти</h1>
       <p class="p" data-i18n="contacts_text">Напишіть нам у Telegram або Instagram — відповідаємо швидко.</p>
 
-      <div class="section-title">Соцмережі</div>
-      <div class="notice"><b>Telegram:</b> https://t.me/</div>
-      <div class="notice" style="margin-top:10px"><b>Instagram:</b> https://instagram.com/</div>
-      <div class="notice" style="margin-top:10px"><b>TikTok:</b> https://tiktok.com/</div>
-    </section>
+      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn primary" href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
+        <a class="btn" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" href="https://tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
   </main>
 
   <script src="assets/i18n.js"></script>
