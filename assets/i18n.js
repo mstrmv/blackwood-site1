@@ -20,7 +20,6 @@
       section_catalog_sub: "Оберіть товар і додайте в кошик.",
       search_placeholder: "Пошук товарів…",
       add_to_cart: "Додати в кошик",
-      in_cart: "У кошику",
       weight: "Вага",
       kg: "кг",
 
@@ -76,7 +75,6 @@
       section_catalog_sub: "Выберите товар и добавьте в корзину.",
       search_placeholder: "Поиск товаров…",
       add_to_cart: "Добавить в корзину",
-      in_cart: "В корзине",
       weight: "Вес",
       kg: "кг",
 
@@ -132,7 +130,6 @@
       section_catalog_sub: "Choose products and add to cart.",
       search_placeholder: "Search products…",
       add_to_cart: "Add to cart",
-      in_cart: "In cart",
       weight: "Weight",
       kg: "kg",
 
