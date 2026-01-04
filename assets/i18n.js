@@ -23,6 +23,10 @@
       weight: "Вага",
       kg: "кг",
 
+      filter_all: "Усе",
+      filter_charcoal: "Пачки вугілля",
+      filter_set: "Сет",
+
       section_shipping: "Доставка та оплата",
       shipping_text: "Доставка по Україні. Відправка щодня. Оплата: карта / післяплата (за домовленістю).",
       section_about: "Про нас",
@@ -78,6 +82,10 @@
       weight: "Вес",
       kg: "кг",
 
+      filter_all: "Все",
+      filter_charcoal: "Пачки угля",
+      filter_set: "Сет",
+
       section_shipping: "Доставка и оплата",
       shipping_text: "Доставка по Украине. Отправка ежедневно. Оплата: карта / наложка (по договоренности).",
       section_about: "О нас",
@@ -132,6 +140,10 @@
       add_to_cart: "Add to cart",
       weight: "Weight",
       kg: "kg",
+
+      filter_all: "All",
+      filter_charcoal: "Charcoal packs",
+      filter_set: "Set",
 
       section_shipping: "Shipping & payment",
       shipping_text: "Shipping across Ukraine. Daily dispatch. Payment: card / cash on delivery (by agreement).",
