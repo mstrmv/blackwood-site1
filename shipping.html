@@ -4,11 +4,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BLACKWOOD • CHARCOAL — Доставка</title>
+  <title>BLACKWOOD • Доставка</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <div class="bg"></div>
+  <div class="bg bg--catalog"></div>
   <div class="grain"></div>
 
   <header class="topbar">
@@ -24,7 +24,10 @@
           <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
           <a href="about.html" data-i18n="nav_about">Про нас</a>
           <a href="contacts.html" data-i18n="nav_contacts">Контакти</a>
-          <a href="cart.html" data-i18n="nav_cart">Кошик <span data-cart-count style="display:none;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid rgba(200,164,90,.25);background:rgba(200,164,90,.12);font-weight:900;font-size:12px;">0</span></a>
+          <a href="cart.html" data-i18n="nav_cart">
+            Кошик
+            <span data-cart-count style="display:none;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid rgba(200,164,90,.25);background:rgba(200,164,90,.12);font-weight:900;font-size:12px;">0</span>
+          </a>
         </nav>
 
         <div class="rightbar">
@@ -60,36 +63,19 @@
   </header>
 
   <main class="container">
-    <div class="card" style="padding:18px">
-      <div class="section-title" data-i18n="shipping_title">Доставка та оплата</div>
-      <p class="p" data-i18n="shipping_text">Відправляємо по Україні...</p>
+    <section class="card" style="padding:18px">
+      <div class="kicker" data-i18n="section_shipping">Доставка та оплата</div>
+      <h1 class="h2" style="margin-top:10px" data-i18n="section_shipping">Доставка та оплата</h1>
+      <p class="p" data-i18n="shipping_text">Доставка по Україні. Відправка щодня. Оплата: карта / післяплата (за домовленістю).</p>
 
-      <div style="margin-top:14px" class="notice">
-        <ul style="margin:0; padding-left:18px; color:var(--muted); line-height:1.7">
-          <li data-i18n="shipping_points_1">Нова пошта / інші служби — за домовленістю</li>
-          <li data-i18n="shipping_points_2">Оплата: післяплата або картка</li>
-          <li data-i18n="shipping_points_3">Оптові замовлення — індивідуальні умови</li>
-        </ul>
-      </div>
-
-      <div class="hero-actions" style="margin-top:14px">
-        <a class="btn primary" href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-        <a class="btn" href="contacts.html" data-i18n="nav_contacts">Контакти</a>
-      </div>
-    </div>
+      <div class="section-title">FAQ</div>
+      <div class="notice">• Нова Пошта / Укрпошта (за домовленістю)</div>
+      <div class="notice" style="margin-top:10px">• Термін відправки: 1–2 дні</div>
+      <div class="notice" style="margin-top:10px">• Опт: пишіть у контакти</div>
+    </section>
   </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="mini">BLACKWOOD • CHARCOAL</div>
-        <div class="mini">© <span id="y"></span></div>
-      </div>
-    </div>
-  </footer>
 
   <script src="assets/i18n.js"></script>
   <script src="assets/app.js"></script>
-  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 </html>
