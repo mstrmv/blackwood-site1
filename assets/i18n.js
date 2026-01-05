@@ -1,305 +1,555 @@
-// assets/i18n.js
-(() => {
-  const LANG_KEY = "bw_lang";
-  const supported = ["uk", "ru", "en"];
+/* assets/style.css */
+:root{
+  --bg:#070708;
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.76);
+  --muted2:rgba(255,255,255,.62);
 
-  const dict = {
-    uk: {
-      nav_home: "Головна",
-      nav_catalog: "Каталог",
-      nav_shipping: "Доставка",
-      nav_about: "Про нас",
-      nav_contacts: "Контакти",
-      nav_cart: "Кошик",
+  --gold:#c8a45a;
+  --gold2:#b08a3f;
 
-      hero_kicker: "Преміальний вуголь для гриля",
-      hero_title_1: "PREMIUM",
-      hero_title_2: "HARDWOOD CHARCOAL",
-      hero_lead: "Довге горіння, мінімум попелу, чистий жар. Ідеально для BBQ та гриля.",
+  --stroke:rgba(255,255,255,.10);
+  --stroke2:rgba(255,255,255,.16);
 
-      why_title: "Чому BLACKWOOD",
-      why_hint: "Стабільна якість для BBQ та гриля",
-      why_1_t: "Довге горіння",
-      why_1_p: "Стабільне тепло та контроль жару.",
-      why_2_t: "Низька зольність",
-      why_2_p: "Менше попелу — чистіше приготування.",
-      why_3_t: "Для BBQ та гриля",
-      why_3_p: "Підходить для м'яса, овочів і копчення.",
+  --shadow:0 18px 55px rgba(0,0,0,.65);
 
-      catalog_title: "Каталог",
-      catalog_hint: "18 товарів • CORE / YARD / Сітки та аксесуари",
-      search_ph: "Пошук товару…",
-      sort_popular: "Популярне",
-      sort_price_asc: "Ціна ↑",
-      sort_price_desc: "Ціна ↓",
-      sort_name_asc: "Назва A→Z",
-      sort_name_desc: "Назва Z→A",
-      category_all: "Усі",
-      category_core: "CORE вугілля",
-      category_yard: "YARD вугілля",
-      category_sets: "Сітки / Сети / Аксесуари",
-      add_to_cart: "Додати в кошик",
-      added_to_cart: "Додано в кошик",
-      in_cart: "В кошику",
-      empty_catalog: "Нічого не знайдено.",
+  --r:16px;
+  --r2:22px;
 
-      shipping_title: "Доставка",
-      shipping_text: "Відправка по Україні. Опрацювання замовлення — щодня. Термін доставки зазвичай 1–3 дні (залежить від перевізника). Оплата: картка / готівка / післяплата (за домовленістю).",
+  --container:1120px;
+  --focus:0 0 0 3px rgba(200,164,90,.26);
+}
 
-      about_title: "Про нас",
-      about_text: "BLACKWOOD • CHARCOAL — преміальний деревний вуголь для гриля та BBQ. Лінійки CORE і YARD, а також аксесуари: сітки, рукавички, щипці та набори для старту.",
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:var(--bg);
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+a:visited{color:inherit}
+button,input,select,textarea{font-family:inherit}
+::selection{background:rgba(200,164,90,.24)}
 
-      contacts_title: "Контакти",
-      contacts_text: "Напишіть нам у соцмережах або залиште заявку. Ми відповімо якнайшвидше.",
-      contact_name: "Ім'я",
-      contact_phone: "Телефон",
-      contact_msg: "Повідомлення",
-      send: "Надіслати",
+.container{width:min(var(--container), calc(100% - 32px)); margin:0 auto}
 
-      cart_title: "Кошик",
-      cart_hint: "Керуйте кількістю та оформлюйте замовлення",
-      cart_empty: "Кошик порожній.",
-      product: "Товар",
-      price: "Ціна",
-      qty: "К-сть",
-      total: "Разом",
-      clear_cart: "Очистити кошик",
-      go_checkout: "Оформити",
+/* BG */
+body.page{min-height:100%; position:relative;}
+body.page::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(1200px 650px at 18% 8%, rgba(200,164,90,.16), transparent 60%),
+    radial-gradient(900px 520px at 82% 12%, rgba(176,138,63,.12), transparent 58%),
+    radial-gradient(1100px 750px at 50% 110%, rgba(255,255,255,.06), transparent 55%);
+}
+body.page{
+  background:
+    linear-gradient(180deg, rgba(7,7,8,.74), rgba(7,7,8,.86) 45%, rgba(7,7,8,.92)),
+    var(--page-bg, none);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+body.page-hero{ --page-bg: url("../img/hero-bg.png"); }
+body.page-catalog{ --page-bg: url("../img/catalog-bg.png"); }
 
-      checkout_title: "Оформлення",
-      checkout_hint: "Заповніть дані — і ми підтвердимо замовлення",
-      f_name: "Ім'я",
-      f_phone: "Телефон",
-      f_city: "Місто",
-      f_address: "Адреса",
-      f_comment: "Коментар",
-      f_payment: "Оплата",
-      pay_card: "Картка",
-      pay_cash: "Готівка",
-      pay_cod: "Післяплата",
-      place_order: "Підтвердити замовлення",
-      your_order: "Ваше замовлення",
+.noise{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  opacity:.085;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  background-size:220px 220px;
+}
 
-      success_title: "Замовлення прийнято",
-      success_text: "Дякуємо! Ми зв'яжемося з вами найближчим часом для підтвердження.",
-      back_home: "На головну",
-      back_catalog: "Продовжити покупки",
-    },
+/* TOPBAR */
+.topbar{
+  position:sticky; top:0;
+  z-index:50;
+  backdrop-filter: blur(14px);
+  background: linear-gradient(180deg, rgba(10,10,11,.86), rgba(10,10,11,.58));
+  border-bottom:1px solid var(--stroke);
+}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 0;
+}
+.brand{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  font-weight:950;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.brand .dot{
+  width:7px;height:7px;border-radius:999px;
+  background:var(--gold);
+  box-shadow:0 0 0 4px rgba(200,164,90,.12);
+}
+.brand .gold{color:var(--gold)}
 
-    ru: {
-      nav_home: "Главная",
-      nav_catalog: "Каталог",
-      nav_shipping: "Доставка",
-      nav_about: "О нас",
-      nav_contacts: "Контакты",
-      nav_cart: "Корзина",
+.navlinks{
+  margin-left:18px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.navlinks a{
+  padding:10px 12px;
+  border-radius:999px;
+  color:var(--muted);
+  border:1px solid transparent;
+  transition:.2s ease;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  font-size:12px;
+}
+.navlinks a:hover{
+  background:rgba(255,255,255,.04);
+  border-color:var(--stroke2);
+  color:#fff;
+}
+.navlinks a.active{
+  background:rgba(200,164,90,.14);
+  border-color:rgba(200,164,90,.40);
+  color:#fff;
+}
 
-      hero_kicker: "Премиальный уголь для гриля",
-      hero_title_1: "PREMIUM",
-      hero_title_2: "HARDWOOD CHARCOAL",
-      hero_lead: "Долгое горение, минимум пепла, чистый жар. Идеально для BBQ и гриля.",
+.spacer{flex:1}
+.pills{display:flex; align-items:center; gap:10px}
 
-      why_title: "Почему BLACKWOOD",
-      why_hint: "Стабильное качество для BBQ и гриля",
-      why_1_t: "Долгое горение",
-      why_1_p: "Стабильное тепло и контроль жара.",
-      why_2_t: "Низкая зольность",
-      why_2_p: "Меньше золы — чище приготовление.",
-      why_3_t: "Для BBQ и гриля",
-      why_3_p: "Подходит для мяса, овощей и копчения.",
+.lang{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:6px;
+  border-radius:999px;
+  background:rgba(0,0,0,.22);
+  border:1px solid var(--stroke);
+  backdrop-filter:blur(12px);
+}
+.lang button{
+  cursor:pointer;
+  border:0;
+  border-radius:999px;
+  padding:8px 11px;
+  color:var(--muted);
+  background:transparent;
+  font-weight:950;
+  letter-spacing:.10em;
+  transition:.2s ease;
+  font-size:12px;
+}
+.lang button:hover{background:rgba(255,255,255,.05); color:#fff}
+.lang button.active{
+  background:rgba(200,164,90,.20);
+  color:#fff;
+  box-shadow:0 0 0 1px rgba(200,164,90,.24) inset;
+}
 
-      catalog_title: "Каталог",
-      catalog_hint: "18 товаров • CORE / YARD / Сетки и аксессуары",
-      search_ph: "Поиск товара…",
-      sort_popular: "Популярное",
-      sort_price_asc: "Цена ↑",
-      sort_price_desc: "Цена ↓",
-      sort_name_asc: "Название A→Z",
-      sort_name_desc: "Название Z→A",
-      category_all: "Все",
-      category_core: "CORE уголь",
-      category_yard: "YARD уголь",
-      category_sets: "Сетки / Сеты / Аксессуары",
-      add_to_cart: "Добавить в корзину",
-      added_to_cart: "Добавлено в корзину",
-      in_cart: "В корзине",
-      empty_catalog: "Ничего не найдено.",
+.social{display:flex; align-items:center; gap:10px}
+.iconbtn{
+  display:inline-grid;
+  place-items:center;
+  width:38px;height:38px;
+  border-radius:999px;
+  border:1px solid var(--stroke);
+  background:rgba(0,0,0,.22);
+  backdrop-filter:blur(12px);
+  transition:.2s ease;
+}
+.iconbtn:hover{
+  transform:translateY(-1px);
+  border-color:rgba(200,164,90,.35);
+  background:rgba(200,164,90,.12);
+}
+.iconbtn svg{width:18px;height:18px; fill:#fff; opacity:.92}
 
-      shipping_title: "Доставка",
-      shipping_text: "Отправка по Украине. Обработка заказа — ежедневно. Срок доставки обычно 1–3 дня (зависит от перевозчика). Оплата: карта / наличные / наложенный платеж (по договоренности).",
+.cartbtn{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid rgba(200,164,90,.40);
+  background:linear-gradient(180deg, rgba(200,164,90,.22), rgba(200,164,90,.10));
+  box-shadow:0 10px 25px rgba(0,0,0,.28);
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-size:12px;
+}
+.cartbtn small{font-weight:950; letter-spacing:.08em}
+.badge{
+  min-width:22px;
+  height:22px;
+  padding:0 7px;
+  border-radius:999px;
+  display:inline-grid;
+  place-items:center;
+  font-size:12px;
+  background:rgba(255,255,255,.12);
+  border:1px solid var(--stroke2);
+}
 
-      about_title: "О нас",
-      about_text: "BLACKWOOD • CHARCOAL — премиальный древесный уголь для гриля и BBQ. Линейки CORE и YARD, а также аксессуары: сетки, перчатки, щипцы и стартовые наборы.",
+/* MAIN */
+.main{padding:28px 0 56px; position:relative; z-index:2}
 
-      contacts_title: "Контакты",
-      contacts_text: "Напишите нам в соцсетях или оставьте заявку. Мы ответим как можно быстрее.",
-      contact_name: "Имя",
-      contact_phone: "Телефон",
-      contact_msg: "Сообщение",
-      send: "Отправить",
+/* HERO */
+.hero{
+  min-height: calc(100vh - 92px);
+  display:grid;
+  align-items:start;
+  padding: 26px 0 44px;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns: 640px 1fr;
+  gap:18px;
+  align-items:start;
+}
+.hero-card{
+  border-radius:var(--r2);
+  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(180deg, rgba(0,0,0,.56), rgba(0,0,0,.32));
+  backdrop-filter: blur(16px);
+  box-shadow:0 28px 70px rgba(0,0,0,.62);
+  overflow:hidden;
+  position:relative;
+  z-index:2;
+}
+.hero-card::before{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(700px 420px at 18% 20%, rgba(200,164,90,.22), transparent 60%),
+    radial-gradient(700px 420px at 88% 30%, rgba(176,138,63,.14), transparent 62%);
+}
+.hero-card-inner{
+  position:relative;
+  padding:26px 26px 22px;
+  display:grid;
+  gap:14px;
+}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);
+  color:rgba(255,255,255,.86);
+  font-weight:950;
+  letter-spacing:.02em;
+  font-size:12px;
+  width:max-content;
+}
+.hero-badge .dot{
+  width:7px;height:7px;border-radius:999px;
+  background:var(--gold);
+  box-shadow:0 0 0 4px rgba(200,164,90,.12);
+}
+.hero-title{
+  margin:0;
+  font-size:54px;
+  line-height:1.0;
+  letter-spacing:.02em;
+  font-weight:980;
+  text-transform:uppercase;
+}
+.hero-desc{
+  margin:0;
+  color:rgba(255,255,255,.74);
+  font-size:14px;
+  line-height:1.65;
+  max-width:60ch;
+}
+.hero-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
 
-      cart_title: "Корзина",
-      cart_hint: "Управляйте количеством и оформляйте заказ",
-      cart_empty: "Корзина пуста.",
-      product: "Товар",
-      price: "Цена",
-      qty: "Кол-во",
-      total: "Итого",
-      clear_cart: "Очистить корзину",
-      go_checkout: "Оформить",
+/* Section */
+.section{margin-top:22px; display:grid; gap:12px;}
+.section-title{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:12px;
+}
+.section-title h2{
+  margin:0;
+  font-size:18px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.section-title .hint{color:var(--muted2); font-size:13px}
 
-      checkout_title: "Оформление",
-      checkout_hint: "Заполните данные — и мы подтвердим заказ",
-      f_name: "Имя",
-      f_phone: "Телефон",
-      f_city: "Город",
-      f_address: "Адрес",
-      f_comment: "Комментарий",
-      f_payment: "Оплата",
-      pay_card: "Карта",
-      pay_cash: "Наличные",
-      pay_cod: "Наложенный платеж",
-      place_order: "Подтвердить заказ",
-      your_order: "Ваш заказ",
+/* Panels */
+.panel{
+  border:1px solid var(--stroke);
+  border-radius:var(--r);
+  background:rgba(255,255,255,.03);
+  box-shadow:0 14px 35px rgba(0,0,0,.35);
+  z-index:2;
+  position:relative;
+}
+.panel.pad{padding:16px}
+.panel h3{
+  margin:0 0 6px;
+  font-size:13px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.panel p{
+  margin:0;
+  color:var(--muted);
+  font-size:13.5px;
+  line-height:1.55;
+}
 
-      success_title: "Заказ принят",
-      success_text: "Спасибо! Мы свяжемся с вами в ближайшее время для подтверждения.",
-      back_home: "На главную",
-      back_catalog: "Продолжить покупки",
-    },
+/* Catalog */
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px;
+}
+.row{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
 
-    en: {
-      nav_home: "Home",
-      nav_catalog: "Catalog",
-      nav_shipping: "Shipping",
-      nav_about: "About",
-      nav_contacts: "Contacts",
-      nav_cart: "Cart",
+.input, .select{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--stroke);
+  color:#fff;
+  padding:11px 12px;
+  border-radius:14px;
+  min-width:220px;
+}
+.select{min-width:180px}
+.input::placeholder{color:rgba(255,255,255,.42)}
+.input:focus,.select:focus{outline:none; box-shadow:var(--focus); border-color:rgba(200,164,90,.34)}
 
-      hero_kicker: "Premium charcoal for grill",
-      hero_title_1: "PREMIUM",
-      hero_title_2: "HARDWOOD CHARCOAL",
-      hero_lead: "Long burn, minimal ash, clean heat. Perfect for BBQ & grill.",
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chip{
+  cursor:pointer;
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,.03);
+  color:var(--muted);
+  padding:9px 11px;
+  border-radius:999px;
+  font-weight:950;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  font-size:12px;
+  transition:.2s ease;
+}
+.chip:hover{background:rgba(255,255,255,.05); color:#fff}
+.chip.active{
+  border-color:rgba(200,164,90,.40);
+  background:rgba(200,164,90,.12);
+  color:#fff;
+}
 
-      why_title: "Why BLACKWOOD",
-      why_hint: "Consistent quality for BBQ & grill",
-      why_1_t: "Long burn",
-      why_1_p: "Stable heat and easy control.",
-      why_2_t: "Low ash",
-      why_2_p: "Less ash — cleaner cooking.",
-      why_3_t: "For BBQ & grill",
-      why_3_p: "Great for meat, veggies and smoking.",
+.products{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  padding:14px;
+}
+.product{overflow:hidden; display:flex; flex-direction:column; min-height:360px;}
+.product .thumb{
+  position:relative;
+  aspect-ratio: 4/3;
+  background:
+    radial-gradient(900px 500px at 40% 20%, rgba(200,164,90,.16), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.01));
+  border-bottom:1px solid var(--stroke);
+}
+.product .thumb img{
+  width:100%; height:100%;
+  object-fit:cover;
+  filter:drop-shadow(0 14px 28px rgba(0,0,0,.55));
+}
+.pill{
+  position:absolute;
+  top:10px; left:10px;
+  border-radius:999px;
+  padding:7px 10px;
+  font-weight:980;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  font-size:11px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.35);
+  backdrop-filter:blur(8px);
+}
+.product .body{
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  flex:1;
+}
+.product .title{
+  font-weight:980;
+  letter-spacing:.04em;
+  font-size:14px;
+  line-height:1.3;
+}
+.product .meta{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:10px;
+  color:var(--muted);
+  font-size:13px;
+}
+.price{font-weight:980; letter-spacing:.04em; color:#fff;}
+.product .actions{display:flex; gap:10px; margin-top:auto;}
+.btn{
+  cursor:pointer;
+  border:1px solid var(--stroke2);
+  background:rgba(255,255,255,.03);
+  color:#fff;
+  padding:12px 14px;
+  border-radius:999px;
+  transition:.2s ease;
+  font-weight:980;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-size:12px;
+}
+.btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.05)}
+.btn.primary{
+  border-color:rgba(200,164,90,.52);
+  background:linear-gradient(180deg, rgba(200,164,90,.26), rgba(200,164,90,.12));
+}
+.btn.primary:hover{background:linear-gradient(180deg, rgba(200,164,90,.32), rgba(200,164,90,.14))}
+.btn:focus{outline:none; box-shadow:var(--focus)}
+.btn[disabled]{opacity:.5; cursor:not-allowed; transform:none}
 
-      catalog_title: "Catalog",
-      catalog_hint: "18 products • CORE / YARD / Mesh & accessories",
-      search_ph: "Search products…",
-      sort_popular: "Popular",
-      sort_price_asc: "Price ↑",
-      sort_price_desc: "Price ↓",
-      sort_name_asc: "Name A→Z",
-      sort_name_desc: "Name Z→A",
-      category_all: "All",
-      category_core: "CORE charcoal",
-      category_yard: "YARD charcoal",
-      category_sets: "Mesh / Sets / Accessories",
-      add_to_cart: "Add to cart",
-      added_to_cart: "Added to cart",
-      in_cart: "In cart",
-      empty_catalog: "No results found.",
+.note{padding:14px; color:var(--muted); font-size:13.5px; line-height:1.65;}
 
-      shipping_title: "Shipping",
-      shipping_text: "Delivery across Ukraine. Orders are processed daily. Typical delivery time is 1–3 days (carrier dependent). Payment: card / cash / COD (by arrangement).",
+/* Table / cart */
+.table{width:100%; border-collapse:collapse;}
+.table th,.table td{padding:12px 10px; border-bottom:1px solid var(--stroke); text-align:left;}
+.table th{
+  color:var(--muted);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.qty{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,.03);
+  padding:8px;
+  border-radius:12px;
+}
+.qty button{
+  width:30px;height:30px;
+  border-radius:10px;
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,.03);
+  color:#fff;
+  cursor:pointer;
+  font-weight:980;
+}
+.qty button:hover{background:rgba(255,255,255,.06)}
+.qty input{
+  width:44px;
+  text-align:center;
+  border:0;
+  background:transparent;
+  color:#fff;
+  font-weight:980;
+  outline:none;
+}
+.summary{padding:14px; display:grid; gap:10px;}
+.summary-row{display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--muted);}
+.summary-row strong{color:#fff}
+hr.sep{
+  border:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+}
 
-      about_title: "About",
-      about_text: "BLACKWOOD • CHARCOAL is premium hardwood charcoal for grill and BBQ. CORE and YARD lines plus accessories: mesh bags, gloves, tongs and starter kits.",
+/* Forms */
+.form{
+  padding:14px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.form .full{grid-column:1/-1}
+.label{display:grid; gap:6px; color:var(--muted); font-size:13px;}
+textarea.input{min-height:98px; resize:vertical}
 
-      contacts_title: "Contacts",
-      contacts_text: "Message us on social or leave a request. We’ll reply ASAP.",
-      contact_name: "Name",
-      contact_phone: "Phone",
-      contact_msg: "Message",
-      send: "Send",
+/* Footer */
+.footer{
+  margin-top:28px;
+  border-top:1px solid var(--stroke);
+  background:rgba(255,255,255,.02);
+  position:relative;
+  z-index:2;
+}
+.footer .inner{
+  padding:18px 0;
+  display:flex;
+  gap:10px;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  color:var(--muted2);
+  font-size:13px;
+}
 
-      cart_title: "Cart",
-      cart_hint: "Manage quantities and checkout",
-      cart_empty: "Your cart is empty.",
-      product: "Product",
-      price: "Price",
-      qty: "Qty",
-      total: "Total",
-      clear_cart: "Clear cart",
-      go_checkout: "Checkout",
+/* Toast */
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  z-index:999;
+  background:rgba(12,12,14,.86);
+  border:1px solid rgba(200,164,90,.32);
+  backdrop-filter:blur(12px);
+  color:#fff;
+  padding:12px 14px;
+  border-radius:14px;
+  box-shadow:0 18px 45px rgba(0,0,0,.55);
+  display:none;
+  max-width:min(520px, calc(100% - 24px));
+}
 
-      checkout_title: "Checkout",
-      checkout_hint: "Fill in details — we will confirm your order",
-      f_name: "Name",
-      f_phone: "Phone",
-      f_city: "City",
-      f_address: "Address",
-      f_comment: "Comment",
-      f_payment: "Payment",
-      pay_card: "Card",
-      pay_cash: "Cash",
-      pay_cod: "COD",
-      place_order: "Place order",
-      your_order: "Your order",
-
-      success_title: "Order received",
-      success_text: "Thank you! We’ll contact you shortly to confirm.",
-      back_home: "Back home",
-      back_catalog: "Continue shopping",
-    }
-  };
-
-  function getLang(){
-    const fromStorage = (localStorage.getItem(LANG_KEY) || "").toLowerCase();
-    if (supported.includes(fromStorage)) return fromStorage;
-    return "uk";
-  }
-
-  function setLang(lang){
-    const l = (lang || "").toLowerCase();
-    if (!supported.includes(l)) return;
-    localStorage.setItem(LANG_KEY, l);
-    applyI18n();
-  }
-
-  function t(key){
-    const lang = getLang();
-    return (dict[lang] && dict[lang][key]) || (dict.uk && dict.uk[key]) || key;
-  }
-
-  function applyI18n(){
-    const lang = getLang();
-    document.documentElement.setAttribute("lang", lang);
-
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      el.textContent = t(key);
-    });
-
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const key = el.getAttribute("data-i18n-placeholder");
-      el.setAttribute("placeholder", t(key));
-    });
-
-    document.querySelectorAll("[data-lang]").forEach(btn => {
-      const l = btn.getAttribute("data-lang");
-      btn.classList.toggle("active", l === lang);
-      btn.setAttribute("aria-pressed", l === lang ? "true" : "false");
-    });
-
-    window.dispatchEvent(new CustomEvent("bw:lang", { detail: { lang } }));
-  }
-
-  window.BW_I18N = { getLang, setLang, t, applyI18n, dict };
-
-  document.addEventListener("click", (e) => {
-    const btn = e.target.closest("[data-lang]");
-    if (!btn) return;
-    e.preventDefault();
-    setLang(btn.getAttribute("data-lang"));
-  });
-
-  document.addEventListener("DOMContentLoaded", applyI18n);
-})();
+/* Responsive */
+@media (max-width: 980px){
+  .hero{min-height:unset}
+  .hero-grid{grid-template-columns:1fr; gap:14px}
+  .hero-title{font-size:44px}
+  .products{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width: 700px){
+  .navlinks{display:none}
+}
+@media (max-width: 560px){
+  .products{grid-template-columns:1fr}
+  .input{min-width:unset; width:100%}
+  .select{min-width:unset}
+  .form{grid-template-columns:1fr}
+  .hero-title{font-size:40px}
+}
