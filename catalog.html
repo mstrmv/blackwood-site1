@@ -1,87 +1,88 @@
 <!doctype html>
-<html lang="uk">
+<html lang="ru">
 <head>
   <meta charset="utf-8">
   <title>Каталог • BLACKWOOD CHARCOAL</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="stylesheet" href="assets/style.css">
-  <script defer src="assets/i18n.js"></script>
-  <script defer src="assets/app.js"></script>
 </head>
 
-<body class="page catalog">
+<body class="page page-catalog">
+<div class="noise"></div>
 
 <header class="topbar">
-  <div class="container">
-    <div class="nav">
-      <a class="brand" href="index.html">
-        BLACKWOOD <span class="gold">CHARCOAL</span>
-      </a>
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
+    </a>
 
-      <nav class="navlinks">
-        <a href="index.html">Головна</a>
-        <a href="catalog.html" class="active">Каталог</a>
-        <a href="shipping.html">Доставка</a>
-        <a href="about.html">Про нас</a>
-        <a href="contacts.html">Контакти</a>
-      </nav>
+    <nav class="navlinks">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html" class="active">Каталог</a>
+      <a href="shipping.html">Доставка</a>
+      <a href="about.html">О нас</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
 
-      <div class="spacer"></div>
+    <div class="spacer"></div>
 
-      <a class="btn" href="cart.html">
-        Кошик <span data-cart-count>0</span>
-      </a>
-    </div>
+    <a class="cartbtn" href="cart.html">
+      Корзина <span class="badge" data-cart-count>0</span>
+    </a>
   </div>
 </header>
 
-<main class="container">
+<main class="main">
+  <div class="container">
 
-  <h1 style="margin-top:40px;">Каталог</h1>
+    <section class="section">
+      <div class="section-title">
+        <h2>Каталог</h2>
+        <span class="hint">18 товаров • CORE / YARD / Сетки и аксессуары</span>
+      </div>
 
-  <!-- ФИЛЬТРЫ -->
-  <div class="panel" style="padding:16px; margin:20px 0;">
-    <input
-      id="searchInput"
-      placeholder="Пошук товару..."
-      style="padding:10px; width:200px;"
-    >
+      <div class="panel">
+        <div class="toolbar">
+          <div class="row">
+            <input id="searchInput" class="input" placeholder="Поиск товара…">
+            <select id="sortSelect" class="select">
+              <option value="popular">Популярное</option>
+              <option value="price-asc">Цена ↑</option>
+              <option value="price-desc">Цена ↓</option>
+              <option value="name-asc">Название A–Z</option>
+              <option value="name-desc">Название Z–A</option>
+            </select>
+          </div>
 
-    <select id="sortSelect" style="padding:10px;">
-      <option value="popular">Популярне</option>
-      <option value="price-asc">Ціна ↑</option>
-      <option value="price-desc">Ціна ↓</option>
-      <option value="name-asc">Назва A–Z</option>
-      <option value="name-desc">Назва Z–A</option>
-    </select>
+          <div class="chips">
+            <button class="chip active" data-cat="all">Все</button>
+            <button class="chip" data-cat="core">CORE уголь</button>
+            <button class="chip" data-cat="yard">YARD уголь</button>
+            <button class="chip" data-cat="sets">Сетки / аксессуары</button>
+          </div>
+        </div>
 
-    <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
-      <button class="btn" data-cat="all">Всі</button>
-      <button class="btn" data-cat="core">CORE</button>
-      <button class="btn" data-cat="yard">YARD</button>
-      <button class="btn" data-cat="sets">Сети / Аксесуари</button>
-    </div>
+        <div id="catalogEmpty" class="note" style="display:none">
+          Ничего не найдено
+        </div>
+
+        <div id="catalogRoot" class="products"></div>
+      </div>
+    </section>
+
   </div>
-
-  <!-- КАТАЛОГ -->
-  <div id="catalogRoot" class="catalog-grid"></div>
-
-  <!-- ПУСТО -->
-  <div id="catalogEmpty" style="display:none; padding:40px; text-align:center;">
-    Нічого не знайдено
-  </div>
-
 </main>
 
 <footer class="footer">
-  <div class="container">
-    <div class="inner">
-      <div>© BLACKWOOD • CHARCOAL</div>
-      <div>GitHub Pages • HTML / CSS / JS</div>
-    </div>
+  <div class="container inner">
+    <span>© BLACKWOOD • CHARCOAL</span>
+    <span>GitHub Pages • HTML / CSS / JS</span>
   </div>
 </footer>
 
+<div id="toast" class="toast"></div>
+
+<script src="assets/i18n.js"></script>
+<script src="assets/app.js"></script>
 </body>
 </html>
