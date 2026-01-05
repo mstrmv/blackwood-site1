@@ -3,175 +3,31 @@
   const CART_KEY = "bw_cart_v2";
 
   const PRODUCTS = [
-    // CORE (PNG) — твої реальні файли
-    {
-      id: "core-3",
-      brand: "CORE",
-      category: "core",
-      weight: "3 kg",
-      price: 299,
-      img: "img/core-3kg.png",
-      name: { uk: "BLACKWOOD CORE 3 кг", ru: "BLACKWOOD CORE 3 кг", en: "BLACKWOOD CORE 3 kg" },
-    },
-    {
-      id: "core-5",
-      brand: "CORE",
-      category: "core",
-      weight: "5 kg",
-      price: 459,
-      img: "img/core-5kg.png",
-      name: { uk: "BLACKWOOD CORE 5 кг", ru: "BLACKWOOD CORE 5 кг", en: "BLACKWOOD CORE 5 kg" },
-    },
-    {
-      id: "core-10",
-      brand: "CORE",
-      category: "core",
-      weight: "10 kg",
-      price: 799,
-      img: "img/core-10kg.png",
-      name: { uk: "BLACKWOOD CORE 10 кг", ru: "BLACKWOOD CORE 10 кг", en: "BLACKWOOD CORE 10 kg" },
-    },
+    // CORE (PNG)
+    { id:"core-3", brand:"CORE", category:"core", weight:"3 kg", price:299, img:"img/core-3kg.png", name:{ uk:"BLACKWOOD CORE 3 кг", ru:"BLACKWOOD CORE 3 кг", en:"BLACKWOOD CORE 3 kg" } },
+    { id:"core-5", brand:"CORE", category:"core", weight:"5 kg", price:459, img:"img/core-5kg.png", name:{ uk:"BLACKWOOD CORE 5 кг", ru:"BLACKWOOD CORE 5 кг", en:"BLACKWOOD CORE 5 kg" } },
+    { id:"core-10", brand:"CORE", category:"core", weight:"10 kg", price:799, img:"img/core-10kg.png", name:{ uk:"BLACKWOOD CORE 10 кг", ru:"BLACKWOOD CORE 10 кг", en:"BLACKWOOD CORE 10 kg" } },
 
-    // YARD (пока у тебя нет файлов — добавь их в img/ как ниже)
-    {
-      id: "yard-3",
-      brand: "YARD",
-      category: "yard",
-      weight: "3 kg",
-      price: 269,
-      img: "img/yard-3kg.jpg",
-      name: { uk: "BLACKWOOD YARD 3 кг", ru: "BLACKWOOD YARD 3 кг", en: "BLACKWOOD YARD 3 kg" },
-    },
-    {
-      id: "yard-5",
-      brand: "YARD",
-      category: "yard",
-      weight: "5 kg",
-      price: 419,
-      img: "img/yard-5kg.jpg",
-      name: { uk: "BLACKWOOD YARD 5 кг", ru: "BLACKWOOD YARD 5 кг", en: "BLACKWOOD YARD 5 kg" },
-    },
-    {
-      id: "yard-10",
-      brand: "YARD",
-      category: "yard",
-      weight: "10 kg",
-      price: 739,
-      img: "img/yard-10kg.jpg",
-      name: { uk: "BLACKWOOD YARD 10 кг", ru: "BLACKWOOD YARD 10 кг", en: "BLACKWOOD YARD 10 kg" },
-    },
+    // YARD (JPG)
+    { id:"yard-3", brand:"YARD", category:"yard", weight:"3 kg", price:269, img:"img/yard-3kg.jpg", name:{ uk:"BLACKWOOD YARD 3 кг", ru:"BLACKWOOD YARD 3 кг", en:"BLACKWOOD YARD 3 kg" } },
+    { id:"yard-5", brand:"YARD", category:"yard", weight:"5 kg", price:419, img:"img/yard-5kg.jpg", name:{ uk:"BLACKWOOD YARD 5 кг", ru:"BLACKWOOD YARD 5 кг", en:"BLACKWOOD YARD 5 kg" } },
+    { id:"yard-10", brand:"YARD", category:"yard", weight:"10 kg", price:739, img:"img/yard-10kg.jpg", name:{ uk:"BLACKWOOD YARD 10 кг", ru:"BLACKWOOD YARD 10 кг", en:"BLACKWOOD YARD 10 kg" } },
 
-    // СЕТКИ / СЕТЫ / АКСЕССУАРЫ — твои реальные JPG
-    {
-      id: "acc-gloves",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 249,
-      img: "img/gloves.jpg",
-      name: { uk: "Рукавички для гриля", ru: "Перчатки для гриля", en: "Grill gloves" },
-    },
-    {
-      id: "acc-apron",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 299,
-      img: "img/apron.jpg",
-      name: { uk: "Фартух для гриля", ru: "Фартук для гриля", en: "BBQ apron" },
-    },
-    {
-      id: "acc-blower",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 149,
-      img: "img/blower.jpg",
-      name: { uk: "Віяло для роздуву", ru: "Опахало для раздува", en: "Charcoal blower" },
-    },
-    {
-      id: "acc-thermometer",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 349,
-      img: "img/thermometer.jpg",
-      name: { uk: "Термометр для гриля", ru: "Термометр для гриля", en: "BBQ thermometer" },
-    },
-    {
-      id: "acc-starter",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 199,
-      img: "img/starter.jpg",
-      name: { uk: "Стартер для розпалювання", ru: "Стартер для розжига", en: "Chimney starter" },
-    },
-    {
-      id: "acc-ignition",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 129,
-      img: "img/royal-ignition.jpg",
-      name: { uk: "Розпалювач", ru: "Розжиг", en: "Firestarter" },
-    },
-    {
-      id: "acc-grill-set",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 699,
-      img: "img/grill-set.jpg",
-      name: { uk: "Набір для гриля", ru: "Набор для гриля", en: "Grill tool set" },
-    },
-    {
-      id: "acc-weekend-box",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 999,
-      img: "img/weekend-box.jpg",
-      name: { uk: "Weekend Box (набір)", ru: "Weekend Box (набор)", en: "Weekend Box (kit)" },
-    },
-    {
-      id: "acc-grid-flat",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 499,
-      img: "img/grid-flat.jpg",
-      name: { uk: "Решітка для гриля (пласка)", ru: "Решетка для гриля (плоская)", en: "Grill grate (flat)" },
-    },
-    {
-      id: "acc-grid-double",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 549,
-      img: "img/grid-double.jpg",
-      name: { uk: "Решітка для гриля (подвійна)", ru: "Решетка для гриля (двойная)", en: "Grill grate (double)" },
-    },
-    {
-      id: "acc-grid-sausage",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 529,
-      img: "img/grid-sausage.jpg",
-      name: { uk: "Решітка для ковбасок", ru: "Решетка для сосисок", en: "Sausage grill grate" },
-    },
+    // ACCESSORIES (JPG)
+    { id:"acc-gloves", brand:"SET", category:"sets", weight:"—", price:249, img:"img/gloves.jpg", name:{ uk:"Рукавички для гриля", ru:"Перчатки для гриля", en:"Grill gloves" } },
+    { id:"acc-apron", brand:"SET", category:"sets", weight:"—", price:299, img:"img/apron.jpg", name:{ uk:"Фартух для гриля", ru:"Фартук для гриля", en:"BBQ apron" } },
+    { id:"acc-blower", brand:"SET", category:"sets", weight:"—", price:149, img:"img/blower.jpg", name:{ uk:"Віяло для роздуву", ru:"Опахало для раздува", en:"Charcoal blower" } },
+    { id:"acc-thermometer", brand:"SET", category:"sets", weight:"—", price:349, img:"img/thermometer.jpg", name:{ uk:"Термометр для гриля", ru:"Термометр для гриля", en:"BBQ thermometer" } },
+    { id:"acc-starter", brand:"SET", category:"sets", weight:"—", price:199, img:"img/starter.jpg", name:{ uk:"Стартер для розпалювання", ru:"Стартер для розжига", en:"Chimney starter" } },
+    { id:"acc-ignition", brand:"SET", category:"sets", weight:"—", price:129, img:"img/royal-ignition.jpg", name:{ uk:"Розпалювач", ru:"Розжиг", en:"Firestarter" } },
+    { id:"acc-grill-set", brand:"SET", category:"sets", weight:"—", price:699, img:"img/grill-set.jpg", name:{ uk:"Набір для гриля", ru:"Набор для гриля", en:"Grill tool set" } },
+    { id:"acc-weekend-box", brand:"SET", category:"sets", weight:"—", price:999, img:"img/weekend-box.jpg", name:{ uk:"Weekend Box (набір)", ru:"Weekend Box (набор)", en:"Weekend Box (kit)" } },
+    { id:"acc-grid-flat", brand:"SET", category:"sets", weight:"—", price:499, img:"img/grid-flat.jpg", name:{ uk:"Решітка для гриля (пласка)", ru:"Решетка для гриля (плоская)", en:"Grill grate (flat)" } },
+    { id:"acc-grid-double", brand:"SET", category:"sets", weight:"—", price:549, img:"img/grid-double.jpg", name:{ uk:"Решітка для гриля (подвійна)", ru:"Решетка для гриля (двойная)", en:"Grill grate (double)" } },
+    { id:"acc-grid-sausage", brand:"SET", category:"sets", weight:"—", price:529, img:"img/grid-sausage.jpg", name:{ uk:"Решітка для ковбасок", ru:"Решетка для сосисок", en:"Sausage grill grate" } },
 
-    // 18-й товар (пока файла нет — добавь img/mesh-5.jpg или поменяй на свой файл)
-        {
-      id: "starter-kit",
-      brand: "SET",
-      category: "sets",
-      weight: "—",
-      price: 349,
-      img: "img/yard-set.jpg",
-      name: { uk: "BLACKWOOD Starter Kit", ru: "BLACKWOOD Starter Kit", en: "BLACKWOOD Starter Kit" },
-    },
+    // STARTER KIT (yard-set.jpg)
+    { id:"starter-kit", brand:"SET", category:"sets", weight:"—", price:349, img:"img/yard-set.jpg", name:{ uk:"BLACKWOOD Starter Kit", ru:"BLACKWOOD Starter Kit", en:"BLACKWOOD Starter Kit" } },
   ];
 
   const FALLBACK_IMG = "img/core-3kg.png";
@@ -192,7 +48,7 @@
 
   function loadCart() {
     try {
-      const raw = localStorage.getItem("bw_cart_v2");
+      const raw = localStorage.getItem(CART_KEY);
       const obj = raw ? JSON.parse(raw) : {};
       return obj && typeof obj === "object" ? obj : {};
     } catch {
@@ -201,7 +57,7 @@
   }
 
   function saveCart(cart) {
-    localStorage.setItem("bw_cart_v2", JSON.stringify(cart || {}));
+    localStorage.setItem(CART_KEY, JSON.stringify(cart || {}));
     updateCartBadge();
     window.dispatchEvent(new CustomEvent("bw:cart"));
   }
@@ -625,6 +481,8 @@
       updateCartBadge();
     });
     window.addEventListener("bw:cart", updateCartBadge);
+
+    if (window.BW_I18N && BW_I18N.apply) BW_I18N.apply();
   }
 
   document.addEventListener("DOMContentLoaded", init);
