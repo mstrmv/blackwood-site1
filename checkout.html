@@ -4,119 +4,116 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Оформлення • BLACKWOOD • CHARCOAL</title>
-  <link rel="stylesheet" href="assets/style.css?v=20260104b" />
-  <script defer src="assets/i18n.js?v=20260104b"></script>
-  <script defer src="assets/app.js?v=20260104b"></script>
+  <title data-i18n="checkout_title">Оформлення</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/i18n.js"></script>
+  <script defer src="assets/app.js"></script>
 </head>
-<body class="page has-bg" style="--page-bg: url('img/catalog-bg.png');">
-  <div class="noise"></div>
+<body class="page page-catalog">
+<div class="noise"></div>
 
-  <header class="topbar">
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="index.html" aria-label="BLACKWOOD CHARCOAL">
-          BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
-        </a>
+<header class="topbar">
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href="index.html">BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span></a>
+      <nav class="navlinks">
+        <a href="index.html" data-i18n="nav_home">Головна</a>
+        <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+        <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+        <a href="about.html" data-i18n="nav_about">Про нас</a>
+        <a href="contacts.html" data-i18n="nav_contacts">Контакти</a>
+      </nav>
+      <div class="spacer"></div>
 
-        <nav class="navlinks" aria-label="Navigation">
-          <a href="index.html" data-i18n="nav_home">Головна</a>
-          <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-          <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-          <a href="about.html" data-i18n="nav_about">Про нас</a>
-          <a href="contacts.html" data-i18n="nav_contacts">Контакти</a>
-        </nav>
-
-        <div class="spacer"></div>
-
-        <div class="pills">
-          <div class="lang" aria-label="Language switch">
-            <button type="button" data-lang="uk">UKR</button>
-            <button type="button" data-lang="ru">RU</button>
-            <button type="button" data-lang="en">EN</button>
-          </div>
-
-          <a class="cartbtn" href="cart.html" aria-label="Cart">
-            <small data-i18n="nav_cart">Кошик</small>
-            <span class="badge" data-cart-count>0</span>
-          </a>
-        </div>
+      <div class="lang" aria-label="Language">
+        <button type="button" data-lang="uk">UKR</button>
+        <button type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="en">EN</button>
       </div>
-    </div>
-  </header>
 
-  <main class="main">
-    <div class="container">
+      <a class="cartbtn" href="cart.html">
+        <small data-i18n="nav_cart">Кошик</small>
+        <span class="badge" data-cart-count>0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container">
+    <section class="section">
       <div class="section-title">
         <h2 data-i18n="checkout_title">Оформлення</h2>
-        <div class="hint" data-i18n="checkout_hint">Заповніть дані — і ми підтвердимо замовлення</div>
+        <span class="hint"></span>
       </div>
 
-      <section class="panel" style="margin-top:12px;">
-        <form id="checkoutForm" class="form">
-          <label class="label">
-            <span data-i18n="f_name">Ім'я</span>
-            <input class="input" name="name" required />
-          </label>
+      <div class="panel">
+        <div class="form">
+          <form id="checkoutForm" class="full">
+            <div class="form">
+              <label class="label">
+                <span data-i18n="name">Ім’я</span>
+                <input class="input" name="name" required>
+              </label>
 
-          <label class="label">
-            <span data-i18n="f_phone">Телефон</span>
-            <input class="input" name="phone" required />
-          </label>
+              <label class="label">
+                <span data-i18n="phone">Телефон</span>
+                <input class="input" name="phone" required>
+              </label>
 
-          <label class="label">
-            <span data-i18n="f_city">Місто</span>
-            <input class="input" name="city" required />
-          </label>
+              <label class="label">
+                <span data-i18n="city">Місто</span>
+                <input class="input" name="city" required>
+              </label>
 
-          <label class="label">
-            <span data-i18n="f_address">Адреса</span>
-            <input class="input" name="address" required />
-          </label>
+              <label class="label">
+                <span data-i18n="address">Адреса</span>
+                <input class="input" name="address" required>
+              </label>
 
-          <label class="label full">
-            <span data-i18n="f_comment">Коментар</span>
-            <textarea class="input" name="comment"></textarea>
-          </label>
+              <label class="label full">
+                <span data-i18n="comment">Коментар</span>
+                <textarea class="input" name="comment"></textarea>
+              </label>
 
-          <label class="label full">
-            <span data-i18n="f_payment">Оплата</span>
-            <select class="select" name="payment" required>
-              <option value="card" data-i18n="pay_card">Картка</option>
-              <option value="cash" data-i18n="pay_cash">Готівка</option>
-              <option value="cod" data-i18n="pay_cod">Післяплата</option>
-            </select>
-          </label>
+              <label class="label full">
+                <span data-i18n="payment">Оплата</span>
+                <select class="select" name="payment" required>
+                  <option value="cod" data-i18n="pay_cod">Накладений платіж</option>
+                  <option value="iban" data-i18n="pay_card">Оплата на IBAN</option>
+                  <option value="online" data-i18n="pay_online">Онлайн (пізніше)</option>
+                </select>
+              </label>
 
-          <div class="full" style="padding:0 14px 14px;">
-            <div class="panel pad">
-              <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;">
-                <div style="font-weight:980; letter-spacing:.12em; text-transform:uppercase; font-size:12px;" data-i18n="your_order">Ваше замовлення</div>
-                <div><strong id="checkoutTotal">₴0</strong></div>
+              <div class="panel pad full" style="background:rgba(0,0,0,.18)">
+                <div id="checkoutEmpty" class="note" style="display:none" data-i18n="checkout_empty">Кошик порожній. Поверніться в каталог.</div>
+                <div id="checkoutList"></div>
+                <hr class="sep">
+                <div class="summary-row">
+                  <span><strong data-i18n="total">Разом</strong></span>
+                  <strong id="checkoutTotal">0</strong>
+                </div>
               </div>
-              <hr class="sep">
-              <div id="checkoutEmpty" class="note" style="display:none;" data-i18n="cart_empty">Кошик порожній.</div>
-              <div id="checkoutList" class="summary" style="padding:0;"></div>
-            </div>
 
-            <div style="display:flex; justify-content:flex-end; margin-top:12px;">
-              <button class="btn primary" type="submit" data-i18n="place_order">Підтвердити замовлення</button>
+              <div class="full" style="display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap;">
+                <a class="btn" href="cart.html" data-i18n="nav_cart">Кошик</a>
+                <button class="btn primary" type="submit" data-i18n="checkout_submit">Підтвердити замовлення</button>
+              </div>
             </div>
-          </div>
-        </form>
-      </section>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="inner">
-        <div>© BLACKWOOD • CHARCOAL</div>
-        <div>GitHub Pages • HTML/CSS/JS</div>
+          </form>
+        </div>
       </div>
-    </div>
-  </footer>
+    </section>
+  </div>
+</main>
 
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<footer class="footer">
+  <div class="container inner">
+    <span>© BLACKWOOD • CHARCOAL</span>
+    <span>GitHub Pages • HTML/CSS/JS</span>
+  </div>
+</footer>
+
+<div id="toast" class="toast"></div>
 </body>
 </html>
