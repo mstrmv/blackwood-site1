@@ -4,80 +4,69 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Про нас • BLACKWOOD • CHARCOAL</title>
-  <link rel="stylesheet" href="assets/style.css?v=20260104b" />
-  <script defer src="assets/i18n.js?v=20260104b"></script>
-  <script defer src="assets/app.js?v=20260104b"></script>
+  <title data-i18n="about_title">Про нас</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/i18n.js"></script>
+  <script defer src="assets/app.js"></script>
 </head>
-<body class="page has-bg" style="--page-bg: url('img/catalog-bg.png');">
-  <div class="noise"></div>
+<body class="page page-catalog">
+<div class="noise"></div>
 
-  <header class="topbar">
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="index.html" aria-label="BLACKWOOD CHARCOAL">
-          BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
-        </a>
+<header class="topbar">
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href="index.html">BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span></a>
+      <nav class="navlinks">
+        <a href="index.html" data-i18n="nav_home">Головна</a>
+        <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
+        <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
+        <a href="about.html" data-i18n="nav_about" class="active">Про нас</a>
+        <a href="contacts.html" data-i18n="nav_contacts">Контакти</a>
+      </nav>
+      <div class="spacer"></div>
 
-        <nav class="navlinks" aria-label="Navigation">
-          <a href="index.html" data-i18n="nav_home">Головна</a>
-          <a href="catalog.html" data-i18n="nav_catalog">Каталог</a>
-          <a href="shipping.html" data-i18n="nav_shipping">Доставка</a>
-          <a href="about.html" data-i18n="nav_about">Про нас</a>
-          <a href="contacts.html" data-i18n="nav_contacts">Контакти</a>
-        </nav>
-
-        <div class="spacer"></div>
-
-        <div class="social" aria-label="Social">
-          <a class="iconbtn" href="https://t.me/" target="_blank" rel="noopener" aria-label="Telegram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.7 15.6 9.3 20c.6 0 .9-.3 1.2-.6l2.9-2.8 6 4.4c1.1.6 1.9.3 2.2-1l3.9-18.3c.4-1.7-.6-2.3-1.7-1.9L1.5 9.2c-1.6.6-1.6 1.5-.3 1.9l6.1 1.9L20 5.5c.8-.5 1.5-.2 1 .3"/></svg>
-          </a>
-          <a class="iconbtn" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4.5A5.5 5.5 0 1 1 6.5 14 5.5 5.5 0 0 1 12 8.5zm0 2A3.5 3.5 0 1 0 15.5 14 3.5 3.5 0 0 0 12 10.5zM18 6.8a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.8z"/></svg>
-          </a>
-          <a class="iconbtn" href="https://tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.8 2h-3.1v12.1a3 3 0 1 1-2.1-2.9V8a6 6 0 1 0 5.1 5.9V7.2c1.3 1.1 2.9 1.7 4.6 1.8V6a5.4 5.4 0 0 1-4.5-4z"/></svg>
-          </a>
-        </div>
-
-        <div class="pills">
-          <div class="lang" aria-label="Language switch">
-            <button type="button" data-lang="uk">UKR</button>
-            <button type="button" data-lang="ru">RU</button>
-            <button type="button" data-lang="en">EN</button>
-          </div>
-
-          <a class="cartbtn" href="cart.html" aria-label="Cart">
-            <small data-i18n="nav_cart">Кошик</small>
-            <span class="badge" data-cart-count>0</span>
-          </a>
-        </div>
+      <div class="lang" aria-label="Language">
+        <button type="button" data-lang="uk">UKR</button>
+        <button type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="en">EN</button>
       </div>
-    </div>
-  </header>
 
-  <main class="main">
-    <div class="container">
+      <a class="cartbtn" href="cart.html">
+        <small data-i18n="nav_cart">Кошик</small>
+        <span class="badge" data-cart-count>0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container">
+    <section class="section">
       <div class="section-title">
         <h2 data-i18n="about_title">Про нас</h2>
+        <span class="hint"></span>
       </div>
 
-      <section class="panel pad" style="margin-top:12px;">
-        <p data-i18n="about_text">BLACKWOOD • CHARCOAL...</p>
-      </section>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="inner">
-        <div>© BLACKWOOD • CHARCOAL</div>
-        <div>GitHub Pages • HTML/CSS/JS</div>
+      <div class="panel pad">
+        <h3>BLACKWOOD</h3>
+        <p>Преміальне вугілля для BBQ та гриля. Довге горіння, низька зольність, стабільна якість.</p>
       </div>
-    </div>
-  </footer>
 
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+      <div class="panel pad">
+        <h3>Підхід</h3>
+        <p>Відбір сировини, контроль фракції, зручна фасовка CORE/YARD та аксесуари для гриля.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container inner">
+    <span>© BLACKWOOD • CHARCOAL</span>
+    <span>GitHub Pages • HTML/CSS/JS</span>
+  </div>
+</footer>
+
+<div id="toast" class="toast"></div>
 </body>
 </html>
