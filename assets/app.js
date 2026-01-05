@@ -26,7 +26,7 @@
     { id:"acc-grid-double", brand:"SET", category:"sets", weight:"—", price:549, img:"img/grid-double.jpg", name:{ uk:"Решітка для гриля (подвійна)", ru:"Решетка для гриля (двойная)", en:"Grill grate (double)" } },
     { id:"acc-grid-sausage", brand:"SET", category:"sets", weight:"—", price:529, img:"img/grid-sausage.jpg", name:{ uk:"Решітка для ковбасок", ru:"Решетка для сосисок", en:"Sausage grill grate" } },
 
-    // STARTER KIT (yard-set.jpg)
+    // STARTER KIT
     { id:"starter-kit", brand:"SET", category:"sets", weight:"—", price:349, img:"img/yard-set.jpg", name:{ uk:"BLACKWOOD Starter Kit", ru:"BLACKWOOD Starter Kit", en:"BLACKWOOD Starter Kit" } },
   ];
 
@@ -116,6 +116,75 @@
       };
     });
   }
+
+  // ---------- MOBILE MENU ----------
+  function ensureMobileNav() {
+    if (document.getElementById("mnav")) return;
+
+    const topbar = document.querySelector(".topbar .container .nav");
+    if (!topbar) return;
+
+    // insert burger at left
+    const burger = document.createElement("button");
+    burger.className = "burger";
+    burger.type = "button";
+    burger.setAttribute("aria-label", "Menu");
+    burger.innerHTML = `<span></span><span></span><span></span>`;
+    topbar.insertBefore(burger, topbar.firstChild);
+
+    // build mobile sheet from existing nav links
+    const links = Array.from(document.querySelectorAll(".navlinks a"))
+      .map(a => `<a href="${esc(a.getAttribute("href") || "#")}">${esc(a.textContent || "")}</a>`)
+      .join("");
+
+    const mnav = document.createElement("div");
+    mnav.id = "mnav";
+    mnav.className = "mnav";
+    mnav.innerHTML = `
+      <div class="backdrop" data-mclose="1"></div>
+      <div class="sheet" role="dialog" aria-modal="true">
+        <div class="head">
+          <div class="brand">
+            BLACKWOOD <span class="dot"></span> <span class="gold">CHARCOAL</span>
+          </div>
+          <button class="close" type="button" data-mclose="1">✕</button>
+        </div>
+        <div class="links">${links}</div>
+        <div class="row">
+          <div class="lang">
+            <button type="button" data-lang="uk">UKR</button>
+            <button type="button" data-lang="ru">RU</button>
+            <button type="button" data-lang="en">EN</button>
+          </div>
+          <a class="cartbtn" href="cart.html">
+            <small data-i18n="nav_cart">Кошик</small>
+            <span class="badge" data-cart-count>0</span>
+          </a>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(mnav);
+
+    function open() {
+      mnav.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+    function close() {
+      mnav.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    burger.addEventListener("click", open);
+    mnav.addEventListener("click", (e) => {
+      if (e.target.closest("[data-mclose='1']")) close();
+      const a = e.target.closest(".links a");
+      if (a) close();
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+  }
+  // ---------- /MOBILE MENU ----------
 
   function renderCatalog() {
     const root = document.getElementById("catalogRoot");
@@ -467,6 +536,7 @@
   }
 
   function init() {
+    ensureMobileNav();
     setActiveNav();
     updateCartBadge();
 
